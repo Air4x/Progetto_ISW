@@ -1,0 +1,95 @@
+\subsection{Analisi Nomi-Verbi}
+\label{sec:analisi_nomi_verbi}
+Si desidera sviluppare un sistema software per la gestione del
+processo di sottomissione e revisione di articoli scientifici (anche
+detti in gergo ‘paper’) nell’ambito di conferenze accademiche.
+\bigskip
+
+Il sistema coinvolge due tipologie di
+\sethlcolor{WildStrawberry}\hl{utenti}:
+\sethlcolor{Magenta}\hl{autori} e
+\sethlcolor{Magenta}\hl{organizzatori}, ciascuna con funzionalità e
+permessi specifici
+\bigskip
+
+\sethlcolor{Goldenrod}\hl{Ogni utente può registrarsi alla
+  piattaforma} inserendo \sethlcolor{YellowGreen}\hl{nome},
+\sethlcolor{YellowGreen}\hl{cognome},
+\sethlcolor{YellowGreen}\hl{email} e
+\sethlcolor{YellowGreen}\hl{affiliazione}. Al momento della
+registrazione è possibile specificare il proprio
+\sethlcolor{YellowGreen}\hl{ruolo}, scegliendo tra
+\sethlcolor{Cerulean}\hl{autore} o
+\sethlcolor{Cerulean}\hl{organizzatore}. Il sistema assegna un
+\sethlcolor{YellowGreen}\hl{ID} univoco a ciascun utente registrato.
+\bigskip
+
+L’\sethlcolor{Cerulean}\hl{organizzatore} ha il compito di creare e
+gestire una o più \sethlcolor{Cerulean}\hl{conferenze}. Mediante
+un’apposita interfaccia grafica, \sethlcolor{Goldenrod}\hl{può creare
+  una nuova conferenza} specificando
+\sethlcolor{YellowGreen}\hl{titolo},
+\sethlcolor{YellowGreen}\hl{descrizione} e una singola
+\sethlcolor{YellowGreen}\hl{scadenza} per la chiusura delle
+sottomissioni. Ogni conferenza creata sarà associata univocamente
+all’organizzatore che l’ha generata. Una ulteriore sezione
+dell’interfaccia grafica \sethlcolor{Goldenrod}\hl{consente
+  all’organizzatore di visualizzare l’elenco completo dei}
+\sethlcolor{Cerulean}\hl{paper} \sethlcolor{Goldenrod}\hl{ricevuti per
+  ciascuna conferenza}. \sethlcolor{Goldenrod}\hl{Deve inoltre essere
+  possibile accedere al dettaglio di ogni articolo e monitorarne lo
+  stato}.  \bigskip
+
+Ogni autore, una volta autenticato, dispone di una propria interfaccia
+nella quale può \sethlcolor{Goldenrod}\hl{visualizzare l’elenco delle
+  conferenze attive e sottomettere articoli a una conferenza attiva,
+  compilando un modulo} che include
+\sethlcolor{YellowGreen}\hl{titolo},
+\sethlcolor{YellowGreen}\hl{abstract} (testo di al più 250 caratteri),
+e una lista di \sethlcolor{YellowGreen}\hl{co-autori} (massimo tre in
+totale). I co-autori devono essere già registrati al sistema e possono
+essere selezionati dalla lista degli autori già registrati. Una volta
+completata la sottomissione, l’articolo entra nello stato
+“sottomesso”. \sethlcolor{Goldenrod}\hl{Gli autori, inoltre, possono
+  visualizzare l’elenco dei propri articoli sottomessi, ciascuno con
+  il relativo stato (sottomesso, in revisione)}.  \bigskip
+
+L’organizzatore della conferenza, una volta superata la data di
+scadenza delle sottomissioni, \sethlcolor{Goldenrod}\hl{deve assegnare
+  tre} \sethlcolor{WildStrawberry}\hl{revisori}
+\sethlcolor{Goldenrod}\hl{a ciascun articolo sottomesso}, che dovranno
+effettuare la valutazione dell’articolo entro una data specificata
+dall’organizzatore. I revisori \sethlcolor{Goldenrod}\hl{possono
+  essere selezionati dalla lista di tutti gli autori già registrati
+  nel sistema, oppure inserendo l’ID di un autore registrato}. Al
+momento dell’assegnazione del revisore, il sistema deve impedire
+conflitti di interesse, ossia un revisore non può essere autore del
+paper che gli è stato assegnato . Quando ad un articolo sono stati
+assegnati i tre revisori, l’articolo passa dallo stato “sottomesso”
+allo stato “in revisione”.  \bigskip
+
+\sethlcolor{Goldenrod}\hl{Gli organizzatori possono consultare in ogni
+  momento lo stato aggregato della conferenza}, ossia il
+\sethlcolor{YellowGreen}\hl{numero totale di articoli sottomessi}, il
+\sethlcolor{YellowGreen}\hl{numero di articoli in revisione} e lo
+\sethlcolor{YellowGreen}\hl{stato} di ogni articolo.  \bigskip
+
+Il sistema deve garantire una gestione rigorosa dei permessi e delle
+visibilità, mantenendo l’anonimato dei revisori nel processo di peer
+review. \sethlcolor{Goldenrod}\hl{Inoltre, deve essere accessibile da
+  dispositivi desktop e mobili, prevedere notifiche automatiche via
+  email per le principali scadenze e offrire interfacce grafiche
+  separate per autori e organizzatori}.  \bigskip
+
+\textbf{LEGGENDA}:
+\begin{itemize}
+\item \sethlcolor{YellowGreen}\hl{ATTRIBUTO}
+\item \sethlcolor{Cerulean}\hl{CLASSE}
+\item \sethlcolor{WildStrawberry}\hl{ATTORE}
+\item \sethlcolor{Magenta}\hl{CLASSE-ATTORE}
+\item \sethlcolor{Goldenrod}\hl{FUNZIONALITÁ}
+\end{itemize}
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

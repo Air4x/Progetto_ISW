@@ -27,6 +27,7 @@ replay_pid*
 Documentation/*.aux
 Documentation/*.log
 Documentation/*.pdf
+Documentation/*.toc
 
 # Auctex files
 Documentation/auto/*

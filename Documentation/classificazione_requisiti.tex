@@ -1,0 +1,90 @@
+\subsection{Classificazione dei Requisiti}
+\label{sec:classificazione_requisiti}
+\subsubsection{Requisiti Funzionali}
+\label{sec:requisiti_funzionali}
+\begin{tabular}{|p{1cm}|p{9cm}|p{1cm}|}
+  \hline
+  \rowcolor{SkyBlue}
+  ID & Requisito & Origine \\
+  \hline \hline
+  RF\textsubscript{01} & Il sistema deve offrire all'Utente la funzionalità di registrarsi & 1\\
+  \hline
+  RF\textsubscript{02} & Il sistema deve offreire all'Utente la possibilità di accedere & 3\\
+  \hline
+  RF\textsubscript{03} & Il sistema deve assegnare un ID univoco ad ogni utente & 4\\
+  \hline
+  RF\textsubscript{04} & Il sistema deve dare la possibilità all'Utente di scegliere il proprio ruolo al momento della registrazione & 5 \\
+  \hline
+  RF\textsubscript{05} & Il sistema deve dare ad un Organizzatore la possibilità di creare una nuova conferenza& 6\\
+  \hline
+  RF\textsubscript{06} & Il sistema deve dare ad un Organizzatore la possibilità di gestire una o più conferenze & 8\\
+  \hline
+  RF\textsubscript{07} & Il sistema deve dare la possibilità ad un Organizzatore di monitorare le proprie conferenze & 9 \\
+  \hline
+  RF\textsubscript{08} & Il sistema deve date la possibilità ad un Organizzatore di accedere agli articoli legati alle proprie conferenze & 10 \\
+  \hline
+  RF\textsubscript{09} & Il sistema deve dare la possibilità ad un Autore di visualizzare le conferenze attive & 11 \\
+  \hline
+  RF\textsubscript{10} & Il sistema deve dare la possibilità ad un Autore di sottomettere un articolo ad una conferenza attiva & 12 \\
+  \hline
+  RF\textsubscript{11} & Il sistema deve impostare lo stato di un articolo sottomesso ad una conferenza da un Autore a ''sottomesso`` & 17 \\
+  \hline
+  RF\textsubscript{12} & Il sistema deve dare la possibilità ad un Autore di visualizzare i propri articoli & 18 \\
+  \hline
+  RF\textsubscript{13} & Il sistema deve dare la possibilità ad un Organizzatore di assegnare tre revisori ad ogni articolo di una conferenza dopo la data di scadenza & 19 \\
+  \hline
+  RF\textsubscript{14} & Il sistema deve cambiare lo stato di un articolo da ``sottomesso'' a ``in revisione'' una volta che sono stati assegnati i tre revisori & 21\\
+  \hline
+  RF\textsubscript{15} & Il sistema deve dare la possibilità ad un Organizzatore di consultare lo stato aggregato di una conferenza, ossia numero totale di articoli sottomessi, numero di articoli in revisione e stato di ogni articolo & 22 \\
+  \hline
+  RF\textsubscript{16} & Il sistema deve prevedere notifiche automatiche via email per le principali scadenze & 25 \\
+  \hline
+  RF\textsubscript{17} & Il sistema deve offrire interfacce grafiche separate per autori e organizzatori & 26\\
+  \hline
+  RF\textsubscript{18} & Il sistema deve essere accessibile da dispositivi desktop & 27\\
+  RF\textsubscript{19} & Il sistema deve essere accessibile da dispositivi mobili & 28\\
+  \hline
+\end{tabular}
+\subsubsection{Requisiti sui dati}
+\label{sec:requisiti_dati}
+\begin{tabular}{|p{1cm}|p{9cm}|p{1cm}|}
+  \hline
+  \rowcolor{SkyBlue}
+  ID & Requisito & Origine \\
+  \hline
+  \hline
+  RD\textsubscript{01} & Di ogni Utente si vuole memorizzare nome, cognome, email e affiliazione & 2 \\
+  \hline
+  RD\textsubscript{02} & Di ogni conferenza si vuole memorizzare il titolo, una descrizoine ed una singola scadenza per la chiusura delle sottomissioni & 7\\
+  \hline
+  RD\textsubscript{03} & Di ogni Articolo si vuole memorizzare il titolo, l'abstract, co-autori & 13 \\
+  \hline
+  RD\textsubscript{04} & L'abstract di un Articolo può essere composto al più da 250 caratteri & 14 \\
+  \hline
+\end{tabular}
+\subsubsection{Vincoli e altri requisiti}
+\label{sec:vincoli}
+\begin{tabular}{|p{1cm}|p{9cm}|p{1cm}|}
+  \hline
+  \rowcolor{SkyBlue}
+  ID & Requisito & Origine \\
+  \hline
+  \hline
+  VC\textsubscript{01} & Un Articolo può avere un massimo di 3 co-autori, quindi un massimo di 4 autori totali & 15 \\
+  \hline
+  VC\textsubscript{02} &  I co-autori per un Articolo devono essere scelti dalla lista degli autori già registrati & 16 \\
+  \hline
+  VC\textsubscript{03} & Il sistema deve garantire la mancanza di conflitti di interese tra i revisori e gli articoli a loro assegnati & 20 \\
+  \hline
+  VC\textsubscript{04} & Il sistema deve garantire una gestione rigorosa dei permessi e della visibilità & 23 \\
+  \hline
+  VC\textsubscript{05} & Il sistema deve garantir l'anonimato dei revisori nel processo di peer-review & 24 \\
+  \hline
+\end{tabular}
+
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

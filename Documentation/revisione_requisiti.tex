@@ -1,13 +1,41 @@
 \subsection{Revisione dei Requisiti}
 \label{sec:revisione_requisiti}
 
+\begin{enumerate}
+\item Il sistema deve offrire all'Utente la funzionalità di registrarsi
+\item Di ogni Utente si vuole memorizzare nome, cognome, email e affiliazione
+\item Il sistema deve offrire all'Utente la possibilità di accedere
+\item Il sistema deve assegnare un ID univoco ad ogni utente
+\item Il sistema deve dare la possibilità all'Utente di scegliere il proprio ruolo al momento della registrazione
+\item Il sistema deve dare ad un Organizzatore la possibilità di creare una nuova conferenza
+\item Di ogni conferenza si vuole memorizzare il titolo, una descrizione ed una singola scadenza
+  per la chiusura delle sottomissioni
+\item Il sistema deve dare ad un Organizzatore la possibilità di gestire una o più conferenze
+\item Il sistema deve dare la possibilità ad un Organizzatore di monitorare le proprie conferenze
+\item Il sistema deve date la possibilità ad un Organizzatore di accedere agli articoli legati alle proprie conferenze
+\item Il sistema deve dare la possibilità ad un Autore di visualizzare le conferenze attive
+\item Il sistema deve dare la possibilità ad un Autore di sottomettere un articolo ad una conferenza attiva
+\item Di ogni Articolo si vuole memorizzare il titolo, l'abstract, co-autori
+\item L'abstract di un Articolo può essere composto al più da 250 caratteri
+\item Un Articolo può avere un massimo di 3 co-autori, quindi un massimo di 4 autori totali
+\item I co-autori per un Articolo devono essere scelti dalla lista degli autori già registrati
+\item Il sistema deve impostare lo stato di un articolo sottomesso ad una conferenza da un Autore a ``sottomesso''
+\item Il sistema deve dare la possibilità ad un Autore di visualizzare i propri articoli
+\item Il sistema deve dare la possibilità ad un Organizzatore di assegnare tre revisori ad ogni articolo di una conferenza dopo la data di scadenza
+\item Il sistema deve garantire la mancanza di conflitti di interesse tra i revisori e gli articoli a loro assegnati
+\item Il sistema deve cambiare lo stato di un articolo da ``sottomesso'' a ``in revisione'' una volta che sono stati assegnati i tre revisori
+\item Il sistema deve dare la possibilità ad un Organizzatore di consultare lo stato aggregato di una conferenza, ossia numero totale di articoli sottomessi
+  , numero di articoli in revisione e stato di ogni articolo
+\item Il sistema deve garantire una gestione rigorosa dei permessi e delle visibilità
+\item Il sistema deve garantire l'anonimato dei revisore nel processo di peer review
+\item Il sistema deve prevedere notifiche automatiche via email per le principali scadenze
+\item Il sistema deve offrire interfacce grafiche separeate per autori e organizzatori
+\item Il sistema deve essere accessibile da dispositivi desktop
+\item Il sistema deve essere accessibile da dispositivi mobili
+\end{enumerate}
 
-L'utente è una classe attore dove il sistema deve dalre la possibilità di registrarsi
-Il sistema deve dare a un organizzatore la possibilità di gesitre una o più conferenze
-Il sistema deve dare la possibilità ad un organizzatore di monitorare le proprie conferenze
-Il sistema deve date la possibilità a un organizzatore di accedere ai paper
-Il sistema deve dare la possibilità a un autore di visualizzare conferenze attive, di sottomettere a una conferenza attiva un articolo, visualizzare i propri articoli
-Per ogni articolo si vogliono assegnare tre revisori per effettuare una valutazione
+
+
 
 %%% Local Variables:
 %%% mode: LaTeX

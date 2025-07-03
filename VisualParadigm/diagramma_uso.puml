@@ -1,0 +1,25 @@
+@startuml
+package Sistema {
+	actor Utente
+	actor Autore
+	actor Organizzatore
+	actor SistemaNotifiche
+
+	usecase Registrazione
+	usecase Accesso
+	usecase CreaConferenza
+	usecase SottomettiArticolo
+	usecase AssegnaRevisori
+	usecase NotificaScadenza
+	usecase VerificaConflittiInteresse
+}
+
+Utente --> Registrazione
+Autore --> Accesso
+Organizzatore --> Accesso
+Autore --> SottomettiArticolo
+Organizzatore --> CreaConferenza
+Organizzatore --> AssegnaRevisori
+AssegnaRevisori <|-- VerificaConflittiInteresse
+SistemaNotifiche --> NotificaScadenza
+@enduml

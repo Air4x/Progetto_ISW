@@ -1,5 +1,147 @@
+\subsection{Scenari}
+\label{sec:scenari}
+\subsubsection{Registrazione}
+\begin{tabular}{|p{1cm}|p{10cm}}
+\hline 
+\rowcolor{Skyblue}
+Caso d'uso & Registrazione \\
+\hline
+Attore Primario & Utente\\
+\hline
+Attore Secondario & \\
+\hline
+Descrizione & Permette la registrazione di un utente\\
+\hline
+Sequenza Eventi&1.  Il caso d'uso inizia quando l'Utente inserisce Nome,Congome, Affiliazione, Email e Password\\
+& 2. Il sistema verifica che l'email non sia utilizzata anche per altri\\ 
+&3 Se il controllo è positivo e non si è verifcato alcun errrore\\
+&3.1 il sistema informa all'utente la buona uscita dell'operazione e gli assegnerà un ID univoco\\
+\hline
+Post-Condizioni: & Il cliente è registrato nel sistema \\
+\hline
+Sequenza degli eventi alternativa & Al punto 3 il cliente immette una Email non compatibile o che sia già utilizzata restituendo un messaggio di errore\\
+\hline
+\end{tabular}
 
-%%% Local Variables:
-%%% mode: LaTeX
-%%% TeX-master: "main"
-%%% End:
+
+\subsubsection{Accesso}
+\begin{tabular}{|p{1cm}|p{10cm}}
+\hline 
+\rowcolor{Skyblue}
+Caso d'uso & Accesso \\
+\hline
+Attore Primario & Utente\\
+\hline
+Attore Secondario & \\
+\hline
+Descrizione & Permette l'accesso ad un utente al suo account\\
+\hline
+Pre-Condizioni& L'utente sia già registrato\\
+\hline
+Sequenza Eventi&1.  Il caso d'uso inizia quando l'Utente inserisce Email E Password\\
+& 2. Il sistema verifica che l'email e  passoword coincidono con l'utente già registrato \\ 
+&3 Se il controllo è positivo e non si è verifcato alcun errrore\\
+&3.1 il sistema informa all'utente la buona uscita dell'operazione\\
+\hline
+Post-Condizioni: &il cliente ha l'accesso al suo account \\
+\hline
+Sequenza degli eventi alternativa & Al punto 3 il cliente immette una Email collegato ad alcun account  oppure che l'email e passoword non coincidono restituendo un messaggio di errore\\
+\hline
+\end{tabular}
+
+\subsubsection{Crea Conferenza}
+\begin{tabular}{|p{1cm}|p{10cm}}
+\hline 
+\rowcolor{Skyblue}
+Caso d'uso & Crea Conferenza \\
+\hline
+Attore Primario & Organizzatore\\
+\hline
+Attore Secondario & Sistema Di notifica\\
+\hline
+Descrizione & L'organizzatore crea una conferenza \\
+\hline
+Sequenza Eventi&1. L'organizzatore crea una Conferenza inserendo il Titolo, una Descrizione dell'evento e una singola data di scadenza per le sottomissioni \\
+& 2. Il sistema verifica che la data non sia passata o non sia valida \\ 
+&3 Se il controllo è positivo e non si è verifcato alcun errrore\\
+&3.1 il sistema informa all'utente la buona uscita dell'operazione\\
+&3.2 Il sistema permette il monitoraggio dei vari articoli sottomessi per la conferenza\\
+\hline
+Post Condizioni: & L'organizzatore crea una conferenza a cui i vari autori possono sottomettere degli articoli \\
+\hline
+Sequenza degli eventi alternativa & Nel caso in cui la data di scadenza inserita non sia valida o che sia già passata invia un messaggio di errore \\
+\hline
+\end{tabular}
+
+\subsubsection{SottomettiArticolo}
+\begin{tabular}{|p{1cm}|p{10cm}}
+\hline 
+\rowcolor{Skyblue}
+Caso d'uso & SottomettiArticolo \\
+\hline
+Attore Primario & Autore\\
+\hline
+Descrizione & L'autore sottomette un articolo per una determinata conferenza\\
+\hline
+Pre-Condizioni& Esiste la conferenza\\
+\hline
+Sequenza Eventi&1.  L'autore inserisce un articolo composto da un Titolo,Abstract e dai Co-Autori\\
+& 2. Il sistema inserisce l'articolo e verifica che l'autore e i co-autori siano registrati al sistema \\ 
+&3 Se il controllo è positivo e non si è verifcato alcun errrore\\
+&3.1 il sistema informa all'utente la buona uscita dell'operazione\\
+&3.2 il sistema inserisce l'articolo e permette agli autori di poter visualizzare lo stato dell'articolo\\
+\hline
+Post-Condizioni: &L'articolo è inserito e possibile per la verica degli articoli da parte dei Revisori\\
+\hline
+Sequenza degli eventi alternativa & Il sistema nel caso in cui i co-autori non sono stati registrati non procede con l'inserimento dell'articolo e restituisce un messaggio di errore\\
+\hline
+\end{tabular}
+
+\subsubsection{AssegnaRevisori}
+\begin{tabular}{|p{1cm}|p{10cm}}
+\hline 
+\rowcolor{Skyblue}
+Caso d'uso & AssegnaRevisori \\
+\hline
+Attore Primario & Organizzatore\\
+\hline
+Attore Secondario & Sistema di notifica\\
+\hline
+Descrizione &L'organizzatore  assegna ad ogni articolo dei revisori per la revisione dell'articolo\\
+\hline
+Pre-Condizioni& L'Autore ha sottomesso l'articolo\\
+\hline
+Sequenza Eventi&1.  Il caso d'uso inizia allo scadere della data di revisione\\
+&2. L'organizzatore assegna ad ogni articolo sottomesso tre revisori\\
+&3 L'assegnazione può essere tramite ID oppure scegliendoli dalla lista di quelli registrati\\
+\hline
+Post-Condizioni: &L'articolo passa da uno stato di "sottomesso" a quello di "revisione" \\
+\hline
+Sequenza degli eventi alternativa \\
+\hline
+\end{tabular}ù
+
+\subsubsection{NotificaScadenza}
+\begin{tabular}{|p{1cm}|p{10cm}}
+\hline 
+\rowcolor{Skyblue}
+Caso d'uso & NotificaScadenza \\
+\hline
+Attore Primario & Sistema di Notifica\\
+\hline
+Attore Secondario & Autore\\
+\hline
+Descrizione & Permette la notifica automatica via email per le principali scadenze\\
+\hline
+Pre-Condizioni& L'utente sia già registrato\\
+\hline
+Sequenza Eventi&1.  Il caso d'uso inizia quando la scadenza è imminente\\
+& 2. Il sistema invia delle notifiche agli autori per le scadenze delle varie conferenze \\ 
+&3. Tramite Email vengono notificati gli autori\\
+
+\hline
+Post-Condizioni: & \\
+\hline
+Sequenza degli eventi alternativa & \\
+\hline
+\end{tabular}

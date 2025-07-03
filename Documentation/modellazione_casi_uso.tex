@@ -1,0 +1,61 @@
+\subsection{Modellazione dei casi d'uso}
+\subsubsection{Attori e casi d'uso}
+\begin{center}
+\begin{minipage}[t]{0.5\textwidth}
+\textbf{Attori Primari:}
+\begin{itemize}
+\item Utente
+\item Autore
+\item Organizzatore
+\end{itemize}  
+\end{minipage}%
+\begin{minipage}[t]{0.5\textwidth}
+\textbf{Attori Secondari:}
+\begin{itemize}
+\item Sistema di notifiche
+\end{itemize}  
+\end{minipage}%
+\end{center}
+
+\noindent
+\textbf{Casi d'uso:}
+\begin{itemize}
+\item \textbf{UC\textsubscript{01}}: Registrazione
+\item \textbf{UC\textsubscript{02}}: Accesso
+\item \textbf{UC\textsubscript{03}}: CreaConferenza
+\item \textbf{UC\textsubscript{04}}: SottomettiArticolo
+\item \textbf{UC\textsubscript{05}}: AssegnaRevisori
+\item \textbf{UC\textsubscript{06}}: NotificaScadenza
+\item \textbf{UC\textsubscript{07}}: \dots
+\end{itemize}
+
+\textbf{Casi d'uso di inclusione:}
+\begin{itemize}
+\item \textbf{UC\textsubscript{08}}: VerificaConflittiInteresse
+\end{itemize}
+
+\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+  \hline
+  \rowcolor{SkyBlue}
+  Caso d'uso & Attori Primari & Attori Secondari & Incl./Ext. & Requisiti corrispondenti \\
+  \hline
+  \hline
+  \textbf{UC\textsubscript{01}}& Utente & & & RF\textsubscript{01} \\
+  \hline
+  \textbf{UC\textsubscript{02}} & Utente & & & RF\textsubscript{02} \\
+  \hline
+  \textbf{UC\textsubscript{03}} & Organizzatore & Sistema di Notifica & & RF\textsubscript{16} \\
+  \hline
+  \textbf{UC\textsubscript{04}} & Autore & & & RF\textsubscript{10} \\
+  \hline
+  \textbf{UC\textsubscript{05}} & Organizzatore & Sistema di Notifica&  & RF\textsubscript{13}, VC\textsubscript{03} \\
+  \hline
+  \textbf{UC\textsubscript{06}} & Sistema di Notifica & Autore & & RF\textsubscript{16}\\
+  \hline
+  \textbf{UC\textsubscript{08}} & Organizzatore & Autori & Incluso in AssegnaRevisori & VC\textsubscript{03} \\
+  \hline
+\end{tabular}
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

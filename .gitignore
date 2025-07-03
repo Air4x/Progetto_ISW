@@ -28,6 +28,9 @@ Documentation/*.aux
 Documentation/*.log
 Documentation/*.pdf
 Documentation/*.toc
-
+*.aux
+*.log
+*.pdf
+*.toc
 # Auctex files
 Documentation/auto/*

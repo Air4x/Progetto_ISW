@@ -25,12 +25,13 @@
 \item \textbf{UC\textsubscript{04}}: SottomettiArticolo
 \item \textbf{UC\textsubscript{05}}: AssegnaRevisori
 \item \textbf{UC\textsubscript{06}}: NotificaScadenza
-\item \textbf{UC\textsubscript{07}}: \dots
+\item \textbf{UC\textsubscript{07}}: DispositivodiAccesso
 \end{itemize}
 
 \textbf{Casi d'uso di inclusione:}
 \begin{itemize}
-\item \textbf{UC\textsubscript{08}}: VerificaConflittiInteresse
+\item \textbf{UC\textsubscript{08}}: GesionePermessiVisibilita
+\item \textbf{UC\textsubscript{09}}: VerificaConflittiInteresse
 \end{itemize}
 
 \begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
@@ -51,7 +52,11 @@
   \hline
   \textbf{UC\textsubscript{06}} & Sistema di Notifica & Autore & & RF\textsubscript{16}\\
   \hline
-  \textbf{UC\textsubscript{08}} & Organizzatore & Autori & Incluso in AssegnaRevisori & VC\textsubscript{03} \\
+ \textbf{UC\textsubscript{07}} & Utente &  Sistema di Notifiche & Utente & RF\textsubscript{18},RF\textsubscript{19}\\
+  \hline
+ \textbf{UC\textsubscript{08}} & Utente &  & Incluso in Accesso& VC\textsubscript{04}\\
+  \hline
+  \textbf{UC\textsubscript{09}} & Organizzatore & Autori & Incluso in AssegnaRevisori & VC\textsubscript{03} \\
   \hline
 \end{tabular}
 %%% Local Variables:

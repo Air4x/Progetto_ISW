@@ -12,14 +12,17 @@ package Sistema {
 	usecase AssegnaRevisori
 	usecase NotificaScadenza
 	usecase VerificaConflittiInteresse
+	usecase GestionePermessiVisibilità
 }
 
 Utente --> Registrazione
 Autore --> Accesso
+Accesso <|-- GestionePermessiVisibilità
 Organizzatore --> Accesso
 Autore --> SottomettiArticolo
 Organizzatore --> CreaConferenza
 Organizzatore --> AssegnaRevisori
 AssegnaRevisori <|-- VerificaConflittiInteresse
 SistemaNotifiche --> NotificaScadenza
+
 @enduml

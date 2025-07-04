@@ -1,4 +1,44 @@
 
+\subsubsection{Scenari}
+\label{sec:scenari}
+\begin{tabular}{|p{3cm}|p{7cm}|}
+  \hline
+  \rowcolor{Orchid}
+  Caso d'uso & Registrazione \\
+  \hline
+  Attore Primario & Utente\\
+  \hline
+  Attore secondario & - \\
+  \hline
+  Descrizione & Un utente si registra per la prima volta nel sistema\\
+  \hline
+  Pre-Condizioni & Il cliente non si è già registrato all'interno del sistema e non ha effettuato l'accesso\\
+  \hline
+  Sequenza di eventi principale &
+                                  \begin{enumerate}
+                                  \item Il caso d'uso inizia quando il cliente apre l'applicazione
+                                  \item L'utente inserisce il proprio nome, cognome e email
+                                  \item L'utente sceglie il proprio ruolo
+                                  \item L'utente clicca sul tasto registra
+                                  \item Il sistema controlla che non esita già un utente con gli stessi dati nel database
+                                  \item Se l'utente non è presente in database
+                                    \begin{enumerate}
+                                    \item L'utente viene inserito nel database
+                                    \item Viene mostrata all'utente la schermata relativa al suo ruolo
+                                    \end{enumerate}
+                                    \end{enumerate}
+  \\
+  \hline
+  Post-Condizioni & L'utente è presente nel database\\
+  \hline
+  Casi d'uso correlati & VerificaUtente\\
+  \hline
+  Sequenza di eventi alternativi & Se al punto 6 l'utente è già presente nel database viene mostrato un messaggio di errore
+                                   
+                                   Se al punto 3 l'utente non sceglie il proprio ruolo, viene mostrato un messaggio chiedendo all'utente di scegliere un ruolo per registrarsi\\
+  \hline
+\end{tabular}
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "main"

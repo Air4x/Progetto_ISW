@@ -1,0 +1,42 @@
+\subsubsection{Responsabilita}
+\label{sec:responsabilita}
+\begin{tabular}{|p{5cm}|p{5cm}|}
+\hline 
+ \rowcolor{SkyBlue}
+RESPONSABILITA & CLASSE\\
+\hline
+Registrazione & Sistema\\
+\hline
+Accesso & Sistema\\
+\hline
+Crea Conferenzza & Organizzatore\\
+\hline
+Sottometti Articolo & Autore\\
+\hline
+Assegna Revisori & Organizzatore\\
+\hline
+Notifica Scadenza & Sistema di Notifiche\\
+\hline
+Dispositivo di Accesso & Sistema\\
+\hline
+Gestione Permessi Visibilita & Sistema\\
+\hline
+Verifica Conflitti di Interesse & Sistema\\
+\hline
+\end{tabular}
+
+\begin{itemize}
+\item Registrazione e Accesso risultano responsabilita della classe Sistema, poiche sta a lui validare i dati e credenziali inserite.\\
+\item Crea Conferenzza è responsabilita di Organizzatore, poiche è <<Creator>> di tale classe, andando poi a definire i vari parametri.\\
+\item Assegna Revisori è responsabilita di Organizzatore, poiche è <<Creator>> di tale classe, andando ad assegna un revisore per ogni articolo.\\
+\item Sottometti Articolo è responsabilita di Autore, poiche è <<Creator>> di tale classe, andando a sottomentere un dato articolo per una coonferenza.\\
+\item Notifica Scadenza è responsabilita del Sitema di Notifiche andando ad automitizzando la comunicazione delle scadenze per gli utenti coinvolti.\\
+\item Dispositivo di Accesso è responsabilita del Sistema permettere e controllare l'acceso degli Utenti da diversi dispositivi.\\
+\item Gestione Permessi Visibilita è responsabilita del Sistema, anadando a gestire permessi.\\
+\item Verifica Conflitti di Interesse è responsabilita del Sistema, poiche deve garatire l'assenza di conflitti tra articoli assegnati e rispettivi revisori.\\
+\end{itemize}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

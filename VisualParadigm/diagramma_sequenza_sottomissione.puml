@@ -1,0 +1,37 @@
+@startuml
+actor Autore
+participant "Interfaccia Utente" as UI
+participant "Sistema" as Sistema
+participant "Database" as DB
+
+Autore -> UI : Effettua login
+activate Autore
+activate UI
+UI -> Sistema : Richiesta autenticazione (email, password)
+activate Sistema	
+Sistema -> DB : Verifica credenziali
+activate DB
+DB --> Sistema : Credenziali valide
+Sistema --> UI : Accesso consentito
+
+Autore -> UI : Visualizza conferenze attive
+UI -> Sistema : Richiesta elenco conferenze attive
+Sistema -> DB : Query conferenze con scadenza futura
+DB --> Sistema : Elenco conferenze
+Sistema --> UI : Mostra elenco
+
+Autore -> UI : Compila modulo articolo (titolo, abstract, co-autori)
+deactivate Autore		
+UI -> Sistema : Invia dati articolo
+Sistema -> DB : Verifica co-autori registrati
+
+DB --> Sistema : Co-autori validati
+
+Sistema -> DB : Salva articolo (stato = "sottomesso")
+
+DB --> Sistema : ID articolo salvato
+deactivate DB
+Sistema --> UI : Conferma sottomissione riuscita
+deactivate UI
+deactivate Sistema
+@enduml

@@ -34,3 +34,7 @@ Documentation/*.toc
 *.toc
 # Auctex files
 Documentation/auto/*
+
+]
+# Immagini
+VisualParadigm/*.png

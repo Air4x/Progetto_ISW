@@ -1,0 +1,30 @@
+@startuml
+actor Organizzatore
+participant "Interfaccia Utente" as UI
+participant "Sistema" as Sistema
+participant "Database" as DB
+
+Organizzatore -> UI : Effettua login
+UI -> Sistema : Richiesta autenticazione
+Sistema -> DB : Verifica credenziali
+DB --> Sistema : OK
+Sistema --> UI : Accesso consentito
+
+Organizzatore -> UI : Visualizza articoli sottomessi
+UI -> Sistema : Richiesta elenco articoli
+Sistema -> DB : Query articoli sottomessi
+DB --> Sistema : Elenco articoli
+Sistema --> UI : Mostra articoli
+
+Organizzatore -> UI : Assegna revisori a un articolo
+UI -> Sistema : Invia ID revisori e ID articolo
+Sistema -> DB : Verifica revisori non autori
+alt Conflitto di interesse
+    Sistema --> UI : Errore: revisore è autore
+else Nessun conflitto
+    Sistema -> DB : Salva assegnazione revisori
+    Sistema -> DB : Aggiorna stato articolo a "in revisione"
+    Sistema --> UI : Assegnazione completata
+end
+
+@enduml

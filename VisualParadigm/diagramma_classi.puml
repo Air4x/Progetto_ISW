@@ -1,0 +1,54 @@
+@startuml 
+
+abstract class Utente {
+  - nome: String
+  - cognome: String
+  - email: String
+  - affiliazione: String
+  - ruolo: String
+  - id: String
+  + registrarsi(): void
+}
+
+class Autore {
+  + visualizzareConferenzeAttive(): void
+  + sottomettereArticolo(): void
+  + visualizzareArticoliSottomessi(): void
+}
+
+class Organizzatore {
+  + creareConferenza(titolo, descrizione, scadenza): void
+  + visualizzareElencoPaper(conferenza): void
+  + dettaglioArticolo(id): void
+  + monitorareStato(): void
+  + assegnareRevisori(articolo): void
+  + consultareStatoAggregato(): void
+}
+
+class Conferenza {
+  - titolo: String
+  - descrizione: String
+  - scadenza: Date
+  - organizzatore: Organizzatore
+}
+
+class Articolo {
+  - titolo: String
+  - abstract: String
+  - stato: Int 
+  - coAutori: List<Autore>
+}
+
+' Ereditarietà
+Utente <|-- Autore
+Utente <|-- Organizzatore
+
+' Relazioni
+Organizzatore "1" -- "0..*" Conferenza
+Conferenza "1" -- "0..*" Articolo :Sottomesso a
+Articolo "1" -- "0..*" Autore : Scritto da
+
+' Revisori: relazione molti-a-molti tra Autore e Articolo
+Autore "0..*" -- "3" Articolo : <<revisore>>
+
+@enduml

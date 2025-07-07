@@ -1,0 +1,60 @@
+\subsection{Test Assegna Revisori}
+\label{sec:test_assegna_revisori}
+
+\begin{tabular}{|p{3.5cm}|p{2cm}|p{2cm}|p{2cm}}
+\hline
+\rowcolor{SkyBlue}
+\textbf{ASSEGNA REVISORI}&&&\\
+\hline
+\rowcolor{Red}
+\textbf{Nome_Articolo} & \textbf{IDRevisore1} & \textbf{IDRevisore2} & \textbf{IDRevisore3}\\
+
+Stringa di caratteri non vuota di un articolo già esistente di lunghezza <=100 & ID di Autori,distinti, che non sono Autori e Co-autori dell'articolo&&\\
+
+Nome dell'articolo non esistente→ [ERROR]& ID Autori che hanno scritto l'articolo →[ERROR]&&\\
+
+Stringa con caratteri speciali→[ERROR]&  ID Autore duplicato→[ERROR]&&\\
+
+Stringa vuota → [ERROR]&ID Autore nullo→[ERROR]&&\\
+
+Stringa di lunghezza>100 →[ERROR]& ID Organizzatore→[ERROR]&&\\
+
+& ID Autore non esistente→[ERROR] &&\\
+\hline 
+\end{tabular}
+
+\begin{itemize}
+\item Numero di test fatti senza particolari vincoli risulta:1
+\item Numero di test con vincoli risulta: 4 Per Nome Articolo, 5 per IDRevisore = 9 
+\end{itemize}
+
+\begin{sidewaytable}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{4cm}|p{3cm}|p{2cm}|}
+\hline
+\rowcolor{SkyBlue}
+\textbf{Test Suite:Assegna Revisori} & & & & & &\\
+\hline
+\rowcolor{Red}
+\textbf{Test Case ID} & \textbf{Descrizione} & \textbf{Classi di Equivalenza} & \textbf{Pre-condizioni} & \textbf{Input} & \textbf{Output Atteso} & \textbf{Post-condizioni} \\
+\hline
+
+1& Tutti gli input validi &NomeArticolo Valido,IDRevisore1 Valido, ID Revisore2 Valido, IDRevisore3 Valido&NomeArticolo Presente, IDRevisore1/IDRevisore2/IDRevisore3 Autori& NomeArticolo: Studio AI , IDRevisore1: 10,IDRevisore2:11, IDRevisore3:12&Articolo in revisione& Stato di Articolo cambiato da "Sottomesso" a "In Revisione"\\
+\hline
+2& NomeArticolo non esistente&NomeArticolo non esistente, Revisori validi& IDRevisore1/IDRevisore2/IDRevisore3 Autori& NomeArticolo: Computer Quantistici, IDRevisore1: 10,IDRevisore2:11, IDRevisore3:12&Errore: Nome Articolo Non Esistente&\\
+\hline
+3& NomeArticolo con con caratteri speciali& NomeArticolo con caratteri speciali, Revisori Validi & IDRevisore1/IDRevisore2/IDRevisore3 Autori& NomeArticolo: ***, IDRevisore1: 10,IDRevisore2:11, IDRevisore3:12&Errore: Nome Articolo Presenta dei caratteri speciali &\\
+\hline
+4&NomeArticolo vuoto & NomeArticolo:Stringa Vuota, Revisori Validi & IDRevisore1/IDRevisore2/IDRevisore3 Autori& NomeArticolo:None , IDRevisore1: 10,IDRevisore2:11, IDRevisore3:12&Errore:Nome Artivolo Vuoto&\\
+\hline
+5&Nome Articolo stringa>100 &Nome Articolo >100 caratteri , Revisori Validi & IDRevisore1/IDRevisore2/IDRevisore3 Autori&NomeArticolo:Stuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuudio AI,  IDRevisore1: 10,IDRevisore2:11, IDRevisore3:12&Errore: Nome Articolo Troppo lungo&\\
+\hline
+6&IDRevisore Scrittori Articolo& Nome Articolo Valido, IDRevisore1 autore articolo, gli altri revisori sono validi&NomeArticolo Presente, IDRevisore1/IDRevisore2/IDRevisore3 Autori&NomeArticolo: Studio AI , IDRevisore1: 1,IDRevisore2:11, IDRevisore3:12&Errore: Almeno un revisore è Autore dell'articolo &\\
+\hline
+7&IDRevisore duplicato& NomeArticolo Valido, IDRevisore1=IDRevisore2,IDRevisore3 valido &NomeArticolo Presente, IDRevisore1/IDRevisore2/IDRevisore3 Autori&NomeArticolo: Studio AI , IDRevisore1: 11,IDRevisore2:11, IDRevisore3:12&Errore: Almeno un revisore è duplicato &\\
+\hline
+8&IDRevisore Nullo& Nome Articolo Valido, IDRevisore1 nullo, gli altri revisori validi&NomeArticolo Presente,IDRevisore2/IDRevisore3 Autore& NomeArticolo: Studio AI , IDRevisore1: None,IDRevisore2:11, IDRevisore3:12& Errore: Almeno un revisore è nullo&\\
+\hline
+9&ID Revisore è un organizzatore&Nome Articolo Valido, IDRevisore1 organizzatore, gli altri revisori sono validi & Nome Articolo Presente, IDRevisore1 Organizzatore, IDRevisore2/IDRevisore3 Autori& NomeArticolo: Studio AI , IDRevisore1: 32,IDRevisore2:11, IDRevisore3:12&Errore: Almeno un Revisore è Organizzatore&\\
+\hline
+10&ID Rebisore non esistente&Nome Articolo Valido, IDRevisore non esistente, gli altri revisori sono validi & Nome articolo Presente, IDRevisore2/IDRevisore3 Autori&NomeArticolo: Studio AI , IDRevisore1: 312,IDRevisore2:11, IDRevisore3:12&Errore: Almeno un revisore non esiste&\\
+\hline 
+\end{sidewaytable}

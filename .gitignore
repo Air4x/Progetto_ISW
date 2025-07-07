@@ -32,6 +32,7 @@ Documentation/*.toc
 *.log
 *.pdf
 *.toc
+*.out
 # Auctex files
 Documentation/auto/*
 

@@ -1,30 +1,54 @@
 \subsection{Test Registrazione}
 \label{sec:test_registrazione}
 
-\begin{itemize}
-\item Numero di test fatti senza particolari vincoli risulta : 2 x 2 x 1 x 1 x 2 = 8
-\item
-\end{itemize}
-
-\begin{tabular}{|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+\begin{tabular}{|p{3.5cm}|p{2cm}|p{2cm}|p{3cm}|p{2cm}|p{2cm}|}
 \hline
 \rowcolor{SkyBlue}
-REGISTRAZIONE & & & &\\
+\textbf{REGISTRAZIONE} & & & & &\\
 \hline
-Nome & Cognome & Email & Affiliazione & Ruolo  \\
+\rowcolor{Red}
+\textbf{Nome} & \textbf{Cognome} & \textbf{Email} & \textbf{Password} & \textbf{Affiliazione} & \textbf{Ruolo}  \\
 \hline
-Stringa di caratteri di lunghezza <=30 & Stringa di caratteri di lunghezza <=30 & Stringa con @ in posizione valida e non già registrata & Stringa alfanumerica di lunghezza ≤ 50, senza simboli & Autore o Organizzatore \\
+Stringa di caratteri di lunghezza <=30 & Stringa di caratteri di lunghezza <=30 & Stringa con @ in posizione valida e non già registrata & Stringa alfanumerica con 2 caratteri speciali e lunghezza ≤ 40 & Stringa alfanumerica di lunghezza ≤ 50, senza simboli & Autore o Organizzatore \\
 \hline
-Stringa alfabetica di lunghezza > 30 → [ERROR] & Stringa alfabetica di lunghezza > 30 → [ERROR] & Stringa con @ ma già registrata → [ERROR] & Stringa senza @ → [ERROR] & Qualsiasi altro valore → [ERROR] \\
+Stringa alfabetica di lunghezza > 30 → [ERROR] & Stringa alfabetica di lunghezza > 30 → [ERROR] & Stringa con @ ma già registrata → [ERROR] & Stringa con meno di 2 caratteri speciali o senza → [ERROR] & Stringa senza @ → [ERROR] & Qualsiasi altro valore → [ERROR] \\
 \hline
-Stringa con caratteri speciali → [ERROR] & Stringa alfabetica di lunghezza > 30 → [ERROR] & Stringa senza @ → [ERROR] & Stringa con caratteri speciali → [ERROR] & Campo vuota → [ERROR]  \\
+Stringa con caratteri speciali → [ERROR] & Stringa alfabetica di lunghezza > 30 → [ERROR] & Stringa senza @ → [ERROR] & Stringa con caratteri non alfanumerici validi → [ERROR] & Stringa con caratteri speciali → [ERROR] & Campo vuota → [ERROR]  \\
 \hline
-Stringa vuota → [ERROR] & Stringa vuota → [ERROR] & Stringa vuota → [ERROR] & Stringa vuota → [ERROR] &\\
+Stringa vuota → [ERROR] & Stringa vuota → [ERROR] & Stringa vuota → [ERROR] & Stringa con lunghezza > 40 → [ERROR] & Stringa vuota → [ERROR] &\\
 \hline
 \end{tabular}
 
+\begin{itemize}
+\item Numero di test fatti senza particolari vincoli risulta : 2 x 2 x 1 x 1 x 2 = 8
+\item  Numero di test fatti con vincoli risulta: 3 per Nome, 3 per Cognome, 3 per Email, 3 per Affiliazione, 2 per Ruolo = 14 
+\end{itemize}
 
-
+\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{4cm}|p{2cm}|p{2cm}|}
+\hline
+\rowcolor{SkyBlue}
+\textbf{Test Suite} & & & & & &\\
+\hline
+\rowcolor{Red}
+\textbf{Test Case ID} & \textbf{Descrizione} & \textbf{Classi di Equivalenza} & \textbf{Pre-condizioni} & \textbf{Input} & \textbf{Output Atteso} & \textbf{Post-condizioni} \\
+\hline
+1 & Tutti input validi & Nome valido, Cognome valido, Email valida non registrata, Password valida, Affiliazione valida, Ruolo valido & Nessuna & \texttt{\{Nome: "Mario", Cognome: "Calcagno", Email: "mario@email.com", Password: "Mario!@1234", Affiliazione: "Politecnico", Ruolo: "attore"\}} & Utente registrato con successo & Si riceve email di conferma \\
+\hline
+2 & Nome $>$ 30 caratteri & Nome troppo lungo, altri campi validi & Nessuna & \texttt{\{Nome: "Giuseppemeravigliosissimodavvero", Cognome: "Buglione", Email: "giuseppe@email.com", Password: "Pass@12!!", Affiliazione: "Uniba", Ruolo: "organizzatore"\}} & Errore: nome troppo lungo & \\
+\hline
+3 & Cognome con simboli & Cognome con caratteri speciali [ERROR], altri campi validi & Nessuna & \texttt{\{Nome: "Francesco", Cognome: "Calc@lli", Email: "francesco@email.com", Password: "Francesco]]22", Affiliazione: "Uniba", Ruolo: "autore"\}} & Errore: formato cognome non valido & \\
+\hline
+4 & Email già registrata & Email duplicata [ERROR], altri campi validi & Email già usata da altro utente & \texttt{\{Nome: "Mario", Cognome: "Calcagno", Email: "mario@email.com", Password: "M@rio123!!", Affiliazione: "Politecnico", Ruolo: "autore"\}} & Errore: email già in uso & \\
+\hline
+5 & Email senza “@” & Email malformata [ERROR], altri campi validi & Nessuna & \texttt{\{Nome: "Giuseppe", Cognome: "Buglione", Email: "giuseppeemail.com", Password: "Gius!@1234", Affiliazione: "Uniba", Ruolo: "organizzatore"\}} & Errore: formato email errato & \\
+\hline
+6 & Password troppo corta & Password con meno di 2 caratteri speciali [ERROR], altri campi validi & Nessuna & \texttt{\{Nome: "Francesco", Cognome: "Calculli", Email: "francesco.new@email.com", Password: "Francesco123", Affiliazione: "Uniba", Ruolo: "autore"\}} & Errore: password non sicura & \\
+\hline
+7 & Affiliazione con simboli & Affiliazione con caratteri speciali [ERROR], altri campi validi & Nessuna & \texttt{\{Nome: "Mario", Cognome: "Calcagno", Email: "mario2@email.com", Password: "Mario!!44", Affiliazione: "Politec@nico", Ruolo: "organizzatore"\}} & Errore: formato affiliazione errato & \\
+\hline
+8 & Ruolo non valido & Ruolo non previsto [ERROR], altri campi validi & Nessuna & \texttt{\{Nome: "Giuseppe", Cognome: "Buglione", Email: "giuseppe2@email.com", Password: "Pass@@12", Affiliazione: "Uniba", Ruolo: "manager"\}} & Errore: ruolo non valido & \\
+\hline
+\end{tabular}
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "main"

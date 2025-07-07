@@ -1,6 +1,50 @@
 \subsection{Test Accesso}
 \label{sec:test_accesso}
 
+\begin{tabular}{|p{6cm}|p{6cm}|}
+\hline
+\rowcolor{SkyBlue}
+\textbf{ACCESSO	} & \\
+\hline
+\rowcolor{Red}
+\textbf{Email} & \textbf{Password} \\ 
+\hline
+Stringa valida contenente “@” e registrata nel sistema & Stringa corretta, associata all’email inserita  \\
+\hline
+Stringa valida ma non registrata → [ERROR] &   Stringa errata → [ERROR] \\
+\hline
+Stringa senza “@” o in formato errato → [ERROR] &  Stringa vuota o non conforme → [ERROR] \\
+\hline
+\end{tabular}
+
+\begin{itemize}
+\item Il numero di test da fare senza vincoli particolari è: 1 × 1 = 1.
+\item Con i vincoli [ERROR], il numero di test da fare per testare singolarmente i vincoli è 4 (2 per Email, 2 per Password). 
+\item Il numero di test risultante è: (1 × 1) + 4 = 5.
+\end{itemize}
+
+\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{5cm}|p{2cm}|p{2cm}|}
+\hline
+\rowcolor{SkyBlue}
+\textbf{Test Suite} & & & & & &\\
+\hline
+\rowcolor{Red}
+\textbf{Test Case ID} & \textbf{Descrizione} & \textbf{Classi di Equivalenza} & \textbf{Pre-condizioni} & \textbf{Input} & \textbf{Output Atteso} & \textbf{Post-condizioni} \\
+\hline
+1 & Accesso con credenziali valide & Email valida e registrata, Password corretta & Email e password già registrate & \texttt{\{Email: "mario@email.com", Password: "Mario!@1234"\}} & Accesso consentito & Sessione utente avviata \\
+\hline
+2 & Email non registrata & Email valida ma non presente [ERROR] & Nessuna & \texttt{\{Email: "nonregistrata@email.com", Password: "Qualcosa!@1"\}} & Errore: utente non trovato & \\
+\hline
+3 & Email senza “@” & Email malformata [ERROR] & Nessuna & \texttt{\{Email: "giuseppemail.com", Password: "Pass@12!!"\}} & Errore: formato email errato & \\
+\hline
+4 & Password errata & Email registrata, password sbagliata [ERROR] & Email registrata nel sistema & \texttt{\{Email: "buglione@email.com", Password: "passwordSbagliata!!"\}} & Errore: credenziali non valide & \\
+\hline
+5 & Password vuota & Email valida e registrata, Password vuota [ERROR] & Email registrata nel sistema & \texttt{\{Email: "calculli@email.com", Password: ""\}} & Errore: password mancante & \\
+\hline
+6 & Email e password errati & Email malformata + password errata [ERROR] & Nessuna & \texttt{\{Email: "francescoemail.com", Password: "123"\}} & Errore: formato email errato & \\
+\hline
+\end{tabular}
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "main"

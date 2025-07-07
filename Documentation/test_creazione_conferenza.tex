@@ -1,0 +1,52 @@
+\subsection{Test Creazione Conferenza}
+\label{sec:test_creaszione_conferenzza}
+
+\begin{tabular}{|p{3.5cm}|p{2cm}|p{2cm}|p{3cm}|p{2cm}|p{2cm}|}
+\hline
+\rowcolor{SkyBlue}
+\textbf{Creazione Conferenzza} & & &\\
+\hline
+\rowcolor{Red}
+\textbf{Organizzatore} & \textbf{Titolo} & \textbf{Descrizione} & \textbf{Scadenza}  \\
+\hline
+ Utente con ruolo "organizzatore" & Stringa ≤ 70 caratteri alfanumerici e speciali &  Stringa ≤ 300 caratteri & Data futura (valida) \\
+Utente con ruolo non valido → [ERROR] &  Stringa > 70 caratteri → [ERROR] & Stringa > 300 caratteri → [ERROR] & Data passata → [ERROR] \\
+Utente con ruolo mancante → [ERROR] & Stringa vuota → [ERROR] &  & Data odierna → [ERROR] \\
+& & & Formato errato → [ERROR] \\
+\hline
+\end{tabular}
+
+\begin{itemize}
+\item Il numero di test da fare senza vincoli particolari è: 1×1×1×1=1.
+\item Con i vincoli [ERROR], il numero di test da fare per testare singolarmente i vincoli è : 1 (Per Org. non valido) + 2 (Per Titolo[troppo lungo, vuoto]) +1 (Per Descr. troppo lunga) + 1 (Per Scadenza errata) = 5
+\item Il numero di test risultante è: 1 + 5 = 6.
+\end{itemize}
+
+\begin{sidewaystable}
+\begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{5cm}|p{2cm}|p{2cm}|}
+\hline
+\rowcolor{SkyBlue}
+\textbf{Test Suite: CReazione Conferenza} & & & & & &\\
+\hline
+\rowcolor{Red}
+\textbf{Test Case ID} & \textbf{Descrizione} & \textbf{Classi di Equivalenza} & \textbf{Pre-condizioni} & \textbf{Input} & \textbf{Output Atteso} & \textbf{Post-condizioni} \\
+\hline
+1 & Conferenza valida & Organizzatore valido, Titolo ≤70, Descrizione ≤300, Scadenza valida & Utente loggato come organizzatore & \texttt{\{Organizzatore: "Mario", Titolo: "Conf AI", Descrizione: "Evento su AI", Scadenza: "2025-12-01"\}} & Conferenza creata con successo & Conferenza salvata \\
+\hline
+2 & Utente non organizzatore & Organizzatore non valido [ERROR] & Utente loggato & \texttt{\{Organizzatore: "Giuseppe", Ruolo: "attore", ...\}} & Errore: permesso negato & \\
+\hline
+3 & Titolo troppo lungo & Titolo > 70 caratteri [ERROR] & Organizzatore valido & \texttt{\{Titolo: "AAAAAAAAAA... (80 caratteri)", ...\}} & Errore: titolo troppo lungo & \\
+\hline
+4 & Titolo vuoto & Titolo vuoto [ERROR] & Organizzatore valido & \texttt{\{Titolo: "", ...\}} & Errore: titolo mancante & \\
+\hline
+5 & Descrizione troppo lunga & Descrizione > 300 caratteri [ERROR] & Organizzatore valido & \texttt{\{Descrizione: "A...A" (301 caratteri), ...\}} & Errore: descrizione troppo lunga & \\
+\hline
+6 & Scadenza non valida & Scadenza passata o malformata [ERROR] & Organizzatore valido & \texttt{\{Scadenza: "2022-01-01"\}} & Errore: scadenza non valida & \\
+\hline
+\end{tabular}
+\end{sidewaystable}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

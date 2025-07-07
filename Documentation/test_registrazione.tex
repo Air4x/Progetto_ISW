@@ -1,0 +1,31 @@
+\subsection{Test Registrazione}
+\label{sec:test_registrazione}
+
+\begin{itemize}
+\item Numero di test fatti senza particolari vincoli risulta : 2 x 2 x 1 x 1 x 2 = 8
+\item
+\end{itemize}
+
+\begin{tabular}{|p{3cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+\hline
+\rowcolor{SkyBlue}
+REGISTRAZIONE & & & &\\
+\hline
+Nome & Cognome & Email & Affiliazione & Ruolo  \\
+\hline
+Stringa di caratteri di lunghezza <=30 & Stringa di caratteri di lunghezza <=30 & Stringa con @ in posizione valida e non già registrata & Stringa alfanumerica di lunghezza ≤ 50, senza simboli & Autore o Organizzatore \\
+\hline
+Stringa alfabetica di lunghezza > 30 → [ERROR] & Stringa alfabetica di lunghezza > 30 → [ERROR] & Stringa con @ ma già registrata → [ERROR] & Stringa senza @ → [ERROR] & Qualsiasi altro valore → [ERROR] \\
+\hline
+Stringa con caratteri speciali → [ERROR] & Stringa alfabetica di lunghezza > 30 → [ERROR] & Stringa senza @ → [ERROR] & Stringa con caratteri speciali → [ERROR] & Campo vuota → [ERROR]  \\
+\hline
+Stringa vuota → [ERROR] & Stringa vuota → [ERROR] & Stringa vuota → [ERROR] & Stringa vuota → [ERROR] &\\
+\hline
+\end{tabular}
+
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

@@ -1,12 +1,12 @@
-\subsection{Sottomissione di un articolo}
+\subsection{Test Sottomissione di un articolo}
 \label{sec:test_sottomissione}
 \begin{tabular}{|p{4cm}|p{4cm}|p{4cm}|}
   \hline
   \rowcolor{SkyBlue}
-  Sottomisione di un articolo & & \\
+  \textbf{Sottomisione di un articolo} & & \\
   \hline
-  \hline
-  titolo & abstract & co-autori \\
+    \rowcolor{Red}
+  \textbf{Titolo} & \textbf{Abstract} & \textbf{Co-Autori} \\
   \hline
   Stringa di caratteri di lunghezza \(\leq 150\)  & Stringa di caratteri di lunghezza \(\leq 250\) & Lista dei co-autori \\
   \hline
@@ -25,10 +25,10 @@
   \begin{tabular}{|p{2cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{3cm}|p{2.5cm}|}
     \hline
     \rowcolor{SkyBlue}
-    \multicolumn{7}{l}{Test Suite: Sottomissione di un articolo}\\
+    \multicolumn{7}{l}{\textbf{Test Suite: Sottomissione di un articolo}}\\
     \hline
-    \hline
-    Test Case ID & Descrizione & Classi di equivalenza & Pre\hyp{}condizioni & Input & Output attesi & Post\hyp{}condizioni attese \\
+        \rowcolor{Red}
+    \textbf{Test Case ID} & \textbf{Descrizione} & \textbf{Classi di equivalenza} & \textbf{Pre\hyp{}condizioni} & \textbf{Input} & \textbf{Output attesi} &\textbf{Post\hyp{}condizioni attese }\\
     \hline
     1 & Tutti gli input validi & titolo valido abstract valido co-autori validi & I co\hyp{}autori sono già presenti nel sistema & \texttt{Titolo: 'L'empatia nei topi', Abstract:'Come l'empatia cambia il comportamento dei topi', co-autori: ['3304', '43044', '54423']}& Articolo Sottomesso & Lo stato dell'articolo viene impostato a sottomesso \\
     \hline

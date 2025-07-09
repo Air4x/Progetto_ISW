@@ -1,0 +1,41 @@
+@startuml
+package database {
+  class UserDAO {
+    + getUserRoleByID(userId: int): String		
+    + getUserByID(userId: int): User
+    + isUserPresentByID(userId: int): boolean
+    + isUserPresentByEmail(email: String): boolean
+    + getUserIdByEmail(email: String): int
+    + getAllAuthors(): List<User>
+    + saveUser(user: User): void
+  }
+  
+  class ConferenceDAO {
+    + getAllConferences(): List<Conference>
+    + saveConference(conf: Conference): void
+    + getArticlesByConference(confId: int): List<Article>
+  }
+  
+  class ArticleDAO {
+    + saveArticle(art: Article): void
+    + getArticlesByAuthor(authorId: int): List<Article>
+    + getArticleByID(id: int): Article
+    + updateArticleStatus(id: int, status: String): void
+  }
+  
+  class ReviewDAO {
+    + assignReviewer(articleID: int, reviewerId: int): void
+    + getReviewersForArticle(articleId: int): List<Integer>
+    + hasConflictOfInterest(articleId, reviewerId): boolean
+  }
+
+  class DBManager {
+    + getConnectio(): ODBConnection
+  }
+
+  UserDAO --> DBManager
+  ConferenceDAO --> DBManager
+  ArticleDAO --> DBManager
+  ReviewDAO --> DBManager
+}
+@enduml

@@ -30,6 +30,15 @@ package database {
     + getReviewersForArticle(articleId: int): List<Integer>
     + hasConflictOfInterest(articleId, reviewerId): boolean
   }
+
+  class DBManager {
+    + getConnectio(): ODBConnection
+  }
+
+  UserDAO --> DBManager
+  ConferenceDAO --> DBManager
+  ArticleDAO --> DBManager
+  ReviewDAO --> DBManager
 }
 
 package Entity {
@@ -80,4 +89,74 @@ package Entity {
   User <|-- Organizer
   Conference o-- Article
 }
+
+package Controller {
+  class UserController {
+    + registerUser(user: User): boolean
+    + login(email: String, password: String)
+  }
+  class ConferenceController {
+    + createConference(title: String, desc: String, scadenza: Date, organizer: Organizer): void
+    + getActiveConferences(): List<Conference>
+    + getArticlesByConference(id: int): List<Article>
+  }
+  
+  class ArticleController {
+    + submitArticle(art: Article, conf: Conference): void
+    + getArticlesByAuthor(id: int) List<Article>
+    + unpdateArticleStatus(id: int, status: String): void
+  }
+
+  class ReviewController {
+    + assignReviewer(articleID: int, reviewerId: int): boolean
+  }
+}
+
+package Boundary {
+  class LoginView {
+    + showLoginForm()
+    + showRegistretionForm()
+    + handleLogin()
+    + handleRegistration()
+  }
+  
+  class AuthorDashboard {
+    + showActiveConferences()
+    + showSubmittedArticles()
+  }
+  
+  class SubmitArticleForm {
+    + displayForm()
+    + submitArticle()n
+  }
+  
+  class OrganizerDashboard {
+    + showConferenceList()
+    + viewStats()
+  }
+  
+  class CreateConferenceForm {
+    + displayForm()
+    + createConference()
+  }
+  
+  class AssignReviewrsView {
+    + showPendingArticles()
+    + assignReviewers()
+  }
+  
+}
+
+UserDAO --> User
+ArticleDAO --> Article
+ConferenceDAO --> Conference
+LoginView --> UserController
+AuthorDashboard --> ArticleController
+SubmitArticleForm --> ArticleController
+OrganizerDashboard --> ConferenceController
+AssignReviewrsView --> ReviewController
+UserController --> UserDAO
+ArticleController --> ArticleDAO
+ConferenceController --> ConferenceDAO
+ReviewController --> ReviewDAO
 @enduml

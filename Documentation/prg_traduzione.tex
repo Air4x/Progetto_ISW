@@ -1,6 +1,68 @@
-\subsubsection{Traduzione classi ed associazioni}
+\subsection{Traduzione classi ed associazioni}
 \label{sec:prg_traduzione}
 
+In tale \textbf{sezione} si va esplicitare il processo che dal modello concettuale ci porta al modello di progettazione, basato sull'architettura \textbf{BCED} (\textbf{Boundary}, \textbf{Controller}, \textbf{Entity}, \textbf{Database}).
+Dove le scelte di progettazione sono state influenzzate da:
+\begin{itemize}
+\item Vincoli e le funzionalità espresse nei requisiti \ref{sec:analisi_nomi_verbi}
+\item Rispettare i vicoli del modello \textbf{BCED}
+\end{itemize}
+
+\paragraph{Classi Entity}
+\begin{description}
+\item [User] Generalizzazione del concetto di utente, classe astratta, poiche nel sistema un user può essere solo o un \textbf{author} o un \textbf{organizer}. Caratterizatto dagli segueni attributi:
+\begin{itemize}
+\item ID: Che va a indetificare in maniera \textbf{univoca} un user
+\item Name: nome dell'user
+\item Lastname: cognome dell'user
+\item Email: elemento identificativo per l'accesso al database per l'user
+\item Password:  elemento identificativo per l'accesso al database per l'user 
+\item Affiliazzione: organnizazione di appartenenza dell'user
+\end{itemize}
+\item [Author] Estende la classe \textbf{User}, ereditando tutti gli attributi e metodi. Caratterizzato dall'attributo:
+\begin{itemize}
+\item Final-Role: indica il ruolo dell'user (in questo caso \textbf{Autore})
+\end{itemize}
+\item [Organizer] Estende la classe \textbf{User}, ereditando tutti gli attributi e metodi. Caratterizzato dall'attributo:
+\begin{itemize}
+\item Final-Role: indica il ruolo dell'user (in questo caso \textbf{Organizzatore}) 
+\end{itemize}
+\item [Conference] rappresenta una conferenza creata da un \textbf{organizer}, caratterizzata dagli seguenti attributi:
+\begin{itemize}
+\item Titolo: Il nome della conferenzza
+\item Descrizione: descrizione dell'argomento su cui è incetratta la conferenzza
+\item Scadenza: data di scadenzza per la consegna degli articoli
+\item Articoli: lista di riferimenti agli articoli sottomessi
+\end{itemize}
+\item [Article] rappresenta un articolo sottomesso, caratterizzato dagli seguenti attributi:
+\begin{itemize}
+ \item Titolo: Titolo dell'articolo
+\item Abstract: Contenuto dell'articolo
+\item Co-Autori: lista di riferimenti degli auto che hanno partecipato alla creazione dell'articolo
+\end{itemize}
+\end{description}
+
+\paragraph{Associazioni}
+\begin{description}
+\item [Organizer->Conference] associazione di tipo: \textbf{1->* [uno a molti]} indica che uno stesso organizzatore può creare più conferenze
+\item [Conference->Article] associazione di tipo: \textbf{1->* [uno a molti]} dove una confderenza può avere da uno a più articoli
+\item [Author->Article] associazione di tipo: \textbf{*->* [molti a molti]} dove un articolo può essere scrito da uno o più autori mentre quest'ultimi possono scrivere più articoli.
+\item [Article->Author] associazione di tipo: \textbf{*->3 [molti a molti]} con cui ad un aticolo si possono assegnare un messimo di 3 revisore attraverso ReviewDAO e ReviewController in particolar modo con:
+\begin{itemize}
+ \item assignReviewer(articleId, reviewerId)
+\item getReviewersForArticle(articleId)
+\end{itemize}
+\end{description}
+
+\paragraph{Controller}
+\begin{description}
+\item[TODO]
+\end{description}
+
+\paragraph{Data Access Layer}
+\begin{description}
+\item[TODO]
+\end{description}
 
 %%% Local Variables:
 %%% mode: LaTeX

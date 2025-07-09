@@ -1,0 +1,71 @@
+\paragraph{Package Database}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\linewidth]{VisualParadigm/diagramma_prg_database.png}
+  \caption{Diagramma delle classi del package Database}
+  \label{fig:package_database}
+\end{figure}
+
+Il \texttt{package Database} contiene le classi che gestiscono la connesione
+alla base dati. In particolare si è deciso di utilizzare un approccio basato
+su Data Access Object, così da incapsulare la logica di accesso al database
+senza che i livelli superiori se debbano occupare.
+Le classi qui definite sono:
+\begin{description}
+\item[DBManager], è la classe che si occupa di creare la connesione al database, tramite protocollo ODBC
+\item[UserDAO], è la classe che si occupa di gestire l'accesso alla tabella Utenti nella base di dati
+\item[ConferenceDAO], è la classe che si occupa di gestire l'accesso alla tabella Conferenze nella base di dati
+\item[ArticleDAO], è la classe che si occupa di gestire l'accesso alla tabella Articoli nella base di dati
+\item[ReviewDAO], è la classe che si occupa di gestire i reviewers nella base di dati
+\end{description}
+
+\subparagraph{DBManager}
+La classe DBManager presenta due metodi:
+\begin{description}
+\item[Costruttore] Costruttore che inizializza la connesione tra il sistema e la base di dati tramite ODBC
+\item[getConnection] Getter per la connesione, utilizzato dalle altre classi
+  per poter comunicare con la base di dati, senza avere la responsabilità di
+  dover gestire la connesione stessa
+\end{description}
+
+\subparagraph{UserDAO}
+La classe UserDAO presenta i seguenti metodi:
+\begin{itemize}
+\item getUserRoleByID
+\item getUserByID
+\item isUserPresentByID
+\item isUserPresentByEmail
+\item getUserIdByEmail
+\item getAllAuthors
+\item saveUser
+\end{itemize}
+
+\subparagraph{ConferenceDAO}
+La classe ConferenceDAO presenta i seguenti metodi:
+\begin{itemize}
+\item getAllConferences
+\item getArticlesByConference
+\item saveConference
+\end{itemize}
+
+\subparagraph{ArticleDAO}
+La classe ArticleDAO presenta i seguenti metodi:
+\begin{itemize}
+\item getArticleByAuthor
+\item updateArticleStatus
+\item getArticleByID
+\item saveArticle
+\end{itemize}
+
+\subparagraph{ReviewDAO}
+La classe ReviewDAO presenta i seguenti metodi:
+\begin{itemize}
+\item assignReviewer
+\item getReviewers
+\item hasConflictOfInterest
+\end{itemize}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

@@ -1,0 +1,51 @@
+@startuml
+package Entity {
+
+  abstract class User {
+    - id: int
+    - name: String
+    - lastName: String
+    - email: String
+    - Affiliazione: String
+    + getName(): String
+    + getLastName(): String
+    + getEmail(): String
+    + getId(): int
+    + getAffiliazione(): String
+    + setAffiliazione(aff: String): void
+    + setEmail(email: String): void
+  }
+
+  class Author {
+    - final role: String
+    + getRole(): String
+  }
+
+  class Organizer {
+    - final role: String
+    + getRole(): String
+  }
+
+  class Article {
+    - titolo: String
+    - abstract: String
+    - coautori: List<Author>
+  }
+  
+  class Conference {
+    - titolo: String
+    - descrizione: String
+    - scadenza: Date
+    - articoli: List<Article>
+    + getTitolo(): String
+    + getDescrizione(): String
+    + getScadenza(): Date
+    + getArticoli(): List<Article>
+  }
+
+  User <|-- Author
+  User <|-- Organizer
+  Conference o-- Article
+}
+
+@enduml

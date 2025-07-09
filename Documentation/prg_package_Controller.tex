@@ -1,0 +1,24 @@
+\subsubsection{Package Controller}
+\label{sec:package_controller}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\linewidth]{VisualParadigm/diagramma_prg_controller.png}
+  \caption{Resoconto delle ultime 4 anomalie}
+  \label{fig:anomalie}
+\end{figure}
+
+Il \texttt{package Controller} contiene le classi che si occupano delle
+responsabilità, in particolare dei requisiti funzionali (vedere \ref{sec:requisiti_funzionali}).
+In particolare abbiamo:
+\begin{description}
+\item[UserController] Si occupa del login e della registrazione
+\item[ConferenceController] Si occupa di creare le conferenze e di richiedere
+  i dati relative ad esse tramite le classi DAO
+\item[ArticleController] Si occupa della sottomissione degli articoli, di ottenere gli articoli dato un autore e di aggiornare lo stato di un articolo.
+\item[ReviewController] Si occupa di assegnare i revisori ad un articolo
+\end{description}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

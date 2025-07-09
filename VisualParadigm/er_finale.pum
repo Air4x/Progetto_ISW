@@ -1,29 +1,41 @@
 @startchen
 left to right direction
 entity Utente {
+  id <<key>>
+  Nome
+  Cognome
+  Email
+  Affiliazione
+  Ruolo
+  Password
 }
+
 entity Articolo {
+  id <<key>>
+  Titolo
+  abs
 }
+
 entity Conferenza {
+  id <<key>>
+  Titolo
+  Descrizine
+  Scadenza
 }
-entity Autori {
-  id_articolo <<key>>
-  id_user     <<key>>
+
+relationship Scrive {
 }
-relationship Scritto_da {
-}
-relationship Autore_di {
-}
+
 relationship Organizza {
 }
-relationship Sottomesso {
-}
-relationship Rivede {
-}
 
-Articolo -(1,3)- Scritto_da
-Utente -(1,N)- Autore_di
-Scritto_da -- Autori
-Autori -- Autore_di
-
+relationship Sottomette {
+}
+Utente -(0,N)- Scrive
+Scrive -(1,3)- Articolo
+Utente -(0,N)- Organizza
+Organizza -(0,N)- Conferenza
+Utente -(0,N)- Sottomette
+Conferenza -(1,N)- Sottomette
+Articolo -(0,N)- Sottomette
 @endchen

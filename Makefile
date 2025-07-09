@@ -9,7 +9,7 @@ sequence: diagramma_sequenza_sottomissione.png diagramma_sequenza_conferenza.png
 
 prg: diagramma_prg_classi.png diagramma_prg_database.png diagramma_prg_entity.png diagramma_prg_controller.png
 
-er: er_fondamentale.png er_finale.png
+er: er_finale.png
 
 diagramma_classi.png: diagramma_classi.puml
 	java -jar plantuml.jar $^
@@ -36,9 +36,6 @@ diagramma_prg_entity.png: diagramma_prg_entity.pum
 	java -jar plantuml.jar $^
 
 diagramma_prg_controller.png: diagramma_prg_controller.pum
-	java -jar plantuml.jar $^
-
-er_fondamentale.png: er_fondamentale.pum
 	java -jar plantuml.jar $^
 
 er_finale.png: er_finale.pum

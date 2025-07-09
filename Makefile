@@ -3,7 +3,7 @@ VPATH = VisualParadigm:Documentation
 main.pdf:  main.tex images
 	lualatex $<
 
-images: diagramma_uso.png diagramma_classi.png sequence
+images: diagramma_uso.png diagramma_classi.png sequence prg
 
 sequence: diagramma_sequenza_sottomissione.png diagramma_sequenza_conferenza.png diagramma_sequenza_revisori.png
 

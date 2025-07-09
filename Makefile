@@ -26,3 +26,12 @@ diagramma_sequenza_revisori.png: diagramma_sequenza_revisori.puml
 
 diagramma_prg_classi.png: diagramma_prg_classi.puml
 	java -jar plantuml.jar $^
+
+diagramma_prg_database.png: diagramma_prg_database.puml
+	java -jar plantuml.jar $^
+
+
+
+
+clean:
+	rm main.*

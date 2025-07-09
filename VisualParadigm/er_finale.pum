@@ -1,0 +1,29 @@
+@startchen
+left to right direction
+entity Utente {
+}
+entity Articolo {
+}
+entity Conferenza {
+}
+entity Autori {
+  id_articolo <<key>>
+  id_user     <<key>>
+}
+relationship Scritto_da {
+}
+relationship Autore_di {
+}
+relationship Organizza {
+}
+relationship Sottomesso {
+}
+relationship Rivede {
+}
+
+Articolo -(1,3)- Scritto_da
+Utente -(1,N)- Autore_di
+Scritto_da -- Autori
+Autori -- Autore_di
+
+@endchen

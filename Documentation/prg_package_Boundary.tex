@@ -1,9 +1,9 @@
-\paragraph{Package Boundary}
+\subsubsection{Package Boundary}
 \label{sec:package_boundary}
 
 Nel Package Boundary vi sono tutti gli oggetti responsabili della costruzione della GUI e della logica di presentazione. A questo livello tutte le classi corrispondono a delle interfacce. 
 
-\subparagraph{AssignReviewsView}
+\paragraph{AssignReviewsView}
 Permette la visualizzazione di tutti gli articoli sottomessi all'organizzatore per poter essere poi essere messi in revisione.
 \begin{itemize}
 \item showPendingReviewers(): Effettua la visualizzazione degli atricoli inoltrati dagli Autori per essere revisionati.\\
@@ -11,14 +11,14 @@ Permette la visualizzazione di tutti gli articoli sottomessi all'organizzatore p
 \end{itemize}
 
 
-\subparagraph{CreateConferenceForm}
+\paragraph{CreateConferenceForm}
 L'organizzatore tramite questa classe permette la creazione delle conferenze.\\
 \begin{itemize}
 \item displayForm(): si occupa della formattazione del form.\\
 \item createConference(): L'organizzatore inserisce i dati per la creazione della conferenza, inserendo il titolo, la descrizione, la data di scadenza. Nel caso in cui si verificasse un errore viene visualizzato attraverso un messaggio di errore.
 \end{itemize}
 
-\subparagraph{LoginView}
+\paragraph{LoginView}
 Permette la visualizzazione all'utente i form per la registrazione ed l'accesso\\
 \begin{itemize}
 \item showLoginForm(): Mostra il form per l'accesso dell'utente all'applicazione\\
@@ -27,21 +27,21 @@ Permette la visualizzazione all'utente i form per la registrazione ed l'accesso\
 \item handleRegistration(): Gestisce la registrazione dell'utente all'applicazione, visualizzando quando il messaggio di errore quando viene riscontrato\\
 \end{itemize}
 
-\subparagraph{OrganizerDashboard}
+\paragraph{OrganizerDashboard}
 Tramite questa dashboard, vengono visualizzati tutte le conferenze con la possibilità di analizzare anche gli articoli che sono stati sottomessi\\
 \begin{itemize}
 \item showConferenceList(): Permette la visualizzazione tramite una lista delle conferenze\\
 \item viewStats(): Visualizza le statistiche riguardanti le conferenze, tra cui quelle che sono attive. Introduce anche la possibilità di visualizzare gli articoli che sono stati sottomessi per la conferenza determinata\\
 \end{itemize}
 
-\subparagraph{SubmitArticleForm}
+\paragraph{SubmitArticleForm}
 Permette la visualizzazione del form per la sottomissione degli articoli\\
 \begin{itemize}
 \item displayForm(): Si occupa della visualizzazione del form pe la sottomissione degli articoli\\
 \item submitArticle(): Inserendo l'articolo e la conferenza, inoltra l'articolo per la determinata conferenza\\
 \end{itemize}
 
-\subparagraph{AuthorDashboard}
+\paragraph{AuthorDashboard}
 Tramite questa dashboard, l'autore ha la possibità di visualizzare le conferenze attive e gli articoli sottomessi da lui stesso\\
 \begin{itemize}
 \item showActiveConference(): Mostra le confereneze attive a cui è possibile sottomettere degli articoli\\

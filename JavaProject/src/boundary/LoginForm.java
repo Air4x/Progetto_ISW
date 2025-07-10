@@ -49,7 +49,8 @@ public class LoginForm  extends JFrame {
         sendLoginButton.addMouseListener(new MouseAdapter() {
 
             public void mouseClicked(MouseEvent e){
-                System.out.println(emailTextField.getText());
+
+
             }
         });
         panel.add(sendLoginButton);

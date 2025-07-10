@@ -1,0 +1,27 @@
+@startuml
+actor Utente
+
+participant "Interfaccia Utente" as UI
+participant "Sistema" as SI
+participant "Database" as DB
+
+Utente -> UI : Richiesta di registazione (Inserimento dati)
+activate Utente
+activate UI
+UI -> SI : Convalidazione dati
+activate SI
+SI -> DB : Verifica Dati
+activate DB
+DB ->SI : Esito
+
+alt Esito Positivo
+DB -> SI : Email non presente
+SI -> UI : Registrazione effetuata
+UI -> Utente: Messaggio  di Avenuta Registrazione 
+else Esito Negativo
+DB -> SI : Email già presente
+SI -> UI : Richiesta di registrazione negata
+UI -> Utente: Messagio di Registrazione Fallità
+end
+
+@enduml

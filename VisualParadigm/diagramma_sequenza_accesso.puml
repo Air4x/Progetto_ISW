@@ -1,0 +1,26 @@
+@startuml
+actor Utente
+
+participant "Interfaccia Utente" as UI
+participant "Sistema" as SI
+participant "Database" as DB
+
+Utente -> UI : Richiesta di accesso (Inserimento dati)
+activate Utente
+activate UI
+UI -> SI : Autenticazione 
+activate SI
+SI -> DB : Verifica Credenziali
+activate DB
+DB ->SI : Esito
+
+alt Esito Positivo
+DB -> SI : Credeziali Autenticate
+SI -> UI: Accesso Consentito
+else Esito Negativo
+DB -> SI : Errore di Autenticazione
+SI -> UI : Credenziali non corrette
+UI -> Utente: Messagio di Errore di Logion
+end
+
+@enduml

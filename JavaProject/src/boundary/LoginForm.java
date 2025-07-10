@@ -45,7 +45,10 @@ public class LoginForm  extends JFrame {
         panel.add(passwordfield);
 
         JButton sendLoginButton = new JButton("Send Login");
+        sendLoginButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
+
         sendLoginButton.setBounds(10,170,100,30);
+        sendLoginButton.setBackground(new Color(100, 149, 237));
         sendLoginButton.addMouseListener(new MouseAdapter() {
 
             public void mouseClicked(MouseEvent e){

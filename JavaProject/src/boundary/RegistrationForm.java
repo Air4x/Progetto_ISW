@@ -95,7 +95,9 @@ public class RegistrationForm extends JFrame {
         panel.add(txtruolo);
 
         JButton registerbutton=new JButton("Registrazione");
-        registerbutton.setBounds(100,250,150,30);
+        registerbutton.setBounds(10,250,150,30);
+        registerbutton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
+        registerbutton.setBackground(new Color(100, 149, 237));
         registerbutton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 //Bisogna introdurre la registrazione utente(Controller) e il controllo delle informazioni inserite

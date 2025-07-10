@@ -1,5 +1,7 @@
 package boundary;
 
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,6 +30,9 @@ public class LoginView extends JFrame{
 
 
         JButton loginButton = new JButton("Login");
+        loginButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
+        loginButton.setBackground(new Color(100, 149, 237));
+
         loginButton.setBounds(10,30,90,30);
         loginButton.addMouseListener(new MouseAdapter() {
 
@@ -43,7 +48,10 @@ public class LoginView extends JFrame{
         panel.add(loginButton);
 
         JButton registerButton = new JButton("Register");
+        registerButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
+
         registerButton.setBounds(120,30,90,30);
+        registerButton.setBackground(new Color(100, 149, 237));
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 

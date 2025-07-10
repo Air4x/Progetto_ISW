@@ -5,7 +5,7 @@ main.pdf:  main.tex images
 
 images: diagramma_uso.png diagramma_classi.png sequence prg er
 
-sequence: diagramma_sequenza_sottomissione.png diagramma_sequenza_conferenza.png diagramma_sequenza_revisori.png
+sequence: diagramma_sequenza_sottomissione.png diagramma_sequenza_conferenza.png diagramma_sequenza_revisori.png diagramma_sequenza_accesso.png diagramma_sequenza_registrazione.png
 
 prg: diagramma_prg_classi.png diagramma_prg_database.png diagramma_prg_entity.png diagramma_prg_controller.png
 
@@ -15,6 +15,12 @@ diagramma_classi.png: diagramma_classi.puml
 	java -jar plantuml.jar $^
 
 diagramma_uso.png: diagramma_uso.puml
+	java -jar plantuml.jar $^
+
+diagramma_sequenza_accesso.png: diagramma_sequenza_accesso.puml
+	java -jar plantuml.jar $^
+
+diagramma_sequenza_registrazione.png: diagramma_sequenza_registrazione.puml
 	java -jar plantuml.jar $^
 
 diagramma_sequenza_sottomissione.png: diagramma_sequenza_sottomissione.puml

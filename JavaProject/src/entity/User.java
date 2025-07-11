@@ -48,4 +48,6 @@ public abstract class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public abstract String getRole();
 }

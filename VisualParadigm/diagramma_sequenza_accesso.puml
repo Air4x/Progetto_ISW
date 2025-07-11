@@ -23,4 +23,9 @@ SI -> UI : Credenziali non corrette
 UI -> Utente: Messagio di Errore di Logion
 end
 
+deactivate Utente
+deactivate UI
+deactivate Sistema
+deactivate DB
+
 @enduml

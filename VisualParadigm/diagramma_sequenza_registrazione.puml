@@ -24,4 +24,10 @@ SI -> UI : Richiesta di registrazione negata
 UI -> Utente: Messagio di Registrazione Fallità
 end
 
+deactivate Utente
+deactivate UI
+deactivate Sistema
+deactivate DB
+
+
 @enduml

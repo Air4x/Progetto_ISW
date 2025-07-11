@@ -32,7 +32,7 @@ public class LoginView extends JFrame{
         JButton loginButton = new JButton("Login");
         loginButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
         loginButton.setBackground(new Color(100, 149, 237));
-
+        loginButton.setForeground(Color.white);
         loginButton.setBounds(10,30,90,30);
         loginButton.addMouseListener(new MouseAdapter() {
 
@@ -52,6 +52,7 @@ public class LoginView extends JFrame{
 
         registerButton.setBounds(120,30,90,30);
         registerButton.setBackground(new Color(100, 149, 237));
+        registerButton.setForeground(Color.white);
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 

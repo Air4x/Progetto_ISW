@@ -24,7 +24,7 @@ public class RegistrationForm extends JFrame {
 
     public RegistrationForm() {
 
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(2);
         setBounds(250,300,300,350);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -41,7 +41,7 @@ public class RegistrationForm extends JFrame {
 
         JTextField txtname=new JTextField();
         txtname.setBounds(10,30,100,20);
-        txtname.setFont(new Font("Arial",Font.PLAIN,15));
+        txtname.setFont(new Font("Arial",Font.PLAIN,12));
         panel.add(txtname);
 
         JLabel lbllastname=new JLabel("Last Name:");
@@ -51,7 +51,7 @@ public class RegistrationForm extends JFrame {
 
         JTextField txtlastname=new JTextField();
         txtlastname.setBounds(150,30,100,20);
-        txtlastname.setFont(new Font("Arial",Font.PLAIN,15));
+        txtlastname.setFont(new Font("Arial",Font.PLAIN,12));
         panel.add(txtlastname);
 
         JLabel lblemail=new JLabel("Email:");
@@ -61,7 +61,7 @@ public class RegistrationForm extends JFrame {
 
         JTextField txtemail=new JTextField();
         txtemail.setBounds(10,120,100,20);
-        txtemail.setFont(new Font("Arial",Font.PLAIN,15));
+        txtemail.setFont(new Font("Arial",Font.PLAIN,12));
         panel.add(txtemail);
 
         JLabel lblpassword=new JLabel("Password:");
@@ -71,36 +71,38 @@ public class RegistrationForm extends JFrame {
 
         JPasswordField passwordField1=new JPasswordField();
         passwordField1.setBounds(150,120,100,20);
-        passwordField1.setFont(new Font("Arial",Font.PLAIN,15));
+        passwordField1.setFont(new Font("Arial",Font.PLAIN,12));
         panel.add(passwordField1);
 
-        JLabel lblaffiliazione=new JLabel("Affiliazione:");
+        JLabel lblaffiliazione=new JLabel("Affilation:");
         lblaffiliazione.setBounds(10,190,150,20);
         lblaffiliazione.setFont(new Font("Arial",Font.PLAIN,20));
         panel.add(lblaffiliazione);
 
         JTextField txtfaffiliazione=new JTextField();
         txtfaffiliazione.setBounds(10,210,100,20);
-        txtaffiliazione.setFont(new Font("Arial",Font.PLAIN,15));
+        txtaffiliazione.setFont(new Font("Arial",Font.PLAIN,12));
         panel.add(txtfaffiliazione);
 
-        JLabel lblruolo=new JLabel("Ruolo:");
+        JLabel lblruolo=new JLabel("Role:");
         lblruolo.setBounds(150,190,100,20);
         lblruolo.setFont(new Font("Arial",Font.PLAIN,20));
         panel.add(lblruolo);
 
         JTextField txtruolo=new JTextField();
         txtruolo.setBounds(150,210,100,20);
-        txtruolo.setFont(new Font("Arial",Font.PLAIN,15));
+        txtruolo.setFont(new Font("Arial",Font.PLAIN,12));
         panel.add(txtruolo);
 
-        JButton registerbutton=new JButton("Registrazione");
+        JButton registerbutton=new JButton("Register");
         registerbutton.setBounds(10,250,150,30);
         registerbutton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
         registerbutton.setBackground(new Color(100, 149, 237));
+        registerbutton.setForeground(Color.white);
         registerbutton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 //Bisogna introdurre la registrazione utente(Controller) e il controllo delle informazioni inserite
+
 
             }
         });

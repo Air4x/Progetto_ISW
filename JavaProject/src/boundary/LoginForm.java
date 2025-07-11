@@ -14,7 +14,7 @@ public class LoginForm  extends JFrame {
     private JButton sendLoginButton;
 
     public LoginForm() {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(2);
         setSize(200,300);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -44,11 +44,12 @@ public class LoginForm  extends JFrame {
         passwordfield.setBounds(10,130,150,30);
         panel.add(passwordfield);
 
-        JButton sendLoginButton = new JButton("Send Login");
+        JButton sendLoginButton = new JButton("Send");
         sendLoginButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
 
         sendLoginButton.setBounds(10,170,100,30);
         sendLoginButton.setBackground(new Color(100, 149, 237));
+        sendLoginButton.setForeground(Color.white);
         sendLoginButton.addMouseListener(new MouseAdapter() {
 
             public void mouseClicked(MouseEvent e){
@@ -69,6 +70,7 @@ public class LoginForm  extends JFrame {
                 try {
                     LoginForm loginForm = new LoginForm();
                     loginForm.setVisible(true);
+
                 }catch(Exception e){
                     e.printStackTrace();
                 }

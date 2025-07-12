@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import controller.UserController;
 
 public class RegistrationForm extends JFrame {
     private JTextField txtname;
@@ -101,7 +102,21 @@ public class RegistrationForm extends JFrame {
         registerbutton.setForeground(Color.white);
         registerbutton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                //Bisogna introdurre la registrazione utente(Controller) e il controllo delle informazioni inserite
+                String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+                //
+                if(!txtemail.getText().matches(regex)){
+                    JOptionPane.showMessageDialog(null,"Please enter a valid email","Warning",JOptionPane.WARNING_MESSAGE);
+                }
+                if(txtname.getText().length()=="" || txtlastname.getText().length()==""){
+                    JOptionPane.showMessageDialog(null,"Please enter a valid name and last name","Warning",JOptionPane.WARNING_MESSAGE);
+                }
+                if(!txtruolo.getText().equalsIgnoreCase("organizzatore")&& !txtruolo.getText().equals("autore")){
+                    JOptionPane.showMessageDialog(null,"Please enter a valid role","Warning",JOptionPane.WARNING_MESSAGE);
+                }
+
+                //se è tutto ok
+
+                if(e)
 
 
             }

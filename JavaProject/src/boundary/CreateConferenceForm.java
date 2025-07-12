@@ -1,9 +1,14 @@
 package boundary;
 
+import controller.ConferenceController;
+import entity.Organizer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
+import java.sql.SQLException;
 
 public class CreateConferenceForm extends JFrame {
     private JPanel contentPane;
@@ -22,7 +27,15 @@ public class CreateConferenceForm extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    CreateConferenceForm frame = new CreateConferenceForm();
+                    String affiliazione = new String("Affiliazione") ;
+                    String email = new String("email");
+                    String password = new String("Password");
+                    String nome = new String("Nome");
+                    String lastName = new String("Cognome");
+                    int id=1;
+                    int idConference=0;
+                    Organizer organizer = new Organizer(affiliazione,email,password,nome,lastName,id);
+                    CreateConferenceForm frame = new CreateConferenceForm(organizer,idConference);
                     frame.setVisible(true);
 
                 }catch(Exception e){
@@ -38,10 +51,10 @@ public class CreateConferenceForm extends JFrame {
 
 
 
-    public CreateConferenceForm() {
+    public CreateConferenceForm(Organizer organizer, int idConference) {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 300);
-        setTitle("Create Conference");
+        setTitle("Create Conference n"+idConference);
 
         contentPane = new JPanel();
         //contentPane.setBackground(Color.lightGray);
@@ -80,6 +93,8 @@ public class CreateConferenceForm extends JFrame {
         txtduedate.setText("DD/MM/YYYY");
         txtduedate.setBounds(160, 40, 150, 20);
         contentPane.add(txtduedate);
+        Date duedate = new Date(txtduedate.getText());
+
 
         JButton buttonCreateConference = new JButton("Create Conference");
         buttonCreateConference.setBackground(new Color(100, 149, 237));
@@ -87,8 +102,10 @@ public class CreateConferenceForm extends JFrame {
         buttonCreateConference.setForeground(Color.white);
         buttonCreateConference.setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonCreateConference.addMouseListener(new  MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                //Creazione Conferenza (Controller)
+            public void mouseClicked(MouseEvent e){
+               ConferenceController.createConference(duedate,txttitle.getText(),txtareadescription.getText(),idConference,organizer);
+               JOptionPane.showMessageDialog(null,"Conference created");
+               dispose();
             }
         });
         contentPane.add(buttonCreateConference);

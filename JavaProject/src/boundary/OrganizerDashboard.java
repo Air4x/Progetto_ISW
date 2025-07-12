@@ -1,11 +1,16 @@
 package boundary;
 
+import controller.ConferenceController;
+import entity.Conference;
+import entity.Organizer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
-    //MOLTO IN WIP
+//MOLTO IN WIP
 
 public class OrganizerDashboard extends JFrame{
     private JPanel contentPane;
@@ -14,7 +19,8 @@ public class OrganizerDashboard extends JFrame{
     private JList listActiveConference;
 
     //Composizione frame
-    public OrganizerDashboard() {
+    public OrganizerDashboard(Organizer organizer) throws SQLException {
+
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Organizer Dashboard");
         setBounds(100,100,450,300);
@@ -24,16 +30,24 @@ public class OrganizerDashboard extends JFrame{
         setLocationRelativeTo(null);
 
         contentPane.setLayout(null);
-        /*
-        Parte gestione delle Lista conferenze attive
+
+        //Parte gestione delle Lista conferenze attive
 
         JScrollPane scrollConferenceList = new JScrollPane();
         scrollConferenceList.getViewport().add(contentPane);
         scrollConferenceList.getViewport().setBackground(Color.LIGHT_GRAY);
         scrollConferenceList.setBounds(0,0,0,0);
+        JList listActiveConference = new JList(ConferenceController.getActiveConferences().toArray(new Conference[0]));
+        listActiveConference.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        for (int i = 0; i<listActiveConference.getModel().getSize();i++){
+            JLabel label = new JLabel(listActiveConference.getModel().getElementAt(i).toString());
+            label.setHorizontalAlignment(JLabel.CENTER);
+            scrollConferenceList.getViewport().add(label);
+        }
+        int idConference = ConferenceController.getActiveConferences().size();
         contentPane.add(scrollConferenceList);
 
-        */
+
 
         JButton buttonCreateConference = new JButton("New Conference");
         buttonCreateConference.setBounds(50,50,200,50);
@@ -42,8 +56,9 @@ public class OrganizerDashboard extends JFrame{
         buttonCreateConference.setForeground(Color.white);
         buttonCreateConference.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                idConference = idConference+1;
                 //Crea la conferenza la conferenza
-                CreateConferenceForm form = new CreateConferenceForm();
+                CreateConferenceForm form = new CreateConferenceForm(organizer, idConference);
                 form.setVisible(true);
 
             }
@@ -66,8 +81,17 @@ public class OrganizerDashboard extends JFrame{
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    OrganizerDashboard finestra = new OrganizerDashboard();
+                    String affiliazione = new String("Affiliazione");
+                    String email= new String("Email");
+                    String password =  new String("Password");
+                    String nome = new  String("Nome");
+                    String lastName = new String("Cognome");
+                    int id= 0;
+                    Organizer organizer = new Organizer(affiliazione,email,password,nome,lastName,id);
+                    OrganizerDashboard finestra = new OrganizerDashboard(organizer);
                     finestra.setVisible(true);
+
+
 
                 } catch (Exception e) {
                     e.printStackTrace();

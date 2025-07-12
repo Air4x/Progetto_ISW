@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import controller.UserController;
+import java.util.regex.Pattern;
 
 public class LoginForm  extends JFrame {
     private JTextField emailTextField;
@@ -52,8 +55,31 @@ public class LoginForm  extends JFrame {
         sendLoginButton.setForeground(Color.white);
         sendLoginButton.addMouseListener(new MouseAdapter() {
 
-            public void mouseClicked(MouseEvent e){
+            public void mouseClicked(MouseEvent e) throws SQLException {
 
+                //Validazione Credenziali ed effettivo accesso
+                String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+                if(emailTextField.getText().equals("") || passwordfield.getText().equals("")){
+                    JOptionPane.showMessageDialog(null,"Please fill all the fields","Warning",JOptionPane.WARNING_MESSAGE);
+
+                }
+                if(passwordfield.getText().length()>30){
+                    JOptionPane.showMessageDialog(null,"The password is too long(>30 characters)","Warning",JOptionPane.WARNING_MESSAGE);
+                }
+                if(!Pattern.matches(regex,emailTextField.getText())){
+                    JOptionPane.showMessageDialog(null,"Please enter a valid email","Warning",JOptionPane.WARNING_MESSAGE);
+                }
+
+                User a = new //fuzione login
+                if (a== null)
+
+
+                if(!UserController.login(emailTextField.getText(),passwordfield.getText())){
+                    JOptionPane.showMessageDialog(null,"Invalid email or password","Warning",JOptionPane.WARNING_MESSAGE);
+                }
+                if(UserController.login(emailTextField.getText(),passwordfield.getText())){
+                    //Prende l'utente e lo passa
+                }
 
             }
         });

@@ -1,5 +1,7 @@
 package boundary;
 
+import entity.Author;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -13,7 +15,7 @@ public class AuthorDashboard extends JFrame {
     private JScrollPane scrollSubmittedArticles;
     private JList listSubmittedArticles;
 
-    public AuthorDashboard() {
+    public AuthorDashboard(Author author) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         setTitle("Author Dashboard");

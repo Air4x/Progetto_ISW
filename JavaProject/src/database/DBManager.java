@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class DBManager {
     private static final String DB_USER = "mysql";
-    private static final String DB_PASSWORD = "134534";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/";
+    private static final String DB_PASSWORD = "";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/testDB";
 
     private DBManager() throws IllegalAccessException{
         throw new IllegalAccessException("Utility class");

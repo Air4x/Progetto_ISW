@@ -40,29 +40,29 @@ public class ConferenceDAO {
 	ArrayList<Articolo> articoli = new ArrayList<>();
 	// ========Ottenimento id articoli====================
 	String queryIdArt = "SELECT id_art FROM REGISTRO WHERE id_art = "+ conf_id;
-	Statement stIdArt = new conn.createStamtement();
+	Statement stIdArt =  conn.createStatement();
 	ResultSet idArt = stIdArt.executeQuery(queryIdArt);
 	// =======Ottenimento id autori=======================
 	String queryIdAuth = "SELECT id_aut FROM AUTORI WHERE id_art = ";
-	PreparedStatement stIdAuth = conn.createPreparedStatement();
+	Statement stIdAuth = conn.createStatement();
 	// =======Ottenimento dati autore=====================
 	String queryAuth = "SELECT id, nome, cognome, password, affiliazione, email FROM USER WHERE id = ";
-	PreparedStatement stAuth = conn.createPreparedStatement();
+	Statement stAuth = conn.createStatement();
 	// =======Ottenimento dati articolo==================
 	String queryArt = "SELECT id, titolo, abstract FROM Articoli WHERE id = ";
-	PreparedStatement stArt = conn.createPreparedStatement();
+	Statement stArt = conn.createStatement();
 	while(idArt.next()){
 	    ArrayList<Author> autori = new ArrayList<>();
 	    ResultSet idAuth = stIdAuth.executeQuery(queryIdAuth + idArt.getInt("id_art"));
 	    while(idAuth.next()){
-		ResultSet author = stAuth.executeQuery(queryAuth + idAuth.getInt(1));
-		Author a = new Author(authors.getString("affiliazione"), authors.getString("email")
+		ResultSet authors = stAuth.executeQuery(queryAuth + idAuth.getInt(1));
+		Author a = new Author(authors.getString("affiliazione"), authors.getString("email"),
 				      authors.getString("cognome"), authors.getString("nome"),
 				      authors.getString("password"), authors.getInt("id"));
 		autori.add(a);
 	    }
-	    ResultSet article = stArt.executeQuery(queryArt + idArt.getInt(id_art));
-	    Articolo articolo = new Articolo(article.getString"abstract", autori, article.getString("titolo"));
+	    ResultSet article = stArt.executeQuery(queryArt + idArt.getInt("id_art"));
+	    Articolo articolo = new Articolo(article.getString("abstract"), autori, article.getString("titolo"));
 	}
 	return articoli;
     }
@@ -70,10 +70,10 @@ public class ConferenceDAO {
     public List<Conference> getAllConferences() {
 	ArrayList<Conference> conferenze = new ArrayList<>();
 	String query  ="SELECT * FROM conferenza";
-	Statement st = conn.createStamtement();
+	Statement st = conn.createStatement();
 	ResultSet rs = st.executeQuery(query);
 	while(rs.next()){
-	    Conferece c = new Conference(rs.getDate("scadenza"), rs.getString("titolo"), rs.getString("descrizione"), rs.getInt("id"));
+	    Conference c = new Conference(rs.getDate("scadenza"), rs.getString("titolo"), rs.getString("descrizione"), rs.getInt("id"));
 	    conferenze.add(c);
 	}
 	return conferenze;

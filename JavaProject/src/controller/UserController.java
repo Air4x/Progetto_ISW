@@ -2,9 +2,6 @@ package controller;
 import database.UserDAO;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Date;
 import entity.*;
 
 public class UserController {
@@ -22,17 +19,11 @@ public class UserController {
         return false;
     }
 
-    public boolean login (String email, String password) throws SQLException{
-        User accesso;
-        if(user_dao.isUserPresentByEmail(email) == true){
-            accesso = user_dao.getUserByEmail(email);
-            if(accesso.getPassword() == password){
-                return true;
-            } else {
-                return false;
-            }
+    public User login (String email, String password) throws SQLException{
+        if(user_dao.isUserPresentByEmail(email) == true && user_dao.getUserByEmail(email).getPassword() == password){
+            return user_dao.getUserByEmail(email);
         }
-        return false;
+        return null;
     }
     
 }

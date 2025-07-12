@@ -1,14 +1,14 @@
 package entity;
 
 public abstract class User {
-    private int id;
+    private String id;
     private String name;
     private String lastName;
     private String email;
     private String affiliazione;
     private String password;
 
-    protected User(String affiliazione, String email, String lastName, String name, String password, int id) {
+    protected User(String affiliazione, String email, String lastName, String name, String password, String id) {
         this.affiliazione = affiliazione;
         this.email = email;
         this.lastName = lastName;
@@ -17,7 +17,7 @@ public abstract class User {
         this.id = id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 

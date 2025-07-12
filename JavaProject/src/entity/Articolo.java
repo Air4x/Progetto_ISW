@@ -3,14 +3,16 @@ package entity;
 import java.util.List;
 
 public class Articolo {
+    private String id;
     private String titolo;
     private String abstr;
     private List<Author> autori;
 
-    public Articolo(String abstr, List<Author> autori, String titolo) {
+    public Articolo(String id, String abstr, List<Author> autori, String titolo) {
         this.abstr = abstr;
         this.autori = autori;
         this.titolo = titolo;
+	this.id = id;
     }
 
     public List<Author> getAutori() {
@@ -23,5 +25,9 @@ public class Articolo {
 
     public String getTitolo() {
         return titolo;
+    }
+
+    public String getId(){
+	return id;
     }
 }

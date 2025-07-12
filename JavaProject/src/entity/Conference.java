@@ -5,13 +5,13 @@ import java.util.Date;
 import java.util.List;
 
 public class Conference {
-    private int id;
+    private String id;
     private String titolo;
     private String descrizione;
     private Date scadenza;
     private List<Articolo> articoli;
 
-    public Conference(Date scadenza, String titolo, String descrizione, int id) {
+    public Conference(Date scadenza, String titolo, String descrizione, String id) {
         this.id = id;
         this.scadenza = scadenza;
         this.titolo = titolo;
@@ -23,7 +23,7 @@ public class Conference {
         return articoli;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
     public String getDescrizione() {

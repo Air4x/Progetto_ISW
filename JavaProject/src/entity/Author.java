@@ -4,7 +4,7 @@ public class Author extends User{
     final String role;
 
     public Author(String affiliazione, String email, String lastName,
-                  String name, String password, int id) {
+                  String name, String password, String id) {
         super(affiliazione, email, lastName, name, password, id);
         this.role = "autore";
     }

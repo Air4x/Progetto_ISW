@@ -23,7 +23,7 @@ public class ConferenceDAO {
         String sql = "SELECT * FROM conference WHERE id = " + id;
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
-        return new Conference(rs.getDate("scadenza"), rs.getString("titolo"), rs.getString("descrizione"), rs.getInt("id"));
+        return new Conference(rs.getDate("scadenza"), rs.getString("titolo"), rs.getString("descrizione"), rs.getString("id"));
     }
 
     public void saveConference(Conference conf) throws SQLException {

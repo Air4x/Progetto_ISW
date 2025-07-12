@@ -21,7 +21,7 @@ public class SubmitArticleForm extends JFrame{
     public SubmitArticleForm() {
         setTitle("Submit Article Form");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
+        setBounds(100, 100, 290, 300);
         setResizable(false);
         setLocationRelativeTo(null);
 

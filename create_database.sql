@@ -47,6 +47,14 @@ CREATE TABLE Registro (
        CONSTRAINT FK_REGISTRO_ARTICOLI FOREIGN KEY(id_art) REFERENCES Articoli(ID)
 );
 
+-- Tabella Revisori
+CREATE TABLE Revisori (
+       id_art VARCHAR(5),
+       id_rev VARCHAR(5),
+       CONSTRAINT PK_REVISORI PRIMARY KEY(id_conf, id_art, id_rev),
+       CONSTRAINT FK_REVISORI_ARTICOLI FOREIGN KEY(id_art) REFERENCES Articoli(id),
+       CONSTRAINT FK_REVISORI_UTENTI FOREIGN KEY (id_rev) REFERENCES Utenti(id)
+);
 
 -- Inserimento Utenti
 INSERT INTO Utenti

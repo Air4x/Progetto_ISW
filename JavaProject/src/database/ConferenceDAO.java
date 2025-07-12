@@ -2,6 +2,7 @@ package database;
 
 import entity.Articolo;
 import entity.Conference;
+import entity.Author;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -67,7 +68,7 @@ public class ConferenceDAO {
 	return articoli;
     }
 
-    public List<Conference> getAllConferences() {
+    public List<Conference> getAllConferences() throws  SQLException{
 	ArrayList<Conference> conferenze = new ArrayList<>();
 	String query  ="SELECT * FROM conferenza";
 	Statement st = conn.createStatement();

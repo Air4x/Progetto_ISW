@@ -19,6 +19,14 @@ public class Conference {
         this.articoli = new ArrayList<>();
     }
 
+    public Conference(Conference c) {
+	this.id = c.getId();
+        this.scadenza = c.getScadenza();
+        this.titolo = c.getTitolo();
+        this.descrizione = c.getDescrizione();
+        this.articoli = c.getArticoli();
+    }
+    
     public List<Articolo> getArticoli() {
         return articoli;
     }

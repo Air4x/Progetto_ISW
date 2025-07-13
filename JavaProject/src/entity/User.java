@@ -17,6 +17,15 @@ public abstract class User {
         this.id = id;
     }
 
+    protected User(User a) {
+	this.affiliazione = a.getAffiliazione();
+        this.email = a.getEmail();
+        this.lastName = a.getLastName();
+        this.name = a.getName();
+        this.password = a.getPassword();
+        this.id = a.getId();
+    }
+
     public String getId() {
         return id;
     }

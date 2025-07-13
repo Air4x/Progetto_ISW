@@ -9,6 +9,12 @@ public class Author extends User{
         this.role = "autore";
     }
 
+    public Author(Author a){	
+        super(a.getAffiliazione(), a.getEmail(), a.getLastName(),
+	      a.getName(), a.getPassword(), a.getId());
+	this.role = a.getRole();
+    }	
+
     public String getRole() {
         return this.role;
     }

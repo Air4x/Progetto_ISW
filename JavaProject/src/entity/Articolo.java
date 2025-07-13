@@ -15,6 +15,13 @@ public class Articolo {
 	this.id = id;
     }
 
+    public Articolo(Articolo a){
+	this.id = a.getId();
+        this.titolo = a.getTitolo();
+	this.abstr = a.getAbstr();
+	this.autori = a.getAutori();
+    }
+
     public List<Author> getAutori() {
         return autori;
     }

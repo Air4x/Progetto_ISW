@@ -121,6 +121,7 @@ public class RegistrationForm extends JFrame {
                 UserController uc = new UserController();
                 User user=new User(txtaffiliazione.getText(),txtemail.getText(),txtemail.getText(),txtname.getText(),passwordField1.getSelectedText(),);
                 if(!uc.registerUser(user)){
+                    JOptionPane.showMessageDialog(null,"The User has been register","Sucessful Registration",JOptionPane.WARNING_MESSAGE);
                     if(user.getRole().equals("organizer")){
                         Organizer organizer = new Organizer(user);
                         OrganizerDashboard frame = new OrganizerDashboard(organizer);
@@ -132,6 +133,10 @@ public class RegistrationForm extends JFrame {
                         frame.setVisible(true);
 
                     }
+
+                }
+                else{
+                    JOptionPane.showMessageDialog(null,"The User is already register, please login","Warning",JOptionPane.WARNING_MESSAGE);
                 }
 
 

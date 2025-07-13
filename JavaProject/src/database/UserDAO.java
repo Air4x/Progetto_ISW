@@ -30,8 +30,8 @@ public class UserDAO {
         }
     }
 
-    public User getUserByID(int id) throws SQLException {
-        String sql = "SELECT affiliazione, email, cognome, nome, password, id, ruolo FROM user WHERE id = " + Integer.toString(id);
+    public User getUserByID(String id) throws SQLException {
+        String sql = "SELECT affiliazione, email, cognome, nome, password, id, ruolo FROM user WHERE id = " + id;
         Statement stmt = conn.createStatement();
         ResultSet rs =  stmt.executeQuery(sql);
         stmt.close();
@@ -42,14 +42,14 @@ public class UserDAO {
                     rs.getString("cognome"),
                     rs.getString("nome"),
                     rs.getString("password"),
-                    rs.getInt("id"));
+                    rs.getString("id"));
         } else {
             return new Organizer(rs.getString("affiliazione"),
                     rs.getString("email"),
                     rs.getString("cognome"),
                     rs.getString("nome"),
                     rs.getString("password"),
-                    rs.getInt("id"));
+                    rs.getString("id"));
         }
     }
 
@@ -91,14 +91,14 @@ public class UserDAO {
                     rs.getString("cognome"),
                     rs.getString("nome"),
                     rs.getString("password"),
-                    rs.getInt("id"));
+                    rs.getString("id"));
         } else {
             return new Organizer(rs.getString("affiliazione"),
                     rs.getString("email"),
                     rs.getString("cognome"),
                     rs.getString("nome"),
                     rs.getString("password"),
-                    rs.getInt("id"));
+                    rs.getString("id"));
         }
     }
 
@@ -113,7 +113,7 @@ public class UserDAO {
                     rs.getString("cognome"),
                     rs.getString("nome"),
                     rs.getString("password"),
-                    rs.getInt("id"));
+                    rs.getString("id"));
             authors.add(a);
         }
 

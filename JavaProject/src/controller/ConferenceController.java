@@ -2,11 +2,10 @@ package controller;
 
 import database.ConferenceDAO;
 import entity.*;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
 public class ConferenceController {
     
@@ -36,7 +35,7 @@ public class ConferenceController {
         return act_conf;
     }
 
-    public List<Articolo> getArticlesByConference(int conf_Id) throws SQLException {
+    public List<Articolo> getArticlesByConference(String conf_Id) throws SQLException {
         List<Articolo> art = conf_dao.getArticlesByConference(conf_Id);
         return art;
     }

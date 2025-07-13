@@ -27,6 +27,21 @@ Permette la visualizzazione all'utente i form per la registrazione ed l'accesso\
 \item handleRegistration(): Gestisce la registrazione dell'utente all'applicazione, visualizzando quando il messaggio di errore quando viene riscontrato\\
 \end{itemize}
 
+\paragraph{RegistrationForm}
+Permette la compilazione e l'inoltro del form per la registrazione, permettendo la creazione di un nuovo utente\\
+\begin{itemize}
+\item displayForm(): Permette la visualizzazione del form per effettuare la registrazione\\
+\item submitRegistration(): Inoltra i dati per la registrazione al database, effettuando la verifica dell'inserimento corretto dei dati e nel caso in cui sia già registrato un utente\\
+\end{itemize}
+
+\paragraph{LoginForm}
+Permette la compilazione e l'intoltro del form per l'accesso, permettendo tramite l'inserimento dell'email e della password dell'account, di accede alla propria dashboard
+\begin{itemize}
+\item displayForm(): Permette la visualizzazione del form per la compilazione del login
+\item submitLogin(): Inoltra i dati inseriti per l'accesso, verificcando attraverso il database l'esistenza dell'utente
+\end{itemize}
+
+
 \paragraph{OrganizerDashboard}
 Tramite questa dashboard, vengono visualizzati tutte le conferenze con la possibilità di analizzare anche gli articoli che sono stati sottomessi\\
 \begin{itemize}
@@ -47,6 +62,9 @@ Tramite questa dashboard, l'autore ha la possibità di visualizzare le conferenz
 \item showActiveConference(): Mostra le confereneze attive a cui è possibile sottomettere degli articoli\\
 \item showSubmittedArticles(): Mostra gli articoli sottomessi e a quali conferenze sono stati sottomessi\\
 \end{itemize}
+
+
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "main"

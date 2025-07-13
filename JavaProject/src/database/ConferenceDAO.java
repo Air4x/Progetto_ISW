@@ -20,7 +20,7 @@ public class ConferenceDAO {
         }
     }
 
-    public Conference getConferenceByID(int id) throws SQLException {
+    public Conference getConferenceByID(String id) throws SQLException {
         String sql = "SELECT * FROM conference WHERE id = " + id;
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
@@ -37,7 +37,7 @@ public class ConferenceDAO {
         int nRowsUpadated = stmt.executeUpdate(sql);
     }
 
-    public List<Articolo> getArticlesByConference(int conf_id) throws SQLException {
+    public List<Articolo> getArticlesByConference(String conf_id) throws SQLException {
 	ArrayList<Articolo> articoli = new ArrayList<>();
 	// ========Ottenimento id articoli====================
 	String queryIdArt = "SELECT id_art FROM REGISTRO WHERE id_art = "+ conf_id;

@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import controller.UserController;
+import entity.Author;
+import entity.Organizer;
+import entity.User;
 
 public class RegistrationForm extends JFrame {
     private JTextField txtname;
@@ -110,13 +113,27 @@ public class RegistrationForm extends JFrame {
                 if(txtname.getText().length()=="" || txtlastname.getText().length()==""){
                     JOptionPane.showMessageDialog(null,"Please enter a valid name and last name","Warning",JOptionPane.WARNING_MESSAGE);
                 }
-                if(!txtruolo.getText().equalsIgnoreCase("organizzatore")&& !txtruolo.getText().equals("autore")){
+                if(!txtruolo.getText().equalsIgnoreCase("organizer")&& !txtruolo.getText().equals("author")){
                     JOptionPane.showMessageDialog(null,"Please enter a valid role","Warning",JOptionPane.WARNING_MESSAGE);
                 }
 
-                //se è tutto ok
+                //Se tutto corrisponde
+                UserController uc = new UserController();
+                User user=new User(txtaffiliazione.getText(),txtemail.getText(),txtemail.getText(),txtname.getText(),passwordField1.getSelectedText(),);
+                if(!uc.registerUser(user)){
+                    if(user.getRole().equals("organizer")){
+                        Organizer organizer = new Organizer(user);
+                        OrganizerDashboard frame = new OrganizerDashboard(organizer);
+                        frame.setVisible(true);
+                    }
+                    else{
+                        Author author = new Author(user);
+                        AuthorDashboard frame = new AuthorDashboard(author);
+                        frame.setVisible(true);
 
-                if(e)
+                    }
+                }
+
 
 
             }

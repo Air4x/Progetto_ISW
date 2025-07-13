@@ -55,7 +55,15 @@ public class AuthorDashboard extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try{
-                    AuthorDashboard frame=new AuthorDashboard();
+                    String name = new String("Name");
+                    String lastName = new String("LastName");
+                    String email = new String("Email");
+                    String password = new String("Password");
+                    String affilation = new String("Affilation");
+                    String role =  new String("Role");
+
+                    Author author = new Author(name,lastName,email,password,affilation,role);
+                    AuthorDashboard frame=new AuthorDashboard(author);
                     frame.setVisible(true);
 
                 }catch(Exception e){

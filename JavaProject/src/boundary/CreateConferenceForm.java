@@ -54,7 +54,7 @@ public class CreateConferenceForm extends JFrame {
     public CreateConferenceForm(Organizer organizer, int idConference) {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 300);
-        setTitle("Create Conference n"+idConference);
+        setTitle("Create Conference n."+idConference);
 
         contentPane = new JPanel();
         //contentPane.setBackground(Color.lightGray);

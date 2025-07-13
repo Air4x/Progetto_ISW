@@ -6,6 +6,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import controller.UserController;
+import entity.Author;
+import entity.Organizer;
+import entity.User;
+
 import java.util.regex.Pattern;
 
 public class LoginForm  extends JFrame {
@@ -69,16 +73,24 @@ public class LoginForm  extends JFrame {
                 if(!Pattern.matches(regex,emailTextField.getText())){
                     JOptionPane.showMessageDialog(null,"Please enter a valid email","Warning",JOptionPane.WARNING_MESSAGE);
                 }
+                    UserController uc = new UserController();
+                if(uc.login(emailTextField,passwordfield)!=null){
 
-                User a = new //fuzione login
-                if (a== null)
+
+                    JOptionPane.showMessageDialog(null,"Login Successful","Warning",JOptionPane.WARNING_MESSAGE);
+                    if(uc.login(emailTextField.getText(),passwordfield.getText()).getRole()=="Author"){
+                        Author author = new Author(uc.login(emailTextField.getText(),passwordfield.getText()));
+                        AuthorDashboard frame = new AuthorDashboard(author);
+                        frame.setVisible(true);
+                    } else {
+                        Organizer organizer = new Organizer(uc.login(emailTextField.getText(),passwordfield.getText());
+                        OrganizerDashboard frame = new OrganizerDashboard(organizer);
+                        frame.setVisible(true);
 
 
-                if(!UserController.login(emailTextField.getText(),passwordfield.getText())){
-                    JOptionPane.showMessageDialog(null,"Invalid email or password","Warning",JOptionPane.WARNING_MESSAGE);
-                }
-                if(UserController.login(emailTextField.getText(),passwordfield.getText())){
-                    //Prende l'utente e lo passa
+                    }
+
+
                 }
 
             }

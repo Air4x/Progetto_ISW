@@ -119,6 +119,14 @@ package Boundary {
     + handleLogin()
     + handleRegistration()
   }
+  class LoginForm{
+    +displayForm()
+    +submitLogin()
+  }
+  class RegisterForm{
+    +displayForm()
+    submitRegistration()
+  }
   
   class AuthorDashboard {
     + showActiveConferences()
@@ -127,7 +135,7 @@ package Boundary {
   
   class SubmitArticleForm {
     + displayForm()
-    + submitArticle()n
+    + submitArticle()
   }
   
   class OrganizerDashboard {

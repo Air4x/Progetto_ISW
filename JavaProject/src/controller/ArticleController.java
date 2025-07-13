@@ -19,8 +19,10 @@ public class ArticleController {
     }
 
     public boolean submitArticle(Articolo art, Conference conf) throws SQLException{
-        String ID_conf = conf.getId();
-        //if(this.conf_dao.getArticlesByConference(ID_conf) != null){art_dao.saveArticle(art); return true;}
+        if(this.conf_dao.getArticlesByConference(conf.getId()) != null){
+            art_dao.saveArticle(art); 
+            return true;
+        }
         return false;
     }
 
@@ -30,8 +32,11 @@ public class ArticleController {
     }
 
     public boolean updateArticleStatus (String ID, String status) throws SQLException {
-        if()
+        if(art_dao.getArticleByID(ID) != null){
         this.art_dao.updateArticleStatus(ID, status);
+            return true;
+        }
+        return false;
     }
 
 }

@@ -69,7 +69,7 @@ public class ConferenceDAO {
 	return articoli;
     }
 
-    public List<Conference> getAllConferences() throws  SQLException{
+    public ArrayList<Conference> getAllConferences() throws  SQLException{
 	ArrayList<Conference> conferenze = new ArrayList<>();
 	String query  ="SELECT * FROM conferenza";
 	Statement st = conn.createStatement();
@@ -79,5 +79,17 @@ public class ConferenceDAO {
 	    conferenze.add(c);
 	}
 	return conferenze;
+    }
+
+    public ArrayList<Conference> getActiveConferences() throws SQLException {
+	ArrayList<Conference> conferenze = getAllConferences();
+	ArrayList<Conference> conferenzeAttive = new ArrayList<>();
+	Date now = new Date();
+	for (Conference conf : conferenze) {
+	    if(now.before(conf.getScadenza())){
+		conferenzeAttive.add(conf);
+	    }
+	}
+	return conferenzeAttive;
     }
 }

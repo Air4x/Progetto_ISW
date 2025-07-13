@@ -1,17 +1,16 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSet;
-
 import java.util.ArrayList;
 
 
 public class ReviewDAO {
     private Connection conn;
 
-    public ReviewDAO(){
+    public ReviewDAO() throws SQLException{
 	conn = DBManager.getConnection();
     }
 

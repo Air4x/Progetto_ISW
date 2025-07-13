@@ -7,7 +7,6 @@ import entity.Author;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ConferenceDAO {
     private Connection conn;
@@ -37,7 +36,7 @@ public class ConferenceDAO {
         int nRowsUpadated = stmt.executeUpdate(sql);
     }
 
-    public List<Articolo> getArticlesByConference(String conf_id) throws SQLException {
+    public ArrayList<Articolo> getArticlesByConference(String conf_id) throws SQLException {
 	ArrayList<Articolo> articoli = new ArrayList<>();
 	// ========Ottenimento id articoli====================
 	String queryIdArt = "SELECT id_art FROM REGISTRO WHERE id_art = "+ conf_id;
@@ -92,4 +91,6 @@ public class ConferenceDAO {
 	}
 	return conferenzeAttive;
     }
+
+
 }

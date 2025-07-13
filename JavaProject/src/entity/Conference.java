@@ -3,6 +3,7 @@ package entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Calendar;
 
 public class Conference {
     private String id;
@@ -44,5 +45,19 @@ public class Conference {
 
     public String getTitolo() {
         return titolo;
+    }
+
+    public boolean inScadenza () {
+	Date now = new Date();
+	Calendar.Builder calBuilder = new Calendar.Builder();
+        calBuilder.setInstant(now);
+        Calendar cNow = calBuilder.build();
+        calBuilder.setInstant(this.getScadenza());
+        Calendar cScadenza = calBuilder.build();
+        int giornoNow = cNow.get(Calendar.DAY_OF_YEAR);
+        int giornoScadenza = cScadenza.get(Calendar.DAY_OF_YEAR);
+        if((giornoScadenza - giornoNow) <= 5){
+	    return true;
+        } else { return false; }
     }
 }

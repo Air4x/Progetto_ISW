@@ -3,9 +3,9 @@ skinparam packageStyle frame
 
 package database {
   class UserDAO {
-    + getUserRoleByID(userId: int): String		
-    + getUserByID(userId: int): User
-    + isUserPresentByID(userId: int): boolean
+    + getUserRoleByID(userId: String): String		
+    + getUserByID(userId: String): User
+    + isUserPresentByID(userId: String): boolean
     + isUserPresentByEmail(email: String): boolean
     + getUserIdByEmail(email: String): int
     + getAllAuthors(): List<User>
@@ -15,19 +15,19 @@ package database {
   class ConferenceDAO {
     + getAllConferences(): List<Conference>
     + saveConference(conf: Conference): void
-    + getArticlesByConference(confId: int): List<Article>
+    + getArticlesByConference(confId: String): List<Article>
   }
   
   class ArticleDAO {
     + saveArticle(art: Article): void
-    + getArticlesByAuthor(authorId: int): List<Article>
-    + getArticleByID(id: int): Article
-    + updateArticleStatus(id: int, status: String): void
+    + getArticlesByAuthor(authorId: String): List<Article>
+    + getArticleByID(id: String): Article
+    + updateArticleStatus(id: String, status: String): void
   }
   
   class ReviewDAO {
-    + assignReviewer(articleID: int, reviewerId: int): void
-    + getReviewersForArticle(articleId: int): List<Integer>
+    + assignReviewer(articleID: String, reviewerId: String): void
+    + getReviewersForArticle(articleId: STring): List<Integer>
     + hasConflictOfInterest(articleId, reviewerId): boolean
   }
 
@@ -93,22 +93,22 @@ package Entity {
 package Controller {
   class UserController {
     + registerUser(user: User): boolean
-    + login(email: String, password: String)
+    + login(email: String, password: String): User
   }
   class ConferenceController {
     + createConference(title: String, desc: String, scadenza: Date, organizer: Organizer): void
     + getActiveConferences(): List<Conference>
-    + getArticlesByConference(id: int): List<Article>
+    + getArticlesByConference(id: String): List<Article>
   }
   
   class ArticleController {
     + submitArticle(art: Article, conf: Conference): void
-    + getArticlesByAuthor(id: int) List<Article>
-    + unpdateArticleStatus(id: int, status: String): void
+    + getArticlesByAuthor(id: String) List<Article>
+    + unpdateArticleStatus(id: String, status: String): void
   }
 
   class ReviewController {
-    + assignReviewer(articleID: int, reviewerId: int): boolean
+    + assignReviewer(articleID: String, reviewerId: String): boolean
   }
 }
 

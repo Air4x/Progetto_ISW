@@ -49,6 +49,8 @@ package Entity {
     - lastName: String
     - email: String
     - Affiliazione: String
+    # User(aff: String, email: String, lastName: String, name: String, password: String, id: String);
+    # User(u: User)
     + getName(): String
     + getLastName(): String
     + getEmail(): String
@@ -60,18 +62,24 @@ package Entity {
 
   class Author {
     - final role: String
+    + Author(aff: String, email: String, lastName: String, name: String, password: String, id: String)
+    + Author(a: Author)		
     + getRole(): String
   }
 
   class Organizer {
     - final role: String
+    + Organizer(aff: String, email: String, lastName: String, name: String, password: String, id: String)
+    + Organizer(o: Organizer)
     + getRole(): String
   }
 
-  class Article {
+  class Articolo {
     - titolo: String
     - abstract: String
     - coautori: List<Author>
+    + Articolo(id: String, abstr: String, autori: List<Author>, titolo: String)
+    + Articolo(a: Articolo)
   }
   
   class Conference {
@@ -79,6 +87,8 @@ package Entity {
     - descrizione: String
     - scadenza: Date
     - articoli: List<Article>
+    + Conference(scadenza: Date, titolo: String, descrizione: String, id: String)
+    + Conference(conf: Conference)
     + getTitolo(): String
     + getDescrizione(): String
     + getScadenza(): Date

@@ -1,11 +1,12 @@
 package controller;
+
 import database.ConferenceDAO;
+import entity.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
-import entity.*;
 
 public class ConferenceController {
     
@@ -17,13 +18,13 @@ public class ConferenceController {
         this.conf_dao = new ConferenceDAO();
     }
 
-    public void createConference (Date scadenza, String title, String descr, int id, Organizer org) throws SQLException {
+    public void createConference (Date scadenza, String title, String descr, String id, Organizer org) throws SQLException {
         this.conf = new Conference(scadenza,title,descr,id);
         this.user = (Organizer) org;
         conf_dao.saveConference(this.conf);
     }
 
-    public List<Conference> getActiveConferences(){
+    public List<Conference> getActiveConferences() throws SQLException{
         Date data = new Date();
         List<Conference> all_conf = conf_dao.getAllConferences();
         List<Conference> act_conf = new ArrayList<>();

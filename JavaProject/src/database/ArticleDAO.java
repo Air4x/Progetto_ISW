@@ -5,17 +5,18 @@ import entity.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ArticleDAO {
     private Connection conn;
 
-    public ArticleDAO() {
+    public ArticleDAO() throws SQLException {
 	conn = DBManager.getConnection();
     }
 
-    public void saveArticle(Articolo a) {
+    public void saveArticle(Articolo a) throws SQLException {
 	String sql = "INSERT INTO Articoli VALUES (?, ?, ?)";
 	PreparedStatement pst = conn.prepareStatement(sql);
 	pst.setNString(1, a.getId());
@@ -24,9 +25,9 @@ public class ArticleDAO {
 	int nRowsUpdated = pst.executeUpdate();
     }
 
-    public Articolo getArticleByID(String id) {
-	String titolo;
-	String abs;
+    public Articolo getArticleByID(String id) throws SQLException {
+	String titolo = null;
+	String abs = null;
 	ArrayList<Author> autori = new ArrayList<>();
 	// ======To get title, id and abstract=====
 	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID FROM Articoli WHERE id = "+id;
@@ -59,7 +60,7 @@ public class ArticleDAO {
 	return new Articolo(id, abs, autori, titolo);
     }
 
-    public ArrayList<Articolo> getArticlesByAuthor(String id_aut) {
+    public ArrayList<Articolo> getArticlesByAuthor(String id_aut) throws SQLException {
 	ArrayList<Integer> articleIds = new ArrayList<>();
 	ArrayList<Articolo> articoli = new ArrayList<>();
 	String fromAutori = "SELECT id_art FROM Autori WHERE id_aut = "+ id_aut;
@@ -72,7 +73,7 @@ public class ArticleDAO {
 	return articoli;
     }
 
-    public void updateArticleStatus(String id, String status){
+    public void updateArticleStatus(String id, String status) throws SQLException{
 	String intoRegistro = "UPDATE Registro SET STATUS = " + status + "WHERE id_art = " + id;
 	Statement st = conn.createStatement();
 	st.executeUpdate(intoRegistro);

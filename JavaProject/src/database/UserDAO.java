@@ -102,7 +102,7 @@ public class UserDAO {
         }
     }
 
-    public List<Author> getAllUsers() throws SQLException {
+    public List<Author> getAllAuthors() throws SQLException {
         ArrayList<Author> authors = new ArrayList<Author>();
         String sql = "SELECT nome cognome email affiliazione id password FROM user WHERE role = 'Autore'";
         Statement stmt = conn.createStatement();

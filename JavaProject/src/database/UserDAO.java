@@ -22,7 +22,7 @@ public class UserDAO {
         }
     }
 
-    public String getUserRoleByID(int id) throws SQLException {
+    public String getUserRoleByID(String id) throws SQLException {
         String sql = "SELECT role FROM user WHERE id = " + id;
         try (Statement stmt = conn.createStatement()){
             ResultSet rs = stmt.executeQuery(sql);
@@ -53,9 +53,9 @@ public class UserDAO {
         }
     }
 
-    public boolean isUserPresentByID(int id) throws SQLException {
+    public boolean isUserPresentByID(String id) throws SQLException {
         boolean result = false;
-        String sql = "SELECT id FROM user WHERE id = " + Integer.toString(id);
+        String sql = "SELECT id FROM user WHERE id = " + id;
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         // ResultSet has a next() method that return the next row, if the set is empty (there is no next row) it returns

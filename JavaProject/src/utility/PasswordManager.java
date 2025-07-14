@@ -17,7 +17,7 @@ public class PasswordManager {
 	}
     }
 
-    public static PasswordManager getIstance() {
+    public static PasswordManager getInstance() {
 	if(instance == null){
 	    synchronized (PasswordManager.class) {
 		if(instance == null)

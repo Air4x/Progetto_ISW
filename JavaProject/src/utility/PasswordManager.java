@@ -13,7 +13,7 @@ public class PasswordManager {
 	try(FileInputStream fs =new FileInputStream("config/system.properties")){
 	    props.load(fs);
 	} catch (IOException e) {
-	    throw new RuntimeException("Failes to load system properties", e);
+	    throw new RuntimeException("Failed to load system properties", e);
 	}
     }
 

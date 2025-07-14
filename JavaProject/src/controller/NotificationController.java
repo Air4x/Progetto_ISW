@@ -17,7 +17,6 @@ public class NotificationController {
 
     private ConferenceDAO conf_dao;
     private UserDAO user_dao;
-    private PasswordManager pm;
 
     public NotificationController() throws SQLException{
         this.conf_dao= new ConferenceDAO();
@@ -49,8 +48,8 @@ public class NotificationController {
 
     private void sendEmail(String email_d, String conf_title, String msg) throws SQLException, MessagingException {
         // Fare email da cui mandare messaggi
-        final String m_email = this.pm.get("email_username"); //mittente
-        final String m_password = this.pm.get("email_password");; //app_password
+        final String m_email = PasswordManager.getInstance().get("email_username"); //mittente
+        final String m_password = PasswordManager.getInstance().get("email_password");; //app_password
 
         //Configurazione del host
         Properties prop = new Properties();

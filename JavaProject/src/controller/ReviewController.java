@@ -15,15 +15,13 @@ public class ReviewController {
         this.r_DAO = new ReviewDAO();
     }
 
-    public boolean assignReviewer (int articleID, int reviewID) throws SQLException{
-        String art_id = Integer.toString(articleID);
-        String rew_id = Integer.toString(reviewID);
-        if(r_DAO.hasConflitOfInterest(art_id, rew_id)){
+    public boolean assignReviewer (String articleID, String reviewID) throws SQLException{
+        if(r_DAO.hasConflitOfInterest(articleID, reviewID)){
             return false;
         } else if (!u_DAO.isUserPresentByID(reviewID)){
             return false;
         }
-        r_DAO.assignReviewer(art_id,rew_id);
+        r_DAO.assignReviewer(articleID,reviewID);
         return true;
     }
 

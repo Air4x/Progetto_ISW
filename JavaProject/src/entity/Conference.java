@@ -2,7 +2,6 @@ package entity;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Calendar;
 
 public class Conference {
@@ -10,7 +9,7 @@ public class Conference {
     private String titolo;
     private String descrizione;
     private Date scadenza;
-    private List<Articolo> articoli;
+    private ArrayList<Articolo> articoli;
 
     public Conference(Date scadenza, String titolo, String descrizione, String id) {
         this.id = id;
@@ -28,7 +27,7 @@ public class Conference {
         this.articoli = c.getArticoli();
     }
     
-    public List<Articolo> getArticoli() {
+    public ArrayList<Articolo> getArticoli() {
         return articoli;
     }
 

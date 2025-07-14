@@ -1,14 +1,14 @@
 package entity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Articolo {
     private String id;
     private String titolo;
     private String abstr;
-    private List<Author> autori;
+    private ArrayList<Author> autori;
 
-    public Articolo(String id, String abstr, List<Author> autori, String titolo) {
+    public Articolo(String id, String abstr, ArrayList<Author> autori, String titolo) {
         this.abstr = abstr;
         this.autori = autori;
         this.titolo = titolo;
@@ -22,7 +22,7 @@ public class Articolo {
 	this.autori = a.getAutori();
     }
 
-    public List<Author> getAutori() {
+    public ArrayList<Author> getAutori() {
         return autori;
     }
 

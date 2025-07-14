@@ -7,9 +7,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBManager {
-    private static final String DB_USER = "mysql";
-    private static final String DB_PASSWORD = "";
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/testDB";
+    private static final String DB_USER = PasswordManager.getInstance().get("db_user");
+    private static final String DB_PASSWORD = PasswordManager.getInstance().get("db_password");
+    private static final String DB_URL = PasswordManager.getInstance().get("db_url");
 
     private DBManager() throws IllegalAccessException{
         throw new IllegalAccessException("Utility class");

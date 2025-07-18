@@ -37,14 +37,14 @@ public class OrganizerDashboard extends JFrame{
         scrollConferenceList.getViewport().add(contentPane);
         scrollConferenceList.getViewport().setBackground(Color.LIGHT_GRAY);
         scrollConferenceList.setBounds(0,0,0,0);
-        JList listActiveConference = new JList(ConferenceController.getActiveConferences().toArray(new Conference[0]));
+        //JList listActiveConference = new JList(ConferenceController.getActiveConferences().toArray(new Conference[0]));
         listActiveConference.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         for (int i = 0; i<listActiveConference.getModel().getSize();i++){
             JLabel label = new JLabel(listActiveConference.getModel().getElementAt(i).toString());
             label.setHorizontalAlignment(JLabel.CENTER);
             scrollConferenceList.getViewport().add(label);
         }
-        int idConference = ConferenceController.getActiveConferences().size();
+        //int idConference = ConferenceController.getActiveConferences().size();
         contentPane.add(scrollConferenceList);
 
 

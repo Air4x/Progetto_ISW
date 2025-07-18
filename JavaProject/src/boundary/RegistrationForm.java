@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+
 import controller.UserController;
 import entity.Author;
 import entity.Organizer;
@@ -104,13 +106,13 @@ public class RegistrationForm extends JFrame {
         registerbutton.setBackground(new Color(100, 149, 237));
         registerbutton.setForeground(Color.white);
         registerbutton.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
+            public void mouseClicked(MouseEvent e) throws SQLException {
                 String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-                //
+
                 if(!txtemail.getText().matches(regex)){
                     JOptionPane.showMessageDialog(null,"Please enter a valid email","Warning",JOptionPane.WARNING_MESSAGE);
                 }
-                if(txtname.getText().length()=="" || txtlastname.getText().length()==""){
+                if(txtname.getText().isEmpty() || txtlastname.getText().isEmpty()){
                     JOptionPane.showMessageDialog(null,"Please enter a valid name and last name","Warning",JOptionPane.WARNING_MESSAGE);
                 }
                 if(!txtruolo.getText().equalsIgnoreCase("organizer")&& !txtruolo.getText().equals("author")){
@@ -118,30 +120,41 @@ public class RegistrationForm extends JFrame {
                 }
 
                 //Se tutto corrisponde
-                UserController uc = new UserController();
-                User user=new User(txtaffiliazione.getText(),txtemail.getText(),txtemail.getText(),txtname.getText(),passwordField1.getSelectedText(),);
-                if(!uc.registerUser(user)){
-                    JOptionPane.showMessageDialog(null,"The User has been register","Sucessful Registration",JOptionPane.WARNING_MESSAGE);
-                    if(user.getRole().equals("organizer")){
-                        Organizer organizer = new Organizer(user);
-                        OrganizerDashboard frame = new OrganizerDashboard(organizer);
-                        frame.setVisible(true);
-                    }
-                    else{
-                        Author author = new Author(user);
-                        AuthorDashboard frame = new AuthorDashboard(author);
-                        frame.setVisible(true);
+                if(txtruolo.getText().equalsIgnoreCase("autore")){
+                    User e = new Author(txtaffiliazione.getText(),txtemail.getText(),txtlastname.getText(),txtname.getText(),passwordField1.getSelectedText());
+                    UserController uc = new  UserController();
+                    if(!uc.registerUser(e)){
+                        JOptionPane.showMessageDialog(null,"The user has been successfully registrated","Registration done",JOptionPane.WARNING_MESSAGE);
+                        dispose();
 
+                    } else{
+                        JOptionPane.showMessageDialog(null,"Warning, the user is already register","Warning",JOptionPane.WARNING_MESSAGE);
                     }
+
+
 
                 }
-                else{
-                    JOptionPane.showMessageDialog(null,"The User is already register, please login","Warning",JOptionPane.WARNING_MESSAGE);
+                else if(txtruolo.getText().equalsIgnoreCase("organizer")){
+                    User e = new Organizer(txtfaffiliazione.getText(),txtemail.getText(),txtlastname.getText(),txtname.getText(),passwordField1.getSelectedText());
+                    UserController uc = new  UserController();
+                    if(!uc.registerUser(e)){
+                        JOptionPane.showMessageDialog(null,"The user  has been successfully registrated","Registration done",JOptionPane.WARNING_MESSAGE);
+
+
+                    else{
+                        JOptionPane.showMessageDialog(null,"Warning, the user is already register","Warning",JOptionPane.WARNING_MESSAGE);
+                    }
+                }
+
+                else {
+                    JOptionPane.showMessageDialog(null,"Please enter a valid role","Warning",JOptionPane.WARNING_MESSAGE);
                 }
 
 
 
             }
+
+
         });
 
 

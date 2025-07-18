@@ -58,7 +58,7 @@ public class LoginForm  extends JFrame {
         sendLoginButton.setBackground(new Color(100, 149, 237));
         sendLoginButton.setForeground(Color.white);
         sendLoginButton.addMouseListener(new MouseAdapter() {
-
+            @Override
             public void mouseClicked(MouseEvent e) throws SQLException {
 
                 //Validazione Credenziali ed effettivo accesso
@@ -73,17 +73,17 @@ public class LoginForm  extends JFrame {
                 if(!Pattern.matches(regex,emailTextField.getText())){
                     JOptionPane.showMessageDialog(null,"Please enter a valid email","Warning",JOptionPane.WARNING_MESSAGE);
                 }
-                    UserController uc = new UserController();
-                if(uc.login(emailTextField,passwordfield)!=null){
+                UserController uc = new UserController();
+                if(uc.login(emailTextField.getText(),passwordfield.getText())!=null){
 
 
                     JOptionPane.showMessageDialog(null,"Login Successful","Warning",JOptionPane.WARNING_MESSAGE);
                     if(uc.login(emailTextField.getText(),passwordfield.getText()).getRole()=="Author"){
-                        Author author = new Author(uc.login(emailTextField.getText(),passwordfield.getText()));
+                        Author author = new Author((Author) uc.login(emailTextField.getText(),passwordfield.getText()));
                         AuthorDashboard frame = new AuthorDashboard(author);
                         frame.setVisible(true);
                     } else {
-                        Organizer organizer = new Organizer(uc.login(emailTextField.getText(),passwordfield.getText());
+                        Organizer organizer = new Organizer((Organizer) uc.login(emailTextField.getText(),passwordfield.getText()));
                         OrganizerDashboard frame = new OrganizerDashboard(organizer);
                         frame.setVisible(true);
 

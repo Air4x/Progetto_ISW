@@ -32,8 +32,8 @@ public class CreateConferenceForm extends JFrame {
                     String password = new String("Password");
                     String nome = new String("Nome");
                     String lastName = new String("Cognome");
-                    int id=1;
-                    int idConference=0;
+                    String id=new String("1");
+                    String idConference= new String("0");
                     Organizer organizer = new Organizer(affiliazione,email,password,nome,lastName,id);
                     CreateConferenceForm frame = new CreateConferenceForm(organizer,idConference);
                     frame.setVisible(true);
@@ -51,7 +51,7 @@ public class CreateConferenceForm extends JFrame {
 
 
 
-    public CreateConferenceForm(Organizer organizer, int idConference) {
+    public CreateConferenceForm(Organizer organizer, String idConference) {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         setTitle("Create Conference n."+idConference);
@@ -103,7 +103,8 @@ public class CreateConferenceForm extends JFrame {
         buttonCreateConference.setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonCreateConference.addMouseListener(new  MouseAdapter() {
             public void mouseClicked(MouseEvent e){
-               ConferenceController.createConference(duedate,txttitle.getText(),txtareadescription.getText(),idConference,organizer);
+                ConferenceController cc = new ConferenceController();
+               cc.createConference(duedate,txttitle.getText(),txtareadescription.getText(),idConference,organizer);
                JOptionPane.showMessageDialog(null,"Conference created");
                dispose();
             }

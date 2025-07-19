@@ -1,0 +1,258 @@
+\section{Pacchetto Entity}
+\label{sec:impl_entity}
+\subsection{User}
+Classe di dominio astratta, contiene i dati e le funzionalità comuni
+tra \texttt{entity.Author} e \texttt{entity.Organizer}
+\paragraph{Attributi}
+\begin{description}
+\item[id] Il codice identificativo dell'utente, è un UUIDv?
+\item[name] Il nome dell'utente
+\item[lastName] Il cognome dell'utente
+\item[email] L'email dell'utente
+\item[affiliazione] L'università dell'utente
+\item[password] Lo SHA256 della password dell'utente
+\end{description}
+\subsubsection{\texttt{entity.User.User()}}
+Istanzia un utente
+\paragraph{Parametri}
+\begin{itemize}
+\item affiliazione
+\item name
+\item lastName
+\item email
+\item password
+\item id
+\end{itemize}
+
+\subsubsection{\texttt{entity.User.User()}}
+Costruttore di copia per \texttt{entity.User}
+\paragraph{Parametri}
+\begin{itemize}
+\item utente
+\end{itemize}
+
+\subsubsection{\texttt{entity.User.getId()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item l'id dell'utente
+\end{itemize}
+
+\subsubsection{\texttt{entity.User.getName()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item il nome dell'utente
+\end{itemize}
+
+\subsubsection{\texttt{entity.User.getLastName()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item il cognome dell'utente
+\end{itemize}
+
+\subsubsection{\texttt{entity.User.getAffiliazione()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item l'affiliazione dell'utente
+\end{itemize}
+
+\subsubsection{\texttt{entity.User.getEmail()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item l'email dell'utente
+\end{itemize}
+
+\subsubsection{\texttt{entity.User.getPassword()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item la password dell'utente
+\end{itemize}
+
+\subsubsection{\texttt{entity.User.setAffiliazione()}}
+Cambia l'affiliazione dell'utente
+\paragraph{Parametri}
+\begin{itemize}
+\item affiliazione
+\end{itemize}
+
+\subsubsection{\texttt{entity.User.setEmail()}}
+Cambia l'email dell'utente
+\paragraph{Parametri}
+\begin{itemize}
+\item email
+\end{itemize}
+
+\subsection{Author}
+\paragraph{Attributi}
+\begin{description}
+\item [role] il ruolo dell'autore
+\end{description}
+\subsubsection{\texttt{entity.Author.Author()}}
+Istanzia un nuovo autore
+\paragraph{Parametri}
+\begin{itemize}
+\item affiliazione
+\item email
+\item lastName
+\item name
+\item password
+\item id
+\end{itemize}
+
+\subsubsection{\texttt{entity.Author.Author()}}
+Costruttore di copia per \texttt{Author}
+\paragraph{Parametri}
+\begin{itemize}
+\item autore
+\end{itemize}
+
+\subsubsection{\texttt{entity.Author.getRole()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Il ruolo dell'autore
+\end{itemize}
+
+\subsection{Organizer}
+\paragraph{Attributi}
+\begin{description}
+\item
+\end{description}
+
+\subsubsection{\texttt{entity.Author.Organizer()}}
+Istanzia un nuovo organizzatore
+\paragraph{Parametri}
+\begin{itemize}
+\item affiliazione
+\item email
+\item lastName
+\item name
+\item password
+\item id
+\end{itemize}
+
+\subsubsection{\texttt{entity.Author.Organizer()}}
+Costruttore di copia per \texttt{Organizer}
+\paragraph{Parametri}
+\begin{itemize}
+\item organizer
+\end{itemize}
+
+\subsubsection{\texttt{entity.Author.getRole()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Il ruolo dell'organizzatore
+\end{itemize}
+
+\subsection{Articolo}
+\paragraph{Attributi}
+\begin{description}
+\item [id] Codice identificativo dell'articolo
+\item[titolo] Titolo dell'articolo
+\item[abstr]  Abstract dell'articolo
+\item[autori] Lista di \texttt{Author} dell'articolo
+\end{description}
+
+\subsubsection{\texttt{entity.Author.Articolo()}}
+Istanzia un nuovo articolo
+\paragraph{Parametri}
+\begin{itemize}
+\item id
+\item abstr
+\item autori
+\item titolo
+\end{itemize}
+
+\subsubsection{\texttt{entity.Author.Articolo()}}
+Costruttore di copia
+\paragraph{Parametri}
+\begin{itemize}
+\item articolo
+\end{itemize}
+
+\subsubsection{\texttt{entity.Author.getAutori()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Lista di autori dell'articolo
+\end{itemize}
+
+\subsubsection{\texttt{entity.Author.getAbstr()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item L'abstract dell'articolo
+\end{itemize}
+
+\subsubsection{\texttt{entity.Author.getTitolo()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Il titolo dell'articolo
+\end{itemize}
+
+\subsubsection{\texttt{entity.Author.getId()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item L'id dell'articolo
+\end{itemize}
+
+\subsection{Conference}
+\paragraph{Attributi}
+\begin{description}
+\item[id] Il codice identificativo della conferenze
+\item[titolo] Il titolo della conferenza
+\item[descrizione] La descrizione della conferenza
+\item[scadenza] La scadenza per la sottomissione degli articoli
+\item[articoli] La lista di \texttt{Articolo} sottomessi alla conferenza
+\end{description}
+
+\subsubsection{\texttt{entity.Author.Conference()}}
+Istanzia una conferenza
+\paragraph{Parametri}
+\begin{itemize}
+\item scadenza
+\item titolo
+\item descrizione
+\item id
+\end{itemize}
+
+\subsubsection{\texttt{entity.Author.Conference()}}
+Costruttore di copia per \texttt{Conference}
+\paragraph{Parametri}
+\begin{itemize}
+\item conferenza
+\end{itemize}
+
+\subsubsection{\texttt{entity.Author.getArticoli()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Lista degli articoli sottomessi alla conferenza
+\end{itemize}
+\subsubsection{\texttt{entity.Author.getId()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item L'id della conferenza
+\end{itemize}
+\subsubsection{\texttt{entity.Author.getDescrizione()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item La descrizione della conferenza
+\end{itemize}
+\subsubsection{\texttt{entity.Author.getScadenza()}}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item La scadenza per la sottomissione degli articoli
+\end{itemize}
+\subsubsection{\texttt{entity.Author.getTitolo()}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Il titolo della conferenza
+\end{itemize}
+\subsubsection{\texttt{entity.Author.inScadenza()}}
+Predicato che verifica se una conferenza è in ``scadenza''
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Vero se la conferenza è in scadenza
+\item False se la conferenza non  è in scadenza
+\end{itemize}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +32,11 @@ public class UserDAO {
         }
     }
 
-    public User getUserByID(String id) throws SQLException {
-        String sql = "SELECT affiliazione, email, cognome, nome, password, id, ruolo FROM user WHERE id = " + id;
-        Statement stmt = conn.createStatement();
-        ResultSet rs =  stmt.executeQuery(sql);
+    public User getUserByID(ID id) throws SQLException {
+        String sql = "SELECT affiliazione, email, cognome, nome, password, id, ruolo FROM user WHERE id = ?";
+	PreparedStatement stmt = conn.prepareStatement(sql);
+	stmt.setString(1, id.toString());
+	ResultSet rs =  stmt.executeQuery(sql);
         stmt.close();
         String role = rs.getString("ruolo");
         if (role.equals("Autore")) {

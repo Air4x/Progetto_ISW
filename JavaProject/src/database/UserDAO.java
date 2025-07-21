@@ -25,18 +25,18 @@ public class UserDAO {
     }
 
     public String getUserRoleByID(ID id) throws SQLException {
-        String sql = "SELECT role FROM user WHERE id = " + id.toString();
-        try (Statement stmt = conn.createStatement()){
-            ResultSet rs = stmt.executeQuery(sql);
-            return rs.getString("role");
-        }
+        String sql = "SELECT role FROM user WHERE id = ?";
+	PreparedStatement stmt = conn.prepareStatement(sql);
+	stmt.setString(1, id.toString());
+	ResultSet rs = stmt.executeQuery();
+	return rs.getString("role");
     }
 
     public User getUserByID(ID id) throws SQLException {
         String sql = "SELECT affiliazione, email, cognome, nome, password, id, ruolo FROM user WHERE id = ?";
 	PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, id.toString());
-	ResultSet rs =  stmt.executeQuery(sql);
+	ResultSet rs =  stmt.executeQuery();
         stmt.close();
         String role = rs.getString("ruolo");
         if (role.equals("Autore")) {
@@ -58,9 +58,10 @@ public class UserDAO {
 
     public boolean isUserPresentByID(ID id) throws SQLException {
         boolean result = false;
-        String sql = "SELECT id FROM user WHERE id = " + id.toString();
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
+        String sql = "SELECT id FROM user WHERE id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+	stmt.setString(1, id.toString());
+        ResultSet rs = stmt.executeQuery();
         // ResultSet has a next() method that return the next row, if the set is empty (there is no next row) it returns
         // false, so we can verify if a user is in the database with a while loop on rs.next()
         while (rs.next()) {
@@ -71,9 +72,9 @@ public class UserDAO {
 
     public boolean isUserPresentByEmail(String email) throws SQLException {
         boolean result = false;
-        String sql = "SELECT id FROM user WHERE email = " + email;
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
+        String sql = "SELECT id FROM user WHERE email = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
         // ResultSet has a next() method that return the next row, if the set is empty (there is no next row) it returns
         // false, so we can verify if a user is in the database with a while loop on rs.next()
         while (rs.next()) {
@@ -83,9 +84,10 @@ public class UserDAO {
     }
 
     public User getUserByEmail(String email) throws SQLException {
-        String sql = "SELECT affiliazione, email, cognome, nome, password, id, ruolo FROM user WHERE email = " + email;
-        Statement stmt = conn.createStatement();
-        ResultSet rs =  stmt.executeQuery(sql);
+        String sql = "SELECT affiliazione, email, cognome, nome, password, id, ruolo FROM user WHERE email = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+	stmt.setString(1, email);
+        ResultSet rs =  stmt.executeQuery();
         stmt.close();
         String role = rs.getString("ruolo");
         if (role.equals("Autore")) {
@@ -108,8 +110,8 @@ public class UserDAO {
     public ArrayList<Author> getAllAuthors() throws SQLException {
         ArrayList<Author> authors = new ArrayList<Author>();
         String sql = "SELECT nome cognome email affiliazione id password FROM user WHERE role = 'Autore'";
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
         while(rs.next()) {
             Author a = new Author(rs.getString("affiliazione"),
 				  rs.getString("email"),
@@ -126,25 +128,28 @@ public class UserDAO {
     public void saveUser(User user) throws SQLException {
         if (user.getRole().equals("autore")) {
             Author a = (Author) user;
-            String sql = "INSERT INTO user(id, nome, cognome, email, password, affiliazione, ruolo) VALUES("
-		+ a.getId().toString() + ","
-		+ a.getName()+ ","
-		+ a.getLastName() + ","
-		+ a.getEmail() + ","
-		+ a.getPassword() + ","
-		+ "autore);";
-            Statement stmt = conn.createStatement();
-            int nRowsUpdated = stmt.executeUpdate(sql);
+            String sql = "INSERT INTO user(id, nome, cognome, email, password, affiliazione, ruolo) VALUES(?, ?, ?, ?, ?, 'autore');";
+		// + a.getId().toString() + ","
+		// + a.getName()+ ","
+		// + a.getLastName() + ","
+		// + a.getEmail() + ","
+		// + a.getPassword() + ","
+	    PreparedStatement stmt = conn.prepareStatement(sql);
+	    stmt.setString(1, a.getId().toString());
+	    stmt.setString(2, a.getName());
+	    stmt.setString(3, a.getLastName());
+	    stmt.setString(4, a.getEmail());
+	    stmt.setString(5, a.getPassword());
+	    int nRowsUpdated = stmt.executeUpdate();
         } else if (user.getRole().equals("organizer")) {
             Organizer o = (Organizer) user;
-            String sql = "INSERT INTO user(id, nome, cognome, email, password, affiliazione, ruolo) VALUES("
-		+ o.getId().toString() + ","
-		+ o.getName()+ ","
-		+ o.getLastName() + ","
-		+ o.getEmail() + ","
-		+ o.getPassword() + ","
-		+ "organizzatore);";
-            Statement stmt = conn.createStatement();
+            String sql = "INSERT INTO user(id, nome, cognome, email, password, affiliazione, ruolo) VALUES(?, ?, ? ,?, ?, 'organizzatore);'";
+	    PreparedStatement stmt = conn.prepareStatement(sql);
+	    stmt.setString(1, o.getId().toString());
+	    stmt.setString(2, o.getName());
+	    stmt.setString(3, o.getLastName());
+	    stmt.setString(4, o.getEmail());
+	    stmt.setString(5, o.getPassword());
             int nRowsUpdated = stmt.executeUpdate(sql);
         }
     }

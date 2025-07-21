@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import utility.ID;
 
 public class ArticleDAO {
     private Connection conn;
@@ -19,18 +20,18 @@ public class ArticleDAO {
     public void saveArticle(Articolo a) throws SQLException {
 	String sql = "INSERT INTO Articoli VALUES (?, ?, ?)";
 	PreparedStatement pst = conn.prepareStatement(sql);
-	pst.setNString(1, a.getId());
+	pst.setNString(1, a.getId().toString());
 	pst.setNString(2, a.getTitolo());
 	pst.setNString(3, a.getAbstr());
 	int nRowsUpdated = pst.executeUpdate();
     }
 
-    public Articolo getArticleByID(String id) throws SQLException {
+    public Articolo getArticleByID(ID id) throws SQLException {
 	String titolo = null;
 	String abs = null;
 	ArrayList<Author> autori = new ArrayList<>();
 	// ======To get title, id and abstract=====
-	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID FROM Articoli WHERE id = "+id;
+	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID FROM Articoli WHERE id = "+id.toString();
 	Statement stArticoli = conn.createStatement();
 	ResultSet rsArticoli = stArticoli.executeQuery(fromArticoli);
 	while(rsArticoli.next()){
@@ -38,7 +39,7 @@ public class ArticleDAO {
 	    abs = rsArticoli.getString("ABSTRACT");
 	}
 	// ======To get all the authors========
-	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = " + id;
+	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = " + id.toString();
 	Statement stAutori = conn.createStatement();
 	ResultSet rsAutori = stArticoli.executeQuery(fromAutori);
 	String fromUtenti = "SELECT NOME, COGNOME, AFFILIAZIONE, EMAIL, PASSWORD, ID FROM Utenti WHERE RUOLO = ? AND ID = ?";
@@ -53,28 +54,28 @@ public class ArticleDAO {
 		String cognome = rsUtenti.getString("COGNOME");
 		String nome = rsUtenti.getString("NOME");
 		String password = rsUtenti.getString("PASSWORD");
-		Author a = new Author(affiliazione, email, cognome, nome, password, rsAutori.getString("id_aut"));
+		Author a = new Author(affiliazione, email, cognome, nome, password, new ID(rsAutori.getString("id_aut")));
 		autori.add(a);
 	    }  
 	}
 	return new Articolo(id, abs, autori, titolo);
     }
 
-    public ArrayList<Articolo> getArticlesByAuthor(String id_aut) throws SQLException {
+    public ArrayList<Articolo> getArticlesByAuthor(ID id_aut) throws SQLException {
 	ArrayList<Integer> articleIds = new ArrayList<>();
 	ArrayList<Articolo> articoli = new ArrayList<>();
-	String fromAutori = "SELECT id_art FROM Autori WHERE id_aut = "+ id_aut;
+	String fromAutori = "SELECT id_art FROM Autori WHERE id_aut = "+ id_aut.toString();
 	Statement stAutori = conn.createStatement();
 	ResultSet rsAutori = stAutori.executeQuery(fromAutori);
 	while(rsAutori.next()){
-	    Articolo a = getArticleByID(rsAutori.getString("id_art"));
+	    Articolo a = getArticleByID(new ID(rsAutori.getString("id_art")));
 	    articoli.add(a);
 	}
 	return articoli;
     }
 
-    public void updateArticleStatus(String id, String status) throws SQLException{
-	String intoRegistro = "UPDATE Registro SET STATUS = " + status + "WHERE id_art = " + id;
+    public void updateArticleStatus(ID id, String status) throws SQLException{
+	String intoRegistro = "UPDATE Registro SET STATUS = " + status + "WHERE id_art = " + id.toString();
 	Statement st = conn.createStatement();
 	st.executeUpdate(intoRegistro);
     }

@@ -1,8 +1,10 @@
 package database;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.ArrayList;
 import utility.ID;
@@ -16,9 +18,10 @@ public class ReviewDAO {
 
     public boolean hasConflitOfInterest(ID idArt, ID idUser) throws SQLException {
 	ArrayList<String> autori = new ArrayList<>();
-	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = " + idArt.toString() +";";
-	Statement stAutori = conn.createStatement();
-	ResultSet rsAutori = stAutori.executeQuery(fromAutori);
+	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = ?;";
+	PreparedStatement stAutori = conn.prepareStatement(fromAutori);
+	stAutori.setString(1, idArt.toString());
+	ResultSet rsAutori = stAutori.executeQuery();
 	while(rsAutori.next()) {
 	    autori.add(rsAutori.getString("id_aut"));
 	}
@@ -30,15 +33,18 @@ public class ReviewDAO {
     }
     
     public void assignReviewer(ID idArt, String idRev) throws SQLException {
-	String intoRevisori = "INSERT INTO Revisori VALUES("+idArt.toString()+","+idRev.toString()+");";
-	Statement stRevisori = conn.createStatement();
-	stRevisori.executeUpdate(intoRevisori);
+	String intoRevisori = "INSERT INTO Revisori VALUES(?, ?);";
+	PreparedStatement stRevisori = conn.prepareStatement(intoRevisori);
+	stRevisori.setString(1, idArt.toString());
+	stRevisori.setString(2, idRev.toString());
+	stRevisori.executeUpdate();
     }
 
     public ArrayList<String> getReviewersByArticles(ID idArt) throws SQLException {
 	ArrayList<String> revisori = new ArrayList<>();
-	String fromRevisori = "SELECT id_rev FROM Revisori WHERE id_art = "+ idArt.toString() + ";";
-	Statement stRevisori = conn.createStatement();
+	String fromRevisori = "SELECT id_rev FROM Revisori WHERE id_art = ?;";
+	PreparedStatement stRevisori = conn.prepareStatement(fromRevisori);
+	stRevisori.setString(1, idArt.toString());
 	ResultSet rsRevisori = stRevisori.executeQuery(fromRevisori);
 	while(rsRevisori.next()) {
 	    revisori.add(rsRevisori.getString("id_rev"));

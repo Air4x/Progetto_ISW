@@ -21,46 +21,52 @@ public class ConferenceDAO {
 
     public Conference getConferenceByID(ID id) throws SQLException {
         String sql = "SELECT * FROM conference WHERE id = " + id;
-        Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery(sql);
+        PreparedStatement stmt = conn.prepareStatement(sql);
+	stmt.setString(1, id.toString());
+        ResultSet rs = stmt.executeQuery();
         return new Conference(rs.getDate("scadenza"), rs.getString("titolo"), rs.getString("descrizione"), new ID(rs.getString("id")));
     }
 
     public void saveConference(Conference conf) throws SQLException {
-        String sql = "INSERT INTO conferenza(id, titolo, descrizione, scadenza) VALUES("+
-	    conf.getId().toString() + ","
-	    + conf.getTitolo() + ","
-	    + conf.getDescrizione() + ","
-	    + conf.getScadenza().toString() +");";
-        Statement stmt = conn.createStatement();
-        int nRowsUpadated = stmt.executeUpdate(sql);
+        String sql = "INSERT INTO conferenza(id, titolo, descrizione, scadenza) VALUES(?, ?, ?, ?);";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+	stmt.setString(1, conf.getId().toString());
+	stmt.setString(2, conf.getTitolo());
+	stmt.setString(3, conf.getDescrizione());
+	stmt.setString(4, conf.getScadenza().toString());
+        int nRowsUpadated = stmt.executeUpdate();
     }
 
     public ArrayList<Articolo> getArticlesByConference(String conf_id) throws SQLException {
 	ArrayList<Articolo> articoli = new ArrayList<>();
 	// ========Ottenimento id articoli====================
 	String queryIdArt = "SELECT id_art FROM REGISTRO WHERE id_art = "+ conf_id;
-	Statement stIdArt =  conn.createStatement();
-	ResultSet idArt = stIdArt.executeQuery(queryIdArt);
+	PreparedStatement stIdArt =  conn.prepareStatement(queryIdArt);
+	stIdArt.setString(1, conf_id);
+	ResultSet idArt = stIdArt.executeQuery();
 	// =======Ottenimento id autori=======================
-	String queryIdAuth = "SELECT id_aut FROM AUTORI WHERE id_art = ";
-	Statement stIdAuth = conn.createStatement();
+	String queryIdAuth = "SELECT id_aut FROM AUTORI WHERE id_art = ?";
+	PreparedStatement stIdAuth = conn.prepareStatement(queryIdAuth);
 	// =======Ottenimento dati autore=====================
-	String queryAuth = "SELECT id, nome, cognome, password, affiliazione, email FROM USER WHERE id = ";
-	Statement stAuth = conn.createStatement();
+	String queryAuth = "SELECT id, nome, cognome, password, affiliazione, email FROM USER WHERE id = ?";
+	PreparedStatement stAuth = conn.prepareStatement(queryAuth);
 	// =======Ottenimento dati articolo==================
-	String queryArt = "SELECT id, titolo, abstract FROM Articoli WHERE id = ";
-	Statement stArt = conn.createStatement();
+	String queryArt = "SELECT id, titolo, abstract FROM Articoli WHERE id = ?";
+	PreparedStatement stArt = conn.prepareStatement(queryArt);
+	// =======Esecuzione queries=========================
 	while(idArt.next()){
 	    ArrayList<Author> autori = new ArrayList<>();
-	    ResultSet idAuth = stIdAuth.executeQuery(queryIdAuth + idArt.getString("id_art"));
+	    stIdAuth.setString(1, idArt.getString("id_art"));
+	    ResultSet idAuth = stIdAuth.executeQuery();
 	    while(idAuth.next()){
-		ResultSet authors = stAuth.executeQuery(queryAuth + idAuth.getString(1));
+		stAuth.setString(1, idAuth.getString(1));
+		ResultSet authors = stAuth.executeQuery();
 		Author a = new Author(authors.getString("affiliazione"), authors.getString("email"),
 				      authors.getString("cognome"), authors.getString("nome"),
 				      authors.getString("password"), new ID(authors.getString("id")));
 		autori.add(a);
 	    }
+	    stArt.setString(1, idArt.getString("id_art"));
 	    ResultSet article = stArt.executeQuery(queryArt + idArt.getString("id_art"));
 	    Articolo articolo = new Articolo(new ID(idArt.getString("id_art")),article.getString("abstract"), autori, article.getString("titolo"));
 	    articoli.add(articolo);
@@ -71,8 +77,8 @@ public class ConferenceDAO {
     public ArrayList<Conference> getAllConferences() throws  SQLException{
 	ArrayList<Conference> conferenze = new ArrayList<>();
 	String query  ="SELECT * FROM conferenza";
-	Statement st = conn.createStatement();
-	ResultSet rs = st.executeQuery(query);
+	PreparedStatement st = conn.prepareStatement(query);
+	ResultSet rs = st.executeQuery();
 	while(rs.next()){
 	    Conference c = new Conference(rs.getDate("scadenza"), rs.getString("titolo"), rs.getString("descrizione"), new ID(rs.getString("id")));
 	    conferenze.add(c);

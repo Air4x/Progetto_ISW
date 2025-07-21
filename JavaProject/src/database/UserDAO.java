@@ -10,6 +10,7 @@ import java.util.List;
 import entity.Author;
 import entity.Organizer;
 import entity.User;
+import utility.ID;
 
 public class UserDAO {
     private Connection conn;
@@ -22,8 +23,8 @@ public class UserDAO {
         }
     }
 
-    public String getUserRoleByID(String id) throws SQLException {
-        String sql = "SELECT role FROM user WHERE id = " + id;
+    public String getUserRoleByID(ID id) throws SQLException {
+        String sql = "SELECT role FROM user WHERE id = " + id.toString();
         try (Statement stmt = conn.createStatement()){
             ResultSet rs = stmt.executeQuery(sql);
             return rs.getString("role");
@@ -38,24 +39,24 @@ public class UserDAO {
         String role = rs.getString("ruolo");
         if (role.equals("Autore")) {
             return new Author(rs.getString("affiliazione"),
-                    rs.getString("email"),
-                    rs.getString("cognome"),
-                    rs.getString("nome"),
-                    rs.getString("password"),
-                    rs.getString("id"));
+			      rs.getString("email"),
+			      rs.getString("cognome"),
+			      rs.getString("nome"),
+			      rs.getString("password"),
+			      new ID(rs.getString("id")));
         } else {
             return new Organizer(rs.getString("affiliazione"),
-                    rs.getString("email"),
-                    rs.getString("cognome"),
-                    rs.getString("nome"),
-                    rs.getString("password"),
-                    rs.getString("id"));
+				 rs.getString("email"),
+				 rs.getString("cognome"),
+				 rs.getString("nome"),
+				 rs.getString("password"),
+				 new ID(rs.getString("id")));
         }
     }
 
-    public boolean isUserPresentByID(String id) throws SQLException {
+    public boolean isUserPresentByID(ID id) throws SQLException {
         boolean result = false;
-        String sql = "SELECT id FROM user WHERE id = " + id;
+        String sql = "SELECT id FROM user WHERE id = " + id.toString();
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         // ResultSet has a next() method that return the next row, if the set is empty (there is no next row) it returns
@@ -87,18 +88,18 @@ public class UserDAO {
         String role = rs.getString("ruolo");
         if (role.equals("Autore")) {
             return new Author(rs.getString("affiliazione"),
-                    rs.getString("email"),
-                    rs.getString("cognome"),
-                    rs.getString("nome"),
-                    rs.getString("password"),
-                    rs.getString("id"));
+			      rs.getString("email"),
+			      rs.getString("cognome"),
+			      rs.getString("nome"),
+			      rs.getString("password"),
+			      new ID(rs.getString("id")));
         } else {
             return new Organizer(rs.getString("affiliazione"),
-                    rs.getString("email"),
-                    rs.getString("cognome"),
-                    rs.getString("nome"),
-                    rs.getString("password"),
-                    rs.getString("id"));
+				 rs.getString("email"),
+				 rs.getString("cognome"),
+				 rs.getString("nome"),
+				 rs.getString("password"),
+				 new ID(rs.getString("id")));
         }
     }
 
@@ -109,11 +110,11 @@ public class UserDAO {
         ResultSet rs = stmt.executeQuery(sql);
         while(rs.next()) {
             Author a = new Author(rs.getString("affiliazione"),
-                    rs.getString("email"),
-                    rs.getString("cognome"),
-                    rs.getString("nome"),
-                    rs.getString("password"),
-                    rs.getString("id"));
+				  rs.getString("email"),
+				  rs.getString("cognome"),
+				  rs.getString("nome"),
+				  rs.getString("password"),
+				  new ID(rs.getString("id")));
             authors.add(a);
         }
 
@@ -124,23 +125,23 @@ public class UserDAO {
         if (user.getRole().equals("autore")) {
             Author a = (Author) user;
             String sql = "INSERT INTO user(id, nome, cognome, email, password, affiliazione, ruolo) VALUES("
-                    + a.getId() + ","
-                    + a.getName()+ ","
-                    + a.getLastName() + ","
-                    + a.getEmail() + ","
-                    + a.getPassword() + ","
-                    + "autore);";
+		+ a.getId().toString() + ","
+		+ a.getName()+ ","
+		+ a.getLastName() + ","
+		+ a.getEmail() + ","
+		+ a.getPassword() + ","
+		+ "autore);";
             Statement stmt = conn.createStatement();
             int nRowsUpdated = stmt.executeUpdate(sql);
         } else if (user.getRole().equals("organizer")) {
             Organizer o = (Organizer) user;
             String sql = "INSERT INTO user(id, nome, cognome, email, password, affiliazione, ruolo) VALUES("
-                    + o.getId() + ","
-                    + o.getName()+ ","
-                    + o.getLastName() + ","
-                    + o.getEmail() + ","
-                    + o.getPassword() + ","
-                    + "organizzatore);";
+		+ o.getId().toString() + ","
+		+ o.getName()+ ","
+		+ o.getLastName() + ","
+		+ o.getEmail() + ","
+		+ o.getPassword() + ","
+		+ "organizzatore);";
             Statement stmt = conn.createStatement();
             int nRowsUpdated = stmt.executeUpdate(sql);
         }

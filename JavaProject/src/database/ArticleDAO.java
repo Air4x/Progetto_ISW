@@ -31,17 +31,19 @@ public class ArticleDAO {
 	String abs = null;
 	ArrayList<Author> autori = new ArrayList<>();
 	// ======To get title, id and abstract=====
-	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID FROM Articoli WHERE id = "+id.toString();
-	Statement stArticoli = conn.createStatement();
-	ResultSet rsArticoli = stArticoli.executeQuery(fromArticoli);
+	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID FROM Articoli WHERE id = ?;";
+	PreparedStatement stArticoli = conn.prepareStatement(fromArticoli);
+	stArticoli.setString(1, id.toString());
+	ResultSet rsArticoli = stArticoli.executeQuery();
 	while(rsArticoli.next()){
 	    titolo = rsArticoli.getString("TITOLO");
 	    abs = rsArticoli.getString("ABSTRACT");
 	}
 	// ======To get all the authors========
-	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = " + id.toString();
-	Statement stAutori = conn.createStatement();
-	ResultSet rsAutori = stArticoli.executeQuery(fromAutori);
+	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = ?;";
+	PreparedStatement stAutori = conn.prepareStatement(fromAutori);
+	stAutori.setString(1, id.toString());
+	ResultSet rsAutori = stArticoli.executeQuery();
 	String fromUtenti = "SELECT NOME, COGNOME, AFFILIAZIONE, EMAIL, PASSWORD, ID FROM Utenti WHERE RUOLO = ? AND ID = ?";
 	PreparedStatement pstUtenti= conn.prepareStatement(fromUtenti);
 	while(rsAutori.next()) {
@@ -65,8 +67,9 @@ public class ArticleDAO {
 	ArrayList<Integer> articleIds = new ArrayList<>();
 	ArrayList<Articolo> articoli = new ArrayList<>();
 	String fromAutori = "SELECT id_art FROM Autori WHERE id_aut = "+ id_aut.toString();
-	Statement stAutori = conn.createStatement();
-	ResultSet rsAutori = stAutori.executeQuery(fromAutori);
+	PreparedStatement stAutori = conn.prepareStatement(fromAutori);
+	stAutori.setString(1, id_aut.toString());
+	ResultSet rsAutori = stAutori.executeQuery();
 	while(rsAutori.next()){
 	    Articolo a = getArticleByID(new ID(rsAutori.getString("id_art")));
 	    articoli.add(a);
@@ -75,8 +78,10 @@ public class ArticleDAO {
     }
 
     public void updateArticleStatus(ID id, String status) throws SQLException{
-	String intoRegistro = "UPDATE Registro SET STATUS = " + status + "WHERE id_art = " + id.toString();
-	Statement st = conn.createStatement();
-	st.executeUpdate(intoRegistro);
+	String intoRegistro = "UPDATE Registro SET STATUS = ? WHERE id_art = ?;";
+	PreparedStatement st = conn.prepareStatement(intoRegistro);
+	st.setString(1, status);
+	st.setString(2, id.toString());
+	st.executeUpdate();
     }
 }

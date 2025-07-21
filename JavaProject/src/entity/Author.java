@@ -1,4 +1,6 @@
 package entity;
+
+import utility.ID;
 /**
  * Classe che implementa un Autore, estende {@see entity.User}
  *
@@ -20,7 +22,7 @@ public class Author extends User{
      * @param id 
      */
     public Author(String affiliazione, String email, String lastName,
-                  String name, String password, String id) {
+                  String name, String password, ID id) {
         super(affiliazione, email, lastName, name, password, id);
         this.role = "autore";
     }

@@ -1,4 +1,7 @@
 package entity;
+
+import utility.ID;
+
 /**
  * Classe che implementa un Organizzatore, estende {@see entity.User}
  *
@@ -19,7 +22,7 @@ public class Organizer extends User{
       * @param password
       * @param id 
       */
-    public Organizer(String affiliazione, String email, String lastName, String name, String password, String id) {
+    public Organizer(String affiliazione, String email, String lastName, String name, String password, ID id) {
         super(affiliazione, email, lastName, name, password, id);
         this.role = "organizzatore";
     }

@@ -1,14 +1,15 @@
 package entity;
 
 import java.util.ArrayList;
+import utility.ID;
 
 public class Articolo {
-    private String id;
+    private ID id;
     private String titolo;
     private String abstr;
     private ArrayList<Author> autori;
 
-    public Articolo(String id, String abstr, ArrayList<Author> autori, String titolo) {
+    public Articolo(ID id, String abstr, ArrayList<Author> autori, String titolo) {
         this.abstr = abstr;
         this.autori = autori;
         this.titolo = titolo;
@@ -34,7 +35,7 @@ public class Articolo {
         return titolo;
     }
 
-    public String getId(){
+    public ID getId(){
 	return id;
     }
 }

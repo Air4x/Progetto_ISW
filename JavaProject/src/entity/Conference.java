@@ -3,15 +3,16 @@ package entity;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
+import utility.ID;
 
 public class Conference {
-    private String id;
+    private ID id;
     private String titolo;
     private String descrizione;
     private Date scadenza;
     private ArrayList<Articolo> articoli;
 
-    public Conference(Date scadenza, String titolo, String descrizione, String id) {
+    public Conference(Date scadenza, String titolo, String descrizione, ID id) {
         this.id = id;
         this.scadenza = scadenza;
         this.titolo = titolo;
@@ -31,7 +32,7 @@ public class Conference {
         return articoli;
     }
 
-    public String getId() {
+    public ID getId() {
         return id;
     }
     public String getDescrizione() {

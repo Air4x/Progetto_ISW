@@ -10,13 +10,33 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import utility.ID;
 
+
+/**
+ * Classe responsabile per le operazioni sulla tabella articoli del
+ * database
+ *
+ * @author Mario Calcagno
+ */
 public class ArticleDAO {
+    /**
+     * La connesione al database
+     *
+     */
     private Connection conn;
 
+    /**
+     * Costruttore di ArticleDAO, imposta la connesione al database
+     *
+     */
     public ArticleDAO() throws SQLException {
 	conn = DBManager.getConnection();
     }
 
+    /**
+     * Permette di aggiungere un articolo al database
+     *
+     * @param l'articolo che si vuole salvare
+     */
     public void saveArticle(Articolo a) throws SQLException {
 	String sql = "INSERT INTO Articoli VALUES (?, ?, ?)";
 	PreparedStatement pst = conn.prepareStatement(sql);
@@ -26,6 +46,13 @@ public class ArticleDAO {
 	int nRowsUpdated = pst.executeUpdate();
     }
 
+    /**
+     * Permette di ottenere un articolo dato il suo Id
+     *
+     * @param l'id dell'articolo
+     * @return un'instanza della classe Article rappresentante
+     * l'articolo ottenuto
+     */
     public Articolo getArticleByID(ID id) throws SQLException {
 	String titolo = null;
 	String abs = null;
@@ -63,6 +90,12 @@ public class ArticleDAO {
 	return new Articolo(id, abs, autori, titolo);
     }
 
+    /**
+     * Permette di ottenere tutti gli articoli scritti da un'autore
+     * 
+     * @param L'id dell'autore
+     * @return La lista di articoli scritti dall'autore
+     */
     public ArrayList<Articolo> getArticlesByAuthor(ID id_aut) throws SQLException {
 	ArrayList<Integer> articleIds = new ArrayList<>();
 	ArrayList<Articolo> articoli = new ArrayList<>();
@@ -77,6 +110,12 @@ public class ArticleDAO {
 	return articoli;
     }
 
+    /**
+     * Permette di aggiornare lo stato di un articolo
+     *
+     * @param L'id dell'articolo
+     * @param Il nuovo stato
+     */
     public void updateArticleStatus(ID id, String status) throws SQLException{
 	String intoRegistro = "UPDATE Registro SET STATUS = ? WHERE id_art = ?;";
 	PreparedStatement st = conn.prepareStatement(intoRegistro);

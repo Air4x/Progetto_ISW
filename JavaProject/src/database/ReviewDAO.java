@@ -31,8 +31,14 @@ public class ReviewDAO {
 	    return false;
 	}
     }
-    
-    public void assignReviewer(ID idArt, String idRev) throws SQLException {
+
+    /**
+     * Permette di assegnare un autore come revisore ad un articolo
+     *
+     * @param L'id dell'articolo
+     * @param L'id del revisore
+     */
+    public void assignReviewer(ID idArt, ID idRev) throws SQLException {
 	String intoRevisori = "INSERT INTO Revisori VALUES(?, ?);";
 	PreparedStatement stRevisori = conn.prepareStatement(intoRevisori);
 	stRevisori.setString(1, idArt.toString());

@@ -14,7 +14,7 @@ public class ID {
 	this.id = UUID.randomUUID();
     }
     
-    public static ID generate(){
+    public static synchronized ID generate(){
 	return new ID();
     }
 

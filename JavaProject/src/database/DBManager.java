@@ -30,7 +30,7 @@ public class DBManager {
      * @return Un oggetto Connection che rappresenta la connesione
      * vera e propria
      */
-    public static Connection getConnection() throws SQLException {
+    public static synchronized Connection getConnection() throws SQLException {
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
     }
 }

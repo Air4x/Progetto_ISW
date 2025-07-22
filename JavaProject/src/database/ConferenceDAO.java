@@ -8,9 +8,23 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Classe che si occupa delle operazioni sulla tabella conferenze nel
+ * database
+ *
+ */
 public class ConferenceDAO {
+    /**
+     * La connesione al database
+     *
+     */
     private Connection conn;
 
+    /**
+     * Costruttre di ConferenceDAO, si occupa di impostare la
+     * connesione al database
+     *
+     */
     public ConferenceDAO() throws SQLException {
         try {
             this.conn = DBManager.getConnection();
@@ -19,6 +33,13 @@ public class ConferenceDAO {
         }
     }
 
+    /**
+     * Permette di ottenere una conferenza dato il suo Id
+     *
+     * @param L'id della conferenza
+     * @return Un'instanza della classe Conference rappresentante la
+     * conferenza ottenuta
+     */
     public Conference getConferenceByID(ID id) throws SQLException {
         String sql = "SELECT * FROM conference WHERE id = " + id;
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -27,6 +48,11 @@ public class ConferenceDAO {
         return new Conference(rs.getDate("scadenza"), rs.getString("titolo"), rs.getString("descrizione"), new ID(rs.getString("id")));
     }
 
+    /**
+     * Permette di salvare una conferenza nel database
+     *
+     * @param La conferenza da salvare
+     */
     public void saveConference(Conference conf) throws SQLException {
         String sql = "INSERT INTO conferenza(id, titolo, descrizione, scadenza) VALUES(?, ?, ?, ?);";
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -81,6 +107,11 @@ public class ConferenceDAO {
 	return articoli;
     }
 
+    /**
+     * Permette di ottenere una lista di tutte le conferenze nel database
+     *
+     * @return La lista di tutte le conferenze
+     */
     public ArrayList<Conference> getAllConferences() throws  SQLException{
 	ArrayList<Conference> conferenze = new ArrayList<>();
 	String query  ="SELECT * FROM conferenza";
@@ -93,6 +124,11 @@ public class ConferenceDAO {
 	return conferenze;
     }
 
+    /**
+     * Permette di ottenere la lista di tutte le conferenze attive
+     *
+     * @return La lista di tutte le conferenze attive
+     */
     public ArrayList<Conference> getActiveConferences() throws SQLException {
 	ArrayList<Conference> conferenze = getAllConferences();
 	ArrayList<Conference> conferenzeAttive = new ArrayList<>();

@@ -9,13 +9,35 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import utility.ID;
 
+
+/**
+ * Classe responsabile per le operazioni sulla tabella registro nel database
+ *
+ */
 public class ReviewDAO {
+    /**
+     * La connesione al database
+     *
+     */
     private Connection conn;
 
+    /**
+     * Il costruttore di ReviewDAO, si occupa di impostare la
+     * connesione al database
+     *
+     */
     public ReviewDAO() throws SQLException{
 	conn = DBManager.getConnection();
     }
 
+    /**
+     * Predicato che verifica la presenza di conflitti di interesse
+     *
+     * @param L'id dell'articolo
+     * @param L'id del possibile revisore
+     *
+     * @return Se ci sono dei conflitti di interesse
+     */
     public boolean hasConflitOfInterest(ID idArt, ID idUser) throws SQLException {
 	ArrayList<String> autori = new ArrayList<>();
 	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = ?;";
@@ -46,6 +68,12 @@ public class ReviewDAO {
 	stRevisori.executeUpdate();
     }
 
+    /**
+     * Permette di ottenere tutti i revisori assegnati ad un articolo
+     *
+     * @param L'id dell'articolo
+     * @return La lista dei revisori assegnati
+     */
     public ArrayList<String> getReviewersByArticles(ID idArt) throws SQLException {
 	ArrayList<String> revisori = new ArrayList<>();
 	String fromRevisori = "SELECT id_rev FROM Revisori WHERE id_art = ?;";

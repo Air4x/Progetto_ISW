@@ -17,7 +17,7 @@ public class PasswordManager {
 	}
     }
 
-    public static PasswordManager getInstance() {
+    public static  PasswordManager getInstance() {
 	if(instance == null){
 	    synchronized (PasswordManager.class) {
 		if(instance == null)
@@ -27,7 +27,7 @@ public class PasswordManager {
 	return instance;
     }
 
-    public String get(String key) {
+    public synchronized String get(String key) {
 	return props.getProperty(key);
     }
 }

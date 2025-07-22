@@ -37,12 +37,19 @@ public class ConferenceDAO {
         int nRowsUpadated = stmt.executeUpdate();
     }
 
-    public ArrayList<Articolo> getArticlesByConference(String conf_id) throws SQLException {
+    /**
+     * Permette di ottenere la lista di tutti gli articoli sottomessi
+     * ad una conferenza
+     *
+     * @param L'id della conferenza
+     * @return La lista degli articoli sottomessi
+     */
+    public ArrayList<Articolo> getArticlesByConference(ID conf_id) throws SQLException {
 	ArrayList<Articolo> articoli = new ArrayList<>();
 	// ========Ottenimento id articoli====================
-	String queryIdArt = "SELECT id_art FROM REGISTRO WHERE id_art = "+ conf_id;
+	String queryIdArt = "SELECT id_art FROM REGISTRO WHERE id_art = ?";
 	PreparedStatement stIdArt =  conn.prepareStatement(queryIdArt);
-	stIdArt.setString(1, conf_id);
+	stIdArt.setString(1, conf_id.toString());
 	ResultSet idArt = stIdArt.executeQuery();
 	// =======Ottenimento id autori=======================
 	String queryIdAuth = "SELECT id_aut FROM AUTORI WHERE id_art = ?";

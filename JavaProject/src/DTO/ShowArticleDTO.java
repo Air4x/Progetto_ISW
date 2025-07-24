@@ -2,16 +2,16 @@ package DTO;
 
 import java.util.ArrayList;
 import utility.ID;
+import entity.Author;
 
 public class ShowArticleDTO {
 
-    
     private ID id;
     private String titolo;
     private String abstr;
-    private ArrayList<ID> autori;
+    private ArrayList<Author> autori;
     
-    public ShowArticleDTO(ID id, String titolo, String abstr, ArrayList<ID> autori) {
+    public ShowArticleDTO(ID id, String titolo, String abstr, ArrayList<Author> autori) {
         this.id = id;
         this.titolo = titolo;
         this.abstr = abstr;
@@ -30,7 +30,7 @@ public class ShowArticleDTO {
         return abstr;
     }
 
-    public ArrayList<ID> getAutori() {
+    public ArrayList<Author> getAutori() {
         return autori;
     }
 

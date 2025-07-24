@@ -13,7 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * @author Giuseppe Buglione
+ * Tale classe va implemetare il sistema di notivife inviate tramite email mediante utilizzo del
+ * package jakarta 
+*/
+
 public class NotificationController {
+    
 
     private ConferenceDAO conf_dao;
     private UserDAO user_dao;
@@ -23,6 +30,13 @@ public class NotificationController {
         this.user_dao= new UserDAO();
     }
 
+    /**
+     * <p> Il metodo che data una lista di conferenze controlla inanzi tutto se risultano in scadenza (5 giorni mancati)
+     * caso affermatico va a inviare un email a tutti gli autori presenti sul database
+     * </p>
+     * @throws SQLException
+     * @throws MessagingException
+     */
     public void invioNotifiche () throws SQLException, MessagingException {
         ArrayList<Conference> conf = conf_dao.getActiveConferences();
         List<Author> auth = user_dao.getAllAuthors();
@@ -42,10 +56,29 @@ public class NotificationController {
         }
     }
 
+    /**
+     * <p> Metodo per la creazione del messaggio da inviare
+     * </p>
+     * @param aut_name: Nome del destinatario
+     * @param aut_lastname: Cognome del destinatario
+     * @param conf_title: Nome della conferenza in scadenza
+     * @param msg: Messaggio da scrivere
+     * @throws MessagingException
+     * @throws SQLException
+     */
     private void creatMessage(String aut_name, String aut_lastname, String conf_title, String msg) throws MessagingException, SQLException{
         msg = "Saluti "+aut_name+" "+aut_lastname+"\nLe Recordiamo che la consegna per "+conf_title+" sta per scadere";
     }
 
+    /**
+     * <p> Metodo utilizzo per la configurazione di un host per l'invio delle email
+     * </p>
+     * @param email_d
+     * @param conf_title
+     * @param msg
+     * @throws SQLException
+     * @throws MessagingException
+     */
     private void sendEmail(String email_d, String conf_title, String msg) throws SQLException, MessagingException {
         // Fare email da cui mandare messaggi
         final String m_email = PasswordManager.getInstance().get("email_username"); //mittente
@@ -86,6 +119,5 @@ public class NotificationController {
         Transport.send(message);
 
         System.out.println("Email inviata a " + email_d);
-    }
+    }
 }
-

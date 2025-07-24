@@ -1,11 +1,12 @@
 package controller;
 
-import entity.Conference;
+import database.ArticleDAO;
+import database.ConferenceDAO;
 import entity.Articolo;
-import database.*;
-
+import entity.Conference;
 import java.sql.SQLException;
 import java.util.List;
+import utility.ID;
 
 public class ArticleController {
 
@@ -25,12 +26,12 @@ public class ArticleController {
         return false;
     }
 
-    public List<Articolo> getArticleByAuthor(String authorID) throws SQLException{
+    public List<Articolo> getArticleByAuthor(ID authorID) throws SQLException{
         List<Articolo> articoli = art_dao.getArticlesByAuthor(authorID);
         return articoli;
     }
 
-    public boolean updateArticleStatus (String ID, String status) throws SQLException {
+    public boolean updateArticleStatus (ID ID, String status) throws SQLException {
         if(art_dao.getArticleByID(ID) != null){
         this.art_dao.updateArticleStatus(ID, status);
             return true;

@@ -2,9 +2,8 @@ package controller;
 
 import database.ReviewDAO;
 import database.UserDAO;
-import entity.*;
-
 import java.sql.SQLException;
+import utility.ID;
 
 public class ReviewController {
 
@@ -15,7 +14,7 @@ public class ReviewController {
         this.r_DAO = new ReviewDAO();
     }
 
-    public boolean assignReviewer (String articleID, String reviewID) throws SQLException{
+    public boolean assignReviewer (ID articleID, ID reviewID) throws SQLException{
         if(r_DAO.hasConflitOfInterest(articleID, reviewID)){
             return false;
         } else if (!u_DAO.isUserPresentByID(reviewID)){

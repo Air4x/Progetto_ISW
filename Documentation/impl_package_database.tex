@@ -100,7 +100,54 @@ inserire un nuovo utente all'interno del database
 \begin{itemize}
 \item L'utente da inserire
 \end{itemize}
-    
+
+
+\subsection{ArticleDAO}
+Classe responsabile per le operazioni sulla tabella articoli del database
+\begin{description}
+\item[conn] La connesione al database
+\end{description}
+
+\subsubsection{\texttt{database.ArticleDAO.ArticleDAO()}}
+Costruttore, imposta la connesione al database
+
+\subsubsection{\texttt{database.ArticleDAO.saveArticle()}}
+Permette di aggiungere un articolo al database
+\paragraph{Parametri}
+\begin{itemize}
+\item L'articolo da aggiungere
+\end{itemize}
+\paragraph{Valore di ritorno}
+
+\subsubsection{\texttt{database.ArticleDAO.getArticleByID()}}
+Permette di ottenere un articolo dato il suo id
+\paragraph{Parametri}
+\begin{itemize}
+\item L'id dell'articolo
+\end{itemize}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Un istanza di Articolo rappresentante l'articolo ottenuto
+\end{itemize}
+
+\subsubsection{\texttt{database.ArticleDAO.getArticlesByAuthor()}}
+Permette di ottenere tutti gli articoli scritti da un'utente
+\paragraph{Parametri}
+\begin{itemize}
+\item L'id dell'autore
+\end{itemize}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item La lista di articoli scritti dall'autore
+\end{itemize}
+
+\subsubsection{\texttt{database.ArticleDAP.updateArticleStatus()}}
+Permette di aggiornare lo stato di un articolo
+\paragraph{Parametri}
+\begin{itemize}
+\item L'id dell'articolo da aggiornare
+\item Il nuovo stato
+\end{itemize}
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "main"

@@ -15,6 +15,10 @@ public class UserController {
 
     private UserDAO user_dao;
 
+    public UserController() {
+        this.user_dao = new UserDAO();
+    }
+
     /**
      * Metodo per la registarzione di un untente
      * @param aff

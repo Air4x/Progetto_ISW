@@ -1,7 +1,27 @@
 \section{Pacchetto Database}
 \label{sec:package_database}
-\subsection{UserDAO}
-Classe responsabile per le operazioni sulla tabella utente del database
+
+\subsection{DBManager}
+Classe che si occupa di impostare la connesione al database
+\begin{description}
+\item[DB_USER]  Il nome utente per il database
+\item[DB_PASSWORD] La password per il database
+\item[DB_URL]  L'url per il database
+\end{description}
+Tutti i parametri vengono ottenuti tramite \texttt{utility.PropertiesManager}
+\subsubsection{\texttt{database.DBManager.DBManager()}}
+Costruttore della classe \texttt{database.DBManager}, non è utilizzabile e di conseguenza
+lancia una eccezzione se chiamato
+
+\subsubsection{\texttt{database.DBManager.getConnection()}}
+Metodo statico che permette di ottenere la connesione al database
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Un oggetto Connection che rappresenta la connesione al database
+\end{itemize}
+    
+\subsection{UserDAO} Classe responsabile per le operazioni sulla
+tabella utente del database
 \begin{description}
 \item[conn] La connesione al database, ottenuta da DBManager
 \end{description}
@@ -24,7 +44,7 @@ Permette di ottenere il ruolo di un utente dato il suo id
 Permette di ottenere un utente dato il suo id
 \paragraph{Parametri}
 \begin{itemize}
-  \item L'id dell'utente
+\item L'id dell'utente
 \end{itemize}
 \paragraph{Valore di ritorno}
 \begin{itemize}
@@ -35,50 +55,51 @@ Permette di ottenere un utente dato il suo id
 
 \subsubsection{\texttt{database.UserDAO.isUserPresentByID()}}
 Predicato che verifica la presenza di un utente nel database
-  \paragraph{Parametri}
-  \begin{itemize}
-    \item L'id dell'utente
-  \end{itemize}
-  \paragraph{Valore di ritorno}
-  \begin{itemize}
-    \item Un valore booleano corrispondente alla presenza dell'utente
-    \end{itemize}
+\paragraph{Parametri}
+\begin{itemize}
+\item L'id dell'utente
+\end{itemize}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Un valore booleano corrispondente alla presenza dell'utente
+\end{itemize}
 
-    \subsubsection{\texttt{database.UserDAO.isUserPresentByEmail()}}
-    Predicato che verifica la presenza di un utente data la sua email
-    \paragraph{Parametri}
-    \begin{itemize}
-    \item L'email dell'utente
-    \end{itemize}
-    \paragraph{Valore di ritorno}
-    \begin{itemize}
-    \item Un valore booleano corrispondente alla presenza dell'utente
-    \end{itemize}
+\subsubsection{\texttt{database.UserDAO.isUserPresentByEmail()}}
+Predicato che verifica la presenza di un utente data la sua email
+\paragraph{Parametri}
+\begin{itemize}
+\item L'email dell'utente
+\end{itemize}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Un valore booleano corrispondente alla presenza dell'utente
+\end{itemize}
 
-    \subsubsection{\texttt{database.UserDAO.getUserByEmail()}}
-    Permette di ottenere un utente data la sua email
-    \paragraph{Parametri}
-    \begin{itemize}
-    \item L'email dell'utente
-    \end{itemize}
-    \paragraph{Valore di ritorno}
-    \begin{itemize}
-    \item La corrispondente istanza di \texttt{entity.Author} o di \texttt{entity.Organizer}
-    \end{itemize}
+\subsubsection{\texttt{database.UserDAO.getUserByEmail()}}
+Permette di ottenere un utente data la sua email
+\paragraph{Parametri}
+\begin{itemize}
+\item L'email dell'utente
+\end{itemize}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item La corrispondente istanza di \texttt{entity.Author} o di
+  \texttt{entity.Organizer}
+\end{itemize}
 
-    \subsubsection{\texttt{database.UserDAO.getAllAuthors()}}
-    Permette di ottenere una lista di tutti gli autori presenti nel database
-    \paragraph{Valore di ritorno}
-    \begin{itemize}
-    \item La lista di tutti gli autori nel database
-    \end{itemize}
+\subsubsection{\texttt{database.UserDAO.getAllAuthors()}} Permette
+di ottenere una lista di tutti gli autori presenti nel database
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item La lista di tutti gli autori nel database
+\end{itemize}
 
-    \subsubsection{\texttt{database.UserDAO.saveUser()}}
-    Permette di inserire un nuovo utente all'interno del database
-  \paragraph{Parametri}
-  \begin{itemize}
-    \item L'utente da inserire
-    \end{itemize}
+\subsubsection{\texttt{database.UserDAO.saveUser()}} Permette di
+inserire un nuovo utente all'interno del database
+\paragraph{Parametri}
+\begin{itemize}
+\item L'utente da inserire
+\end{itemize}
     
 %%% Local Variables:
 %%% mode: LaTeX

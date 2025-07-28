@@ -19,7 +19,8 @@ Metodo statico che permette di ottenere la connesione al database
 \begin{itemize}
 \item Un oggetto Connection che rappresenta la connesione al database
 \end{itemize}
-    
+
+
 \subsection{UserDAO} Classe responsabile per le operazioni sulla
 tabella utente del database
 \begin{description}
@@ -147,6 +148,58 @@ Permette di aggiornare lo stato di un articolo
 \begin{itemize}
 \item L'id dell'articolo da aggiornare
 \item Il nuovo stato
+\end{itemize}
+
+
+\subsubsection{ConferenceDAO}
+Classe che si occupa delle operazioni sulla tabella conferenze nel database
+\begin{description}
+\item[conn] La connesione al database
+\end{description}
+
+\subsubsection{\texttt{database.ConferenceDAO.ConferenceDAO()}}
+Costruttore, si occupa di impostare la connesione
+
+\subsubsection{\texttt{database.ConferenceDAO.getConferenceByID()}}
+Permette di ottenere una conferenza dato il suo di
+\paragraph{Parametri}
+\begin{itemize}
+\item L'id della conferenza
+\end{itemize}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Un istanza di \texttt{entity.Conference} rappresentante la conferenza ottenuta
+\end{itemize}
+
+\subsubsection{\texttt{database.ConferenceDAO.saveConference()}}
+\paragraph{Parametri}
+\begin{itemize}
+\item La conferenza da salvare
+\end{itemize}
+
+\subsubsection{\texttt{database.ConferenceDAO.getArticlesByConference()}}
+Permette di ottenere la lista di tutti gli articoli sottomessi ad una conferenza
+\paragraph{Parametri}
+\begin{itemize}
+\item L'id della conferenza
+\end{itemize}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item La lista degli articoli sottomessi
+\end{itemize}
+
+\subsubsection{\texttt{database.ConferenceDAO.getAllConferences()}}
+Permette di ottenere una lista di tutte le conferenze nel database
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item La lista di tutte le conferenze
+\end{itemize}
+
+\subsubsection{\texttt{database.ConferenceDAO.getActiveConferences}}
+Permette di ottenere la lista di tutte le conferenze attive
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item La lista di tutte le conferenze attive
 \end{itemize}
 %%% Local Variables:
 %%% mode: LaTeX

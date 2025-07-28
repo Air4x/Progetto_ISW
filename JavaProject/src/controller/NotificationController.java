@@ -15,25 +15,24 @@ import java.util.Properties;
 
 /**
  * @author Giuseppe Buglione
- * Tale classe va implemetare il sistema di notivife inviate tramite email mediante utilizzo del
- * package jakarta 
+ * Classe utilizzata per la gestione della creazione e invio di email
 */
-
 public class NotificationController {
     
-
     private ConferenceDAO conf_dao;
     private UserDAO user_dao;
 
+    /**
+     * Costruttore
+     * @throws SQLException
+     */
     public NotificationController() throws SQLException{
         this.conf_dao= new ConferenceDAO();
         this.user_dao= new UserDAO();
     }
 
     /**
-     * <p> Il metodo che data una lista di conferenze controlla inanzi tutto se risultano in scadenza (5 giorni mancati)
-     * caso affermatico va a inviare un email a tutti gli autori presenti sul database
-     * </p>
+     * Metodo utilizzato per l'invio di email
      * @throws SQLException
      * @throws MessagingException
      */
@@ -57,8 +56,7 @@ public class NotificationController {
     }
 
     /**
-     * <p> Metodo per la creazione del messaggio da inviare
-     * </p>
+     * Metodo per la creazione del messaggio da inviare
      * @param aut_name: Nome del destinatario
      * @param aut_lastname: Cognome del destinatario
      * @param conf_title: Nome della conferenza in scadenza
@@ -71,15 +69,14 @@ public class NotificationController {
     }
 
     /**
-     * <p> Metodo utilizzo per la configurazione di un host per l'invio delle email
-     * </p>
+     * Metodo utilizzo per la configurazione di un host per l'invio delle email
      * @param email_d
      * @param conf_title
      * @param msg
      * @throws SQLException
      * @throws MessagingException
      */
-    private void sendEmail(String email_d, String conf_title, String msg) throws SQLException, MessagingException {
+    private void sendEmail (String email_d, String conf_title, String msg) throws SQLException, MessagingException {
         // Fare email da cui mandare messaggi
         final String m_email = PasswordManager.getInstance().get("email_username"); //mittente
         final String m_password = PasswordManager.getInstance().get("email_password");; //app_password
@@ -118,6 +115,6 @@ public class NotificationController {
         message.setContent(mp);
         Transport.send(message);
 
-        System.out.println("Email inviata a " + email_d);
-    }
+        System.out.println("Email inviata a "+email_d);
+    }
 }

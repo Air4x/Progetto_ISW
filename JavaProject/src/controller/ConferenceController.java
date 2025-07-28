@@ -13,6 +13,10 @@ import java.util.Date;
 import java.util.List;
 import utility.ID;
 
+/**
+ * @author Giuseppe Buglione
+ * Classe utilizzata per la gestione delle Conferenzze
+ */
 public class ConferenceController {
     
     private User user;
@@ -24,13 +28,27 @@ public class ConferenceController {
     public ConferenceController() throws SQLException {
         this.conf_dao = new ConferenceDAO();
     }
-
+    
+    /**
+     * Metodo per la creazione di una conferenzza
+     * @param scadenza
+     * @param title
+     * @param descr
+     * @param id
+     * @param org
+     * @throws SQLException
+     */
     public void createConference (Date scadenza, String title, String descr, ID id, Organizer org) throws SQLException {
         this.conf = new Conference(scadenza,title,descr,id);
         this.user = (Organizer) org;
         conf_dao.saveConference(this.conf);
     }
 
+    /**
+     * Metodo per ottenere una lista di conferenzze attive [NON ANCORA SCADUTE]
+     * @return
+     * @throws SQLException
+     */
     public List<ShowActiveConferenceDTO> getActiveConferences() throws SQLException{
         Date data = new Date();
         List<Conference> all_conf = conf_dao.getAllConferences();
@@ -44,6 +62,12 @@ public class ConferenceController {
             return actconf;
     }
 
+    /**
+     * Metodo per ottenere una lista di articoli
+     * @param conf_Id
+     * @return
+     * @throws SQLException
+     */
     public List<ShowArticleDTO> getArticlesByConference(ID conf_Id) throws SQLException {
         List<Articolo> art = conf_dao.getArticlesByConference(conf_Id);
         List<ShowArticleDTO> at = new ArrayList<>();

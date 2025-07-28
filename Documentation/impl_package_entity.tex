@@ -86,6 +86,7 @@ Cambia l'email dell'utente
 \begin{description}
 \item [role] il ruolo dell'autore
 \end{description}
+
 \subsubsection{\texttt{entity.Author.Author()}}
 Istanzia un nuovo autore
 \paragraph{Parametri}
@@ -114,7 +115,7 @@ Costruttore di copia per \texttt{Author}
 \subsection{Organizer}
 \paragraph{Attributi}
 \begin{description}
-\item
+\item[id] L'id dell'organizzatore
 \end{description}
 
 \subsubsection{\texttt{entity.Author.Organizer()}}
@@ -151,7 +152,7 @@ Costruttore di copia per \texttt{Organizer}
 \item[autori] Lista di \texttt{Author} dell'articolo
 \end{description}
 
-\subsubsection{\texttt{entity.Author.Articolo()}}
+\subsubsection{\texttt{entity.Articolo.Articolo()}}
 Istanzia un nuovo articolo
 \paragraph{Parametri}
 \begin{itemize}
@@ -161,32 +162,32 @@ Istanzia un nuovo articolo
 \item titolo
 \end{itemize}
 
-\subsubsection{\texttt{entity.Author.Articolo()}}
+\subsubsection{\texttt{entity.Articolo.Articolo()}}
 Costruttore di copia
 \paragraph{Parametri}
 \begin{itemize}
 \item articolo
 \end{itemize}
 
-\subsubsection{\texttt{entity.Author.getAutori()}}
+\subsubsection{\texttt{entity.Articolo.getAutori()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item Lista di autori dell'articolo
 \end{itemize}
 
-\subsubsection{\texttt{entity.Author.getAbstr()}}
+\subsubsection{\texttt{entity.Articolo.getAbstr()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item L'abstract dell'articolo
 \end{itemize}
 
-\subsubsection{\texttt{entity.Author.getTitolo()}}
+\subsubsection{\texttt{entity.Articolo.getTitolo()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item Il titolo dell'articolo
 \end{itemize}
 
-\subsubsection{\texttt{entity.Author.getId()}}
+\subsubsection{\texttt{entity.Articolo.getId()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item L'id dell'articolo

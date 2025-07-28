@@ -201,6 +201,48 @@ Permette di ottenere la lista di tutte le conferenze attive
 \begin{itemize}
 \item La lista di tutte le conferenze attive
 \end{itemize}
+
+
+\subsection{\texttt{ReviewDAO}}
+Classe responsabile per le operazioni sulla tabella registro nel database
+\begin{description}
+\item[conn] La connesione al database
+\end{description}
+
+\subsubsection{\texttt{database.ReviewDAO.ReviewDAO()}}
+Costruttore, imposta la connesione al database
+
+\subsubsection{\texttt{database.ReviewDAO.hasConflitOfInterest}}
+Predicato che verifica la presenza di conflitti di interesse
+\paragraph{Parametri}
+\begin{itemize}
+\item L'id dell'articolo
+\item L'id del possibile revisore
+\end{itemize}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Valore booleano corrispondente alla presenza di conflitti di interesse
+\end{itemize}
+
+\subsubsection{\texttt{database.ReviewDAO.assignReviewer()}}
+Permette di assegnare un autore come revisore ad un articolo
+\paragraph{Parametri}
+\begin{itemize}
+\item L'id dell'articolo
+\item L'id del revisore
+\end{itemize}
+
+\subsubsection{\texttt{database.ReviewDAO.getReviewersByArticles()}}
+Permette di ottenere tutti i revisori assegnati ad un articolo
+\paragraph{Parametri}
+\begin{itemize}
+\item L'id dell'articolo
+\end{itemize}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item La lista dei revisori assegnati
+\end{itemize}
+    
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "main"

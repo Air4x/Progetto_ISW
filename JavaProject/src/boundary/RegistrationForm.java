@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
+import DTO.RUserDTO;
 import controller.UserController;
 import entity.Author;
 import entity.Organizer;
@@ -120,35 +121,29 @@ public class RegistrationForm extends JFrame {
                 }
 
                 //Se tutto corrisponde
-                if(txtruolo.getText().equalsIgnoreCase("autore")){
-                    User e = new Author(txtaffiliazione.getText(),txtemail.getText(),txtlastname.getText(),txtname.getText(),passwordField1.getSelectedText());
-                    UserController uc = new  UserController();
-                    if(!uc.registerUser(e)){
-                        JOptionPane.showMessageDialog(null,"The user has been successfully registrated","Registration done",JOptionPane.WARNING_MESSAGE);
-                        dispose();
+                if(!txtemail.getText().isEmpty() && !txtemail.getText().isEmpty()&&txtemail.getText().matches(regex)){
+                    UserController uc = new UserController();
+                    RUserDTO userDTO = uc.registerUser(txtaffiliazione.getText(),txtemail.getText(),txtlastname.getText(), txtname.getText(), passwordField1.getSelectedText(),txtruolo.getText());
+                    if(userDTO!=null){
+                        JOptionPane.showMessageDialog(null,"User already register, proceed to login","Warining",JOptionPane.WARNING_MESSAGE);
 
-                    } else{
-                        JOptionPane.showMessageDialog(null,"Warning, the user is already register","Warning",JOptionPane.WARNING_MESSAGE);
+                    }else{
+                        if(txtruolo.getText().equalsIgnoreCase("organizer")){
+                            OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
+                            organizerDashboard.setVisible(true);
+                            dispose();
+                        }
+                        else{
+                            AuthorDashboard authorDashboard = new AuthorDashboard(userDTO);
+                            authorDashboard.setVisible(true);
+                            dispose();
+
+                        }
                     }
 
-
-
-                }
-                else if(txtruolo.getText().equalsIgnoreCase("organizer")){
-                    User e = new Organizer(txtfaffiliazione.getText(),txtemail.getText(),txtlastname.getText(),txtname.getText(),passwordField1.getSelectedText());
-                    UserController uc = new  UserController();
-                    if(!uc.registerUser(e)){
-                        JOptionPane.showMessageDialog(null,"The user  has been successfully registrated","Registration done",JOptionPane.WARNING_MESSAGE);
-
-
-                    else{
-                        JOptionPane.showMessageDialog(null,"Warning, the user is already register","Warning",JOptionPane.WARNING_MESSAGE);
-                    }
                 }
 
-                else {
-                    JOptionPane.showMessageDialog(null,"Please enter a valid role","Warning",JOptionPane.WARNING_MESSAGE);
-                }
+
 
 
 

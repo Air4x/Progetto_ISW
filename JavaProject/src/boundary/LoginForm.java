@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+
+import DTO.RUserDTO;
 import controller.UserController;
 import entity.Author;
 import entity.Organizer;
@@ -38,7 +40,7 @@ public class LoginForm  extends JFrame {
         panel.add(lblemail);
 
 
-        emailTextField = new JTextField();
+        JTextField emailTextField = new JTextField();
         emailTextField.setBounds(10,50,150,30);
         panel.add(emailTextField);
 
@@ -47,7 +49,7 @@ public class LoginForm  extends JFrame {
         lblpassword.setBounds(10,90,100,30 );
         panel.add(lblpassword);
 
-        passwordfield = new JPasswordField();
+        JPasswordField passwordfield = new JPasswordField();
         passwordfield.setBounds(10,130,150,30);
         panel.add(passwordfield);
 
@@ -73,25 +75,30 @@ public class LoginForm  extends JFrame {
                 if(!Pattern.matches(regex,emailTextField.getText())){
                     JOptionPane.showMessageDialog(null,"Please enter a valid email","Warning",JOptionPane.WARNING_MESSAGE);
                 }
-                UserController uc = new UserController();
-                if(uc.login(emailTextField.getText(),passwordfield.getText())!=null){
+                if(passwordfield.getText().length()<30 && Pattern.matches(regex,emailTextField.getText())){
+                    UserController userController = new UserController();
+                    RUserDTO userDTO= userController.login(emailTextField.getText(),passwordfield.getSelectedText());
+                    if(userDTO==null){
+                        JOptionPane.showMessageDialog(null,"The User does not exist, proceed to register","Warning",JOptionPane.WARNING_MESSAGE);
+                    }
+                    else{
+                        if(userDTO.getRuolo().equals("Organizer")){
+                            OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
+                            organizerDashboard.setVisible(true);
+                            dispose();
 
+                        }
+                        else{
+                            AuthorDashboard authorDashboard = new AuthorDashboard(userDTO);
+                            authorDashboard.setVisible(true);
+                            dispose();
 
-                    JOptionPane.showMessageDialog(null,"Login Successful","Warning",JOptionPane.WARNING_MESSAGE);
-                    if(uc.login(emailTextField.getText(),passwordfield.getText()).getRole()=="Author"){
-                        Author author = new Author((Author) uc.login(emailTextField.getText(),passwordfield.getText()));
-                        AuthorDashboard frame = new AuthorDashboard(author);
-                        frame.setVisible(true);
-                    } else {
-                        Organizer organizer = new Organizer((Organizer) uc.login(emailTextField.getText(),passwordfield.getText()));
-                        OrganizerDashboard frame = new OrganizerDashboard(organizer);
-                        frame.setVisible(true);
-
+                        }
 
                     }
 
-
                 }
+
 
             }
         });

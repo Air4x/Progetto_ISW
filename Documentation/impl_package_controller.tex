@@ -1,0 +1,277 @@
+\section{Package Controller}
+\label{sec:package_controller}
+
+\subsection{ArticleController}
+Classe utilizzata per la gestione degli Articoli
+\paragraph{Attributi}
+\begin{description}
+\item[art-dao] Instanza di ArticleDAO
+\item[conf-dao] Instanza di ConferenceDAO
+\end{description}
+
+\subsubsection{\texttt{controller.ArticleController.ArticleController()}}
+Costruttore
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+
+\subsubsection{\texttt{controller.ArticleController.submitArticle()}}
+Metodo per la sottomisione di un articolo a una conferenza
+\paragraph{Parametri}
+\begin{description}
+\item a-titolo
+\item a-abstrct
+\item a-autori
+\item id-conf
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item [Vero] se l'articolo è stato sottomesso corettamente
+\item [Falso] se non c'è nessuna conferenza con l'id indicato
+\end{description}
+
+\subsubsection{\texttt{controller.ArticleController.getArticleByAuthor()}}
+Metodo per ottenere una lista di articoli
+\paragraph{Parametri}
+\begin{description}
+\item authorID
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+Una lista di ShowArticleDTO
+
+\subsubsection{\texttt{controller.ArticleController.updateArticleStatus()}}
+Metodo per aggiorna lo status di un articolo
+\paragraph{Parametri}
+\begin{description}
+\item ID
+\item status
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item[Vero] se lo stato del'articolo è sato corretamente aggiornato
+\item[Falso] articolo non trovato
+\end{description}
+
+
+
+\subsection{ConferenceController}
+\paragraph{Attributi}
+\begin{description}
+\item[user] User
+\item[conf] Instanza di Conference 
+\item[conf-dao] Instanza di ConferenceDAO
+\item[conf-dto] Instanza di ShowActiveConferenceDTO
+\item[art-dto] Instanza di ShowArticleDTO
+\end{description}
+
+\subsubsection{\texttt{controller.ConferenceController.ConferenceController()}}
+Costruttore
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+
+\subsubsection{\texttt{controller.ConferenceController.createConference()}}
+Metodo per la creazione di una conferenzza
+\paragraph{Parametri}
+\begin{description}
+\item scadenza
+\item title
+\item descr
+\item id
+\item org
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+metodo void
+
+\subsubsection{\texttt{controller.ConferenceController.getActiveConferences()}}
+Metodo per ottenere una lista di conferenzze attive [NON ANCORA SCADUTE]
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+Lista di ShowActiveConferenceDTO
+
+\subsubsection{\texttt{controller.ConferenceController.getArticlesByConference()}}
+Metodo per ottenere una lista di articoli
+\paragraph{Parametri}
+\begin{description}
+\item conf-id
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+Lista di ShowArticleDTO
+
+
+
+\subsection{NotificationController}
+\paragraph{Attributi}
+\begin{description}
+\item[conf-dao] Instanza di ConferenceDAO
+\item[user-dao] Instanza di UserDAO
+\end{description}
+
+\subsubsection{\texttt{controller.NotificationController.NotificationController()}}
+Costruttore
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+
+\subsubsection{\texttt{controller.NotificationController.invioNotifiche()}}
+Metodo utilizzato per l'invio di email222
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\item[MessagingException] Messaggio di errore in caso di eccezione
+\end{description}
+\paragraph{Valore di ritorno}
+Metodo void
+
+\subsubsection{\texttt{controller.NotificationController.creatMessage()}}
+Metodo per la creazione del messaggio da inviare
+\paragraph{Parametri}
+\begin{description}
+\item aut-name
+\item aut-lastname
+\item conf-title
+\item msg
+\end{description}
+\paragraph{Valore di ritorno}
+Metodo void
+
+\subsubsection{\texttt{controller.NotificationController.sendEmail()}}
+Metodo utilizzo per la configurazione di un host per l'invio delle email
+\paragraph{Parametri}
+\begin{description}
+\item email-d
+\item conf-title
+\item msg
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\item[MessagingException] Messaggio di errore in caso di eccezione
+\end{description}
+\paragraph{Valore di ritorno}
+Metodo void
+
+
+
+\subsection{ReviewController}
+\paragraph{Attributi}
+\begin{description}
+\item[r-DAO] Instanza di eviewDAO
+\item[u-DAO] Instanza di UserDAO
+\end{description}
+
+\subsubsection{\texttt{controller.ReviewController.ReviewController()}}
+Costruttore
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+
+
+\subsubsection{\texttt{controller.ReviewController.}}
+Metodo per l'assegnazion di revisore
+\paragraph{Parametri}
+\begin{description}
+\item articleID
+\item reviewID
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item[Vero] Se i revisori sono stati assegnati correttamente 
+\item[Falso] Se si sono assegnati un numero eccesivo di revisori
+\end{description}
+
+
+
+\subsubsection{\texttt{controller.ReviewController.getListReviewer()}}
+Metodo per ottenere una lista di possibili revisori
+\paragraph{Parametri}
+\begin{description}
+\item articleID
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+Una lista di oggetti PossibleReviewDTO
+
+
+\subsection{UserController}
+\paragraph{Attributi}
+\begin{description}
+\item[user-dao] Instanza di UserDAO
+\end{description}
+
+\subsubsection{\texttt{controller.UserController.}}
+Costruttore
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+
+\subsubsection{\texttt{controller.UserController.registerUser()}}
+\paragraph{Parametri}
+\begin{description}
+\item aff
+\item email
+\item lastname
+\item name
+\item password
+\item ruole
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+Un oggetto RUserDTO
+
+\subsubsection{\texttt{controller.UserController.}}
+
+\paragraph{Parametri}
+\begin{description}
+\item email
+\item password
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+Un oggetto RUserDTO
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

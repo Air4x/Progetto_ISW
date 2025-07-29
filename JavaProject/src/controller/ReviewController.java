@@ -11,7 +11,7 @@ import utility.ID;
 
 /**
  * @author Giuseppe Buglione
- * CLasse utilizzata per la gestione dei revisori
+ * Classe utilizzata per la gestione dei revisori
  */
 public class ReviewController {
 
@@ -20,6 +20,7 @@ public class ReviewController {
 
     public ReviewController () throws SQLException {
         this.r_DAO = new ReviewDAO();
+        this.u_DAO = new UserDAO();
     }
 
     /**
@@ -30,17 +31,22 @@ public class ReviewController {
      * @throws SQLException
      */
     public boolean assignReviewer (ID articleID, List<PossibleReviewDTO> list_r ) throws SQLException{
-        int v = 3;
+        int v = 0;
         for(PossibleReviewDTO rp : list_r){
             if(rp.getSelezione() == true){
-                r_DAO.assignReviewer(articleID,rp.getId());
-                v--;
+                v++;
             }
         }
-        if(v == 0){
+        if(v <= 3){
+            for(PossibleReviewDTO rp : list_r){
+                if(rp.getSelezione() == true){
+                r_DAO.assignReviewer(articleID, rp.getId());
+                }
+                }
             return true;
         }
         return false;
+        
     }
 
     /**

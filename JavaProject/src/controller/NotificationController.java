@@ -36,7 +36,7 @@ public class NotificationController {
      * @throws SQLException
      * @throws MessagingException
      */
-    public void invioNotifiche () throws SQLException, MessagingException {
+    public void invioNotifiche() throws SQLException, MessagingException {
         ArrayList<Conference> conf = conf_dao.getActiveConferences();
         List<Author> auth = user_dao.getAllAuthors();
         String msg = " ",name_a,lastname_a,email_a,title_c;
@@ -61,10 +61,8 @@ public class NotificationController {
      * @param aut_lastname: Cognome del destinatario
      * @param conf_title: Nome della conferenza in scadenza
      * @param msg: Messaggio da scrivere
-     * @throws MessagingException
-     * @throws SQLException
      */
-    private void creatMessage(String aut_name, String aut_lastname, String conf_title, String msg) throws MessagingException, SQLException{
+    private void creatMessage(String aut_name, String aut_lastname, String conf_title, String msg){
         msg = "Saluti "+aut_name+" "+aut_lastname+"\nLe Recordiamo che la consegna per "+conf_title+" sta per scadere";
     }
 

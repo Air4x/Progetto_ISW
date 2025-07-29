@@ -14,14 +14,14 @@ import utility.ID;
 
 /**
  * @author Giuseppe Buglione
- * Classe per utilizzata per la sgestione degli Articoli
+ * Classe per utilizzata per la gestione degli Articoli
  */
 public class ArticleController {
 
     private ArticleDAO art_dao;
     private ConferenceDAO conf_dao;
 
-    public ArticleController () throws SQLException{
+    public ArticleController () throws SQLException {
         this.art_dao= new ArticleDAO();
         this.conf_dao= new ConferenceDAO();
     }

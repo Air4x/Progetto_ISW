@@ -1,0 +1,187 @@
+\section{Pacchetto DTO}
+\label{sec:package_dto}
+
+\subsection{PossibleReviewDTO}
+Classe DTO per il trasporto delle informazioni di un revisore [autore]
+\paragraph{Attributi}
+\begin{description}
+\item [id] ID che va indentificare in maiera \texttt{univoca} un revisore
+\item [name] Nome del revisore
+\item [lastname] Cognome del revisore 
+\item [affilazione] Affilazione del revisore
+\item [selezione] L'elemento che indica se un revisore è stato selezionato
+\end{description}
+\subsubsection{\texttt{DTO.PossibleReviewDTO.PossibleReviewDTO()}}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item id
+\item name
+\item lastname
+\item affilazione
+\item selezione
+\end{description}
+\subsubsection{\texttt{DTO.PossibleReviewDTO.PossibleReviewDTO()}}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item author
+\end{description}
+\subsubsection{\texttt{DTO.PossibleReviewDTO.getId()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item L'id del revisore
+\end{description}
+\subsubsection{\texttt{DTO.PossibleReviewDTO.getName()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Nome del revisore
+\end{description}
+\subsubsection{\texttt{DTO.PossibleReviewDTO.getLastname()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Cognome del revisore
+\end{description}
+\subsubsection{\texttt{DTO.PossibleReviewDTO.getAffiliazione()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Affilazione del revisore
+\end{description}
+\subsubsection{\texttt{DTO.PossibleReviewDTO.getSelezione()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item [Vero] Se il revisore è stato scelto
+\item [Falso] Se il revisore non è stato scelto
+\end{description}
+
+\subsection{RUserDTO}
+\subsubsection{\texttt{DTO.RUserDTO.RUserDTO()}}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item name
+\item lastname
+\item email
+\item affiliazione
+\item ruolo
+\item id
+\item esito
+\end{description}
+\subsubsection{\texttt{DTO.RUserDTO.RUserDTO()}}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item utente
+\item esito
+\end{description}
+\subsubsection{\texttt{DTO.RUserDTO.getName()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Nome dell'utente
+\end{description}
+\subsubsection{\texttt{DTO.RUserDTO.getLastname()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Cognome dell'utente
+\end{description}
+\subsubsection{\texttt{DTO.RUserDTO.getEmail()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Email dell'utente
+\end{description}
+\subsubsection{\texttt{DTO.RUserDTO.getAffiliazione()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Affilazione dell'utente
+\end{description}
+\subsubsection{\texttt{DTO.RUserDTO.getRuolo()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Ruolo dell'utente
+\end{description}
+\subsubsection{\texttt{DTO.RUserDTO.getId()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Id dell'utente
+\end{description}
+\subsubsection{\texttt{DTO.RUserDTO.getEsito()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item [Vero] Se l'utente è stato registrato con successo
+\item [Falso] Se l'utente non è stato registrato con successo
+\end{description}
+
+\subsection{ShowActiveConferenceDTO}
+\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.ShowActiveConferenceDTO()()}}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item id
+\item titolo
+\item scadenza
+\item descrizione
+\end{description}
+\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.getId()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Id della conferenzza
+\end{description}
+\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.getTitolo()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Titolo della conferenzza
+\end{description}
+\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.getScadenza()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Scadenza  della conferenzza
+\end{description}
+\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.getDecrizione()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Descrizione della conferenzza
+\end{description}
+
+\subsection{ShowArticleDTO}
+\subsubsection{\texttt{DTO.ShowArticleDTO.ShowArticleDTO()}}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item id
+\item titolo
+\item abstr
+\item autori
+\end{description}
+\subsubsection{\texttt{DTO.ShowArticleDTO.ShowArticleDTO()}}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item articolo
+\end{description}
+\subsubsection{\texttt{DTO.ShowArticleDTO.getId()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Id dell'articolo 
+\end{description}
+\subsubsection{\texttt{DTO.ShowArticleDTO.getTitolo()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Titolo dell'articolo
+\end{description}
+\subsubsection{\texttt{DTO.ShowArticleDTO.getAbstr()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Abstract dell'articolo
+\end{description}
+\subsubsection{\texttt{DTO.ShowArticleDTO.getAutori()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Autori dell'articolo
+\end{description}
+
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

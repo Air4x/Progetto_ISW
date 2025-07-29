@@ -3,6 +3,10 @@ package DTO;
 import utility.ID;
 import entity.Author;
 
+/**
+ * @author Giuseppe Buglione
+ * Classe DTO per il trasporto delle informazioni di un revisore [autore]
+ */
 public class PossibleReviewDTO {
 
     private ID id;

@@ -5,6 +5,10 @@ import utility.ID;
 import entity.Articolo;
 import entity.Author;
 
+/**
+ * @author Giuseppe Buglione
+ * Classe DTO per il trasporto delle informazioni di un articolo
+ */
 public class ShowArticleDTO {
 
     private ID id;

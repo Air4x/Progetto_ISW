@@ -3,21 +3,16 @@ package DTO;
 import java.util.Date;
 import utility.ID;
 
+/**
+ * @author Giuseppe Buglione
+ * Classe DTO per il trasporto delle informazioni di una conferenzza attiva
+ */
 public class ShowActiveConferenceDTO {
     
     private ID id;
     private String titolo;
     private Date scadenza;
     private String decrizione;
-
-    /**
-     * Costrutore
-     */
-    public ShowActiveConferenceDTO() {
-        this.titolo = new String();
-        this.scadenza = new Date();
-        this.decrizione = new String();
-    }
 
     /**
      * Costruttore

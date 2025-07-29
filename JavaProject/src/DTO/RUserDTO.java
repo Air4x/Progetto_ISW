@@ -3,6 +3,10 @@ package DTO;
 import entity.User;
 import utility.ID;
 
+/**
+ * @author Giuseppe Buglione
+ * Classe DTO per il trasporto delle informazioni di un utente
+ */
 public class RUserDTO {
 
     private String name;
@@ -35,16 +39,16 @@ public class RUserDTO {
 
     /**
      * Costruttore
-     * @param a
+     * @param utente
      * @param esito
      */
-    public RUserDTO(User a, boolean esito) {
-        this.name = a.getName();
-        this.lastname = a.getLastName();
-        this.email = a.getLastName();
-        this.affiliazione = a.getAffiliazione();
-        this.ruolo = a.getRole();
-        this.id = a.getId();
+    public RUserDTO(User utente, boolean esito) {
+        this.name = utente.getName();
+        this.lastname = utente.getLastName();
+        this.email = utente.getLastName();
+        this.affiliazione = utente.getAffiliazione();
+        this.ruolo = utente.getRole();
+        this.id = utente.getId();
         this.esito=esito;
     }
 

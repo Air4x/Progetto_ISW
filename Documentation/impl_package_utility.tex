@@ -1,5 +1,7 @@
 \section{Pacchetto Utility}
 \label{sec:package_utility}
+
+\subsection{ID}
 Classe di utilità che implementa le funzioni per la creazione e
 gestione dei codici identificativi usati nelle classi di dominio
 
@@ -48,6 +50,39 @@ Override del metodo \texttt{toString()} di \texttt{java.util.UUID}
 \item L'id sotto forma di stringa
 \end{itemize}
 
+
+\subsection{PasswordManager}
+Classe che si occupa di gestire i <it>segreti</it>. In particolare
+utilizza un file chiamato system.properties nella cartella ./config
+per ottenere le informazioni necessarie alla connessione al database e
+per il sistema di notifica.
+ 
+La classe è implementata come singleton, così da assicurarne
+l'unicità.  La classe è anche Thread-Safe.
+
+\begin{description}
+\item[instance] L'istanza della classe, necessaria per rispettare il pattern Singleton
+\item[props] Le proprietà ottenute leggendo il file di configurazione
+\end{description}
+
+\subsubsection{\texttt{utility.PasswordManager.PasswordManager()}}
+Costruttore privato della classe
+
+\subsubsection{\texttt{utility.PasswordManager.getInstance()}}
+Metodo statico e thread-safe per ottenere l'istanza di \texttt{PasswordManager}
+\paragraph{Valore di ritorno}
+L'istanza di PasswordManager
+
+\subsubsection{\texttt{utility.PasswordManager.get()}}
+Metodo thread-sage per ottenere una data proprietà
+\paragraph{Parametri}
+\begin{itemize}
+\item La ``key'' della proprietà richiesta
+\end{itemize}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Il valore della proprietà sotto forma di stringa
+\end{itemize}
   
 %%% Local Variables:
 %%% mode: LaTeX    

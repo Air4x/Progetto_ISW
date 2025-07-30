@@ -1,0 +1,55 @@
+\section{Pacchetto Utility}
+\label{sec:package_utility}
+Classe di utilità che implementa le funzioni per la creazione e
+gestione dei codici identificativi usati nelle classi di dominio
+
+Utilizza \texttt{java.util.UUID} per la creazione degli UUID veri e
+propri, in particolare viene utilizzato per la creazione di UUIDv4 di
+conseguenza la probabilità di una "convergenza" tra due ID è
+abbastanza bassa da poter essere ignorata. Il tutto rafforzato dal
+fatto che non ci sono state convergenze documentate utilizzando UUIDv4
+
+\paragraph{Attributi}
+\begin{description}
+\item[id] L'id vero e proprio
+\end{description}
+
+\subsubsection{\texttt{utility.ID.ID()}}
+Costruttore di ID, permette di creare un ID data la sua
+rappresentazione come stringa
+\paragraph{Parametri}
+\begin{itemize}
+\item L'id sotto forma di stringa
+\end{itemize}
+
+\subsubsection{\texttt{utility.ID.ID()}}
+Costruttore di ID, crea un nuovo ID unico e universale
+
+\subsubsection{\texttt{utility.ID.generate()}}
+Metodo statico, viene utilizzato per generare un nuovo ID da parte
+dei livello superiori
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item Una nuova istanza di \texttt{utility.ID} contenente un nuovo UUID
+\end{itemize}
+
+\subsubsection{\texttt{utility.ID.getID()}}
+Semplice getter per ottener l'id come \texttt{java.util.UUID}
+
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item L'id come \texttt{java.util.UUID}
+\end{itemize}
+
+\subsubsection{\texttt{utility.ID.toString()}}
+Override del metodo \texttt{toString()} di \texttt{java.util.UUID}
+\paragraph{Valore di ritorno}
+\begin{itemize}
+\item L'id sotto forma di stringa
+\end{itemize}
+
+  
+%%% Local Variables:
+%%% mode: LaTeX    
+%%% TeX-master: "mai
+%%% End:         

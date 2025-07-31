@@ -65,5 +65,15 @@ public class UserController {
         RUserDTO fake_user = new RUserDTO (null,true);
         return fake_user;
     }
+
+    public RUserDTO getRAuthorBYEmail (String Email) throws SQLException{
+        if(this.user_dao.isUserPresentByEmail(Email)==true && this.user_dao.getUserByEmail(Email).getRole()=="autore"){
+            User  user = (Author) user_dao.getUserByEmail(Email);
+            RUserDTO user_dto = new RUserDTO(user, true);
+            return user_dto;
+        }
+
+        return null;
+    }
     
 }

@@ -1,9 +1,16 @@
 package boundary;
 
+import DTO.RUserDTO;
+import controller.ArticleController;
+import controller.UserController;
+import entity.Author;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SubmitArticleForm extends JFrame{
     private JLabel lbltitle;
@@ -50,12 +57,12 @@ public class SubmitArticleForm extends JFrame{
         txtareaabstract.setLineWrap(true);
         contentPane.add(txtareaabstract);
 
-        JLabel lblcoauthors = new JLabel("Co-Authors");
+        JLabel lblcoauthors = new JLabel("Email Co-Authors");
         lblcoauthors.setFont(new Font("Arial",Font.PLAIN,20));
         lblcoauthors.setBounds(170,10,100,20);
         contentPane.add(lblcoauthors);
 
-        JTextField txtcoauthors = new JTextField();
+        JTextField txtcoauthors = new JTextField("Please enter the email address of the Co-Authors");
         txtcoauthors.setBounds(170,40,100,20);
         contentPane.add(txtcoauthors);
 
@@ -75,6 +82,17 @@ public class SubmitArticleForm extends JFrame{
         buttonSubmit.setBounds(170,170,100,30);
         buttonSubmit.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
+                if(txtareaabstract.getText().length()<100){
+                    ArticleController ac = new ArticleController();
+                    UserController uc = new UserController();
+                    List<RUserDTO> listacoautori = new ArrayList<>(Arrays.asList(uc.getRAuthorBYEmail(txtcoauthors.getText().split(","))).toString());
+
+                    if(ac.submitArticle(txttitle.getText(),txtareaabstract.getText(),listacoautori,))
+
+
+
+
+                }
                 //Submit Article
             }
         });

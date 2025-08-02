@@ -42,6 +42,7 @@ CREATE TABLE Autori (
 CREATE TABLE Registro (
        id_conf VARCHAR(5),
        id_art VARCHAR(5),
+       stato  VARCHAR(13),
        CONSTRAINT PK_REGISTRO PRIMARY KEY(id_conf, id_art),
        CONSTRAINT FK_REGISTRO_CONFERENZE FOREIGN KEY(id_conf) REFERENCES Conferenze(ID),
        CONSTRAINT FK_REGISTRO_ARTICOLI FOREIGN KEY(id_art) REFERENCES Articoli(ID)

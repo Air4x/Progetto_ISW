@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import utility.ID;
+import DTO.RUserDTO;
+import database.UserDAO;;
 
 /**
  * @author Giuseppe Buglione
@@ -20,6 +22,7 @@ import utility.ID;
 public class ConferenceController {
     
     private User user;
+    private UserDAO user_dao;
     private Conference conf;
     private ConferenceDAO conf_dao;
     private ShowActiveConferenceDTO dto;
@@ -38,9 +41,9 @@ public class ConferenceController {
      * @param org
      * @throws SQLException
      */
-    public void createConference (Date scadenza, String title, String descr, ID id, Organizer org) throws SQLException {
+    public void createConference (Date scadenza, String title, String descr, ID id, RUserDTO org) throws SQLException {
         this.conf = new Conference(scadenza,title,descr,id);
-        this.user = (Organizer) org;
+        this.user = (Organizer) this.user_dao.getUserByID(org.getId());;
         conf_dao.saveConference(this.conf);
     }
 

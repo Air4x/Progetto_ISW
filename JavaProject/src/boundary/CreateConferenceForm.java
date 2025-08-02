@@ -104,7 +104,7 @@ public class CreateConferenceForm extends JFrame {
         buttonCreateConference.addMouseListener(new  MouseAdapter() {
             public void mouseClicked(MouseEvent e){
                 ConferenceController cc = new ConferenceController();
-               cc.createConference(duedate,txttitle.getText(),txtareadescription.getText(),idConference,organizer);
+               cc.createConference(duedate,txttitle.getText(),txtareadescription.getText());
                JOptionPane.showMessageDialog(null,"Conference created");
                dispose();
             }

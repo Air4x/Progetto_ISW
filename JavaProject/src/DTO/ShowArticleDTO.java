@@ -32,13 +32,13 @@ public class ShowArticleDTO {
 
     /**
      * Costruttore
-     * @param art
+     * @param articolo
      */
-    public ShowArticleDTO (Articolo art){
-        this.id=art.getId();
-        this.titolo = art.getTitolo();
-        this.abstr = art.getAbstr();
-        this.autori = art.getAutori();
+    public ShowArticleDTO (Articolo articolo){
+        this.id=articolo.getId();
+        this.titolo = articolo.getTitolo();
+        this.abstr = articolo.getAbstr();
+        this.autori = articolo.getAutori();
     }
 
     /**

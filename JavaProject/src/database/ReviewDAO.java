@@ -85,4 +85,18 @@ public class ReviewDAO {
 	}
 	return revisori;
     }
+
+    /**
+     * Permette di aggiornare lo stato di un articolo
+     *
+     * @param L'id dell'articolo
+     * @param Il nuovo stato
+     */
+    public void updateArticleStatus(ID id, String status) throws SQLException{
+	String intoRegistro = "UPDATE Registro SET STATUS = ? WHERE id_art = ?;";
+	PreparedStatement st = conn.prepareStatement(intoRegistro);
+	st.setString(1, status);
+	st.setString(2, id.toString());
+	st.executeUpdate();
+    }
 }

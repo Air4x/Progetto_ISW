@@ -142,15 +142,6 @@ Permette di ottenere tutti gli articoli scritti da un'utente
 \item La lista di articoli scritti dall'autore
 \end{itemize}
 
-\subsubsection{\texttt{database.ArticleDAP.updateArticleStatus()}}
-Permette di aggiornare lo stato di un articolo
-\paragraph{Parametri}
-\begin{itemize}
-\item L'id dell'articolo da aggiornare
-\item Il nuovo stato
-\end{itemize}
-
-
 \subsubsection{ConferenceDAO}
 Classe che si occupa delle operazioni sulla tabella conferenze nel database
 \begin{description}
@@ -242,7 +233,15 @@ Permette di ottenere tutti i revisori assegnati ad un articolo
 \begin{itemize}
 \item La lista dei revisori assegnati
 \end{itemize}
-    
+
+\subsubsection{\texttt{database.ReviewDAO.updateArticleStatus()}}
+Permette di aggiornare lo stato di un articolo
+\paragraph{Parametri}
+\begin{itemize}
+\item L'id dell'articolo da aggiornare
+\item Il nuovo stato
+\end{itemize}
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "main"

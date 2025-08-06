@@ -1,8 +1,11 @@
 package boundary;
 
+import DTO.RUserDTO;
+import DTO.ShowActiveConferenceDTO;
 import controller.ConferenceController;
 import entity.Conference;
 import entity.Organizer;
+import utility.ID;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,21 +13,21 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
-//MOLTO IN WIP
 
 public class OrganizerDashboard extends JFrame{
     private JPanel contentPane;
     private JScrollPane scrollConferenceList;
     private JButton buttonCreateConference;
     private JList listActiveConference;
+    private JScrollPane listArticleSubmitted;
 
     //Composizione frame
-    public OrganizerDashboard(Organizer organizer) throws SQLException {
+    public OrganizerDashboard(RUserDTO organizer) throws SQLException {
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Organizer Dashboard");
         setBounds(100,100,450,300);
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         contentPane.setBounds(5,5,5,5);
         setContentPane(contentPane);
         setLocationRelativeTo(null);
@@ -32,19 +35,32 @@ public class OrganizerDashboard extends JFrame{
         contentPane.setLayout(null);
 
         //Parte gestione delle Lista conferenze attive
+        ConferenceController cc = new ConferenceController();
 
         JScrollPane scrollConferenceList = new JScrollPane();
         scrollConferenceList.getViewport().add(contentPane);
         scrollConferenceList.getViewport().setBackground(Color.LIGHT_GRAY);
         scrollConferenceList.setBounds(0,0,0,0);
-        //JList listActiveConference = new JList(ConferenceController.getActiveConferences().toArray(new Conference[0]));
+        JList listActiveConference = new JList(cc.getActiveConferences().toArray(new ShowActiveConferenceDTO[0]));
         listActiveConference.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         for (int i = 0; i<listActiveConference.getModel().getSize();i++){
             JLabel label = new JLabel(listActiveConference.getModel().getElementAt(i).toString());
             label.setHorizontalAlignment(JLabel.CENTER);
             scrollConferenceList.getViewport().add(label);
+
         }
-        //int idConference = ConferenceController.getActiveConferences().size();
+        listActiveConference.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e){
+                int index  = listActiveConference.locationToIndex(e.getPoint());
+                ShowActiveConferenceDTO selected = (ShowActiveConferenceDTO) listActiveConference.getSelectedValue();
+                JList listActiveConference = (JList) cc.getArticlesByConference(selected.getId());
+                JScrollPane articleSubmitted = (JScrollPane) listArticleSubmitted.getViewport().getView();
+
+
+
+
+            }
+        });
         contentPane.add(scrollConferenceList);
 
 
@@ -56,9 +72,8 @@ public class OrganizerDashboard extends JFrame{
         buttonCreateConference.setForeground(Color.white);
         buttonCreateConference.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                idConference = idConference+1;
                 //Crea la conferenza la conferenza
-                CreateConferenceForm form = new CreateConferenceForm(organizer, idConference);
+                CreateConferenceForm form = new CreateConferenceForm(organizer);
                 form.setVisible(true);
 
             }
@@ -81,13 +96,7 @@ public class OrganizerDashboard extends JFrame{
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    String affiliazione = new String("Affiliazione");
-                    String email= new String("Email");
-                    String password =  new String("Password");
-                    String nome = new  String("Nome");
-                    String lastName = new String("Cognome");
-                    int id= 0;
-                    Organizer organizer = new Organizer(affiliazione,email,password,nome,lastName,id);
+                    RUserDTO organizer = new RUserDTO("Name","Lastname","email@email.com","Affilation","Organizer",true, ID.generate());
                     OrganizerDashboard finestra = new OrganizerDashboard(organizer);
                     finestra.setVisible(true);
 

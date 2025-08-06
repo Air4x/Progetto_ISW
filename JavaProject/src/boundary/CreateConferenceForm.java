@@ -1,7 +1,9 @@
 package boundary;
 
+import DTO.RUserDTO;
 import controller.ConferenceController;
 import entity.Organizer;
+import utility.ID;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,13 +31,10 @@ public class CreateConferenceForm extends JFrame {
                 try {
                     String affiliazione = new String("Affiliazione") ;
                     String email = new String("email");
-                    String password = new String("Password");
                     String nome = new String("Nome");
                     String lastName = new String("Cognome");
-                    String id=new String("1");
-                    String idConference= new String("0");
-                    Organizer organizer = new Organizer(affiliazione,email,password,nome,lastName,id);
-                    CreateConferenceForm frame = new CreateConferenceForm(organizer,idConference);
+                    RUserDTO organizer = new RUserDTO(nome,lastName,email,affiliazione,"Organizer",true,ID.generate());
+                    CreateConferenceForm frame = new CreateConferenceForm(organizer);
                     frame.setVisible(true);
 
                 }catch(Exception e){
@@ -51,12 +50,12 @@ public class CreateConferenceForm extends JFrame {
 
 
 
-    public CreateConferenceForm(Organizer organizer, String idConference) {
+    public CreateConferenceForm(RUserDTO organizer) {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 300);
-        setTitle("Create Conference n."+idConference);
+        setTitle("Create Conference");
 
-        contentPane = new JPanel();
+        JPanel contentPane = new JPanel();
         //contentPane.setBackground(Color.lightGray);
         contentPane.setLayout(null);
         setContentPane(contentPane);
@@ -104,9 +103,27 @@ public class CreateConferenceForm extends JFrame {
         buttonCreateConference.addMouseListener(new  MouseAdapter() {
             public void mouseClicked(MouseEvent e){
                 ConferenceController cc = new ConferenceController();
-               cc.createConference(duedate,txttitle.getText(),txtareadescription.getText());
-               JOptionPane.showMessageDialog(null,"Conference created");
-               dispose();
+                Date today = new Date();
+                today.setMinutes(0);
+                today.setHours(0);
+                today.setSeconds(0);
+                if(!duedate.before(today)&& txttitle.getText().length()<30 && txtareadescription.getText().length()<100){
+
+                    cc.createConference(duedate,txttitle.getText(),txtareadescription.getText(),organizer);
+                    JOptionPane.showMessageDialog(null,"Conference created");
+                    dispose();
+                }
+                if(duedate.before(today)){
+                    JOptionPane.showMessageDialog(null,"Conference creation failed, Due Date is earlier than today");
+                }
+                if(txttitle.getText().length()>30){
+                    JOptionPane.showMessageDialog(null,"Conference creation failed, Title is too long");
+                }
+                if(txtareadescription.getText().length()>100){
+                    JOptionPane.showMessageDialog(null,"Conference creation failed, Description is too long");
+                }
+
+
             }
         });
         contentPane.add(buttonCreateConference);

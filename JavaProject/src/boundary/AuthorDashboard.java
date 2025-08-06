@@ -36,41 +36,28 @@ public class AuthorDashboard extends JFrame {
         contentPane.setBounds(5,5,5,5);
         setContentPane(contentPane);
 
-        List listActiveConference<ShowActiveConferenceDTO>= cc.getActiveConferences();
+        JList<ShowActiveConferenceDTO> listActiveConference = (JList<ShowActiveConferenceDTO>) cc.getActiveConferences();
 
         JScrollPane scrollActiveConference = new JScrollPane(listActiveConference);
         scrollActiveConference.setBounds(5,5,50,200);
-        listActiveConference.addActionListener( new MouseListener() {
+        listActiveConference.addMouseListener( new MouseAdapter() {
             public void mouseClicked(MouseEvent e){
-                SubmitArticleForm submitArticleForm = new SubmitArticleForm(userDTO,ShowActiveConferenceDTO.getId());
+                ShowActiveConferenceDTO selected = (ShowActiveConferenceDTO) listActiveConference.getSelectedValue();
+                SubmitArticleForm submitArticleForm = new SubmitArticleForm(userDTO,selected.getId());
                 submitArticleForm.setVisible(true);
+
             }
         });
         contentPane.add(scrollActiveConference);
 
 
 
-        List listSubmittedArticles<ShowArticleDTO> = ac.getArticleByAuthor(userDTO.getId());
+        JList<ShowArticleDTO> listSubmittedArticles = (JList<ShowArticleDTO>) ac.getArticleByAuthor(userDTO.getId());
         JScrollPane scrollSubmittedArticles = new JScrollPane(listSubmittedArticles);
         scrollSubmittedArticles.setBounds(5,215,50,200);
         contentPane.add(scrollSubmittedArticles);
 
-        /*
-        JButton buttonSubmitArticle = new JButton("Submit Article");
-        buttonSubmitArticle.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
-        buttonSubmitArticle.setBackground(new Color(100,149,237));
-        buttonSubmitArticle.setBounds(50,50,200,50);
-        buttonSubmitArticle.setForeground(Color.white);
-        buttonSubmitArticle.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                SubmitArticleForm submitArticleForm = new SubmitArticleForm();
-                submitArticleForm.setVisible(true);
 
-            }
-        });
-        contentPane.add(buttonSubmitArticle);
-
-         */
 
 
     }
@@ -93,7 +80,7 @@ public class AuthorDashboard extends JFrame {
                     String email = new String("Email");
                     String affilation = new String("Affilation");
                     String role =  new String("Role");
-                    ID id = new ID();
+                    ID id = ID.generate();
                     boolean esito = true;
 
                     RUserDTO author = new RUserDTO(name,lastName,email, affilation,role,esito,id);

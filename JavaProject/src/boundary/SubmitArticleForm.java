@@ -4,11 +4,13 @@ import DTO.RUserDTO;
 import controller.ArticleController;
 import controller.UserController;
 import entity.Author;
+import utility.ID;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -25,7 +27,7 @@ public class SubmitArticleForm extends JFrame{
     private JButton buttonSubmit;
 
 
-    public SubmitArticleForm() {
+    public SubmitArticleForm(RUserDTO userDTO, ID conferenceID) throws SQLException{
         setTitle("Submit Article Form");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBounds(100, 100, 290, 300);
@@ -82,18 +84,30 @@ public class SubmitArticleForm extends JFrame{
         buttonSubmit.setBounds(170,170,100,30);
         buttonSubmit.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if(txtareaabstract.getText().length()<100){
-                    ArticleController ac = new ArticleController();
-                    UserController uc = new UserController();
-                    List<RUserDTO> listacoautori = new ArrayList<>(Arrays.asList(uc.getRAuthorBYEmail(txtcoauthors.getText().split(","))).toString());
+                if(txtareaabstract.getText().length()<100) {
+                    try {
+                        ArticleController ac = new ArticleController();
+                        UserController uc = new UserController();
+                        java.util.List<RUserDTO> listacoautori = new ArrayList<>(Arrays.asList(uc.getRAuthorBYEmail(Arrays.toString(txtcoauthors.getText().split(",")))).toString());
 
-                    if(ac.submitArticle(txttitle.getText(),txtareaabstract.getText(),listacoautori,))
-
-
+                        if (ac.submitArticle(txttitle.getText(), txtareaabstract.getText(), listacoautori, conferenceID)) {
+                            JOptionPane.showMessageDialog(null, "Article Submitted Successfully");
+                            dispose();
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Article Not Submitted", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
 
 
                 }
-                //Submit Article
+
+
+
+
+
+
             }
         });
         contentPane.add(buttonSubmit);
@@ -109,7 +123,8 @@ public class SubmitArticleForm extends JFrame{
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    SubmitArticleForm finestra = new SubmitArticleForm();
+                    RUserDTO userDTO = new RUserDTO("Name","Lastaname","email@test.com","affilation","Role",false,ID.generate());
+                    SubmitArticleForm finestra = new SubmitArticleForm(userDTO,ID.generate());
                     finestra.setVisible(true);
 
                 }

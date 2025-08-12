@@ -40,7 +40,7 @@ public class ConferenzeDAO {
      * @return Un'instanza della classe Conferenza rappresentante la
      * conferenza ottenuta
      */
-    public Conferenza getConferenceByID(ID id) throws SQLException {
+    public Conferenza getConferenzaByID(ID id) throws SQLException {
         String sql = "SELECT * FROM conference WHERE id = " + id;
         PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, id.toString());
@@ -53,7 +53,7 @@ public class ConferenzeDAO {
      *
      * @param La conferenza da salvare
      */
-    public void saveConference(Conferenza conf) throws SQLException {
+    public void salvaConferenza(Conferenza conf) throws SQLException {
         String sql = "INSERT INTO conferenza(id, titolo, descrizione, scadenza) VALUES(?, ?, ?, ?);";
         PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, conf.getId().toString());
@@ -70,7 +70,7 @@ public class ConferenzeDAO {
      * @param L'id della conferenza
      * @return La lista degli articoli sottomessi
      */
-    public ArrayList<Articolo> getArticlesByConference(ID conf_id) throws SQLException {
+    public ArrayList<Articolo> getArticoliByConferenza(ID conf_id) throws SQLException {
 	ArrayList<Articolo> articoli = new ArrayList<>();
 	// ========Ottenimento id articoli====================
 	String queryIdArt = "SELECT id_art FROM REGISTRO WHERE id_art = ?";
@@ -112,7 +112,7 @@ public class ConferenzeDAO {
      *
      * @return La lista di tutte le conferenze
      */
-    public ArrayList<Conferenza> getAllConferences() throws  SQLException{
+    public ArrayList<Conferenza> getTutteConferenze() throws  SQLException{
 	ArrayList<Conferenza> conferenze = new ArrayList<>();
 	String query  ="SELECT * FROM conferenza";
 	PreparedStatement st = conn.prepareStatement(query);
@@ -129,8 +129,8 @@ public class ConferenzeDAO {
      *
      * @return La lista di tutte le conferenze attive
      */
-    public ArrayList<Conferenza> getActiveConferences() throws SQLException {
-	ArrayList<Conferenza> conferenze = getAllConferences();
+    public ArrayList<Conferenza> getConferenzeAttive() throws SQLException {
+	ArrayList<Conferenza> conferenze = getTutteConferenze();
 	ArrayList<Conferenza> conferenzeAttive = new ArrayList<>();
 	Date now = new Date();
 	for (Conferenza conf : conferenze) {

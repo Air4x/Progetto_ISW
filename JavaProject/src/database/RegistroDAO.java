@@ -36,7 +36,7 @@ public class RegistroDAO {
      *
      * @return Se ci sono dei conflitti di interesse
      */
-    public boolean hasConflitOfInterest(ID idArt, ID idUser) throws SQLException {
+    public boolean haConflittoInteressi(ID idArt, ID idUser) throws SQLException {
 	ArrayList<String> autori = new ArrayList<>();
 	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = ?;";
 	PreparedStatement stAutori = conn.prepareStatement(fromAutori);
@@ -58,7 +58,7 @@ public class RegistroDAO {
      * @param L'id dell'articolo
      * @param L'id del revisore
      */
-    public void assignReviewer(ID idArt, ID idRev) throws SQLException {
+    public void assegnaRevisore(ID idArt, ID idRev) throws SQLException {
 	String intoRevisori = "INSERT INTO Revisori VALUES(?, ?);";
 	PreparedStatement stRevisori = conn.prepareStatement(intoRevisori);
 	stRevisori.setString(1, idArt.toString());
@@ -72,7 +72,7 @@ public class RegistroDAO {
      * @param L'id dell'articolo
      * @return La lista dei revisori assegnati
      */
-    public ArrayList<String> getReviewersByArticles(ID idArt) throws SQLException {
+    public ArrayList<String> getRevisoriByArticolo(ID idArt) throws SQLException {
 	ArrayList<String> revisori = new ArrayList<>();
 	String fromRevisori = "SELECT id_rev FROM Revisori WHERE id_art = ?;";
 	PreparedStatement stRevisori = conn.prepareStatement(fromRevisori);
@@ -90,7 +90,7 @@ public class RegistroDAO {
      * @param L'id dell'articolo
      * @param Il nuovo stato
      */
-    public void updateArticleStatus(ID id, String status) throws SQLException{
+    public void updateStatoArticolo(ID id, String status) throws SQLException{
 	String intoRegistro = "UPDATE Registro SET STATUS = ? WHERE id_art = ?;";
 	PreparedStatement st = conn.prepareStatement(intoRegistro);
 	st.setString(1, status);

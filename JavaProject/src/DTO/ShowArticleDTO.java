@@ -38,7 +38,7 @@ public class ShowArticleDTO {
     public ShowArticleDTO (Articolo articolo){
         RUserDTO user_f= null;
         for (Autore a: articolo.getAutori()){
-            user_f= new RUserDTO(a.getName(), a.getLastName(), a.getEmail(), a.getAffiliazione(), a.getRole(), false, a.getId());
+            user_f= new RUserDTO(a.getNome(), a.getCognome(), a.getEmail(), a.getAffiliazione(), a.getRuolo(), false, a.getId());
             this.autori.add(user_f);
         }
         this.id=articolo.getId();

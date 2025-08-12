@@ -37,7 +37,7 @@ public class UserController {
         // false = Utente non trovato
         Utente utente = null ;
         ID id = ID.generate();
-        if(user_dao.isUserPresentByEmail(email)==true){
+        if(user_dao.isUtentePresenteByEmail(email)==true){
         RUserDTO fake_user = new RUserDTO(null, null, null, null, null, false, id);
          return fake_user;
         }else{
@@ -47,7 +47,7 @@ public class UserController {
                 utente = new Autore(aff,email,lastname,name,password,id);
             }
                 RUserDTO fake_user = new RUserDTO(utente, true);
-                user_dao.saveUser(utente);
+                user_dao.salvaUtente(utente);
             return fake_user;
         }
     }
@@ -60,8 +60,8 @@ public class UserController {
      * @throws SQLException
      */
     public RUserDTO login (String email, String password) throws SQLException{
-        if(user_dao.isUserPresentByEmail(email) == true && user_dao.getUserByEmail(email).getPassword() == password){
-            RUserDTO fake_user = new RUserDTO (user_dao.getUserByEmail(email),true); 
+        if(user_dao.isUtentePresenteByEmail(email) == true && user_dao.getUtenteByEmail(email).getPassword() == password){
+            RUserDTO fake_user = new RUserDTO (user_dao.getUtenteByEmail(email),true);
             return fake_user;
         }
         RUserDTO fake_user = new RUserDTO (null,true);
@@ -69,8 +69,8 @@ public class UserController {
     }
 
     public RUserDTO getRAuthorBYEmail (String Email) throws SQLException{
-        if(this.user_dao.isUserPresentByEmail(Email)==true && this.user_dao.getUserByEmail(Email).getRole()=="autore"){
-            Utente utente = (Autore) user_dao.getUserByEmail(Email);
+        if(this.user_dao.isUtentePresenteByEmail(Email)==true && this.user_dao.getUtenteByEmail(Email).getRuolo()=="autore"){
+            Utente utente = (Autore) user_dao.getUtenteByEmail(Email);
             RUserDTO user_dto = new RUserDTO(utente, true);
             return user_dto;
         }

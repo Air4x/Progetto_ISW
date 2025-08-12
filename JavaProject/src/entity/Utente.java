@@ -13,11 +13,11 @@ public abstract class Utente {
     /**
      * Il nome dell'utente
      */
-    private String name;
+    private String nome;
     /**
      * Il cognome dell'utente
      */
-    private String lastName;
+    private String cognome;
     /**
      * L'email dell'utente
      */
@@ -35,25 +35,25 @@ public abstract class Utente {
      * Istanzia un utente
      * @param affiliazione
      * @param email
-     * @param lastName
-     * @param name
+     * @param cognome
+     * @param nome
      * @param password
      * @param id 
      */
-    protected Utente(String affiliazione, String email, String lastName, String name, String password, ID id) {
+    protected Utente(String affiliazione, String email, String cognome, String nome, String password, ID id) {
         this.affiliazione = affiliazione;
         this.email = email;
-        this.lastName = lastName;
-        this.name = name;
+        this.cognome = cognome;
+        this.nome = nome;
         this.password = password;
         this.id = id;
     }
 
-    protected Utente(String affiliazione, String email, String lastName, String name, String password) {
+    protected Utente(String affiliazione, String email, String cognome, String nome, String password) {
         this.affiliazione = affiliazione;
         this.email = email;
-        this.lastName = lastName;
-        this.name = name;
+        this.cognome = cognome;
+        this.nome = nome;
         this.password = password;
         this.id = ID.generate();
     }
@@ -64,8 +64,8 @@ public abstract class Utente {
     protected Utente(Utente utente) {
 	this.affiliazione = utente.getAffiliazione();
         this.email = utente.getEmail();
-        this.lastName = utente.getLastName();
-        this.name = utente.getName();
+        this.cognome = utente.getCognome();
+        this.nome = utente.getNome();
         this.password = utente.getPassword();
         this.id = utente.getId();
     }
@@ -82,16 +82,16 @@ public abstract class Utente {
      * getter per il nome dell'utente
      * @return il nome dell'utente
      */
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
     /**
      * getter per il cognome dell'utente
      * @return il cognome dell'utente
      */
-    public String getLastName() {
-        return lastName;
+    public String getCognome() {
+        return cognome;
     }
 
     /**
@@ -138,5 +138,5 @@ public abstract class Utente {
      * Metodo astratto implementato da le sotto classi
      * @return il ruolo dell'utente
      */
-    public abstract String getRole();
+    public abstract String getRuolo();
 }

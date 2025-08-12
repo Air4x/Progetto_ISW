@@ -43,8 +43,8 @@ public class ConferenceController {
      */
     public void createConference (Date scadenza, String title, String descr, ID id, RUserDTO org) throws SQLException {
         this.conf = new Conferenza(scadenza,title,descr,id);
-        this.utente = (Organizzatore) this.user_dao.getUserByID(org.getId());;
-        conf_dao.saveConference(this.conf);
+        this.utente = (Organizzatore) this.user_dao.getUtenteByID(org.getId());;
+        conf_dao.salvaConferenza(this.conf);
     }
 
     /**
@@ -54,7 +54,7 @@ public class ConferenceController {
      */
     public ArrayList<ShowActiveConferenceDTO> getActiveConferences() throws SQLException{
         Date data = new Date();
-        ArrayList<Conferenza> all_conf = conf_dao.getAllConferences();
+        ArrayList<Conferenza> all_conf = conf_dao.getTutteConferenze();
         ArrayList<ShowActiveConferenceDTO> actconf = new ArrayList<>();
         
         for(Conferenza conf : all_conf){
@@ -72,7 +72,7 @@ public class ConferenceController {
      * @throws SQLException
      */
     public ArrayList<ShowArticleDTO> getArticlesByConference(ID conf_Id) throws SQLException {
-        ArrayList<Articolo> art = conf_dao.getArticlesByConference(conf_Id);
+        ArrayList<Articolo> art = conf_dao.getArticoliByConferenza(conf_Id);
         ArrayList<ShowArticleDTO> at = new ArrayList<>();
         for (Articolo a : art) {
             this.dto2 = new ShowArticleDTO (a.getId(),a.getTitolo(),a.getAbstr(),a.getAutori());

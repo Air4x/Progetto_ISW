@@ -36,15 +36,15 @@ public class NotificationController {
      * @throws MessagingException
      */
     public void invioNotifiche() throws SQLException, MessagingException {
-        ArrayList<Conferenza> conf = conf_dao.getActiveConferences();
-        ArrayList<Autore> auth = user_dao.getAllAuthors();
+        ArrayList<Conferenza> conf = conf_dao.getConferenzeAttive();
+        ArrayList<Autore> auth = user_dao.getTuttiAutori();
         String msg = " ",name_a,lastname_a,email_a,title_c;
         for (Conferenza c : conf) {
             if (c.inScadenza()) {
                 title_c = c.getTitolo();
                 for(Autore a : auth){
-                    name_a =  a.getName();
-                    lastname_a =  a.getLastName();
+                    name_a =  a.getNome();
+                    lastname_a =  a.getCognome();
                     email_a =  a.getEmail();
                     creatMessage(name_a,lastname_a,title_c,msg);
                     sendEmail(email_a,title_c,msg);

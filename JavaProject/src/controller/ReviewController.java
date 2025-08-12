@@ -41,8 +41,8 @@ public class ReviewController {
         }
         if(v <= 3){
             for(PossibleReviewDTO rp : list_r){
-                if(rp.getSelezione() == true && u_DAO.isUserPresentByID(rp.getId())){
-                r_DAO.assignReviewer(articleID, rp.getId());
+                if(rp.getSelezione() == true && u_DAO.isUtentePresenteByID(rp.getId())){
+                r_DAO.assegnaRevisore(articleID, rp.getId());
                     }
                 }
             return true;
@@ -59,10 +59,10 @@ public class ReviewController {
      */
     public ArrayList<PossibleReviewDTO> getListReviewer(ID articleID) throws SQLException{
         ArrayList<PossibleReviewDTO> list_r = new ArrayList<>();
-        ArrayList<Autore> list_a = u_DAO.getAllAuthors();
+        ArrayList<Autore> list_a = u_DAO.getTuttiAutori();
 
         for(Autore a: list_a){
-            if(r_DAO.hasConflitOfInterest(articleID, a.getId()) != true && u_DAO.isUserPresentByID(a.getId()) != true){
+            if(r_DAO.haConflittoInteressi(articleID, a.getId()) != true && u_DAO.isUtentePresenteByID(a.getId()) != true){
                 PossibleReviewDTO r = new PossibleReviewDTO(a);
                 list_r.add(r);
             }
@@ -78,8 +78,8 @@ public class ReviewController {
      * @throws SQLException
      */
     public boolean updateArticleStatus (ID id_article, String status) throws SQLException {
-        if(art_dao.getArticleByID(id_article) != null){
-            this.r_DAO.updateArticleStatus(id_article, status);
+        if(art_dao.getArticoloByID(id_article) != null){
+            this.r_DAO.updateStatoArticolo(id_article, status);
             return true;
         }
         return false;

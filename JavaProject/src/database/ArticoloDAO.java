@@ -36,7 +36,7 @@ public class ArticoloDAO {
      *
      * @param l'articolo che si vuole salvare
      */
-    public void saveArticle(Articolo a) throws SQLException {
+    public void salvaArticolo(Articolo a) throws SQLException {
 	String sql = "INSERT INTO Articoli VALUES (?, ?, ?)";
 	PreparedStatement pst = conn.prepareStatement(sql);
 	pst.setNString(1, a.getId().toString());
@@ -52,7 +52,7 @@ public class ArticoloDAO {
      * @return un'instanza della classe Article rappresentante
      * l'articolo ottenuto
      */
-    public Articolo getArticleByID(ID id) throws SQLException {
+    public Articolo getArticoloByID(ID id) throws SQLException {
 	String titolo = null;
 	String abs = null;
 	ArrayList<Autore> autori = new ArrayList<>();
@@ -95,19 +95,19 @@ public class ArticoloDAO {
      * @param L'id dell'autore
      * @return La lista di articoli scritti dall'autore
      */
-    public ArrayList<Articolo> getArticlesByAuthor(ID id_aut) throws SQLException {
-	ArrayList<Integer> articleIds = new ArrayList<>();
-	ArrayList<Articolo> articoli = new ArrayList<>();
-	String fromAutori = "SELECT id_art FROM Autori WHERE id_aut = "+ id_aut.toString();
-	PreparedStatement stAutori = conn.prepareStatement(fromAutori);
-	stAutori.setString(1, id_aut.toString());
-	ResultSet rsAutori = stAutori.executeQuery();
-	while(rsAutori.next()){
-	    Articolo a = getArticleByID(new ID(rsAutori.getString("id_art")));
-	    articoli.add(a);
+    public ArrayList<Articolo> getArticoliByAutore(ID id_aut) throws SQLException {
+		ArrayList<Integer> articleIds = new ArrayList<>();
+		ArrayList<Articolo> articoli = new ArrayList<>();
+		String fromAutori = "SELECT id_art FROM Autori WHERE id_aut = "+ id_aut.toString();
+		PreparedStatement stAutori = conn.prepareStatement(fromAutori);
+		stAutori.setString(1, id_aut.toString());
+		ResultSet rsAutori = stAutori.executeQuery();
+		while(rsAutori.next()){
+			Articolo a = getArticoloByID(new ID(rsAutori.getString("id_art")));
+			articoli.add(a);
+		}
+		return articoli;
 	}
-	return articoli;
-    }
 
 
 }

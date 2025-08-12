@@ -10,7 +10,7 @@ public class Organizzatore extends Utente {
     /**
      * Il ruolo dell'organizzatore
      */
-    private final String role;
+    private final String ruolo;
 
      /**
       * Costruttore di Organizzatore
@@ -24,16 +24,16 @@ public class Organizzatore extends Utente {
       */
     public Organizzatore(String affiliazione, String email, String lastName, String name, String password, ID id) {
         super(affiliazione, email, lastName, name, password, id);
-        this.role = "organizzatore";
+        this.ruolo = "organizzatore";
     }
     /**
      * Costruttore di copia per Organizzatore
      *
      */
     public Organizzatore(Organizzatore organizzatore) {
-	super(organizzatore.getAffiliazione(), organizzatore.getEmail(), organizzatore.getLastName(),
-	      organizzatore.getName(), organizzatore.getPassword(), organizzatore.getId());
-	this.role = organizzatore.getRole();
+	super(organizzatore.getAffiliazione(), organizzatore.getEmail(), organizzatore.getCognome(),
+	      organizzatore.getNome(), organizzatore.getPassword(), organizzatore.getId());
+	this.ruolo = organizzatore.getRuolo();
     }
 
     /**
@@ -41,7 +41,7 @@ public class Organizzatore extends Utente {
      *
      * @return il ruole dell'organizzatore
      */
-    public String getRole() {
-        return this.role;
+    public String getRuolo() {
+        return this.ruolo;
     }
 }

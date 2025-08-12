@@ -43,11 +43,11 @@ public class RUserDTO {
      * @param esito
      */
     public RUserDTO(Utente utente, boolean esito) {
-        this.name = utente.getName();
-        this.lastname = utente.getLastName();
-        this.email = utente.getLastName();
+        this.name = utente.getNome();
+        this.lastname = utente.getCognome();
+        this.email = utente.getCognome();
         this.affiliazione = utente.getAffiliazione();
-        this.ruolo = utente.getRole();
+        this.ruolo = utente.getRuolo();
         this.id = utente.getId();
         this.esito=esito;
     }

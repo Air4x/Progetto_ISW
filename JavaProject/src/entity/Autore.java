@@ -9,7 +9,7 @@ public class Autore extends Utente {
     /**
      * Il ruolo dell'autore
      */
-    final String role;
+    final String ruolo;
 
     /**
      * Costruttore di Autore
@@ -24,7 +24,7 @@ public class Autore extends Utente {
     public Autore(String affiliazione, String email, String lastName,
                   String name, String password, ID id) {
         super(affiliazione, email, lastName, name, password, id);
-        this.role = "autore";
+        this.ruolo = "autore";
     }
 
     /**
@@ -33,9 +33,9 @@ public class Autore extends Utente {
      * @param autore 
      */
     public Autore(Autore autore){
-        super(autore.getAffiliazione(), autore.getEmail(), autore.getLastName(),
-	      autore.getName(), autore.getPassword(), autore.getId());
-	this.role = autore.getRole();
+        super(autore.getAffiliazione(), autore.getEmail(), autore.getCognome(),
+	      autore.getNome(), autore.getPassword(), autore.getId());
+	this.ruolo = autore.getRuolo();
     }	
 
     /**
@@ -43,7 +43,7 @@ public class Autore extends Utente {
      *
      * @return il ruole dell'autore
      */
-    public String getRole() {
-        return this.role;
+    public String getRuolo() {
+        return this.ruolo;
     }
 }

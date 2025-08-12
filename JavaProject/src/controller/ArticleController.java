@@ -46,15 +46,15 @@ public class ArticleController {
         ID id = ID.generate();
         try {
 
-            if(this.conf_dao.getConferenceByID(id_conf) != null){
+            if(this.conf_dao.getConferenzaByID(id_conf) != null){
             for(RUserDTO f_user : a_autori){
-                if(user_dao.isUserPresentByEmail(f_user.getEmail()) && user_dao.getUserByEmail(f_user.getEmail()).getRole() == "autore" ){
-                    user = (Autore) user_dao.getUserByEmail(f_user.getEmail());
+                if(user_dao.isUtentePresenteByEmail(f_user.getEmail()) && user_dao.getUtenteByEmail(f_user.getEmail()).getRuolo() == "autore" ){
+                    user = (Autore) user_dao.getUtenteByEmail(f_user.getEmail());
                     authors_list.add(user);
                 }else{return false;}
             }
                     Articolo art = new Articolo(id, a_abstrct, authors_list, a_titolo);
-                    art_dao.saveArticle(art); 
+                    art_dao.salvaArticolo(art);
                     return true;
             }
         } catch (SQLException e) {
@@ -74,7 +74,7 @@ public class ArticleController {
      * @throws SQLException
      */
     public ArrayList<ShowArticleDTO> getArticleByAuthor(ID authorID) throws SQLException{
-        ArrayList<Articolo> articoli = art_dao.getArticlesByAuthor(authorID);
+        ArrayList<Articolo> articoli = art_dao.getArticoliByAutore(authorID);
         ArrayList<ShowArticleDTO> f_art = new ArrayList<>();
         for(Articolo c : articoli){
             ShowArticleDTO a = new ShowArticleDTO(c);

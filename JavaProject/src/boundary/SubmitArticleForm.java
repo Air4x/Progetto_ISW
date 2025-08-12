@@ -88,7 +88,7 @@ public class SubmitArticleForm extends JFrame{
                     try {
                         ArticleController ac = new ArticleController();
                         UserController uc = new UserController();
-                        java.util.List<RUserDTO> listacoautori = new ArrayList<>(Arrays.asList(uc.getRAuthorBYEmail(Arrays.toString(txtcoauthors.getText().split(",")))).toString());
+                        ArrayList<RUserDTO> listacoautori = new ArrayList<>(Integer.parseInt(Arrays.asList(uc.getRAuthorBYEmail(Arrays.toString(txtcoauthors.getText().split(",")))).toString()));
 
                         if (ac.submitArticle(txttitle.getText(), txtareaabstract.getText(), listacoautori, conferenceID)) {
                             JOptionPane.showMessageDialog(null, "Article Submitted Successfully");

@@ -12,6 +12,8 @@ import entity.Author;
 import entity.Organizer;
 import entity.User;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 public class LoginForm  extends JFrame {
@@ -61,42 +63,45 @@ public class LoginForm  extends JFrame {
         sendLoginButton.setForeground(Color.white);
         sendLoginButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) throws SQLException {
+            public void mouseClicked(MouseEvent e) {
+                try {
 
-                //Validazione Credenziali ed effettivo accesso
-                String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-                if(emailTextField.getText().equals("") || passwordfield.getText().equals("")){
-                    JOptionPane.showMessageDialog(null,"Please fill all the fields","Warning",JOptionPane.WARNING_MESSAGE);
-
-                }
-                if(passwordfield.getText().length()>30){
-                    JOptionPane.showMessageDialog(null,"The password is too long(>30 characters)","Warning",JOptionPane.WARNING_MESSAGE);
-                }
-                if(!Pattern.matches(regex,emailTextField.getText())){
-                    JOptionPane.showMessageDialog(null,"Please enter a valid email","Warning",JOptionPane.WARNING_MESSAGE);
-                }
-                if(passwordfield.getText().length()<30 && Pattern.matches(regex,emailTextField.getText())){
-                    UserController userController = new UserController();
-                    RUserDTO userDTO= userController.login(emailTextField.getText(),passwordfield.getSelectedText());
-                    if(userDTO==null){
-                        JOptionPane.showMessageDialog(null,"The User does not exist, proceed to register","Warning",JOptionPane.WARNING_MESSAGE);
-                    }
-                    else{
-                        if(userDTO.getRuolo().equals("Organizer")){
-                            OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
-                            organizerDashboard.setVisible(true);
-                            dispose();
-
-                        }
-                        else{
-                            AuthorDashboard authorDashboard = new AuthorDashboard(userDTO);
-                            authorDashboard.setVisible(true);
-                            dispose();
-
-                        }
+                    //Validazione Credenziali ed effettivo accesso
+                    String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+                    if (emailTextField.getText().equals("") || passwordfield.getText().equals("")) {
+                        JOptionPane.showMessageDialog(null, "Please fill all the fields", "Warning", JOptionPane.WARNING_MESSAGE);
 
                     }
+                    if (passwordfield.getText().length() > 30) {
+                        JOptionPane.showMessageDialog(null, "The password is too long(>30 characters)", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                    if (!Pattern.matches(regex, emailTextField.getText())) {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid email", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                    if (passwordfield.getText().length() < 30 && Pattern.matches(regex, emailTextField.getText())) {
+                        UserController userController = new UserController();
+                        RUserDTO userDTO = userController.login(emailTextField.getText(), passwordfield.getSelectedText());
+                        if (userDTO == null) {
+                            JOptionPane.showMessageDialog(null, "The User does not exist, proceed to register", "Warning", JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            if (userDTO.getRuolo().equals("Organizer")) {
+                                OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
+                                organizerDashboard.setVisible(true);
+                                dispose();
 
+                            } else {
+                                AuthorDashboard authorDashboard = new AuthorDashboard(userDTO);
+                                authorDashboard.setVisible(true);
+                                dispose();
+
+                            }
+
+                        }
+
+                    }
+                }
+                catch (Exception ex) {
+                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
 

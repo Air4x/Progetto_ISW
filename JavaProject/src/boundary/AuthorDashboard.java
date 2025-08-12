@@ -15,6 +15,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AuthorDashboard extends JFrame {
     private JPanel contentPane;
@@ -24,6 +26,7 @@ public class AuthorDashboard extends JFrame {
 
 
     public AuthorDashboard(RUserDTO userDTO) throws SQLException {
+
         ConferenceController cc = new ConferenceController();
         ArticleController ac = new ArticleController();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,10 +45,14 @@ public class AuthorDashboard extends JFrame {
         scrollActiveConference.setBounds(5,5,50,200);
         listActiveConference.addMouseListener( new MouseAdapter() {
             public void mouseClicked(MouseEvent e){
-                ShowActiveConferenceDTO selected = (ShowActiveConferenceDTO) listActiveConference.getSelectedValue();
-                SubmitArticleForm submitArticleForm = new SubmitArticleForm(userDTO,selected.getId());
-                submitArticleForm.setVisible(true);
-
+                try {
+                    ShowActiveConferenceDTO selected = (ShowActiveConferenceDTO) listActiveConference.getSelectedValue();
+                    SubmitArticleForm submitArticleForm = new SubmitArticleForm(userDTO, selected.getId());
+                    submitArticleForm.setVisible(true);
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(AuthorDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
         contentPane.add(scrollActiveConference);

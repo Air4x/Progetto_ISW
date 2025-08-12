@@ -101,30 +101,38 @@ public class CreateConferenceForm extends JFrame {
         buttonCreateConference.setForeground(Color.white);
         buttonCreateConference.setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonCreateConference.addMouseListener(new  MouseAdapter() {
-            public void mouseClicked(MouseEvent e){
-                ConferenceController cc = new ConferenceController();
-                Date today = new Date();
-                today.setMinutes(0);
-                today.setHours(0);
-                today.setSeconds(0);
-                if(!duedate.before(today)&& txttitle.getText().length()<30 && txtareadescription.getText().length()<100){
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    ConferenceController cc = new ConferenceController();
+                    Date today = new Date();
+                    today.setMinutes(0);
+                    today.setHours(0);
+                    today.setSeconds(0);
+                    if (!duedate.before(today) && txttitle.getText().length() < 30 && txtareadescription.getText().length() < 100) {
+                        try {
+                            cc.createConference(duedate, txttitle.getText(), txtareadescription.getText(), ID.generate(), organizer);
+                            JOptionPane.showMessageDialog(null, "Conference created");
+                            dispose();
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, ex);
+                        }
+                    }
+                    if (duedate.before(today)) {
+                        JOptionPane.showMessageDialog(null, "Conference creation failed, Due Date is earlier than today");
+                    }
+                    if (txttitle.getText().length() > 30) {
+                        JOptionPane.showMessageDialog(null, "Conference creation failed, Title is too long");
+                    }
+                    if (txtareadescription.getText().length() > 100) {
+                        JOptionPane.showMessageDialog(null, "Conference creation failed, Description is too long");
+                    }
+                }catch(SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Errore SQL");
 
-                    cc.createConference(duedate,txttitle.getText(),txtareadescription.getText(),organizer);
-                    JOptionPane.showMessageDialog(null,"Conference created");
-                    dispose();
                 }
-                if(duedate.before(today)){
-                    JOptionPane.showMessageDialog(null,"Conference creation failed, Due Date is earlier than today");
-                }
-                if(txttitle.getText().length()>30){
-                    JOptionPane.showMessageDialog(null,"Conference creation failed, Title is too long");
-                }
-                if(txtareadescription.getText().length()>100){
-                    JOptionPane.showMessageDialog(null,"Conference creation failed, Description is too long");
                 }
 
 
-            }
         });
         contentPane.add(buttonCreateConference);
     }

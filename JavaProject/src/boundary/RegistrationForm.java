@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import DTO.RUserDTO;
 import controller.UserController;
@@ -107,44 +109,45 @@ public class RegistrationForm extends JFrame {
         registerbutton.setBackground(new Color(100, 149, 237));
         registerbutton.setForeground(Color.white);
         registerbutton.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) throws SQLException {
-                String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 
-                if(!txtemail.getText().matches(regex)){
-                    JOptionPane.showMessageDialog(null,"Please enter a valid email","Warning",JOptionPane.WARNING_MESSAGE);
-                }
-                if(txtname.getText().isEmpty() || txtlastname.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Please enter a valid name and last name","Warning",JOptionPane.WARNING_MESSAGE);
-                }
-                if(!txtruolo.getText().equalsIgnoreCase("organizer")&& !txtruolo.getText().equals("author")){
-                    JOptionPane.showMessageDialog(null,"Please enter a valid role","Warning",JOptionPane.WARNING_MESSAGE);
-                }
-
-                //Se tutto corrisponde
-                if(!txtemail.getText().isEmpty() && !txtemail.getText().isEmpty()&&txtemail.getText().matches(regex)){
-                    UserController uc = new UserController();
-                    RUserDTO userDTO = uc.registerUser(txtaffiliazione.getText(),txtemail.getText(),txtlastname.getText(), txtname.getText(), passwordField1.getSelectedText(),txtruolo.getText());
-                    if(userDTO==null){
-                        JOptionPane.showMessageDialog(null,"User already register, proceed to login","Warining",JOptionPane.WARNING_MESSAGE);
-
-                    }else if(!userDTO.getEsito()){
-                        JOptionPane.showMessageDialog(null,"An Error has accured","Warining",JOptionPane.WARNING_MESSAGE);
+                    if (!txtemail.getText().matches(regex)) {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid email", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                    if (txtname.getText().isEmpty() || txtlastname.getText().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid name and last name", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                    if (!txtruolo.getText().equalsIgnoreCase("organizer") && !txtruolo.getText().equals("author")) {
+                        JOptionPane.showMessageDialog(null, "Please enter a valid role", "Warning", JOptionPane.WARNING_MESSAGE);
                     }
 
-                    else{
-                        if(txtruolo.getText().equalsIgnoreCase("organizer")){
-                            OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
-                            organizerDashboard.setVisible(true);
-                            dispose();
-                        }
-                        else{
-                            AuthorDashboard authorDashboard = new AuthorDashboard(userDTO);
-                            authorDashboard.setVisible(true);
-                            dispose();
+                    //Se tutto corrisponde
+                    if (!txtemail.getText().isEmpty() && !txtemail.getText().isEmpty() && txtemail.getText().matches(regex)) {
+                        UserController uc = new UserController();
+                        RUserDTO userDTO = uc.registerUser(txtaffiliazione.getText(), txtemail.getText(), txtlastname.getText(), txtname.getText(), passwordField1.getSelectedText(), txtruolo.getText());
+                        if (userDTO == null) {
+                            JOptionPane.showMessageDialog(null, "User already register, proceed to login", "Warining", JOptionPane.WARNING_MESSAGE);
 
+                        } else if (!userDTO.getEsito()) {
+                            JOptionPane.showMessageDialog(null, "An Error has accured", "Warining", JOptionPane.WARNING_MESSAGE);
+                        } else {
+                            if (txtruolo.getText().equalsIgnoreCase("organizer")) {
+                                OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
+                                organizerDashboard.setVisible(true);
+                                dispose();
+                            } else {
+                                AuthorDashboard authorDashboard = new AuthorDashboard(userDTO);
+                                authorDashboard.setVisible(true);
+                                dispose();
+
+                            }
                         }
+
                     }
-
+                }catch (Exception ex) {
+                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
 

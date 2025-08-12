@@ -14,7 +14,7 @@ public class ShowArticleDTO {
     private ID id;
     private String titolo;
     private String abstr;
-    private ArrayList<Author> autori;
+    private ArrayList<RUserDTO> autori;
     
     /**
      * Costrutore
@@ -23,7 +23,7 @@ public class ShowArticleDTO {
      * @param abstr
      * @param autori
      */
-    public ShowArticleDTO(ID id, String titolo, String abstr, ArrayList<Author> autori) {
+    public ShowArticleDTO(ID id, String titolo, String abstr, ArrayList<RUserDTO> autori) {
         this.id = id;
         this.titolo = titolo;
         this.abstr = abstr;
@@ -35,10 +35,14 @@ public class ShowArticleDTO {
      * @param articolo
      */
     public ShowArticleDTO (Articolo articolo){
+        RUserDTO user_f= null;
+        for (Author a: articolo.getAutori()){
+            user_f= new RUserDTO(a.getName(), a.getLastName(), a.getEmail(), a.getAffiliazione(), a.getRole(), false, a.getId());
+            this.autori.add(user_f);
+        }
         this.id=articolo.getId();
         this.titolo = articolo.getTitolo();
         this.abstr = articolo.getAbstr();
-        this.autori = articolo.getAutori();
     }
 
     /**
@@ -69,7 +73,7 @@ public class ShowArticleDTO {
      * Autori dell'articolo
      * @return
      */
-    public ArrayList<Author> getAutori() {
+    public ArrayList<RUserDTO> getAutori() {
         return autori;
     }
 

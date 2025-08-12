@@ -1,11 +1,13 @@
 package controller;
+
+import java.sql.SQLException;
+
 import database.UserDAO;
 import entity.User;
 import entity.Author;
 import entity.Organizer;
 import utility.ID;
 import DTO.RUserDTO;
-import java.sql.SQLException;
 
 /**
  * @author Giuseppe Buglione

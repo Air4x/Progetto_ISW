@@ -5,12 +5,10 @@ import DTO.RUserDTO;
 import database.ConferenceDAO;
 import entity.Articolo;
 import entity.Author;
-import entity.User;
 import database.UserDAO;
 import java.sql.SQLException;
 import DTO.ShowArticleDTO;
 import java.util.ArrayList;
-import java.util.List;
 import utility.ID;
 
 
@@ -73,29 +71,13 @@ public class ArticleController {
      * @return
      * @throws SQLException
      */
-    public List<ShowArticleDTO> getArticleByAuthor(ID authorID) throws SQLException{
-        List<Articolo> articoli = art_dao.getArticlesByAuthor(authorID);
-        List<ShowArticleDTO> f_art = new ArrayList<>();
+    public ArrayList<ShowArticleDTO> getArticleByAuthor(ID authorID) throws SQLException{
+        ArrayList<Articolo> articoli = art_dao.getArticlesByAuthor(authorID);
+        ArrayList<ShowArticleDTO> f_art = new ArrayList<>();
         for(Articolo c : articoli){
             ShowArticleDTO a = new ShowArticleDTO(c);
             f_art.add(a);
         }
         return f_art;
     }
-
-    /**
-     * Metodo per aggiorna lo status di un articolo
-     * @param ID
-     * @param status
-     * @return
-     * @throws SQLException
-     */
-    public boolean updateArticleStatus (ID ID, String status) throws SQLException {
-        if(art_dao.getArticleByID(ID) != null){
-        this.art_dao.updateArticleStatus(ID, status);
-            return true;
-        }
-        return false;
-    }
-
 }

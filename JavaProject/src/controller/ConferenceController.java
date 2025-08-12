@@ -1,19 +1,19 @@
 package controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+
+import database.ConferenceDAO;
 import DTO.ShowActiveConferenceDTO;
 import DTO.ShowArticleDTO;
-import database.ConferenceDAO;
+import DTO.RUserDTO;
+import database.UserDAO;
+import utility.ID;
 import entity.Articolo;
 import entity.Conference;
 import entity.Organizer;
 import entity.User;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import utility.ID;
-import DTO.RUserDTO;
-import database.UserDAO;;
 
 /**
  * @author Giuseppe Buglione
@@ -52,10 +52,10 @@ public class ConferenceController {
      * @return
      * @throws SQLException
      */
-    public List<ShowActiveConferenceDTO> getActiveConferences() throws SQLException{
+    public ArrayList<ShowActiveConferenceDTO> getActiveConferences() throws SQLException{
         Date data = new Date();
-        List<Conference> all_conf = conf_dao.getAllConferences();
-        List<ShowActiveConferenceDTO> actconf = new ArrayList<>();
+        ArrayList<Conference> all_conf = conf_dao.getAllConferences();
+        ArrayList<ShowActiveConferenceDTO> actconf = new ArrayList<>();
         
         for(Conference conf : all_conf){
             if(conf.getScadenza() != null && !conf.getScadenza().before(data))
@@ -71,9 +71,9 @@ public class ConferenceController {
      * @return
      * @throws SQLException
      */
-    public List<ShowArticleDTO> getArticlesByConference(ID conf_Id) throws SQLException {
-        List<Articolo> art = conf_dao.getArticlesByConference(conf_Id);
-        List<ShowArticleDTO> at = new ArrayList<>();
+    public ArrayList<ShowArticleDTO> getArticlesByConference(ID conf_Id) throws SQLException {
+        ArrayList<Articolo> art = conf_dao.getArticlesByConference(conf_Id);
+        ArrayList<ShowArticleDTO> at = new ArrayList<>();
         for (Articolo a : art) {
             this.dto2 = new ShowArticleDTO (a.getId(),a.getTitolo(),a.getAbstr(),a.getAutori());
             at.add(dto2);

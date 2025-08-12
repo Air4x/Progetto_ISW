@@ -10,7 +10,6 @@ import utility.PasswordManager;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -38,7 +37,7 @@ public class NotificationController {
      */
     public void invioNotifiche() throws SQLException, MessagingException {
         ArrayList<Conference> conf = conf_dao.getActiveConferences();
-        List<Author> auth = user_dao.getAllAuthors();
+        ArrayList<Author> auth = user_dao.getAllAuthors();
         String msg = " ",name_a,lastname_a,email_a,title_c;
         for (Conference c : conf) {
             if (c.inScadenza()) {

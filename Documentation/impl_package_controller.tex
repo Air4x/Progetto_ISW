@@ -48,30 +48,13 @@ Metodo per ottenere una lista di articoli
 \paragraph{Valore di ritorno}
 Una lista di ShowArticleDTO
 
-\subsubsection{\texttt{controller.ArticleController.updateArticleStatus()}}
-Metodo per aggiorna lo status di un articolo
-\paragraph{Parametri}
-\begin{description}
-\item ID
-\item status
-\end{description}
-\paragraph{Eccezioni}
-\begin{description}
-\item[SQLException] In caso di errore di interazione con il DataBase
-\end{description}
-\paragraph{Valore di ritorno}
-\begin{description}
-\item[Vero] se lo stato del'articolo è sato corretamente aggiornato
-\item[Falso] articolo non trovato
-\end{description}
-
 
 
 \subsection{ConferenceController}
 \paragraph{Attributi}
 \begin{description}
 \item[user] User 
-\item[user_dao] Instanza di  UserDAO
+\item[user-dao] Instanza di  UserDAO
 \item[conf] Instanza di Conference
 \item[conf-dao] Instanza di ConferenceDAO
 \item[conf-dto] Instanza di ShowActiveConferenceDTO
@@ -183,8 +166,9 @@ Metodo void
 \subsection{ReviewController}
 \paragraph{Attributi}
 \begin{description}
-\item[r-DAO] Instanza di eviewDAO
+\item[r-DAO] Instanza di ReviewDAO
 \item[u-DAO] Instanza di UserDAO
+\item[art-dao] Instanza di ArticleDAO
 \end{description}
 
 \subsubsection{\texttt{controller.ReviewController.ReviewController()}}
@@ -226,6 +210,25 @@ Metodo per ottenere una lista di possibili revisori
 \end{description}
 \paragraph{Valore di ritorno}
 Una lista di oggetti PossibleReviewDTO
+
+
+\subsubsection{\texttt{controller.ArticleController.updateArticleStatus()}}
+Metodo per aggiorna lo status di un articolo
+\paragraph{Parametri}
+\begin{description}
+\item ID
+\item status
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item[Vero] se lo stato del'articolo è sato corretamente aggiornato
+\item[Falso] articolo non trovato
+\end{description}
+
 
 
 \subsection{UserController}

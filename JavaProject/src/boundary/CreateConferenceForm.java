@@ -32,7 +32,7 @@ public class CreateConferenceForm extends JFrame {
                     String email = new String("email");
                     String nome = new String("Nome");
                     String lastName = new String("Cognome");
-                    RUserDTO organizer = new RUserDTO(nome,lastName,email,affiliazione,"Organizzatore",true,ID.generate());
+                    RUserDTO organizer = new RUserDTO(nome,lastName,email,affiliazione,"Organizer",true,ID.generate());
                     CreateConferenceForm frame = new CreateConferenceForm(organizer);
                     frame.setVisible(true);
 
@@ -52,7 +52,7 @@ public class CreateConferenceForm extends JFrame {
     public CreateConferenceForm(RUserDTO organizer) {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 300);
-        setTitle("Create Conferenza");
+        setTitle("Create Conference");
 
         JPanel contentPane = new JPanel();
         //contentPane.setBackground(Color.lightGray);
@@ -94,7 +94,7 @@ public class CreateConferenceForm extends JFrame {
         Date duedate = new Date(txtduedate.getText());
 
 
-        JButton buttonCreateConference = new JButton("Create Conferenza");
+        JButton buttonCreateConference = new JButton("Create Conference");
         buttonCreateConference.setBackground(new Color(100, 149, 237));
         buttonCreateConference.setBounds(160, 70, 150, 30);
         buttonCreateConference.setForeground(Color.white);
@@ -110,20 +110,20 @@ public class CreateConferenceForm extends JFrame {
                     if (!duedate.before(today) && txttitle.getText().length() < 30 && txtareadescription.getText().length() < 100) {
                         try {
                             cc.createConference(duedate, txttitle.getText(), txtareadescription.getText(), ID.generate(), organizer);
-                            JOptionPane.showMessageDialog(null, "Conferenza created");
+                            JOptionPane.showMessageDialog(null, "Conference created");
                             dispose();
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(null, ex);
                         }
                     }
                     if (duedate.before(today)) {
-                        JOptionPane.showMessageDialog(null, "Conferenza creation failed, Due Date is earlier than today");
+                        JOptionPane.showMessageDialog(null, "Conference creation failed, Due Date is earlier than today");
                     }
                     if (txttitle.getText().length() > 30) {
-                        JOptionPane.showMessageDialog(null, "Conferenza creation failed, Title is too long");
+                        JOptionPane.showMessageDialog(null, "Conference creation failed, Title is too long");
                     }
                     if (txtareadescription.getText().length() > 100) {
-                        JOptionPane.showMessageDialog(null, "Conferenza creation failed, Description is too long");
+                        JOptionPane.showMessageDialog(null, "Conference creation failed, Description is too long");
                     }
                 }catch(SQLException ex){
                     JOptionPane.showMessageDialog(null, "Errore SQL");

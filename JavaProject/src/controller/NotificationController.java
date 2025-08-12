@@ -1,9 +1,9 @@
 package controller;
 
-import database.ConferenzeDAO;
-import database.UtenteDAO;
+import database.ConferenceDAO;
+import database.UserDAO;
 import entity.Autore;
-import entity.Conferenza;
+import entity.Conference;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
 import utility.PasswordManager;
@@ -18,16 +18,16 @@ import java.util.Properties;
 */
 public class NotificationController {
     
-    private ConferenzeDAO conf_dao;
-    private UtenteDAO user_dao;
+    private ConferenceDAO conf_dao;
+    private UserDAO user_dao;
 
     /**
      * Costruttore
      * @throws SQLException
      */
     public NotificationController() throws SQLException{
-        this.conf_dao= new ConferenzeDAO();
-        this.user_dao= new UtenteDAO();
+        this.conf_dao= new ConferenceDAO();
+        this.user_dao= new UserDAO();
     }
 
     /**
@@ -36,15 +36,15 @@ public class NotificationController {
      * @throws MessagingException
      */
     public void invioNotifiche() throws SQLException, MessagingException {
-        ArrayList<Conferenza> conf = conf_dao.getConferenzeAttive();
-        ArrayList<Autore> auth = user_dao.getTuttiAutori();
+        ArrayList<Conference> conf = conf_dao.getActiveConference();
+        ArrayList<Autore> auth = user_dao.getAllAuthors();
         String msg = " ",name_a,lastname_a,email_a,title_c;
-        for (Conferenza c : conf) {
+        for (Conference c : conf) {
             if (c.inScadenza()) {
-                title_c = c.getTitolo();
+                title_c = c.getTitle();
                 for(Autore a : auth){
-                    name_a =  a.getNome();
-                    lastname_a =  a.getCognome();
+                    name_a =  a.getName();
+                    lastname_a =  a.getLastName();
                     email_a =  a.getEmail();
                     creatMessage(name_a,lastname_a,title_c,msg);
                     sendEmail(email_a,title_c,msg);

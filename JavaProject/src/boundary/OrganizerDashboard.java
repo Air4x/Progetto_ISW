@@ -25,7 +25,7 @@ public class OrganizerDashboard extends JFrame{
         try {
 
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            setTitle("Organizzatore Dashboard");
+            setTitle("Organizer Dashboard");
             setBounds(100, 100, 450, 300);
             JPanel contentPane = new JPanel();
             contentPane.setBounds(5, 5, 5, 5);
@@ -69,7 +69,7 @@ public class OrganizerDashboard extends JFrame{
             contentPane.add(scrollConferenceList);
 
 
-            JButton buttonCreateConference = new JButton("New Conferenza");
+            JButton buttonCreateConference = new JButton("New Conference");
             buttonCreateConference.setBounds(50, 50, 200, 50);
             buttonCreateConference.setBackground(new Color(100, 149, 237));
             buttonCreateConference.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
@@ -103,7 +103,7 @@ public class OrganizerDashboard extends JFrame{
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    RUserDTO organizer = new RUserDTO("Name","Lastname","email@email.com","Affilation","Organizzatore",true, ID.generate());
+                    RUserDTO organizer = new RUserDTO("Name","Lastname","email@email.com","Affilation","Organizer",true, ID.generate());
                     OrganizerDashboard finestra = new OrganizerDashboard(organizer);
                     finestra.setVisible(true);
 

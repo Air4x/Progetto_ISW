@@ -38,9 +38,9 @@ public class PossibleReviewDTO {
      */
     public PossibleReviewDTO(Autore autore) {
         this.id = autore.getId();
-        this.name = autore.getNome();
-        this.lastname = autore.getCognome();
-        this.affiliazione = autore.getAffiliazione();
+        this.name = autore.getName();
+        this.lastname = autore.getLastName();
+        this.affiliazione = autore.getAffiliation();
         this.selezione = false;
     }
 

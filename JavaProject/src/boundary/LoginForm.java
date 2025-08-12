@@ -78,9 +78,9 @@ public class LoginForm  extends JFrame {
                         UserController userController = new UserController();
                         RUserDTO userDTO = userController.login(emailTextField.getText(), passwordfield.getSelectedText());
                         if (userDTO == null) {
-                            JOptionPane.showMessageDialog(null, "The Utente does not exist, proceed to register", "Warning", JOptionPane.WARNING_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "The User does not exist, proceed to register", "Warning", JOptionPane.WARNING_MESSAGE);
                         } else {
-                            if (userDTO.getRuolo().equals("Organizzatore")) {
+                            if (userDTO.getRuolo().equals("Organizer")) {
                                 OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
                                 organizerDashboard.setVisible(true);
                                 dispose();

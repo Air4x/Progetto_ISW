@@ -67,7 +67,7 @@ public class SubmitArticleForm extends JFrame{
         txtcoauthors.setBounds(170,40,100,20);
         contentPane.add(txtcoauthors);
 
-        JLabel lblconference = new JLabel("Conferenza");
+        JLabel lblconference = new JLabel("Conference");
         lblconference.setFont(new Font("Arial",Font.PLAIN,20));
         lblconference.setBounds(170,70,150,20);
         contentPane.add(lblconference);

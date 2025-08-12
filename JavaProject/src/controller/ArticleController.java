@@ -1,10 +1,10 @@
 package controller;
 
-import database.ArticoloDAO;
+import database.ArticleDAO;
 import DTO.RUserDTO;
-import database.ConferenzeDAO;
-import database.UtenteDAO;
-import entity.Articolo;
+import database.ConferenceDAO;
+import database.UserDAO;
+import entity.Article;
 import entity.Autore;
 
 import java.sql.SQLException;
@@ -20,14 +20,14 @@ import utility.ID;
  */
 public class ArticleController {
 
-    private ArticoloDAO art_dao;
-    private UtenteDAO user_dao;
-    private ConferenzeDAO conf_dao;
+    private ArticleDAO art_dao;
+    private UserDAO user_dao;
+    private ConferenceDAO conf_dao;
 
     public ArticleController () throws SQLException {
-        this.art_dao= new ArticoloDAO();
-        this.user_dao= new UtenteDAO();
-        this.conf_dao= new ConferenzeDAO();
+        this.art_dao= new ArticleDAO();
+        this.user_dao= new UserDAO();
+        this.conf_dao= new ConferenceDAO();
     }
 
     /**
@@ -46,15 +46,15 @@ public class ArticleController {
         ID id = ID.generate();
         try {
 
-            if(this.conf_dao.getConferenzaByID(id_conf) != null){
+            if(this.conf_dao.getConferenceByID(id_conf) != null){
             for(RUserDTO f_user : a_autori){
-                if(user_dao.isUtentePresenteByEmail(f_user.getEmail()) && user_dao.getUtenteByEmail(f_user.getEmail()).getRuolo() == "autore" ){
-                    user = (Autore) user_dao.getUtenteByEmail(f_user.getEmail());
+                if(user_dao.isUserPresentByEmail(f_user.getEmail()) && user_dao.getUserByEmail(f_user.getEmail()).getRole() == "autore" ){
+                    user = (Autore) user_dao.getUserByEmail(f_user.getEmail());
                     authors_list.add(user);
                 }else{return false;}
             }
-                    Articolo art = new Articolo(id, a_abstrct, authors_list, a_titolo);
-                    art_dao.salvaArticolo(art);
+                    Article art = new Article(id, a_abstrct, authors_list, a_titolo);
+                    art_dao.saveArticle(art);
                     return true;
             }
         } catch (SQLException e) {
@@ -74,9 +74,9 @@ public class ArticleController {
      * @throws SQLException
      */
     public ArrayList<ShowArticleDTO> getArticleByAuthor(ID authorID) throws SQLException{
-        ArrayList<Articolo> articoli = art_dao.getArticoliByAutore(authorID);
+        ArrayList<Article> articoli = art_dao.getArticlesByAuthor(authorID);
         ArrayList<ShowArticleDTO> f_art = new ArrayList<>();
-        for(Articolo c : articoli){
+        for(Article c : articoli){
             ShowArticleDTO a = new ShowArticleDTO(c);
             f_art.add(a);
         }

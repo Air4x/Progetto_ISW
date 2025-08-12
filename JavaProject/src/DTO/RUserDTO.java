@@ -1,6 +1,6 @@
 package DTO;
 
-import entity.Utente;
+import entity.User;
 import utility.ID;
 
 /**
@@ -39,16 +39,16 @@ public class RUserDTO {
 
     /**
      * Costruttore
-     * @param utente
+     * @param user
      * @param esito
      */
-    public RUserDTO(Utente utente, boolean esito) {
-        this.name = utente.getNome();
-        this.lastname = utente.getCognome();
-        this.email = utente.getCognome();
-        this.affiliazione = utente.getAffiliazione();
-        this.ruolo = utente.getRuolo();
-        this.id = utente.getId();
+    public RUserDTO(User user, boolean esito) {
+        this.name = user.getName();
+        this.lastname = user.getLastName();
+        this.email = user.getLastName();
+        this.affiliazione = user.getAffiliation();
+        this.ruolo = user.getRole();
+        this.id = user.getId();
         this.esito=esito;
     }
 

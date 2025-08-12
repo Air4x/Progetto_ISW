@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import entity.Autore;
 import utility.ID;
-import entity.Articolo;
+import entity.Article;
 
 /**
  * @author Giuseppe Buglione
@@ -33,17 +33,17 @@ public class ShowArticleDTO {
 
     /**
      * Costruttore
-     * @param articolo
+     * @param article
      */
-    public ShowArticleDTO (Articolo articolo){
+    public ShowArticleDTO (Article article){
         RUserDTO user_f= null;
-        for (Autore a: articolo.getAutori()){
-            user_f= new RUserDTO(a.getNome(), a.getCognome(), a.getEmail(), a.getAffiliazione(), a.getRuolo(), false, a.getId());
+        for (Autore a: article.getAuthors()){
+            user_f= new RUserDTO(a.getName(), a.getLastName(), a.getEmail(), a.getAffiliation(), a.getRole(), false, a.getId());
             this.autori.add(user_f);
         }
-        this.id=articolo.getId();
-        this.titolo = articolo.getTitolo();
-        this.abstr = articolo.getAbstr();
+        this.id= article.getId();
+        this.titolo = article.getTitle();
+        this.abstr = article.getAbstr();
     }
 
     /**

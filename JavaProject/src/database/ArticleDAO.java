@@ -16,7 +16,7 @@ import utility.ID;
  *
  * @author Mario Calcagno
  */
-public class ArticoloDAO {
+public class ArticleDAO {
     /**
      * La connesione al database
      *
@@ -24,10 +24,10 @@ public class ArticoloDAO {
     private Connection conn;
 
     /**
-     * Costruttore di ArticoloDAO, imposta la connesione al database
+     * Costruttore di ArticleDAO, imposta la connesione al database
      *
      */
-    public ArticoloDAO() throws SQLException {
+    public ArticleDAO() throws SQLException {
 	conn = DBManager.getConnection();
     }
 
@@ -36,11 +36,11 @@ public class ArticoloDAO {
      *
      * @param l'articolo che si vuole salvare
      */
-    public void salvaArticolo(Articolo a) throws SQLException {
+    public void saveArticle(Article a) throws SQLException {
 	String sql = "INSERT INTO Articoli VALUES (?, ?, ?)";
 	PreparedStatement pst = conn.prepareStatement(sql);
 	pst.setNString(1, a.getId().toString());
-	pst.setNString(2, a.getTitolo());
+	pst.setNString(2, a.getTitle());
 	pst.setNString(3, a.getAbstr());
 	int nRowsUpdated = pst.executeUpdate();
     }
@@ -52,7 +52,7 @@ public class ArticoloDAO {
      * @return un'instanza della classe Article rappresentante
      * l'articolo ottenuto
      */
-    public Articolo getArticoloByID(ID id) throws SQLException {
+    public Article getArticleByID(ID id) throws SQLException {
 	String titolo = null;
 	String abs = null;
 	ArrayList<Autore> autori = new ArrayList<>();
@@ -86,7 +86,7 @@ public class ArticoloDAO {
 		autori.add(a);
 	    }  
 	}
-	return new Articolo(id, abs, autori, titolo);
+	return new Article(id, abs, autori, titolo);
     }
 
     /**
@@ -95,15 +95,15 @@ public class ArticoloDAO {
      * @param L'id dell'autore
      * @return La lista di articoli scritti dall'autore
      */
-    public ArrayList<Articolo> getArticoliByAutore(ID id_aut) throws SQLException {
+    public ArrayList<Article> getArticlesByAuthor(ID id_aut) throws SQLException {
 		ArrayList<Integer> articleIds = new ArrayList<>();
-		ArrayList<Articolo> articoli = new ArrayList<>();
+		ArrayList<Article> articoli = new ArrayList<>();
 		String fromAutori = "SELECT id_art FROM Autori WHERE id_aut = "+ id_aut.toString();
 		PreparedStatement stAutori = conn.prepareStatement(fromAutori);
 		stAutori.setString(1, id_aut.toString());
 		ResultSet rsAutori = stAutori.executeQuery();
 		while(rsAutori.next()){
-			Articolo a = getArticoloByID(new ID(rsAutori.getString("id_art")));
+			Article a = getArticleByID(new ID(rsAutori.getString("id_art")));
 			articoli.add(a);
 		}
 		return articoli;

@@ -2,10 +2,10 @@ package entity;
 
 import utility.ID;
 /**
- * Classe di dominio astratta, contiene i dati e le funzionalità comuni tra {@see entity.Autore} e {@see entity.Organizzatore}
+ * Classe di dominio astratta, contiene i dati e le funzionalità comuni tra {@see entity.Autore} e {@see entity.Organizer}
  * @author Mario Calcagno
  */
-public abstract class Utente {
+public abstract class User {
     /**
      * Il codice identificativo dell'utente, è un UUIDv?
      */
@@ -13,11 +13,11 @@ public abstract class Utente {
     /**
      * Il nome dell'utente
      */
-    private String nome;
+    private String name;
     /**
      * Il cognome dell'utente
      */
-    private String cognome;
+    private String lastName;
     /**
      * L'email dell'utente
      */
@@ -25,7 +25,7 @@ public abstract class Utente {
     /**
      * L'università dell'utente
      */
-    private String affiliazione;
+    private String affiliation;
     /**
      * Lo SHA256 della password dell'utente
      */
@@ -33,41 +33,41 @@ public abstract class Utente {
 
     /**
      * Istanzia un utente
-     * @param affiliazione
+     * @param affiliation
      * @param email
-     * @param cognome
-     * @param nome
+     * @param lastName
+     * @param name
      * @param password
      * @param id 
      */
-    protected Utente(String affiliazione, String email, String cognome, String nome, String password, ID id) {
-        this.affiliazione = affiliazione;
+    protected User(String affiliation, String email, String lastName, String name, String password, ID id) {
+        this.affiliation = affiliation;
         this.email = email;
-        this.cognome = cognome;
-        this.nome = nome;
+        this.lastName = lastName;
+        this.name = name;
         this.password = password;
         this.id = id;
     }
 
-    protected Utente(String affiliazione, String email, String cognome, String nome, String password) {
-        this.affiliazione = affiliazione;
+    protected User(String affiliation, String email, String lastName, String name, String password) {
+        this.affiliation = affiliation;
         this.email = email;
-        this.cognome = cognome;
-        this.nome = nome;
+        this.lastName = lastName;
+        this.name = name;
         this.password = password;
         this.id = ID.generate();
     }
     /**
      * Costruttore di copia
-     * @param utente
+     * @param user
      */
-    protected Utente(Utente utente) {
-	this.affiliazione = utente.getAffiliazione();
-        this.email = utente.getEmail();
-        this.cognome = utente.getCognome();
-        this.nome = utente.getNome();
-        this.password = utente.getPassword();
-        this.id = utente.getId();
+    protected User(User user) {
+	this.affiliation = user.getAffiliation();
+        this.email = user.getEmail();
+        this.lastName = user.getLastName();
+        this.name = user.getName();
+        this.password = user.getPassword();
+        this.id = user.getId();
     }
 
     /**
@@ -82,24 +82,24 @@ public abstract class Utente {
      * getter per il nome dell'utente
      * @return il nome dell'utente
      */
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
     /**
      * getter per il cognome dell'utente
      * @return il cognome dell'utente
      */
-    public String getCognome() {
-        return cognome;
+    public String getLastName() {
+        return lastName;
     }
 
     /**
      * getter per l'affiliazione dell'utente
      * @return l'affiliazione dell'utente
      */
-    public String getAffiliazione() {
-        return affiliazione;
+    public String getAffiliation() {
+        return affiliation;
     }
 
     /**
@@ -122,8 +122,8 @@ public abstract class Utente {
      * Cambia l'affiliazione dell'utente
      * @param la nuova affiliazione
      */
-    public void setAffiliazione(String affiliazione) {
-        this.affiliazione = affiliazione;
+    public void setAffiliation(String affiliation) {
+        this.affiliation = affiliation;
     }
 
     /**
@@ -138,5 +138,5 @@ public abstract class Utente {
      * Metodo astratto implementato da le sotto classi
      * @return il ruolo dell'utente
      */
-    public abstract String getRuolo();
+    public abstract String getRole();
 }

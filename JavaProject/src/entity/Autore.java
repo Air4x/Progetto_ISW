@@ -2,17 +2,17 @@ package entity;
 
 import utility.ID;
 /**
- * Classe che implementa un Autore, estende {@see entity.User}
+ * Classe che implementa un Autore, estende {@see entity.Utente}
  *
  */
-public class Author extends User{
+public class Autore extends Utente {
     /**
      * Il ruolo dell'autore
      */
     final String role;
 
     /**
-     * Costruttore di Author
+     * Costruttore di Autore
      *
      * @param affiliazione
      * @param email
@@ -21,7 +21,7 @@ public class Author extends User{
      * @param password
      * @param id 
      */
-    public Author(String affiliazione, String email, String lastName,
+    public Autore(String affiliazione, String email, String lastName,
                   String name, String password, ID id) {
         super(affiliazione, email, lastName, name, password, id);
         this.role = "autore";
@@ -32,14 +32,14 @@ public class Author extends User{
      *
      * @param autore 
      */
-    public Author(Author autore){	
+    public Autore(Autore autore){
         super(autore.getAffiliazione(), autore.getEmail(), autore.getLastName(),
 	      autore.getName(), autore.getPassword(), autore.getId());
 	this.role = autore.getRole();
     }	
 
     /**
-     * Implementazione di {@see User.getRole}
+     * Implementazione di {@see Utente.getRole}
      *
      * @return il ruole dell'autore
      */

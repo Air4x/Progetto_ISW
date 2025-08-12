@@ -3,7 +3,6 @@ package boundary;
 import DTO.RUserDTO;
 import controller.ArticleController;
 import controller.UserController;
-import entity.Author;
 import utility.ID;
 
 import javax.swing.*;
@@ -68,7 +67,7 @@ public class SubmitArticleForm extends JFrame{
         txtcoauthors.setBounds(170,40,100,20);
         contentPane.add(txtcoauthors);
 
-        JLabel lblconference = new JLabel("Conference");
+        JLabel lblconference = new JLabel("Conferenza");
         lblconference.setFont(new Font("Arial",Font.PLAIN,20));
         lblconference.setBounds(170,70,150,20);
         contentPane.add(lblconference);

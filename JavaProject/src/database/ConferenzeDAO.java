@@ -1,8 +1,8 @@
 package database;
 
 import entity.Articolo;
-import entity.Conference;
-import entity.Author;
+import entity.Autore;
+import entity.Conferenza;
 import utility.ID;
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.Date;
  * database
  *
  */
-public class ConferenceDAO {
+public class ConferenzeDAO {
     /**
      * La connesione al database
      *
@@ -21,11 +21,11 @@ public class ConferenceDAO {
     private Connection conn;
 
     /**
-     * Costruttre di ConferenceDAO, si occupa di impostare la
+     * Costruttre di ConferenzeDAO, si occupa di impostare la
      * connesione al database
      *
      */
-    public ConferenceDAO() throws SQLException {
+    public ConferenzeDAO() throws SQLException {
         try {
             this.conn = DBManager.getConnection();
         } catch (SQLException e) {
@@ -37,15 +37,15 @@ public class ConferenceDAO {
      * Permette di ottenere una conferenza dato il suo Id
      *
      * @param L'id della conferenza
-     * @return Un'instanza della classe Conference rappresentante la
+     * @return Un'instanza della classe Conferenza rappresentante la
      * conferenza ottenuta
      */
-    public Conference getConferenceByID(ID id) throws SQLException {
+    public Conferenza getConferenceByID(ID id) throws SQLException {
         String sql = "SELECT * FROM conference WHERE id = " + id;
         PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, id.toString());
         ResultSet rs = stmt.executeQuery();
-        return new Conference(rs.getDate("scadenza"), rs.getString("titolo"), rs.getString("descrizione"), new ID(rs.getString("id")));
+        return new Conferenza(rs.getDate("scadenza"), rs.getString("titolo"), rs.getString("descrizione"), new ID(rs.getString("id")));
     }
 
     /**
@@ -53,7 +53,7 @@ public class ConferenceDAO {
      *
      * @param La conferenza da salvare
      */
-    public void saveConference(Conference conf) throws SQLException {
+    public void saveConference(Conferenza conf) throws SQLException {
         String sql = "INSERT INTO conferenza(id, titolo, descrizione, scadenza) VALUES(?, ?, ?, ?);";
         PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, conf.getId().toString());
@@ -88,13 +88,13 @@ public class ConferenceDAO {
 	PreparedStatement stArt = conn.prepareStatement(queryArt);
 	// =======Esecuzione queries=========================
 	while(idArt.next()){
-	    ArrayList<Author> autori = new ArrayList<>();
+	    ArrayList<Autore> autori = new ArrayList<>();
 	    stIdAuth.setString(1, idArt.getString("id_art"));
 	    ResultSet idAuth = stIdAuth.executeQuery();
 	    while(idAuth.next()){
 		stAuth.setString(1, idAuth.getString(1));
 		ResultSet authors = stAuth.executeQuery();
-		Author a = new Author(authors.getString("affiliazione"), authors.getString("email"),
+		Autore a = new Autore(authors.getString("affiliazione"), authors.getString("email"),
 				      authors.getString("cognome"), authors.getString("nome"),
 				      authors.getString("password"), new ID(authors.getString("id")));
 		autori.add(a);
@@ -112,13 +112,13 @@ public class ConferenceDAO {
      *
      * @return La lista di tutte le conferenze
      */
-    public ArrayList<Conference> getAllConferences() throws  SQLException{
-	ArrayList<Conference> conferenze = new ArrayList<>();
+    public ArrayList<Conferenza> getAllConferences() throws  SQLException{
+	ArrayList<Conferenza> conferenze = new ArrayList<>();
 	String query  ="SELECT * FROM conferenza";
 	PreparedStatement st = conn.prepareStatement(query);
 	ResultSet rs = st.executeQuery();
 	while(rs.next()){
-	    Conference c = new Conference(rs.getDate("scadenza"), rs.getString("titolo"), rs.getString("descrizione"), new ID(rs.getString("id")));
+	    Conferenza c = new Conferenza(rs.getDate("scadenza"), rs.getString("titolo"), rs.getString("descrizione"), new ID(rs.getString("id")));
 	    conferenze.add(c);
 	}
 	return conferenze;
@@ -129,11 +129,11 @@ public class ConferenceDAO {
      *
      * @return La lista di tutte le conferenze attive
      */
-    public ArrayList<Conference> getActiveConferences() throws SQLException {
-	ArrayList<Conference> conferenze = getAllConferences();
-	ArrayList<Conference> conferenzeAttive = new ArrayList<>();
+    public ArrayList<Conferenza> getActiveConferences() throws SQLException {
+	ArrayList<Conferenza> conferenze = getAllConferences();
+	ArrayList<Conferenza> conferenzeAttive = new ArrayList<>();
 	Date now = new Date();
-	for (Conference conf : conferenze) {
+	for (Conferenza conf : conferenze) {
 	    if(now.before(conf.getScadenza())){
 		conferenzeAttive.add(conf);
 	    }

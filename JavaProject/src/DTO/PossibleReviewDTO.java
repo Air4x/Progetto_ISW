@@ -1,7 +1,7 @@
 package DTO;
 
+import entity.Autore;
 import utility.ID;
-import entity.Author;
 
 /**
  * @author Giuseppe Buglione
@@ -34,13 +34,13 @@ public class PossibleReviewDTO {
 
     /**
      * Costruttore
-     * @param author
+     * @param autore
      */
-    public PossibleReviewDTO(Author author) {
-        this.id = author.getId();
-        this.name = author.getName();
-        this.lastname = author.getLastName();
-        this.affiliazione = author.getAffiliazione();
+    public PossibleReviewDTO(Autore autore) {
+        this.id = autore.getId();
+        this.name = autore.getName();
+        this.lastname = autore.getLastName();
+        this.affiliazione = autore.getAffiliazione();
         this.selezione = false;
     }
 

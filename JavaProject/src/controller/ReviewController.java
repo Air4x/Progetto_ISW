@@ -1,10 +1,10 @@
 package controller;
 
-import database.ArticleDAO;
-import database.ReviewDAO;
+import database.ArticoloDAO;
+import database.RegistroDAO;
 import DTO.PossibleReviewDTO;
-import database.UserDAO;
-import entity.Author;
+import database.UtenteDAO;
+import entity.Autore;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -16,13 +16,13 @@ import utility.ID;
  */
 public class ReviewController {
 
-    private ReviewDAO r_DAO;
-    private UserDAO u_DAO;
-    private ArticleDAO art_dao;
+    private RegistroDAO r_DAO;
+    private UtenteDAO u_DAO;
+    private ArticoloDAO art_dao;
 
     public ReviewController () throws SQLException {
-        this.r_DAO = new ReviewDAO();
-        this.u_DAO = new UserDAO();
+        this.r_DAO = new RegistroDAO();
+        this.u_DAO = new UtenteDAO();
     }
 
     /**
@@ -59,9 +59,9 @@ public class ReviewController {
      */
     public ArrayList<PossibleReviewDTO> getListReviewer(ID articleID) throws SQLException{
         ArrayList<PossibleReviewDTO> list_r = new ArrayList<>();
-        ArrayList<Author> list_a = u_DAO.getAllAuthors();
+        ArrayList<Autore> list_a = u_DAO.getAllAuthors();
 
-        for(Author a: list_a){
+        for(Autore a: list_a){
             if(r_DAO.hasConflitOfInterest(articleID, a.getId()) != true && u_DAO.isUserPresentByID(a.getId()) != true){
                 PossibleReviewDTO r = new PossibleReviewDTO(a);
                 list_r.add(r);

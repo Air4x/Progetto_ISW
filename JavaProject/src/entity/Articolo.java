@@ -7,9 +7,9 @@ public class Articolo {
     private ID id;
     private String titolo;
     private String abstr;
-    private ArrayList<Author> autori;
+    private ArrayList<Autore> autori;
 
-    public Articolo(ID id, String abstr, ArrayList<Author> autori, String titolo) {
+    public Articolo(ID id, String abstr, ArrayList<Autore> autori, String titolo) {
         this.abstr = abstr;
         this.autori = autori;
         this.titolo = titolo;
@@ -23,7 +23,7 @@ public class Articolo {
 	this.autori = a.getAutori();
     }
 
-    public ArrayList<Author> getAutori() {
+    public ArrayList<Autore> getAutori() {
         return autori;
     }
 

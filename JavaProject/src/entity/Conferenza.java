@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.Calendar;
 import utility.ID;
 
-public class Conference {
+public class Conferenza {
     private ID id;
     private String titolo;
     private String descrizione;
     private Date scadenza;
     private ArrayList<Articolo> articoli;
 
-    public Conference(Date scadenza, String titolo, String descrizione, ID id) {
+    public Conferenza(Date scadenza, String titolo, String descrizione, ID id) {
         this.id = id;
         this.scadenza = scadenza;
         this.titolo = titolo;
@@ -20,7 +20,7 @@ public class Conference {
         this.articoli = new ArrayList<>();
     }
 
-    public Conference(Conference c) {
+    public Conferenza(Conferenza c) {
 	this.id = c.getId();
         this.scadenza = c.getScadenza();
         this.titolo = c.getTitolo();

@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.ArrayList;
 import utility.ID;
 
@@ -14,7 +12,7 @@ import utility.ID;
  * Classe responsabile per le operazioni sulla tabella registro nel database
  *
  */
-public class ReviewDAO {
+public class RegistroDAO {
     /**
      * La connesione al database
      *
@@ -22,11 +20,11 @@ public class ReviewDAO {
     private Connection conn;
 
     /**
-     * Il costruttore di ReviewDAO, si occupa di impostare la
+     * Il costruttore di RegistroDAO, si occupa di impostare la
      * connesione al database
      *
      */
-    public ReviewDAO() throws SQLException{
+    public RegistroDAO() throws SQLException{
 	conn = DBManager.getConnection();
     }
 

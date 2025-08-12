@@ -3,14 +3,12 @@ package database;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.List;
 
-import entity.Author;
-import entity.Organizer;
-import entity.User;
+import entity.Autore;
+import entity.Organizzatore;
+import entity.Utente;
 import utility.ID;
 
 
@@ -19,17 +17,17 @@ import utility.ID;
  *
  * @author Mario Calcagno
  */
-public class UserDAO {
+public class UtenteDAO {
     /**
      * La connesione al database, ottenuta da DBManager
      */
     private Connection conn;
 
     /**
-     * Costruttore di UserDAO, prova a creare una connesione con il database
+     * Costruttore di UtenteDAO, prova a creare una connesione con il database
      *
      */
-    public UserDAO() {
+    public UtenteDAO() {
         try {
             this.conn = DBManager.getConnection();
         } catch (SQLException e) {
@@ -55,9 +53,9 @@ public class UserDAO {
      * Permette di ottenere un utente dato il suo id
      *
      * @param l'id dell'utente
-     * @return Un istanza della classe Author/Organizer rappresentante l'utente
+     * @return Un istanza della classe Autore/Organizzatore rappresentante l'utente
      */
-    public User getUserByID(ID id) throws SQLException {
+    public Utente getUserByID(ID id) throws SQLException {
         String sql = "SELECT affiliazione, email, cognome, nome, password, id, ruolo FROM user WHERE id = ?";
 	PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, id.toString());
@@ -65,14 +63,14 @@ public class UserDAO {
         stmt.close();
         String role = rs.getString("ruolo");
         if (role.equals("Autore")) {
-            return new Author(rs.getString("affiliazione"),
+            return new Autore(rs.getString("affiliazione"),
 			      rs.getString("email"),
 			      rs.getString("cognome"),
 			      rs.getString("nome"),
 			      rs.getString("password"),
 			      new ID(rs.getString("id")));
         } else {
-            return new Organizer(rs.getString("affiliazione"),
+            return new Organizzatore(rs.getString("affiliazione"),
 				 rs.getString("email"),
 				 rs.getString("cognome"),
 				 rs.getString("nome"),
@@ -126,9 +124,9 @@ public class UserDAO {
      * Permette di ottenere un utente data la sua email
      *
      * @param l'email dell'utente
-     * @return un istanza di Author/Organizer che rappresenta l'utente
+     * @return un istanza di Autore/Organizzatore che rappresenta l'utente
      */
-    public User getUserByEmail(String email) throws SQLException {
+    public Utente getUserByEmail(String email) throws SQLException {
         String sql = "SELECT affiliazione, email, cognome, nome, password, id, ruolo FROM user WHERE email = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, email);
@@ -136,14 +134,14 @@ public class UserDAO {
         stmt.close();
         String role = rs.getString("ruolo");
         if (role.equals("Autore")) {
-            return new Author(rs.getString("affiliazione"),
+            return new Autore(rs.getString("affiliazione"),
 			      rs.getString("email"),
 			      rs.getString("cognome"),
 			      rs.getString("nome"),
 			      rs.getString("password"),
 			      new ID(rs.getString("id")));
         } else {
-            return new Organizer(rs.getString("affiliazione"),
+            return new Organizzatore(rs.getString("affiliazione"),
 				 rs.getString("email"),
 				 rs.getString("cognome"),
 				 rs.getString("nome"),
@@ -159,22 +157,22 @@ public class UserDAO {
      *
      * @return La lista di tutti gli autori nel database
      */
-    public ArrayList<Author> getAllAuthors() throws SQLException {
-        ArrayList<Author> authors = new ArrayList<Author>();
+    public ArrayList<Autore> getAllAuthors() throws SQLException {
+        ArrayList<Autore> autores = new ArrayList<Autore>();
         String sql = "SELECT nome cognome email affiliazione id password FROM user WHERE role = 'Autore'";
         PreparedStatement stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         while(rs.next()) {
-            Author a = new Author(rs.getString("affiliazione"),
+            Autore a = new Autore(rs.getString("affiliazione"),
 				  rs.getString("email"),
 				  rs.getString("cognome"),
 				  rs.getString("nome"),
 				  rs.getString("password"),
 				  new ID(rs.getString("id")));
-            authors.add(a);
+            autores.add(a);
         }
 
-        return authors;
+        return autores;
     }
 
     /**
@@ -182,9 +180,9 @@ public class UserDAO {
      *
      * @param Un utente da salvare
      */
-    public void saveUser(User user) throws SQLException {
-        if (user.getRole().equals("autore")) {
-            Author a = (Author) user;
+    public void saveUser(Utente utente) throws SQLException {
+        if (utente.getRole().equals("autore")) {
+            Autore a = (Autore) utente;
             String sql = "INSERT INTO user(id, nome, cognome, email, password, affiliazione, ruolo) VALUES(?, ?, ?, ?, ?, 'autore');";
 	    PreparedStatement stmt = conn.prepareStatement(sql);
 	    stmt.setString(1, a.getId().toString());
@@ -193,8 +191,8 @@ public class UserDAO {
 	    stmt.setString(4, a.getEmail());
 	    stmt.setString(5, a.getPassword());
 	    int nRowsUpdated = stmt.executeUpdate();
-        } else if (user.getRole().equals("organizer")) {
-            Organizer o = (Organizer) user;
+        } else if (utente.getRole().equals("organizer")) {
+            Organizzatore o = (Organizzatore) utente;
             String sql = "INSERT INTO user(id, nome, cognome, email, password, affiliazione, ruolo) VALUES(?, ?, ? ,?, ?, 'organizzatore);'";
 	    PreparedStatement stmt = conn.prepareStatement(sql);
 	    stmt.setString(1, o.getId().toString());

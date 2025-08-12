@@ -1,14 +1,16 @@
 package controller;
 
-import database.ArticleDAO;
+import database.ArticoloDAO;
 import DTO.RUserDTO;
-import database.ConferenceDAO;
+import database.ConferenzeDAO;
+import database.UtenteDAO;
 import entity.Articolo;
-import entity.Author;
-import database.UserDAO;
+import entity.Autore;
+
 import java.sql.SQLException;
 import DTO.ShowArticleDTO;
 import java.util.ArrayList;
+
 import utility.ID;
 
 
@@ -18,14 +20,14 @@ import utility.ID;
  */
 public class ArticleController {
 
-    private ArticleDAO art_dao;
-    private UserDAO user_dao;
-    private ConferenceDAO conf_dao;
+    private ArticoloDAO art_dao;
+    private UtenteDAO user_dao;
+    private ConferenzeDAO conf_dao;
 
     public ArticleController () throws SQLException {
-        this.art_dao= new ArticleDAO();
-        this.user_dao= new UserDAO();
-        this.conf_dao= new ConferenceDAO();
+        this.art_dao= new ArticoloDAO();
+        this.user_dao= new UtenteDAO();
+        this.conf_dao= new ConferenzeDAO();
     }
 
     /**
@@ -39,15 +41,15 @@ public class ArticleController {
      * 
      */
     public boolean submitArticle(String a_titolo, String a_abstrct,  ArrayList<RUserDTO> a_autori, ID id_conf) throws SQLException{
-        ArrayList<Author> authors_list = new ArrayList<>();
-        Author user= null;
+        ArrayList<Autore> authors_list = new ArrayList<>();
+        Autore user= null;
         ID id = ID.generate();
         try {
 
             if(this.conf_dao.getConferenceByID(id_conf) != null){
             for(RUserDTO f_user : a_autori){
                 if(user_dao.isUserPresentByEmail(f_user.getEmail()) && user_dao.getUserByEmail(f_user.getEmail()).getRole() == "autore" ){
-                    user = (Author) user_dao.getUserByEmail(f_user.getEmail());
+                    user = (Autore) user_dao.getUserByEmail(f_user.getEmail());
                     authors_list.add(user);
                 }else{return false;}
             }

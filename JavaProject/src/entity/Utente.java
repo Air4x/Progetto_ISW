@@ -2,10 +2,10 @@ package entity;
 
 import utility.ID;
 /**
- * Classe di dominio astratta, contiene i dati e le funzionalità comuni tra {@see entity.Author} e {@see entity.Organizer}
+ * Classe di dominio astratta, contiene i dati e le funzionalità comuni tra {@see entity.Autore} e {@see entity.Organizzatore}
  * @author Mario Calcagno
  */
-public abstract class User {
+public abstract class Utente {
     /**
      * Il codice identificativo dell'utente, è un UUIDv?
      */
@@ -40,7 +40,7 @@ public abstract class User {
      * @param password
      * @param id 
      */
-    protected User(String affiliazione, String email, String lastName, String name, String password, ID id) {
+    protected Utente(String affiliazione, String email, String lastName, String name, String password, ID id) {
         this.affiliazione = affiliazione;
         this.email = email;
         this.lastName = lastName;
@@ -49,7 +49,7 @@ public abstract class User {
         this.id = id;
     }
 
-    protected User(String affiliazione, String email, String lastName, String name, String password) {
+    protected Utente(String affiliazione, String email, String lastName, String name, String password) {
         this.affiliazione = affiliazione;
         this.email = email;
         this.lastName = lastName;
@@ -59,15 +59,15 @@ public abstract class User {
     }
     /**
      * Costruttore di copia
-     * @param user
+     * @param utente
      */
-    protected User(User user) {
-	this.affiliazione = user.getAffiliazione();
-        this.email = user.getEmail();
-        this.lastName = user.getLastName();
-        this.name = user.getName();
-        this.password = user.getPassword();
-        this.id = user.getId();
+    protected Utente(Utente utente) {
+	this.affiliazione = utente.getAffiliazione();
+        this.email = utente.getEmail();
+        this.lastName = utente.getLastName();
+        this.name = utente.getName();
+        this.password = utente.getPassword();
+        this.id = utente.getId();
     }
 
     /**

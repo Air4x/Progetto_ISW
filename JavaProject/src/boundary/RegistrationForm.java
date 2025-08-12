@@ -4,15 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import DTO.RUserDTO;
 import controller.UserController;
-import entity.Author;
-import entity.Organizer;
-import entity.User;
 
 public class RegistrationForm extends JFrame {
     private JTextField txtname;
@@ -128,7 +124,7 @@ public class RegistrationForm extends JFrame {
                         UserController uc = new UserController();
                         RUserDTO userDTO = uc.registerUser(txtaffiliazione.getText(), txtemail.getText(), txtlastname.getText(), txtname.getText(), passwordField1.getSelectedText(), txtruolo.getText());
                         if (userDTO == null) {
-                            JOptionPane.showMessageDialog(null, "User already register, proceed to login", "Warining", JOptionPane.WARNING_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Utente already register, proceed to login", "Warining", JOptionPane.WARNING_MESSAGE);
 
                         } else if (!userDTO.getEsito()) {
                             JOptionPane.showMessageDialog(null, "An Error has accured", "Warining", JOptionPane.WARNING_MESSAGE);

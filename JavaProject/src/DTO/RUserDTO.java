@@ -1,6 +1,6 @@
 package DTO;
 
-import entity.User;
+import entity.Utente;
 import utility.ID;
 
 /**
@@ -42,7 +42,7 @@ public class RUserDTO {
      * @param utente
      * @param esito
      */
-    public RUserDTO(User utente, boolean esito) {
+    public RUserDTO(Utente utente, boolean esito) {
         this.name = utente.getName();
         this.lastname = utente.getLastName();
         this.email = utente.getLastName();

@@ -4,13 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 
 import DTO.RUserDTO;
 import controller.UserController;
-import entity.Author;
-import entity.Organizer;
-import entity.User;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -82,9 +78,9 @@ public class LoginForm  extends JFrame {
                         UserController userController = new UserController();
                         RUserDTO userDTO = userController.login(emailTextField.getText(), passwordfield.getSelectedText());
                         if (userDTO == null) {
-                            JOptionPane.showMessageDialog(null, "The User does not exist, proceed to register", "Warning", JOptionPane.WARNING_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "The Utente does not exist, proceed to register", "Warning", JOptionPane.WARNING_MESSAGE);
                         } else {
-                            if (userDTO.getRuolo().equals("Organizer")) {
+                            if (userDTO.getRuolo().equals("Organizzatore")) {
                                 OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
                                 organizerDashboard.setVisible(true);
                                 dispose();

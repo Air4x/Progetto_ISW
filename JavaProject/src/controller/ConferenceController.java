@@ -4,16 +4,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import database.ConferenceDAO;
+import database.ConferenzeDAO;
 import DTO.ShowActiveConferenceDTO;
 import DTO.ShowArticleDTO;
 import DTO.RUserDTO;
-import database.UserDAO;
+import database.UtenteDAO;
+import entity.Conferenza;
+import entity.Organizzatore;
+import entity.Utente;
 import utility.ID;
 import entity.Articolo;
-import entity.Conference;
-import entity.Organizer;
-import entity.User;
 
 /**
  * @author Giuseppe Buglione
@@ -21,15 +21,15 @@ import entity.User;
  */
 public class ConferenceController {
     
-    private User user;
-    private UserDAO user_dao;
-    private Conference conf;
-    private ConferenceDAO conf_dao;
+    private Utente utente;
+    private UtenteDAO user_dao;
+    private Conferenza conf;
+    private ConferenzeDAO conf_dao;
     private ShowActiveConferenceDTO dto;
     private ShowArticleDTO dto2;
 
     public ConferenceController() throws SQLException {
-        this.conf_dao = new ConferenceDAO();
+        this.conf_dao = new ConferenzeDAO();
     }
     
     /**
@@ -42,8 +42,8 @@ public class ConferenceController {
      * @throws SQLException
      */
     public void createConference (Date scadenza, String title, String descr, ID id, RUserDTO org) throws SQLException {
-        this.conf = new Conference(scadenza,title,descr,id);
-        this.user = (Organizer) this.user_dao.getUserByID(org.getId());;
+        this.conf = new Conferenza(scadenza,title,descr,id);
+        this.utente = (Organizzatore) this.user_dao.getUserByID(org.getId());;
         conf_dao.saveConference(this.conf);
     }
 
@@ -54,10 +54,10 @@ public class ConferenceController {
      */
     public ArrayList<ShowActiveConferenceDTO> getActiveConferences() throws SQLException{
         Date data = new Date();
-        ArrayList<Conference> all_conf = conf_dao.getAllConferences();
+        ArrayList<Conferenza> all_conf = conf_dao.getAllConferences();
         ArrayList<ShowActiveConferenceDTO> actconf = new ArrayList<>();
         
-        for(Conference conf : all_conf){
+        for(Conferenza conf : all_conf){
             if(conf.getScadenza() != null && !conf.getScadenza().before(data))
             this.dto = new ShowActiveConferenceDTO(conf.getId(),conf.getTitolo(),conf.getScadenza(),conf.getDescrizione());
             actconf.add(dto);

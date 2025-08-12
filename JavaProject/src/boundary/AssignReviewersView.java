@@ -3,16 +3,13 @@ package boundary;
 import DTO.PossibleReviewDTO;
 import DTO.RUserDTO;
 import DTO.ShowArticleDTO;
-import controller.ArticleController;
 import controller.ReviewController;
-import entity.Author;
 import utility.ID;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;

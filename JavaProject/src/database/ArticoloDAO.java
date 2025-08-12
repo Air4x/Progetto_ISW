@@ -6,7 +6,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import utility.ID;
 
@@ -17,7 +16,7 @@ import utility.ID;
  *
  * @author Mario Calcagno
  */
-public class ArticleDAO {
+public class ArticoloDAO {
     /**
      * La connesione al database
      *
@@ -25,10 +24,10 @@ public class ArticleDAO {
     private Connection conn;
 
     /**
-     * Costruttore di ArticleDAO, imposta la connesione al database
+     * Costruttore di ArticoloDAO, imposta la connesione al database
      *
      */
-    public ArticleDAO() throws SQLException {
+    public ArticoloDAO() throws SQLException {
 	conn = DBManager.getConnection();
     }
 
@@ -56,7 +55,7 @@ public class ArticleDAO {
     public Articolo getArticleByID(ID id) throws SQLException {
 	String titolo = null;
 	String abs = null;
-	ArrayList<Author> autori = new ArrayList<>();
+	ArrayList<Autore> autori = new ArrayList<>();
 	// ======To get title, id and abstract=====
 	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID FROM Articoli WHERE id = ?;";
 	PreparedStatement stArticoli = conn.prepareStatement(fromArticoli);
@@ -83,7 +82,7 @@ public class ArticleDAO {
 		String cognome = rsUtenti.getString("COGNOME");
 		String nome = rsUtenti.getString("NOME");
 		String password = rsUtenti.getString("PASSWORD");
-		Author a = new Author(affiliazione, email, cognome, nome, password, new ID(rsAutori.getString("id_aut")));
+		Autore a = new Autore(affiliazione, email, cognome, nome, password, new ID(rsAutori.getString("id_aut")));
 		autori.add(a);
 	    }  
 	}

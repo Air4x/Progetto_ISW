@@ -5,16 +5,13 @@ import DTO.ShowActiveConferenceDTO;
 import DTO.ShowArticleDTO;
 import controller.ArticleController;
 import controller.ConferenceController;
-import entity.Author;
 import utility.ID;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +28,7 @@ public class AuthorDashboard extends JFrame {
         ArticleController ac = new ArticleController();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
-        setTitle("Author Dashboard");
+        setTitle("Autore Dashboard");
 
 
 

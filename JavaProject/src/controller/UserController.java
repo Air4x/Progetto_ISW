@@ -2,10 +2,10 @@ package controller;
 
 import java.sql.SQLException;
 
-import database.UserDAO;
-import entity.User;
-import entity.Author;
-import entity.Organizer;
+import database.UtenteDAO;
+import entity.Autore;
+import entity.Utente;
+import entity.Organizzatore;
 import utility.ID;
 import DTO.RUserDTO;
 
@@ -15,10 +15,10 @@ import DTO.RUserDTO;
  */
 public class UserController {
 
-    private UserDAO user_dao;
+    private UtenteDAO user_dao;
 
     public UserController() {
-        this.user_dao = new UserDAO();
+        this.user_dao = new UtenteDAO();
     }
 
     /**
@@ -35,16 +35,16 @@ public class UserController {
     public RUserDTO registerUser (String aff, String email, String lastname, String name, String password, String ruole) throws SQLException{
         // true = Utente già presente
         // false = Utente non trovato
-        User utente = null ;
+        Utente utente = null ;
         ID id = ID.generate();
         if(user_dao.isUserPresentByEmail(email)==true){
         RUserDTO fake_user = new RUserDTO(null, null, null, null, null, false, id);
          return fake_user;
         }else{
             if(ruole == "organizzatore"){
-                utente = new Organizer (aff,email,lastname,name,password,id);
+                utente = new Organizzatore(aff,email,lastname,name,password,id);
             } else if (ruole == "autore"){
-                utente = new Author (aff,email,lastname,name,password,id);
+                utente = new Autore(aff,email,lastname,name,password,id);
             }
                 RUserDTO fake_user = new RUserDTO(utente, true);
                 user_dao.saveUser(utente);
@@ -70,8 +70,8 @@ public class UserController {
 
     public RUserDTO getRAuthorBYEmail (String Email) throws SQLException{
         if(this.user_dao.isUserPresentByEmail(Email)==true && this.user_dao.getUserByEmail(Email).getRole()=="autore"){
-            User  user = (Author) user_dao.getUserByEmail(Email);
-            RUserDTO user_dto = new RUserDTO(user, true);
+            Utente utente = (Autore) user_dao.getUserByEmail(Email);
+            RUserDTO user_dto = new RUserDTO(utente, true);
             return user_dto;
         }
 

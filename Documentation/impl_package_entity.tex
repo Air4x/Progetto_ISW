@@ -5,13 +5,14 @@ Classe di dominio astratta, contiene i dati e le funzionalità comuni
 tra \texttt{entity.Author} e \texttt{entity.Organizer}
 \paragraph{Attributi}
 \begin{description}
-\item[id] Il codice identificativo dell'utente, è un UUIDv?
+\item[id] Il codice identificativo dell'utente, è un UUIDv4
 \item[name] Il nome dell'utente
 \item[lastName] Il cognome dell'utente
 \item[email] L'email dell'utente
-\item[affiliazione] L'università dell'utente
+\item[affiliation] L'università dell'utente
 \item[password] Lo SHA256 della password dell'utente
 \end{description}
+
 \subsubsection{\texttt{entity.User.User()}}
 Istanzia un utente
 \paragraph{Parametri}
@@ -22,6 +23,17 @@ Istanzia un utente
 \item email
 \item password
 \item id
+\end{itemize}
+
+\subsubsection{\texttt{entity.User.User()}}
+Istanzia un utente, generando un nuovo Id
+\paragraph{Parametri}
+\begin{itemize}
+  \item affiliazione
+  \item email
+\item lastName
+\item name
+\item password
 \end{itemize}
 
 \subsubsection{\texttt{entity.User.User()}}
@@ -49,7 +61,7 @@ Costruttore di copia per \texttt{entity.User}
 \item il cognome dell'utente
 \end{itemize}
 
-\subsubsection{\texttt{entity.User.getAffiliazione()}}
+\subsubsection{\texttt{entity.User.getAffiliation()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item l'affiliazione dell'utente
@@ -67,7 +79,7 @@ Costruttore di copia per \texttt{entity.User}
 \item la password dell'utente
 \end{itemize}
 
-\subsubsection{\texttt{entity.User.setAffiliazione()}}
+\subsubsection{\texttt{entity.User.setAffiliation()}}
 Cambia l'affiliazione dell'utente
 \paragraph{Parametri}
 \begin{itemize}
@@ -113,12 +125,13 @@ Costruttore di copia per \texttt{Author}
 \end{itemize}
 
 \subsection{Organizer}
+Classe che modella un Organizzatore, estende \texttt{User}
 \paragraph{Attributi}
 \begin{description}
-\item[id] L'id dell'organizzatore
+\item[role] Il ruolo dell'organizzatore
 \end{description}
 
-\subsubsection{\texttt{entity.Author.Organizer()}}
+\subsubsection{\texttt{entity.Organizer.Organizer()}}
 Istanzia un nuovo organizzatore
 \paragraph{Parametri}
 \begin{itemize}
@@ -130,29 +143,29 @@ Istanzia un nuovo organizzatore
 \item id
 \end{itemize}
 
-\subsubsection{\texttt{entity.Author.Organizer()}}
+\subsubsection{\texttt{entity.Organizer.Organizer()}}
 Costruttore di copia per \texttt{Organizer}
 \paragraph{Parametri}
 \begin{itemize}
 \item organizer
 \end{itemize}
 
-\subsubsection{\texttt{entity.Author.getRole()}}
+\subsubsection{\texttt{entity.Organizer.getRole()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item Il ruolo dell'organizzatore
 \end{itemize}
 
-\subsection{Articolo}
+\subsection{Article}
 \paragraph{Attributi}
 \begin{description}
-\item [id] Codice identificativo dell'articolo
-\item[titolo] Titolo dell'articolo
+\item[id] Codice identificativo dell'articolo
+\item[title] Titolo dell'articolo
 \item[abstr]  Abstract dell'articolo
-\item[autori] Lista di \texttt{Author} dell'articolo
+\item[authors] Lista di \texttt{Author} dell'articolo
 \end{description}
 
-\subsubsection{\texttt{entity.Articolo.Articolo()}}
+\subsubsection{\texttt{entity.Article.Article()}}
 Istanzia un nuovo articolo
 \paragraph{Parametri}
 \begin{itemize}
@@ -162,32 +175,32 @@ Istanzia un nuovo articolo
 \item titolo
 \end{itemize}
 
-\subsubsection{\texttt{entity.Articolo.Articolo()}}
+\subsubsection{\texttt{entity.Article.Article()}}
 Costruttore di copia
 \paragraph{Parametri}
 \begin{itemize}
 \item articolo
 \end{itemize}
 
-\subsubsection{\texttt{entity.Articolo.getAutori()}}
+\subsubsection{\texttt{entity.Article.getAuthors()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item Lista di autori dell'articolo
 \end{itemize}
 
-\subsubsection{\texttt{entity.Articolo.getAbstr()}}
+\subsubsection{\texttt{entity.Article.getAbstr()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item L'abstract dell'articolo
 \end{itemize}
 
-\subsubsection{\texttt{entity.Articolo.getTitolo()}}
+\subsubsection{\texttt{entity.Article.getTitle()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item Il titolo dell'articolo
 \end{itemize}
 
-\subsubsection{\texttt{entity.Articolo.getId()}}
+\subsubsection{\texttt{entity.Article.getId()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item L'id dell'articolo
@@ -203,7 +216,7 @@ Costruttore di copia
 \item[articoli] La lista di \texttt{Articolo} sottomessi alla conferenza
 \end{description}
 
-\subsubsection{\texttt{entity.Author.Conference()}}
+\subsubsection{\texttt{entity.Conference.Conference()}}
 Istanzia una conferenza
 \paragraph{Parametri}
 \begin{itemize}
@@ -213,39 +226,39 @@ Istanzia una conferenza
 \item id
 \end{itemize}
 
-\subsubsection{\texttt{entity.Author.Conference()}}
+\subsubsection{\texttt{entity.Conference.Conference()}}
 Costruttore di copia per \texttt{Conference}
 \paragraph{Parametri}
 \begin{itemize}
 \item conferenza
 \end{itemize}
 
-\subsubsection{\texttt{entity.Author.getArticoli()}}
+\subsubsection{\texttt{entity.Conference.getArticles()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item Lista degli articoli sottomessi alla conferenza
 \end{itemize}
-\subsubsection{\texttt{entity.Author.getId()}}
+\subsubsection{\texttt{entity.Conference.getId()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item L'id della conferenza
 \end{itemize}
-\subsubsection{\texttt{entity.Author.getDescrizione()}}
+\subsubsection{\texttt{entity.Conference.getDescription()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item La descrizione della conferenza
 \end{itemize}
-\subsubsection{\texttt{entity.Author.getScadenza()}}
+\subsubsection{\texttt{entity.Conference.getDeadline()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item La scadenza per la sottomissione degli articoli
 \end{itemize}
-\subsubsection{\texttt{entity.Author.getTitolo()}}
+\subsubsection{\texttt{entity.Conference.getTitle()}}
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item Il titolo della conferenza
 \end{itemize}
-\subsubsection{\texttt{entity.Author.inScadenza()}}
+\subsubsection{\texttt{entity.Conference.nearDeadline()}}
 Predicato che verifica se una conferenza è in ``scadenza''
 \paragraph{Valore di ritorno}
 \begin{itemize}

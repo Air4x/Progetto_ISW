@@ -48,7 +48,16 @@ public abstract class User {
         this.password = password;
         this.id = id;
     }
-
+    
+    /**
+     * Istanzia un utente, generando un nuovo Id
+     * @param affiliation
+     * @param email
+     * @param lastName
+     * @param name
+     * @param password
+     * @param id 
+     */
     protected User(String affiliation, String email, String lastName, String name, String password) {
         this.affiliation = affiliation;
         this.email = email;
@@ -57,6 +66,7 @@ public abstract class User {
         this.password = password;
         this.id = ID.generate();
     }
+    
     /**
      * Costruttore di copia
      * @param user

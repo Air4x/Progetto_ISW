@@ -3,38 +3,96 @@ package entity;
 import java.util.ArrayList;
 import utility.ID;
 
-public class Article {
-    private ID id;
-    private String title;
-    private String abstr;
-    private ArrayList<Autore> authors;
+/**
+ * Classe che modella un Articolo
+ *
+ * @author Mario Calcagno
+ */
 
-    public Article(ID id, String abstr, ArrayList<Autore> authors, String titolo) {
+public class Article {
+    /**
+     * L'identificativo dell'articolo
+     *
+     */
+    private ID id;
+    
+    /**
+     * Il titolo dell'articolo
+     *
+     */
+    private String title;
+
+    /**
+     * L'abstract dell'articolo
+     *
+     */
+    private String abstr;
+
+    /**
+     * Lista degli autori dell'articolo
+     *
+     */
+    private ArrayList<Author> authors;
+
+    /**
+     * Costruttore per Article
+     *
+     * @param id
+     * @param abstr
+     * @param authors
+     * @param titolo
+     */
+    public Article(ID id, String abstr, ArrayList<Author> authors, String titolo) {
         this.abstr = abstr;
         this.authors = authors;
         this.title = titolo;
 	this.id = id;
     }
 
+    /**
+     * Costruttore di copia per Article
+     *
+     * @param a
+     */
     public Article(Article a){
 	this.id = a.getId();
-    this.title = a.getTitle();
+	this.title = a.getTitle();
 	this.abstr = a.getAbstr();
 	this.authors = a.getAuthors();
     }
 
-    public ArrayList<Autore> getAuthors() {
+    /**
+     * Getter per ottenere la lista di autori
+     *
+     * @return lista degli autori
+     */
+    public ArrayList<Author> getAuthors() {
         return authors;
     }
 
+    /**
+     * Getter per l'abstract 
+     *
+     * @return l'abstract dell'articolo
+     */
     public String getAbstr() {
         return abstr;
     }
 
+    /**
+     * Getter per il titolo
+     *
+     * @return il titolo dell'articolo
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * Getter per l'id 
+     *
+     * @return l'id dell'articolo
+     */
     public ID getId(){
 	return id;
     }

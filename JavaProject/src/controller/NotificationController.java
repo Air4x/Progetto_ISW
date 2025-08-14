@@ -2,7 +2,7 @@ package controller;
 
 import database.ConferenceDAO;
 import database.UserDAO;
-import entity.Autore;
+import entity.Author;
 import entity.Conference;
 import jakarta.mail.*;
 import jakarta.mail.internet.*;
@@ -37,12 +37,12 @@ public class NotificationController {
      */
     public void invioNotifiche() throws SQLException, MessagingException {
         ArrayList<Conference> conf = conf_dao.getActiveConference();
-        ArrayList<Autore> auth = user_dao.getAllAuthors();
+        ArrayList<Author> auth = user_dao.getAllAuthors();
         String msg = " ",name_a,lastname_a,email_a,title_c;
         for (Conference c : conf) {
             if (c.inScadenza()) {
                 title_c = c.getTitle();
-                for(Autore a : auth){
+                for(Author a : auth){
                     name_a =  a.getName();
                     lastname_a =  a.getLastName();
                     email_a =  a.getEmail();

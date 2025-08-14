@@ -55,7 +55,7 @@ public class ArticleDAO {
     public Article getArticleByID(ID id) throws SQLException {
 	String titolo = null;
 	String abs = null;
-	ArrayList<Autore> autori = new ArrayList<>();
+	ArrayList<Author> autori = new ArrayList<>();
 	// ======To get title, id and abstract=====
 	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID FROM Articoli WHERE id = ?;";
 	PreparedStatement stArticoli = conn.prepareStatement(fromArticoli);
@@ -82,7 +82,7 @@ public class ArticleDAO {
 		String cognome = rsUtenti.getString("COGNOME");
 		String nome = rsUtenti.getString("NOME");
 		String password = rsUtenti.getString("PASSWORD");
-		Autore a = new Autore(affiliazione, email, cognome, nome, password, new ID(rsAutori.getString("id_aut")));
+		Author a = new Author(affiliazione, email, cognome, nome, password, new ID(rsAutori.getString("id_aut")));
 		autori.add(a);
 	    }  
 	}

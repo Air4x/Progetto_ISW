@@ -1,7 +1,7 @@
 package database;
 
 import entity.Article;
-import entity.Autore;
+import entity.Author;
 import entity.Conference;
 import utility.ID;
 import java.sql.*;
@@ -88,13 +88,13 @@ public class ConferenceDAO {
 	PreparedStatement stArt = conn.prepareStatement(queryArt);
 	// =======Esecuzione queries=========================
 	while(idArt.next()){
-	    ArrayList<Autore> autori = new ArrayList<>();
+	    ArrayList<Author> autori = new ArrayList<>();
 	    stIdAuth.setString(1, idArt.getString("id_art"));
 	    ResultSet idAuth = stIdAuth.executeQuery();
 	    while(idAuth.next()){
 		stAuth.setString(1, idAuth.getString(1));
 		ResultSet authors = stAuth.executeQuery();
-		Autore a = new Autore(authors.getString("affiliazione"), authors.getString("email"),
+		Author a = new Author(authors.getString("affiliazione"), authors.getString("email"),
 				      authors.getString("cognome"), authors.getString("nome"),
 				      authors.getString("password"), new ID(authors.getString("id")));
 		autori.add(a);

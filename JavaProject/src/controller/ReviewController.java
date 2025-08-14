@@ -4,7 +4,7 @@ import database.ArticleDAO;
 import database.ReviewDAO;
 import DTO.PossibleReviewDTO;
 import database.UserDAO;
-import entity.Autore;
+import entity.Author;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -59,9 +59,9 @@ public class ReviewController {
      */
     public ArrayList<PossibleReviewDTO> getListReviewer(ID articleID) throws SQLException{
         ArrayList<PossibleReviewDTO> list_r = new ArrayList<>();
-        ArrayList<Autore> list_a = u_DAO.getAllAuthors();
+        ArrayList<Author> list_a = u_DAO.getAllAuthors();
 
-        for(Autore a: list_a){
+        for(Author a: list_a){
             if(r_DAO.hasConflitOfInterest(articleID, a.getId()) != true && u_DAO.isUserPresentByID(a.getId()) != true){
                 PossibleReviewDTO r = new PossibleReviewDTO(a);
                 list_r.add(r);

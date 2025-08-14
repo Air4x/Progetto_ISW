@@ -3,7 +3,7 @@ package controller;
 import java.sql.SQLException;
 
 import database.UserDAO;
-import entity.Autore;
+import entity.Author;
 import entity.Organizer;
 import entity.User;
 import utility.ID;
@@ -44,7 +44,7 @@ public class UserController {
             if(ruole == "organizzatore"){
                 user = new Organizer(aff,email,lastname,name,password,id);
             } else if (ruole == "autore"){
-                user = new Autore(aff,email,lastname,name,password,id);
+                user = new Author(aff,email,lastname,name,password,id);
             }
                 RUserDTO fake_user = new RUserDTO(user, true);
                 user_dao.saveUser(user);
@@ -70,7 +70,7 @@ public class UserController {
 
     public RUserDTO getRAuthorBYEmail (String Email) throws SQLException{
         if(this.user_dao.isUserPresentByEmail(Email)==true && this.user_dao.getUserByEmail(Email).getRole()=="autore"){
-            User user = (Autore) user_dao.getUserByEmail(Email);
+            User user = (Author) user_dao.getUserByEmail(Email);
             RUserDTO user_dto = new RUserDTO(user, true);
             return user_dto;
         }

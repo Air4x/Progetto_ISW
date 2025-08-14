@@ -5,7 +5,7 @@ import DTO.RUserDTO;
 import database.ConferenceDAO;
 import database.UserDAO;
 import entity.Article;
-import entity.Autore;
+import entity.Author;
 
 import java.sql.SQLException;
 import DTO.ShowArticleDTO;
@@ -41,15 +41,15 @@ public class ArticleController {
      * 
      */
     public boolean submitArticle(String a_titolo, String a_abstrct,  ArrayList<RUserDTO> a_autori, ID id_conf) throws SQLException{
-        ArrayList<Autore> authors_list = new ArrayList<>();
-        Autore user= null;
+        ArrayList<Author> authors_list = new ArrayList<>();
+        Author user= null;
         ID id = ID.generate();
         try {
 
             if(this.conf_dao.getConferenceByID(id_conf) != null){
             for(RUserDTO f_user : a_autori){
                 if(user_dao.isUserPresentByEmail(f_user.getEmail()) && user_dao.getUserByEmail(f_user.getEmail()).getRole() == "autore" ){
-                    user = (Autore) user_dao.getUserByEmail(f_user.getEmail());
+                    user = (Author) user_dao.getUserByEmail(f_user.getEmail());
                     authors_list.add(user);
                 }else{return false;}
             }

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
-import entity.Autore;
+import entity.Author;
 import entity.Organizer;
 import entity.User;
 import utility.ID;
@@ -63,7 +63,7 @@ public class UserDAO {
         stmt.close();
         String role = rs.getString("ruolo");
         if (role.equals("Autore")) {
-            return new Autore(rs.getString("affiliazione"),
+            return new Author(rs.getString("affiliazione"),
 			      rs.getString("email"),
 			      rs.getString("cognome"),
 			      rs.getString("nome"),
@@ -134,7 +134,7 @@ public class UserDAO {
         stmt.close();
         String role = rs.getString("ruolo");
         if (role.equals("Autore")) {
-            return new Autore(rs.getString("affiliazione"),
+            return new Author(rs.getString("affiliazione"),
 			      rs.getString("email"),
 			      rs.getString("cognome"),
 			      rs.getString("nome"),
@@ -157,13 +157,13 @@ public class UserDAO {
      *
      * @return La lista di tutti gli autori nel database
      */
-    public ArrayList<Autore> getAllAuthors() throws SQLException {
-        ArrayList<Autore> autores = new ArrayList<Autore>();
+    public ArrayList<Author> getAllAuthors() throws SQLException {
+        ArrayList<Author> autores = new ArrayList<Author>();
         String sql = "SELECT nome cognome email affiliazione id password FROM user WHERE role = 'Autore'";
         PreparedStatement stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         while(rs.next()) {
-            Autore a = new Autore(rs.getString("affiliazione"),
+            Author a = new Author(rs.getString("affiliazione"),
 				  rs.getString("email"),
 				  rs.getString("cognome"),
 				  rs.getString("nome"),
@@ -182,7 +182,7 @@ public class UserDAO {
      */
     public void saveUser(User user) throws SQLException {
         if (user.getRole().equals("autore")) {
-            Autore a = (Autore) user;
+            Author a = (Author) user;
             String sql = "INSERT INTO user(id, nome, cognome, email, password, affiliazione, ruolo) VALUES(?, ?, ?, ?, ?, 'autore');";
 	    PreparedStatement stmt = conn.prepareStatement(sql);
 	    stmt.setString(1, a.getId().toString());

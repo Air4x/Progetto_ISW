@@ -1,6 +1,6 @@
 package DTO;
 
-import entity.Autore;
+import entity.Author;
 import utility.ID;
 
 /**
@@ -36,7 +36,7 @@ public class PossibleReviewDTO {
      * Costruttore
      * @param autore
      */
-    public PossibleReviewDTO(Autore autore) {
+    public PossibleReviewDTO(Author autore) {
         this.id = autore.getId();
         this.name = autore.getName();
         this.lastname = autore.getLastName();

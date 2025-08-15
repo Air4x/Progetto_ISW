@@ -1,19 +1,19 @@
 package controller;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-
-import database.ConferenceDAO;
+import DTO.RUserDTO;
 import DTO.ShowActiveConferenceDTO;
 import DTO.ShowArticleDTO;
-import DTO.RUserDTO;
+import database.ConferenceDAO;
 import database.UserDAO;
+import entity.Article;
+import entity.Author;
 import entity.Conference;
 import entity.Organizer;
 import entity.User;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
 import utility.ID;
-import entity.Article;
 
 /**
  * @author Giuseppe Buglione
@@ -72,13 +72,20 @@ public class ConferenceController {
      * @throws SQLException
      */
     public ArrayList<ShowArticleDTO> getArticlesByConference(ID conf_Id) throws SQLException {
-        ArrayList<Article> art = conf_dao.getArticlesByConference(conf_Id);
-        ArrayList<ShowArticleDTO> at = new ArrayList<>();
-        for (Article a : art) {
-            this.dto2 = new ShowArticleDTO (a.getId(),a.getTitle(),a.getAbstr(),a.getAuthors());
-            at.add(dto2);
+        ArrayList<Article> art_1 = conf_dao.getArticlesByConference(conf_Id);
+        ArrayList<ShowArticleDTO> art_2 = new ArrayList<>();
+        ShowArticleDTO art_3= null;
+        ArrayList<RUserDTO> list_a  = new ArrayList<>();
+        RUserDTO usr = null;
+        for (Article a : art_1) {
+            for(Author auth : a.getAuthors()){
+                usr = new RUserDTO (auth.getName(),auth.getLastName(),auth.getEmail(),auth.getAffiliation(),auth.getRole(),false,auth.getId());
+                list_a.add(usr);
+            }
+            art_3 = new ShowArticleDTO(a.getId(), a.getTitle(), a.getAbstr(), list_a);
+            art_2.add(dto2);
         }
-        return at;
+        return art_2;
     }
 
 }

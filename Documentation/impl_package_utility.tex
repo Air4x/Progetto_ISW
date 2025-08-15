@@ -13,7 +13,7 @@ fatto che non ci sono state convergenze documentate utilizzando UUIDv4
 
 \paragraph{Attributi}
 \begin{description}
-\item[id] L'id vero e proprio
+\item[id] L'id vero e proprio rappresentato come \texttt{java.util.UUID}
 \end{description}
 
 \subsubsection{\texttt{utility.ID.ID()}}
@@ -52,10 +52,10 @@ Override del metodo \texttt{toString()} di \texttt{java.util.UUID}
 
 
 \subsection{PasswordManager}
-Classe che si occupa di gestire i <it>segreti</it>. In particolare
-utilizza un file chiamato system.properties nella cartella ./config
-per ottenere le informazioni necessarie alla connessione al database e
-per il sistema di notifica.
+Classe che si occupa di gestire i \textit{segreti}. In particolare
+utilizza un file chiamato system.properties nella cartella
+\texttt{./config} per ottenere le informazioni necessarie alla
+connessione al database e per il sistema di notifica.
  
 La classe è implementata come singleton, così da assicurarne
 l'unicità.  La classe è anche Thread-Safe.
@@ -86,5 +86,5 @@ Metodo thread-sage per ottenere una data proprietà
   
 %%% Local Variables:
 %%% mode: LaTeX    
-%%% TeX-master: "mai
-%%% End:         
+%%% TeX-master: "main"
+%%% End:

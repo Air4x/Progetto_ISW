@@ -7,7 +7,7 @@ images: diagramma_uso.png diagramma_classi.png sequence prg er
 
 sequence: diagramma_sequenza_sottomissione.png diagramma_sequenza_conferenza.png diagramma_sequenza_revisori.png diagramma_sequenza_accesso.png diagramma_sequenza_registrazione.png
 
-prg: diagramma_prg_classi.png diagramma_prg_database.png diagramma_prg_entity.png diagramma_prg_controller.png
+prg: diagramma_prg_classi.png diagramma_prg_database.png diagramma_prg_entity.png diagramma_prg_controller.png diagramma_prg_dto.png
 
 er: er_finale.png
 
@@ -41,10 +41,13 @@ diagramma_prg_database.png: diagramma_prg_database.puml
 diagramma_prg_entity.png: diagramma_prg_entity.pum
 	java -jar plantuml.jar $^
 
-diagramma_prg_controller.png: diagramma_prg_controller.pum
+diagramma_prg_controller.png: diagramma_prg_controller.puml
 	java -jar plantuml.jar $^
 
 er_finale.png: er_finale.pum
+	java -jar plantuml.jar $^
+
+diagramma_prg_dto.png: diagramma_prg_dto.puml
 	java -jar plantuml.jar $^
 
 clean:

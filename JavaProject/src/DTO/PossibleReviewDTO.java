@@ -72,7 +72,7 @@ public class PossibleReviewDTO {
      * Affiliazione del revisore
      * @return
      */
-    public String getAffiliazione() {
+    public String getAffiliation() {
         return affiliazione;
     }
 
@@ -80,7 +80,7 @@ public class PossibleReviewDTO {
      * Elemento per la selezione dell'autore
      * @return
      */
-    public boolean getSelezione() {
+    public boolean getSelection() {
         return selezione;
     }
 }

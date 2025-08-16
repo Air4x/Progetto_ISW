@@ -1,0 +1,57 @@
+@startuml
+package DTO{
+
+    class PossibleReviewDTO {
+        - id: ID 
+        - name: String
+        - lastname: String
+        - affiliazione: String
+        - selezione: boolean
+        + getId(): ID
+        + getName(): String
+        + getLastname(): String
+        + getAffiliation(): String
+        + getSelection(): bolean
+    }
+
+    class RUserDTO {
+        - name: String
+        - lastname: String
+        - email: String
+        - affiliazione: String
+        - ruolo: String
+        - id: ID
+        - esito: boolean
+        + getName(): String
+        + getLastname(): String
+        + getEmail(): String
+        + getAffiliation(): String
+        + getRole(): String
+        + getId(): ID
+        + getResult(): boolean
+    }
+
+    class ShowActiveConferenceDTO {
+        - id: ID 
+        - titolo: String
+        - scadenza: Date
+        - descrizione: String
+        + getId(): ID
+        + getTitle(): String
+        + getDeadline(): Date
+        + getDescription(): String
+    }
+
+    class ShowArticleDTO {
+        - id: ID 
+        - titolo: String
+        - abstr: String
+        - autori: ArrayList<RUserDTO>
+        + getId(): ID
+        + getTitle(): String
+        + getAbstr(): String
+        +getAuthors(): ArrayList<RUserDTO>
+    }
+
+}
+@enduml

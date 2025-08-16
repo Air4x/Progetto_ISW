@@ -1,0 +1,34 @@
+@startuml
+package Controller {
+
+  class UserController {
+    + registerUser(String aff, String email, String lastname, String name, String password, String ruole): RUserDTO
+    + login(email: String, password: String): RUserDTO
+    + getRAuthorBYEmail (String Email): RUserDTO
+  }
+
+  class ConferenceController {
+    + createConference(Date scadenza, String title, String descr, ID id, RUserDTO org): void
+    + getActiveConferences(): ArrayList<ShowActiveConferenceDTO>
+    + getArticlesByConference(id: int): ArrayList<ShowArticleDTO>
+  }
+  
+  class ArticleController {
+    + submitArticle(String a_titolo, String a_abstrct,  ArrayList<RUserDTO> a_autori, ID id_conf): boolean
+    + getArticleByAuthor(ID authorID): ArrayList<ShowArticleDTO>
+  }
+
+  class ReviewController {
+    + assignReviewer(ID articleID, ArrayList<PossibleReviewDTO> list_r): boolean
+    + getListReviewer(ID articleID): ArrayList<PossibleReviewDTO>
+    + updateArticleStatus (ID id_article, String status): boolean
+  }
+
+  class NotificationController {
+    + invioNotifiche(): void
+    + creatMessage(String aut_name, String aut_lastname, String conf_title, String msg): void
+    + sendEmail (String email_d, String conf_title, String msg): void
+  }
+
+}
+@enduml

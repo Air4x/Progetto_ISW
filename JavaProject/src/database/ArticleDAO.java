@@ -96,18 +96,30 @@ public class ArticleDAO {
      * @return La lista di articoli scritti dall'autore
      */
     public ArrayList<Article> getArticlesByAuthor(ID id_aut) throws SQLException {
-		ArrayList<Integer> articleIds = new ArrayList<>();
-		ArrayList<Article> articoli = new ArrayList<>();
-		String fromAutori = "SELECT id_art FROM Autori WHERE id_aut = "+ id_aut.toString();
-		PreparedStatement stAutori = conn.prepareStatement(fromAutori);
-		stAutori.setString(1, id_aut.toString());
-		ResultSet rsAutori = stAutori.executeQuery();
-		while(rsAutori.next()){
-			Article a = getArticleByID(new ID(rsAutori.getString("id_art")));
-			articoli.add(a);
-		}
-		return articoli;
+	ArrayList<Integer> articleIds = new ArrayList<>();
+	ArrayList<Article> articoli = new ArrayList<>();
+	String fromAutori = "SELECT id_art FROM Autori WHERE id_aut = "+ id_aut.toString();
+	PreparedStatement stAutori = conn.prepareStatement(fromAutori);
+	stAutori.setString(1, id_aut.toString());
+	ResultSet rsAutori = stAutori.executeQuery();
+	while(rsAutori.next()){
+	    Article a = getArticleByID(new ID(rsAutori.getString("id_art")));
+	    articoli.add(a);
 	}
+	return articoli;
+    }
 
-
+    /**
+     * Aggiorna il titolo di un articolo dato il suo id
+     *
+     * @param artid, l'id dell'articolo
+     * @param newTitle, il nuovo titolo dell'articolo
+     */
+    public void updateTitle(ID artId, String newTitle) throws SQLException {
+	String updateQuery = "UPDATE Articoli SET Articoli.ID=? WHERE Articoli.ID=?;";
+	PreparedStatement updateArticoli = conn.prepareStatement(updateQuery);
+	updateArticoli.setString(1, artId.toString());
+	updateArticoli.setString(2, newTitle);
+	int _ = updateArticoli.executeUpdate();
+    }
 }

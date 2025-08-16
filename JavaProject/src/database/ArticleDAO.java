@@ -122,4 +122,18 @@ public class ArticleDAO {
 	updateArticoli.setString(2, newTitle);
 	int _ = updateArticoli.executeUpdate();
     }
+
+    /**
+     * Aggiorna l'abstract di un articolo dato il suo id
+     *
+     * @param artId, l'id dell'articolo
+     * @param newAbs, il nuovo abstract dell'articolo
+     */
+    public void updateAbstract(ID artId, String newAbs) throws SQLException {
+	String updateQuery = "UPDATE Articoli SET Articoli.ABSTRACT=? WHERE Articoli.ID=?;";
+	PreparedStatement updateArticoli = conn.prepareStatement(updateQuery);
+	updateArticoli.setString(1, artId.toString());
+	updateArticoli.setString(2, newAbs);
+	int _ = updateArticoli.executeUpdate();
+    }
 }

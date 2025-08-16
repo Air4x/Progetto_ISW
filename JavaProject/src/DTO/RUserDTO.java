@@ -80,7 +80,7 @@ public class RUserDTO {
      * Affilazione del'utente
      * @return
      */
-    public String getAffiliazione() {
+    public String getAffiliation() {
         return affiliazione;
     }
 
@@ -88,7 +88,7 @@ public class RUserDTO {
      * Ruolo del'utente
      * @return
      */
-    public String getRuolo() {
+    public String getRole() {
         return ruolo;
     }
 
@@ -104,7 +104,7 @@ public class RUserDTO {
      * Elemento per verifica della registrazione dell'untente
      * @return
      */
-    public boolean getEsito(){
+    public boolean getResult(){
         return this.esito;
     }
 }

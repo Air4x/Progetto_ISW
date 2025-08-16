@@ -40,7 +40,7 @@ public class ShowActiveConferenceDTO {
      * Titolo  della conferenzza
      * @return
      */
-    public String getTitolo() {
+    public String getTitle() {
         return titolo;
     }
 
@@ -48,7 +48,7 @@ public class ShowActiveConferenceDTO {
      * Scadenza della conferenzza
      * @return
      */
-    public Date getScadenza() {
+    public Date getDeadline() {
         return scadenza;
     }
 
@@ -56,7 +56,7 @@ public class ShowActiveConferenceDTO {
      * Descrizione della conferenzza
      * @return
      */
-    public String getDecrizione() {
+    public String getDescription() {
         return decrizione;
     }
     

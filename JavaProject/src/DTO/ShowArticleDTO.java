@@ -1,10 +1,9 @@
 package DTO;
 
-import java.util.ArrayList;
-
-import entity.Author;
-import utility.ID;
 import entity.Article;
+import entity.Author;
+import java.util.ArrayList;
+import utility.ID;
 
 /**
  * @author Giuseppe Buglione
@@ -58,7 +57,7 @@ public class ShowArticleDTO {
      * Titolo dell'articolo
      * @return
      */
-    public String getTitolo() {
+    public String getTitle() {
         return titolo;
     }
 
@@ -74,7 +73,7 @@ public class ShowArticleDTO {
      * Autori dell'articolo
      * @return
      */
-    public ArrayList<RUserDTO> getAutori() {
+    public ArrayList<RUserDTO> getAuthors() {
         return autori;
     }
 

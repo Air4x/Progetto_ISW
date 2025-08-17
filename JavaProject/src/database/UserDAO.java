@@ -158,7 +158,7 @@ public class UserDAO {
      * @return La lista di tutti gli autori nel database
      */
     public ArrayList<Author> getAllAuthors() throws SQLException {
-        ArrayList<Author> autores = new ArrayList<Author>();
+        ArrayList<Author> authors = new ArrayList<Author>();
         String sql = "SELECT nome cognome email affiliazione id password FROM user WHERE role = 'Autore'";
         PreparedStatement stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
@@ -169,10 +169,10 @@ public class UserDAO {
 				  rs.getString("nome"),
 				  rs.getString("password"),
 				  new ID(rs.getString("id")));
-            autores.add(a);
+            authors.add(a);
         }
 
-        return autores;
+        return authors;
     }
 
     /**
@@ -190,7 +190,7 @@ public class UserDAO {
 	    stmt.setString(3, a.getLastName());
 	    stmt.setString(4, a.getEmail());
 	    stmt.setString(5, a.getPassword());
-	    int nRowsUpdated = stmt.executeUpdate();
+	    int _ = stmt.executeUpdate();
         } else if (user.getRole().equals("organizer")) {
             Organizer o = (Organizer) user;
             String sql = "INSERT INTO user(id, nome, cognome, email, password, affiliazione, ruolo) VALUES(?, ?, ? ,?, ?, 'organizzatore);'";
@@ -200,7 +200,7 @@ public class UserDAO {
 	    stmt.setString(3, o.getLastName());
 	    stmt.setString(4, o.getEmail());
 	    stmt.setString(5, o.getPassword());
-            int nRowsUpdated = stmt.executeUpdate(sql);
+            int _ = stmt.executeUpdate(sql);
         }
     }
 }

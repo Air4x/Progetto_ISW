@@ -26,11 +26,7 @@ public class ConferenceDAO {
      *
      */
     public ConferenceDAO() throws SQLException {
-        try {
             this.conn = DBManager.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -140,6 +136,4 @@ public class ConferenceDAO {
 	}
 	return conferenzeAttive;
     }
-
-
 }

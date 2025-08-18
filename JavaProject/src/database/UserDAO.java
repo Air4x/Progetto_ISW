@@ -184,7 +184,7 @@ public class UserDAO {
     public void saveUser(User user) throws SQLException {
         if (user.getRole().equals("autore")) {
             Author a = (Author) user;
-            String sql = "INSERT INTO user(id, nome, cognome, email, password, affiliazione, ruolo) VALUES(?, ?, ?, ?, ?, 'autore');";
+            String sql = "INSERT INTO user(ID, NOME, COGNOME, EMAIL, PASSWORD, AFFILIAZIONE, RUOLO) VALUES(?, ?, ?, ?, ?, 'autore');";
 	    PreparedStatement stmt = conn.prepareStatement(sql);
 	    stmt.setString(1, a.getId().toString());
 	    stmt.setString(2, a.getName());
@@ -194,7 +194,7 @@ public class UserDAO {
 	    int _ = stmt.executeUpdate();
         } else if (user.getRole().equals("organizer")) {
             Organizer o = (Organizer) user;
-            String sql = "INSERT INTO user(id, nome, cognome, email, password, affiliazione, ruolo) VALUES(?, ?, ? ,?, ?, 'organizzatore);'";
+            String sql = "INSERT INTO user(ID, NOME, COGNOME, EMAIL, PASSWORD, AFFILIAZIONE, RUOLO) VALUES(?, ?, ? ,?, ?, 'organizzatore);'";
 	    PreparedStatement stmt = conn.prepareStatement(sql);
 	    stmt.setString(1, o.getId().toString());
 	    stmt.setString(2, o.getName());

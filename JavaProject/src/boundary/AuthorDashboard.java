@@ -36,7 +36,7 @@ public class AuthorDashboard extends JFrame {
         contentPane.setBounds(5,5,5,5);
         setContentPane(contentPane);
 
-        JList<ShowActiveConferenceDTO> listActiveConference = (JList<ShowActiveConferenceDTO>) cc.getActiveConferences();
+        JList<ShowActiveConferenceDTO> listActiveConference = new JList<>((ListModel) cc.getActiveConferences());
 
         JScrollPane scrollActiveConference = new JScrollPane(listActiveConference);
         scrollActiveConference.setBounds(5,5,50,200);
@@ -56,7 +56,7 @@ public class AuthorDashboard extends JFrame {
 
 
 
-        JList<ShowArticleDTO> listSubmittedArticles = (JList<ShowArticleDTO>) ac.getArticleByAuthor(userDTO.getId());
+        JList<ShowArticleDTO> listSubmittedArticles = new JList<>((ListModel<ShowArticleDTO>) ac.getArticleByAuthor(userDTO.getId()));
         JScrollPane scrollSubmittedArticles = new JScrollPane(listSubmittedArticles);
         scrollSubmittedArticles.setBounds(5,215,50,200);
         contentPane.add(scrollSubmittedArticles);

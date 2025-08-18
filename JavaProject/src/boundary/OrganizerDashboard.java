@@ -51,17 +51,24 @@ public class OrganizerDashboard extends JFrame{
             }
             listActiveConference.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
-                    int index = listActiveConference.locationToIndex(e.getPoint());
-                    ShowActiveConferenceDTO selected = (ShowActiveConferenceDTO) listActiveConference.getSelectedValue();
-                    JList articleSubmitted = (JList) cc.getArticlesByConference(selected.getId());
-                    JScrollPane listarticleSubmitted = (JScrollPane) articleSubmitted.getSelectedValue();
-                    articleSubmitted.addMouseListener(new MouseAdapter() {
-                        public void mouseClicked(MouseEvent e) {
-                            int indexarticle = articleSubmitted.locationToIndex(e.getPoint());
-                            ShowArticleDTO selected = (ShowArticleDTO) articleSubmitted.getSelectedValue();
+                    try {
+                        int index = listActiveConference.locationToIndex(e.getPoint());
+                        ShowActiveConferenceDTO selected = (ShowActiveConferenceDTO) listActiveConference.getSelectedValue();
+                        JList articleSubmitted =new JList ((ListModel) cc.getArticlesByConference(selected.getId()));
+                        JScrollPane listarticleSubmitted = (JScrollPane) articleSubmitted.getSelectedValue();
+                        articleSubmitted.addMouseListener(new MouseAdapter() {
+                            public void mouseClicked(MouseEvent e) {
+                                int indexarticle = articleSubmitted.locationToIndex(e.getPoint());
+                                ShowArticleDTO selected = (ShowArticleDTO) articleSubmitted.getSelectedValue();
 
-                        }
-                    });
+                            }
+                        });
+                    }catch (SQLException ex){
+                        ex.printStackTrace();
+
+
+                    }
+
 
 
                 }

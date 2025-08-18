@@ -109,6 +109,7 @@ public class UserDAO {
         boolean result = false;
         String sql = "SELECT id FROM user WHERE email = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
+	stmt.setString(1, email);
         ResultSet rs = stmt.executeQuery();
         // ResultSet has a next() method that return the next row, if
         // the set is empty (there is no next row) it returns false,

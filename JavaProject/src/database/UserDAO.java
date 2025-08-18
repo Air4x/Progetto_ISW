@@ -42,11 +42,11 @@ public class UserDAO {
      * @return una stringa, che può essere "autore" o "organizzatore"
      */
     public String getUserRoleByID(ID id) throws SQLException {
-        String sql = "SELECT role FROM user WHERE id = ?";
+        String sql = "SELECT RUOLO FROM Utenti WHERE ID = ?";
 	PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, id.toString());
 	ResultSet rs = stmt.executeQuery();
-	return rs.getString("role");
+	return rs.getString("RUOLO");
     }
 
     /**
@@ -56,26 +56,26 @@ public class UserDAO {
      * @return Un istanza della classe Autore/Organizer rappresentante l'utente
      */
     public User getUserByID(ID id) throws SQLException {
-        String sql = "SELECT affiliazione, email, cognome, nome, password, id, ruolo FROM user WHERE id = ?";
+        String sql = "SELECT AFFILIAZIONE, EMAIL, COGNOME, NOME, PASSWORD, ID, RUOLO FROM Utenti WHERE id = ?";
 	PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, id.toString());
 	ResultSet rs =  stmt.executeQuery();
         stmt.close();
-        String role = rs.getString("ruolo");
-        if (role.equals("Autore")) {
-            return new Author(rs.getString("affiliazione"),
-			      rs.getString("email"),
-			      rs.getString("cognome"),
-			      rs.getString("nome"),
-			      rs.getString("password"),
-			      new ID(rs.getString("id")));
+        String role = rs.getString("RUOLO");
+        if (role.equals("autore")) {
+            return new Author(rs.getString("AFFILIAZIONE"),
+			      rs.getString("EMAIL"),
+			      rs.getString("COGNOME"),
+			      rs.getString("NOME"),
+			      rs.getString("PASSWORD"),
+			      new ID(rs.getString("ID")));
         } else {
-            return new Organizer(rs.getString("affiliazione"),
-				 rs.getString("email"),
-				 rs.getString("cognome"),
-				 rs.getString("nome"),
-				 rs.getString("password"),
-				 new ID(rs.getString("id")));
+            return new Organizer(rs.getString("AFFILIAZIONE"),
+				 rs.getString("EMAIL"),
+				 rs.getString("COGNOME"),
+				 rs.getString("NOME"),
+				 rs.getString("PASSWORD"),
+				 new ID(rs.getString("ID")));
         }
     }
 
@@ -87,7 +87,7 @@ public class UserDAO {
      */
     public boolean isUserPresentByID(ID id) throws SQLException {
         boolean result = false;
-        String sql = "SELECT id FROM user WHERE id = ?";
+        String sql = "SELECT ID FROM Utenti WHERE ID = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, id.toString());
         ResultSet rs = stmt.executeQuery();
@@ -107,7 +107,7 @@ public class UserDAO {
      */
     public boolean isUserPresentByEmail(String email) throws SQLException {
         boolean result = false;
-        String sql = "SELECT id FROM user WHERE email = ?";
+        String sql = "SELECT ID FROM Utenti WHERE EMAIL = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, email);
         ResultSet rs = stmt.executeQuery();
@@ -128,26 +128,26 @@ public class UserDAO {
      * @return un istanza di Autore/Organizer che rappresenta l'utente
      */
     public User getUserByEmail(String email) throws SQLException {
-        String sql = "SELECT affiliazione, email, cognome, nome, password, id, ruolo FROM user WHERE email = ?";
+        String sql = "SELECT AFFILIAZIONE, EMAIL, COGNOME, NOME, PASSWORD, ID, RUOLO FROM Utenti WHERE EMAIL = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, email);
         ResultSet rs =  stmt.executeQuery();
         stmt.close();
-        String role = rs.getString("ruolo");
-        if (role.equals("Autore")) {
-            return new Author(rs.getString("affiliazione"),
-			      rs.getString("email"),
-			      rs.getString("cognome"),
-			      rs.getString("nome"),
-			      rs.getString("password"),
-			      new ID(rs.getString("id")));
+        String role = rs.getString("RUOLO");
+        if (role.equals("autore")) {
+            return new Author(rs.getString("AFFILIAZIONE"),
+			      rs.getString("EMAIL"),
+			      rs.getString("COGNOME"),
+			      rs.getString("NOME"),
+			      rs.getString("PASSWORD"),
+			      new ID(rs.getString("ID")));
         } else {
-            return new Organizer(rs.getString("affiliazione"),
-				 rs.getString("email"),
-				 rs.getString("cognome"),
-				 rs.getString("nome"),
-				 rs.getString("password"),
-				 new ID(rs.getString("id")));
+            return new Organizer(rs.getString("AFFILIAZIONE"),
+				 rs.getString("EMAIL"),
+				 rs.getString("COGNOME"),
+				 rs.getString("NOME"),
+				 rs.getString("PASSWORD"),
+				 new ID(rs.getString("ID")));
         }
     }
 
@@ -160,16 +160,16 @@ public class UserDAO {
      */
     public ArrayList<Author> getAllAuthors() throws SQLException {
         ArrayList<Author> authors = new ArrayList<Author>();
-        String sql = "SELECT nome cognome email affiliazione id password FROM user WHERE role = 'Autore'";
+        String sql = "SELECT NOME COGNOME EMAIL AFFILIAZIONE ID PASSWORD FROM Utenti WHERE RUOLO = 'autore'";
         PreparedStatement stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         while(rs.next()) {
-            Author a = new Author(rs.getString("affiliazione"),
-				  rs.getString("email"),
-				  rs.getString("cognome"),
-				  rs.getString("nome"),
-				  rs.getString("password"),
-				  new ID(rs.getString("id")));
+            Author a = new Author(rs.getString("AFFILIAZIONE"),
+				  rs.getString("EMAIL"),
+				  rs.getString("COGNOME"),
+				  rs.getString("NOME"),
+				  rs.getString("PASSWORD"),
+				  new ID(rs.getString("ID")));
             authors.add(a);
         }
 
@@ -192,7 +192,7 @@ public class UserDAO {
 	    stmt.setString(4, a.getEmail());
 	    stmt.setString(5, a.getPassword());
 	    int _ = stmt.executeUpdate();
-        } else if (user.getRole().equals("organizer")) {
+        } else if (user.getRole().equals("organizzatore")) {
             Organizer o = (Organizer) user;
             String sql = "INSERT INTO user(ID, NOME, COGNOME, EMAIL, PASSWORD, AFFILIAZIONE, RUOLO) VALUES(?, ?, ? ,?, ?, 'organizzatore);'";
 	    PreparedStatement stmt = conn.prepareStatement(sql);

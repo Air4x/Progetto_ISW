@@ -80,7 +80,7 @@ public class LoginForm  extends JFrame {
                         if (userDTO == null) {
                             JOptionPane.showMessageDialog(null, "The User does not exist, proceed to register", "Warning", JOptionPane.WARNING_MESSAGE);
                         } else {
-                            if (userDTO.getRuolo().equals("Organizer")) {
+                            if (userDTO.getRole().equals("Organizer")) {
                                 OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
                                 organizerDashboard.setVisible(true);
                                 dispose();

@@ -1,13 +1,12 @@
 package controller;
 
+import DTO.PossibleReviewDTO;
 import database.ArticleDAO;
 import database.ReviewDAO;
-import DTO.PossibleReviewDTO;
 import database.UserDAO;
 import entity.Author;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import utility.ID;
 
 /**
@@ -28,20 +27,20 @@ public class ReviewController {
     /**
      * Metodo per l'assegnazion di revisore
      * @param articleID
-     * @param reviewID
+     * @param list_r
      * @return
      * @throws SQLException
      */
     public boolean assignReviewer (ID articleID, ArrayList<PossibleReviewDTO> list_r ) throws SQLException{
         int v = 0;
         for(PossibleReviewDTO rp : list_r){
-            if(rp.getSelezione() == true){
+            if(rp.getSelection() == true){
                 v++;
             }
         }
         if(v <= 3){
             for(PossibleReviewDTO rp : list_r){
-                if(rp.getSelezione() == true && u_DAO.isUserPresentByID(rp.getId())){
+                if(rp.getSelection() == true && u_DAO.isUserPresentByID(rp.getId())){
                 r_DAO.assignReviewer(articleID, rp.getId());
                     }
                 }
@@ -72,7 +71,7 @@ public class ReviewController {
 
     /**
      * Metodo per aggiorna lo status di un articolo
-     * @param ID
+     * @param id_article
      * @param status
      * @return
      * @throws SQLException

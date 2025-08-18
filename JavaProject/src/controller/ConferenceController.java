@@ -30,6 +30,7 @@ public class ConferenceController {
 
     public ConferenceController() throws SQLException {
         this.conf_dao = new ConferenceDAO();
+        this.user_dao = new UserDAO();
     }
     
     /**

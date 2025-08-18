@@ -40,7 +40,7 @@ public class NotificationController {
         ArrayList<Author> auth = user_dao.getAllAuthors();
         String msg = " ",name_a,lastname_a,email_a,title_c;
         for (Conference c : conf) {
-            if (c.inScadenza()) {
+            if (c.nearDeadline()) {
                 title_c = c.getTitle();
                 for(Author a : auth){
                     name_a =  a.getName();

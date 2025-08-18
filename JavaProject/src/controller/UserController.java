@@ -37,17 +37,18 @@ public class UserController {
         // false = User non trovato
         User user = null ;
         ID id = ID.generate();
-        if(user_dao.isUserPresentByEmail(email)==true){
-        RUserDTO fake_user = new RUserDTO(null, null, null, null, null, false, id);
-         return fake_user;
+        if(user_dao.isUserPresentByEmail(email)){
+         return null;
         }else{
+            RUserDTO fake_user = null;
             if(ruole == "organizzatore"){
                 user = new Organizer(aff,email,lastname,name,password,id);
+
             } else if (ruole == "autore"){
                 user = new Author(aff,email,lastname,name,password,id);
             }
-                RUserDTO fake_user = new RUserDTO(user, true);
-                user_dao.saveUser(user);
+            user_dao.saveUser(user);
+            fake_user = new RUserDTO(user,false);
             return fake_user;
         }
     }

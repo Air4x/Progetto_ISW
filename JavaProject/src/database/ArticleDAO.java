@@ -42,7 +42,7 @@ public class ArticleDAO {
 	pst.setNString(1, a.getId().toString());
 	pst.setNString(2, a.getTitle());
 	pst.setNString(3, a.getAbstr());
-	int nRowsUpdated = pst.executeUpdate();
+	int _ = pst.executeUpdate();
     }
 
     /**
@@ -57,7 +57,7 @@ public class ArticleDAO {
 	String abs = null;
 	ArrayList<Author> autori = new ArrayList<>();
 	// ======To get title, id and abstract=====
-	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID FROM Articoli WHERE id = ?;";
+	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID FROM Articoli WHERE ID = ?;";
 	PreparedStatement stArticoli = conn.prepareStatement(fromArticoli);
 	stArticoli.setString(1, id.toString());
 	ResultSet rsArticoli = stArticoli.executeQuery();
@@ -98,7 +98,7 @@ public class ArticleDAO {
     public ArrayList<Article> getArticlesByAuthor(ID id_aut) throws SQLException {
 	ArrayList<Integer> articleIds = new ArrayList<>();
 	ArrayList<Article> articoli = new ArrayList<>();
-	String fromAutori = "SELECT id_art FROM Autori WHERE id_aut = "+ id_aut.toString();
+	String fromAutori = "SELECT id_art FROM Autori WHERE id_aut = ?";
 	PreparedStatement stAutori = conn.prepareStatement(fromAutori);
 	stAutori.setString(1, id_aut.toString());
 	ResultSet rsAutori = stAutori.executeQuery();

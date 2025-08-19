@@ -15,7 +15,7 @@ public class RUserDTO {
     private String affiliazione;
     private String ruolo;
     private ID id;
-    private boolean esito;
+    private boolean scelta;
 
     /**
      * Costruttore
@@ -24,32 +24,46 @@ public class RUserDTO {
      * @param email
      * @param affiliazione
      * @param ruolo
-     * @param esito
+     * @param scelta
      * @param id
      */
-    public RUserDTO(String name, String lastname, String email, String affiliazione, String ruolo, boolean esito,ID id) {
+    public RUserDTO(String name, String lastname, String email, String affiliazione, String ruolo, boolean scelta,ID id) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.affiliazione = affiliazione;
         this.ruolo = ruolo;
         this.id = id;
-        this.esito=esito;
+        this.scelta =scelta;
     }
 
     /**
      * Costruttore
      * @param user
-     * @param esito
+     * @param scelta
      */
-    public RUserDTO(User user, boolean esito) {
+    public RUserDTO(User user, boolean scelta) {
         this.name = user.getName();
         this.lastname = user.getLastName();
         this.email = user.getEmail();
         this.affiliazione = user.getAffiliation();
         this.ruolo = user.getRole();
         this.id = user.getId();
-        this.esito=esito;
+        this.scelta = scelta;
+    }
+
+    /**
+     * Costruttore di copia
+     * @param user
+     */
+    public RUserDTO(RUserDTO user) {
+        this.name = user.getName();
+        this.lastname= user.getLastname();;
+        this.email = user.getEmail();
+        this.affiliazione = user.getAffiliation();
+        this.ruolo = user.getRole();
+        this.id = user.getId();
+        this.scelta =false;
     }
 
     /**
@@ -105,6 +119,6 @@ public class RUserDTO {
      * @return
      */
     public boolean getResult(){
-        return this.esito;
+        return this.scelta;
     }
 }

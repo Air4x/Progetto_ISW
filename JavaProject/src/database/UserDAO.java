@@ -191,6 +191,7 @@ public class UserDAO {
 	    stmt.setString(3, a.getLastName());
 	    stmt.setString(4, a.getEmail());
 	    stmt.setString(5, a.getPassword());
+	    stmt.setString(6, a.getAffiliation());
 	    int _ = stmt.executeUpdate();
         } else if (user.getRole().equals("organizzatore")) {
             Organizer o = (Organizer) user;
@@ -201,6 +202,7 @@ public class UserDAO {
 	    stmt.setString(3, o.getLastName());
 	    stmt.setString(4, o.getEmail());
 	    stmt.setString(5, o.getPassword());
+	    stmt.setString(6, a.getAffiliation());
             int _ = stmt.executeUpdate(sql);
         }
     }

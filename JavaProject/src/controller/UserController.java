@@ -1,7 +1,6 @@
 package controller;
 
 import java.sql.SQLException;
-
 import database.UserDAO;
 import entity.Author;
 import entity.Organizer;
@@ -37,7 +36,7 @@ public class UserController {
         // false = User non trovato
         User user = null ;
         ID id = ID.generate();
-        if(user_dao.isUserPresentByEmail(email)){
+        if(user_dao.isUserPresentByEmail(email)==true){
          return null;
         }else{
             RUserDTO fake_user = null;

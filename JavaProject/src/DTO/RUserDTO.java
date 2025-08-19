@@ -45,7 +45,7 @@ public class RUserDTO {
     public RUserDTO(User user, boolean esito) {
         this.name = user.getName();
         this.lastname = user.getLastName();
-        this.email = user.getLastName();
+        this.email = user.getEmail();
         this.affiliazione = user.getAffiliation();
         this.ruolo = user.getRole();
         this.id = user.getId();
@@ -57,7 +57,7 @@ public class RUserDTO {
      * @return
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -65,7 +65,7 @@ public class RUserDTO {
      * @return
      */
     public String getLastname() {
-        return lastname;
+        return this.lastname;
     }
 
     /**
@@ -73,7 +73,7 @@ public class RUserDTO {
      * @return
      */
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     /**
@@ -81,7 +81,7 @@ public class RUserDTO {
      * @return
      */
     public String getAffiliation() {
-        return affiliazione;
+        return this.affiliazione;
     }
 
     /**
@@ -89,7 +89,7 @@ public class RUserDTO {
      * @return
      */
     public String getRole() {
-        return ruolo;
+        return this.ruolo;
     }
 
     /**
@@ -97,7 +97,7 @@ public class RUserDTO {
      * @return
      */
     public ID getId() {
-        return id;
+        return this.id;
     }
 
     /**

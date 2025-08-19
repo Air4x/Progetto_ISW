@@ -7,8 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="eclipse.angus.mail" level="project" />
-    <orderEntry type="module-library">
+    <orderEntry type="library" exported="" name="eclipse.angus.mail" level="project" />
+    <orderEntry type="module-library" exported="">
       <library name="JUnit4">
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/junit-4.13.1.jar!/" />
@@ -18,5 +18,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="mariadb.jdbc.java.client" level="project" />
+    <orderEntry type="library" exported="" name="slf4j.nop" level="project" />
   </component>
 </module>

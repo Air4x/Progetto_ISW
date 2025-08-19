@@ -202,7 +202,7 @@ public class UserDAO {
 	    stmt.setString(3, o.getLastName());
 	    stmt.setString(4, o.getEmail());
 	    stmt.setString(5, o.getPassword());
-	    stmt.setString(6, a.getAffiliation());
+	    stmt.setString(6, o.getAffiliation());
             int _ = stmt.executeUpdate(sql);
         }
     }

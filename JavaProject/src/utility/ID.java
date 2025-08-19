@@ -1,5 +1,6 @@
 package utility;
 
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -63,5 +64,17 @@ public class ID {
     @Override
     public String toString() {
 	return this.id.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ID id1 = (ID) o;
+        return id.toString().equals(id1.id.toString());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

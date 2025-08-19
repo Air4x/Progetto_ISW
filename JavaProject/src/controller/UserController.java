@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.SQLException;
+import java.util.Objects;
 import database.UserDAO;
 import entity.Author;
 import entity.Organizer;
@@ -60,21 +61,19 @@ public class UserController {
      * @throws SQLException
      */
     public RUserDTO login (String email, String password) throws SQLException{
-        if(user_dao.isUserPresentByEmail(email) == true && user_dao.getUserByEmail(email).getPassword() == password){
-            RUserDTO fake_user = new RUserDTO (user_dao.getUserByEmail(email),true);
+        if(user_dao.isUserPresentByEmail(email) == true && user_dao.getUserByEmail(email).getPassword().equals(password)){
+            User user = user_dao.getUserByEmail(email);
+            RUserDTO fake_user = new RUserDTO (user,false);
             return fake_user;
         }
-        RUserDTO fake_user = new RUserDTO (null,true);
-        return fake_user;
+        return null;
     }
 
-    public RUserDTO getRAuthorBYEmail (String Email) throws SQLException{
-        if(this.user_dao.isUserPresentByEmail(Email)==true && this.user_dao.getUserByEmail(Email).getRole()=="autore"){
-            User user = (Author) user_dao.getUserByEmail(Email);
-            RUserDTO user_dto = new RUserDTO(user, true);
-            return user_dto;
+    public RUserDTO getRAuthorBYEmail (String email) throws SQLException{
+        if(this.user_dao.isUserPresentByEmail(email)==true && this.user_dao.getUserByEmail(email).getRole()=="autore"){
+            RUserDTO fake_user = new RUserDTO(user_dao.getUserByEmail(email), false);
+            return fake_user;
         }
-
         return null;
     }
     

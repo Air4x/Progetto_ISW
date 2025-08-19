@@ -184,7 +184,7 @@ public class UserDAO {
     public void saveUser(User user) throws SQLException {
         if (user.getRole().equals("autore")) {
             Author a = (Author) user;
-            String Sql = "Insert Into Utenti(ID, NOME, COGNOME, EMAIL, PASSWORD, AFFILIAZIONE, RUOLO) VALUES(?, ?, ?, ?, ?, 'autore');";
+            String sql = "Insert Into Utenti(ID, NOME, COGNOME, EMAIL, PASSWORD, AFFILIAZIONE, RUOLO) VALUES(?, ?, ?, ?, ?, 'autore');";
 	    PreparedStatement stmt = conn.prepareStatement(sql);
 	    stmt.setString(1, a.getId().toString());
 	    stmt.setString(2, a.getName());

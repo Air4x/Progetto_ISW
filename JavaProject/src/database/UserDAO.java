@@ -45,6 +45,7 @@ public class UserDAO {
         try(PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, id.toString());
             ResultSet rs = stmt.executeQuery();
+            rs.next();
             return rs.getString("RUOLO");
         }
     }
@@ -60,6 +61,7 @@ public class UserDAO {
         try(PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, id.toString());
             ResultSet rs = stmt.executeQuery();
+            rs.next();
             String role = rs.getString("RUOLO");
             if (role.equals("autore")) {
                 return new Author(rs.getString("AFFILIAZIONE"),
@@ -165,8 +167,8 @@ public class UserDAO {
      * @return La lista di tutti gli autori nel database
      */
     public ArrayList<Author> getAllAuthors() throws SQLException {
-        ArrayList<Author> authors = new ArrayList<Author>();
-        String sql = "SELECT NOME COGNOME EMAIL AFFILIAZIONE ID PASSWORD FROM Utenti WHERE RUOLO = 'autore'";
+        ArrayList<Author> authors = new ArrayList<>();
+        String sql = "SELECT NOME, COGNOME, EMAIL, AFFILIAZIONE, ID, PASSWORD FROM Utenti WHERE RUOLO = 'autore'";
         try(PreparedStatement stmt = conn.prepareStatement(sql);) {
             ResultSet rs = stmt.executeQuery();
             rs.next();

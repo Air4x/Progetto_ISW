@@ -2,6 +2,8 @@ package entity;
 
 import utility.ID;
 
+import java.util.Objects;
+
 /**
  * Classe che implementa un Organizer, estende {@see entity.User}
  *
@@ -43,5 +45,18 @@ public class Organizer extends User {
      */
     public String getRole() {
         return this.role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Organizer organizer = (Organizer) o;
+        return Objects.equals(getRole(), organizer.getRole());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getRole());
     }
 }

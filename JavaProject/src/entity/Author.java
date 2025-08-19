@@ -1,6 +1,9 @@
 package entity;
 
 import utility.ID;
+
+import java.util.Objects;
+
 /**
  * Classe che implementa un Autore, estende {@see entity.User}
  *
@@ -45,5 +48,18 @@ public class Author extends User {
      */
     public String getRole() {
         return this.role;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Author author = (Author) o;
+        return Objects.equals(getRole(), author.getRole());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getRole());
     }
 }

@@ -1,6 +1,9 @@
 package entity;
 
 import utility.ID;
+
+import java.util.Objects;
+
 /**
  * Classe di dominio astratta, contiene i dati e le funzionalità comuni tra {@see entity.Autore} e {@see entity.Organizer}
  * @author Mario Calcagno
@@ -149,4 +152,21 @@ public abstract class User {
      * @return il ruolo dell'utente
      */
     public abstract String getRole();
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return getId().equals(user.getId())
+                && getName().equals(user.getName())
+                && getLastName().equals(user.getLastName())
+                && getEmail().equals(user.getEmail())
+                && getAffiliation().equals(user.getAffiliation())
+                && getPassword().equals(user.getPassword());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getLastName(), getEmail(), getAffiliation(), getPassword());
+    }
 }

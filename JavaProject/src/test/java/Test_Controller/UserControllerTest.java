@@ -1,29 +1,21 @@
-package test.java;
+package test.java.Test_Controller;
 
 import static org.junit.Assert.*;
 import DTO.RUserDTO;
-import database.UserDAO;
 import org.junit.Test;
 import org.junit.Before;
-import org.junit.After;
-
 import controller.UserController;
-
 import java.sql.SQLException;
 
 public class UserControllerTest {
 
+
     private UserController user_controller;
-    private UserDAO dao;
 
     @Before
     public void setUp() throws SQLException {
         user_controller = new UserController();
-        dao = new UserDAO();
     }
-
-    @After
-    public void tearDown() throws SQLException {}
 
     @Test
     public void testRegisterUserIsPresent() throws SQLException {
@@ -34,8 +26,8 @@ public class UserControllerTest {
 
     @Test
     public void testRegisterUserIsNotPresent() throws SQLException {
-        /*Bisogna cambiare solo l'email per vedere che il test e andato a buon fine*/
-        String new_email = "ppppp.bbb@gmail.com";
+        /*Bisogna cambiare solo new_email per vedere che il test e andato a buon fine*/
+        String new_email = "pnnkjdkczjqzpppp.bbnncszb@gmail.com";
         RUserDTO fake_user =user_controller.registerUser("Seconda Università di Napoli",new_email,"Rombanini","Gianmarco","batuffolino", "autore");
         assertEquals(new_email,fake_user.getEmail());
     }
@@ -63,4 +55,5 @@ public class UserControllerTest {
         RUserDTO fake_user = user_controller.getRAuthorBYEmail("domenico.cotroneo@unina.it");
         assertNull(fake_user);
     }
+
 }

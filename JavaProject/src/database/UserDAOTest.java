@@ -1,11 +1,11 @@
 package database;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entity.Author;
 import entity.User;
-import  org.junit.Test;
+import org.junit.Test;
+import org.junit.Assert.*;
 import utility.ID;
 
 import static org.junit.Assert.*;

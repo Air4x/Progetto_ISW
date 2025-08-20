@@ -24,8 +24,8 @@ org/groupone/DTO/ShowActiveConferenceDTO.class
 org/groupone/database/ArticleDAO.class
 org/groupone/boundary/OrganizerDashboard$1$1.class
 org/groupone/controller/NotificationController$1.class
-org/groupone/utility/PasswordManager.class
 org/groupone/boundary/SubmitArticleForm.class
+org/groupone/utility/PasswordManager.class
 org/groupone/entity/User.class
 org/groupone/boundary/AssignReviewersView$5.class
 org/groupone/boundary/CreateConferenceForm.class

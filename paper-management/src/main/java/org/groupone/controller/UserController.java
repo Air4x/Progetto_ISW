@@ -1,13 +1,13 @@
 package org.groupone.controller;
 
 import java.sql.SQLException;
-import java.util.Objects;
+
+import org.groupone.DTO.RUserDTO;
 import org.groupone.database.UserDAO;
 import org.groupone.entity.Author;
 import org.groupone.entity.Organizer;
 import org.groupone.entity.User;
 import org.groupone.utility.ID;
-import org.groupone.DTO.RUserDTO;
 
 /**
  * @author Giuseppe Buglione
@@ -38,7 +38,8 @@ public class UserController {
         User user = null ;
         ID id = ID.generate();
         if(user_dao.isUserPresentByEmail(email)==true){
-         return null;
+            System.out.println("User già presente");
+            return null;
         }else{
             RUserDTO fake_user = null;
             if(ruole == "organizzatore"){
@@ -49,6 +50,7 @@ public class UserController {
             }
             user_dao.saveUser(user);
             fake_user = new RUserDTO(user,false);
+            System.out.println("User registrato con successo");
             return fake_user;
         }
     }
@@ -66,6 +68,7 @@ public class UserController {
             RUserDTO fake_user = new RUserDTO (user,false);
             return fake_user;
         }
+        System.out.println("Email o password errati");
         return null;
     }
 

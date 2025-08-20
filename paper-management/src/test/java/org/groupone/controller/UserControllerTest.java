@@ -1,12 +1,13 @@
 package org.groupone.controller;
 
 
-import static org.junit.Assert.*;
-import org.groupone.DTO.RUserDTO;
-import org.junit.Test;
-import org.junit.Before;
-import org.groupone.controller.UserController;
 import java.sql.SQLException;
+
+import org.groupone.DTO.RUserDTO;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import org.junit.Before;
+import org.junit.Test;
 
 public class UserControllerTest {
 
@@ -28,7 +29,7 @@ public class UserControllerTest {
     @Test
     public void testRegisterUserIsNotPresent() throws SQLException {
         /*Bisogna cambiare solo new_email per vedere che il test e andato a buon fine*/
-        String new_email = "pnnkjdkczjqzpppp.bbnncszb@gmail.com";
+        String new_email = "komssp.ghysssszb@gmail.com";
         RUserDTO fake_user =user_controller.registerUser("Seconda Università di Napoli",new_email,"Rombanini","Gianmarco","batuffolino", "autore");
         assertEquals(new_email,fake_user.getEmail());
     }

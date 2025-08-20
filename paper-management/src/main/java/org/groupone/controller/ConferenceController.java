@@ -1,5 +1,9 @@
 package org.groupone.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+
 import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ShowActiveConferenceDTO;
 import org.groupone.DTO.ShowArticleDTO;
@@ -10,9 +14,6 @@ import org.groupone.entity.Author;
 import org.groupone.entity.Conference;
 import org.groupone.entity.Organizer;
 import org.groupone.entity.User;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
 import org.groupone.utility.ID;
 
 /**
@@ -42,10 +43,24 @@ public class ConferenceController {
      * @param org
      * @throws SQLException
      */
-    public void createConference (Date scadenza, String title, String descr, ID id, RUserDTO org) throws SQLException {
-        this.conf = new Conference(scadenza,title,descr,id);
-        this.user = (Organizer) this.user_dao.getUserByID(org.getId());;
-        conf_dao.saveConference(this.conf);
+    public boolean createConference (Date scadenza, String title, String descr, ID id, RUserDTO org) throws SQLException {
+        Date today = new Date();
+        if(conf_dao.getConferenceByID(id)!=null){
+            System.out.println("Conference Already Exists");
+            return false;
+        }else if(today.after(scadenza)){
+            System.out.println("Scadenza is after today");
+            return false;
+        }else if(user_dao.isUserPresentByID(org.getId())==false || user_dao.getUserByEmail(org.getEmail()).getRole()!="organizzatore"){
+            System.out.println("Organizzarore is not Found");
+            return false;
+        }else if(conf_dao.getConferenceByID(id)==null){
+            this.conf = new Conference(scadenza,title,descr,id);
+            this.user = (Organizer) this.user_dao.getUserByID(org.getId());;
+            conf_dao.saveConference(this.conf);
+            return true;
+        }
+        return false;
     }
 
     /**

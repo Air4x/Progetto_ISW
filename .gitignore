@@ -19,7 +19,7 @@
 *.tar.gz
 *.rar
 # properties files
-config/*
+resources/*
 *.properties
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -40,3 +40,7 @@ Documentation/auto/*
 
 # Immagini
 VisualParadigm/*.png
+
+paper-management/target/*
+paper-management/src/main/resources/*
+paper-management/src/test/resources/*

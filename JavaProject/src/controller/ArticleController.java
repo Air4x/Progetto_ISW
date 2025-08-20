@@ -6,11 +6,14 @@ import database.ConferenceDAO;
 import database.UserDAO;
 import entity.Article;
 import entity.Author;
-
 import java.sql.SQLException;
 import DTO.ShowArticleDTO;
 import java.util.ArrayList;
-
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utility.ID;
 
 
@@ -20,6 +23,7 @@ import utility.ID;
  */
 public class ArticleController {
 
+    private static final Logger log = LoggerFactory.getLogger(ArticleController.class);
     private ArticleDAO art_dao;
     private UserDAO user_dao;
     private ConferenceDAO conf_dao;
@@ -32,39 +36,30 @@ public class ArticleController {
 
     /**
      * Metodo per la sottomisione di un articolo a una conferenza
-     * @param a_titolo
-     * @param a_abstrct
-     * @param a_autori
+     * @param article_titolo
+     * @param article_abstract
+     * @param article_autori
      * @param id_conf
      * @return
      * @throws SQLException
      * 
      */
-    public boolean submitArticle(String a_titolo, String a_abstrct,  ArrayList<RUserDTO> a_autori, ID id_conf) throws SQLException{
+    public boolean submitArticle(String article_titolo, String article_abstract,  ArrayList<RUserDTO> article_autori, ID id_conf) throws SQLException{
+        ID article_id = ID.generate();
         ArrayList<Author> authors_list = new ArrayList<>();
-        Author user= null;
-        ID id = ID.generate();
-        try {
-
-            if(this.conf_dao.getConferenceByID(id_conf) != null){
-            for(RUserDTO f_user : a_autori){
-                if(user_dao.isUserPresentByEmail(f_user.getEmail()) && user_dao.getUserByEmail(f_user.getEmail()).getRole() == "autore" ){
-                    user = (Author) user_dao.getUserByEmail(f_user.getEmail());
-                    authors_list.add(user);
-                }else{return false;}
+        Date scadenza = this.conf_dao.getConferenceByID(id_conf).getDeadline();
+        Date today = new Date();;
+        if(this.conf_dao.getConferenceByID(id_conf) != null && today.after(scadenza) == false) {
+            for (RUserDTO fake_user : article_autori) {if (user_dao.isUserPresentByEmail(fake_user.getEmail()) && user_dao.getUserByEmail(fake_user.getEmail()).getRole() == "autore") {
+                authors_list.add((Author) user_dao.getUserByEmail(fake_user.getEmail()));}
             }
-                    Article art = new Article(id, a_abstrct, authors_list, a_titolo);
-                    art_dao.saveArticle(art);
-                    return true;
-            }
-        } catch (SQLException e) {
-            e.getSQLState();
-            e.getSQLState();
-            e.getMessage();
-        }  
+            Article art = new Article(article_id, article_abstract, authors_list, article_titolo);
+            art_dao.saveArticle(art);
+            return true;
+        }else if (today.after(scadenza) == true){
+            System.out.println("Conferenza Scaduta");
+        }
         return false;
-        
-        
     }
 
     /**
@@ -73,13 +68,18 @@ public class ArticleController {
      * @return
      * @throws SQLException
      */
-    public ArrayList<ShowArticleDTO> getArticleByAuthor(ID authorID) throws SQLException{
-        ArrayList<Article> articoli = art_dao.getArticlesByAuthor(authorID);
-        ArrayList<ShowArticleDTO> f_art = new ArrayList<>();
-        for(Article c : articoli){
-            ShowArticleDTO a = new ShowArticleDTO(c);
-            f_art.add(a);
+    public ArrayList<ShowArticleDTO> getArticleByAuthor(ID authorID) throws SQLException {
+        if (this.user_dao.isUserPresentByID(authorID) == true) {
+            ArrayList<ShowArticleDTO> fake_article = new ArrayList<>();
+            ArrayList<Article> real_article = art_dao.getArticlesByAuthor(authorID);
+            for (Article article : real_article) {
+                ShowArticleDTO articleDTO = new ShowArticleDTO(article);
+                fake_article.add(articleDTO);
+            }
+            return fake_article;
+        }else  if (this.user_dao.isUserPresentByID(authorID) == false){
+            System.out.println("Utente non trovato");
         }
-        return f_art;
+        return null;
     }
 }

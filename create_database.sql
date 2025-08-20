@@ -42,7 +42,6 @@ CREATE TABLE Autori (
 CREATE TABLE Registro (
        id_conf VARCHAR(36),
        id_art VARCHAR(36),
-       stato  VARCHAR(13),
        CONSTRAINT PK_REGISTRO PRIMARY KEY(id_conf, id_art),
        CONSTRAINT FK_REGISTRO_CONFERENZE FOREIGN KEY(id_conf) REFERENCES Conferenze(ID),
        CONSTRAINT FK_REGISTRO_ARTICOLI FOREIGN KEY(id_art) REFERENCES Articoli(ID)
@@ -77,6 +76,9 @@ VALUES ('90d0f680-b4c1-416f-903c-3d2976025efb', 'Evidence for a sub-jovian plane
 INSERT INTO Conferenze
 VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc16d', 'Interstellar UniNa', 'Viaggi interstellari nel mondo universitario', '2025-12-31');
 
+INSERT INTO Conferenze
+VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc03d', 'Nintendo', 'Perche nintendo dovrebbe essere un monopolio', '2024-12-31');
+
 -- Inserimento Autori
 INSERT INTO Autori
 VALUES ('9c388e06-3c9e-43bd-9327-acbffed869d3', '2e24cd58-a3d7-4057-a1b8-ce9a24669cea');
@@ -87,5 +89,7 @@ VALUES ('9c388e06-3c9e-43bd-9327-acbffed869d3', '90d0f680-b4c1-416f-903c-3d29760
 
 
 -- Inserimento Registro
-INSERT INTO Registro 
-VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc16d', '2e24cd58-a3d7-4057-a1b8-ce9a24669cea', 'in attesa');
+INSERT INTO Registro
+VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc16d', '2e24cd58-a3d7-4057-a1b8-ce9a24669cea');
+-- La riga seguente è stata rimossa perché era un duplicato:
+-- INSERT INTO Registro VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc16d', '2e24cd58-a3d7-4057-a1b8-ce9a24669cea');

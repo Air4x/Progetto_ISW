@@ -8,6 +8,6 @@ public class PasswordManagerTest {
 
     @Test
     public void get() {
-        assertSame(PasswordManager.getInstance().get("db_user"), "mysql");
+        assertTrue(PasswordManager.getInstance().get("db_user").equalsIgnoreCase("mario"));
     }
 }

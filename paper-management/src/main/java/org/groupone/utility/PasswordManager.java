@@ -1,8 +1,8 @@
 package org.groupone.utility;
 
 import java.util.Properties;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Classe che si occupa di gestire i <it>segreti</it>. In particolare
@@ -33,8 +33,8 @@ public class PasswordManager {
      */
     private PasswordManager() {
 	this.props = new Properties();
-	try(FileInputStream fs =new FileInputStream("config/system.properties")){
-	    props.load(fs);
+	try(InputStream in = getClass().getClassLoader().getResourceAsStream("system.properties")){
+	    props.load(in);
 	} catch (IOException e) {
 	    throw new RuntimeException("Failed to load system properties", e);
 	}

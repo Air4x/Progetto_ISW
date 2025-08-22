@@ -60,13 +60,13 @@ public class ConferenceControllerTest {
     public void testGetActiveConferencesOK() throws SQLException {}
 
     @Test
-    public void testGetActiveConferencesNotOK() throws SQLException {}
+    public void testGetActiveConferencesThereAreNotActiveConferences() throws SQLException {}
 
     @Test
     public void testGetArticlesByConferenceOK() throws SQLException {}
 
     @Test
-    public void testGetArticlesByConferenceNotOK() throws SQLException {}
+    public void testGetArticlesByConferenceThreAreNotAArticlesForAuthor() throws SQLException {}
 
 
 }

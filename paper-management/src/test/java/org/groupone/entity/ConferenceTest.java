@@ -5,13 +5,14 @@ import org.junit.Test;
 
 import org.groupone.utility.ID;
 
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class ConferenceTest {
 
     @Test
     public void inScadenza() {
-        Date scadenza = new Date();
+        Date scadenza = Date.valueOf(LocalDate.now());
         Conference c = new Conference(scadenza, "Prova1", "prova1 descrizione", ID.generate());
         Assert.assertTrue("Conferenza non in scadenza",c.nearDeadline());
     }

@@ -41,6 +41,7 @@ public class ConferenceDAO {
         PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, id.toString());
         ResultSet rs = stmt.executeQuery();
+	rs.first();
         return new Conference(rs.getDate("SCADENZA"), rs.getString("TITOLO"), rs.getString("DESCRIZIONE"), new ID(rs.getString("ID")));
     }
 
@@ -69,15 +70,15 @@ public class ConferenceDAO {
     public ArrayList<Article> getArticlesByConference(ID conf_id) throws SQLException {
 	ArrayList<Article> articoli = new ArrayList<>();
 	// ========Ottenimento id articoli====================
-	String queryIdArt = "SELECT id_art FROM REGISTRO WHERE id_art = ?";
+	String queryIdArt = "SELECT id_art FROM Registro WHERE id_conf = ?";
 	PreparedStatement stIdArt =  conn.prepareStatement(queryIdArt);
 	stIdArt.setString(1, conf_id.toString());
 	ResultSet idArt = stIdArt.executeQuery();
 	// =======Ottenimento id autori=======================
-	String queryIdAuth = "SELECT id_aut FROM AUTORI WHERE id_art = ?";
+	String queryIdAuth = "SELECT id_aut FROM Autori WHERE id_art = ?";
 	PreparedStatement stIdAuth = conn.prepareStatement(queryIdAuth);
 	// =======Ottenimento dati autore=====================
-	String queryAuth = "SELECT ID, NOME, COGNOME, PASSWORD, AFFILIAZIONE, EMAIL FROM USER WHERE ID = ?";
+	String queryAuth = "SELECT ID, NOME, COGNOME, PASSWORD, AFFILIAZIONE, EMAIL FROM Utenti WHERE ID = ?";
 	PreparedStatement stAuth = conn.prepareStatement(queryAuth);
 	// =======Ottenimento dati articolo==================
 	String queryArt = "SELECT ID, TITOLO, ABSTRACT FROM Articoli WHERE ID = ?";
@@ -88,15 +89,17 @@ public class ConferenceDAO {
 	    stIdAuth.setString(1, idArt.getString("id_art"));
 	    ResultSet idAuth = stIdAuth.executeQuery();
 	    while(idAuth.next()){
-		stAuth.setString(1, idAuth.getString(1));
+		stAuth.setString(1, idAuth.getString("id_aut"));
 		ResultSet authors = stAuth.executeQuery();
+		authors.first();
 		Author a = new Author(authors.getString("AFFILIAZIONE"), authors.getString("EMAIL"),
 				      authors.getString("COGNOME"), authors.getString("NOME"),
 				      authors.getString("PASSWORD"), new ID(authors.getString("ID")));
 		autori.add(a);
 	    }
 	    stArt.setString(1, idArt.getString("id_art"));
-	    ResultSet article = stArt.executeQuery(queryArt + idArt.getString("id_art"));
+	    ResultSet article = stArt.executeQuery();
+	    article.first();
 	    Article articolo = new Article(new ID(idArt.getString("id_art")),article.getString("ABSTRACT"), autori, article.getString("TITOLO"));
 	    articoli.add(articolo);
 	}

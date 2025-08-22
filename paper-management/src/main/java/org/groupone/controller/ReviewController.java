@@ -32,16 +32,12 @@ public class ReviewController {
      * @return Valore Booleano che indica se l'assegnazione di revisore è avvenuta con successo
      * @throws SQLException
      */
-    public boolean assignReviewer (ID articleID, ArrayList<PossibleReviewDTO> list_r, ArrayList<Integer> elementi_selezionati) throws SQLException{
-        /*
-         * L'oggetto Integer "elementi selezionati" rappresenta gli indici degli elementi selezionati nella lista dei revisori
-         * dove l'utente quando selezione un autore come selezione il sistema va a salvare la posizione in "elementi selezionati"
-         */
-        if(list_r.size()==0){
+    public boolean assignReviewer (ID articleID, ArrayList<PossibleReviewDTO> list_r) throws SQLException{
+        if(list_r.size()==0 || list_r.size()>3){
             return false;
         }
-        for(Integer v :elementi_selezionati){
-            r_DAO.assignReviewer(articleID, list_r.get(v).getId());
+        for(PossibleReviewDTO r: list_r){
+            this.r_DAO.assignReviewer(articleID, r.getId());
         }
        return true;
     }

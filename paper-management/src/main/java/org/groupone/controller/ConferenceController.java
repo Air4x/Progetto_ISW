@@ -2,8 +2,9 @@ package org.groupone.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ShowActiveConferenceDTO;
 import org.groupone.DTO.ShowArticleDTO;
@@ -43,19 +44,20 @@ public class ConferenceController {
      * @param org
      * @throws SQLException
      */
-    public boolean createConference (Date scadenza, String title, String descr, ID id, RUserDTO org) throws SQLException {
-        Date today = new Date();
+    public boolean createConference (LocalDate scadenza, String title, String descr, ID id, RUserDTO org) throws SQLException {
+        LocalDate today = LocalDate.now();
+        Date deadline = Date.valueOf(scadenza);
         if(conf_dao.getConferenceByID(id)!=null){
             System.out.println("Conference Already Exists");
             return false;
-        }else if(today.after(scadenza)){
+        }else if(today.isAfter(scadenza)){
             System.out.println("Scadenza is after today");
             return false;
         }else if(user_dao.isUserPresentByID(org.getId())==false || user_dao.getUserByEmail(org.getEmail()).getRole()!="organizzatore"){
             System.out.println("Organizzarore is not Found");
             return false;
         }else if(conf_dao.getConferenceByID(id)==null){
-            this.conf = new Conference(scadenza,title,descr,id);
+            this.conf = new Conference(deadline,title,descr,id);
             this.user = (Organizer) this.user_dao.getUserByID(org.getId());;
             conf_dao.saveConference(this.conf);
             return true;
@@ -69,14 +71,14 @@ public class ConferenceController {
      * @throws SQLException
      */
     public ArrayList<ShowActiveConferenceDTO> getActiveConferences() throws SQLException{
-        Date data = new Date();
+        LocalDate today = LocalDate.now();
         ArrayList<Conference> all_conf = conf_dao.getAllConference();
         ArrayList<ShowActiveConferenceDTO> actconf = new ArrayList<>();
-        
         for(Conference conf : all_conf){
-            if(conf.getDeadline() != null && !conf.getDeadline().before(data))
-            this.dto = new ShowActiveConferenceDTO(conf.getId(),conf.getTitle(),conf.getDeadline(),conf.getDescription());
-            actconf.add(dto);
+            if(conf.getDeadline() != null && !conf.getDeadline().before(today)){
+                this.dto = new ShowActiveConferenceDTO(conf.getId(),conf.getTitle(),conf.getDeadline(),conf.getDescription());
+                actconf.add(dto);
+            }
         }
             return actconf;
     }

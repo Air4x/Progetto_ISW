@@ -4,7 +4,8 @@ import org.groupone.utility.ID;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Classe che modella una Conferenza
@@ -122,7 +123,7 @@ public class Conference {
      * @return se la conferenza è vicino alla scadenza
      */
     public boolean nearDeadline() {
-	Date now = new Date();
+	Date now = new Date(LocalDate.now().toEpochDay());
 	Calendar.Builder calBuilder = new Calendar.Builder();
         calBuilder.setInstant(now);
         Calendar cNow = calBuilder.build();

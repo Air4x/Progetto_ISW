@@ -5,8 +5,8 @@ import org.groupone.entity.Author;
 import org.groupone.entity.Conference;
 import org.groupone.utility.ID;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Classe che si occupa delle operazioni sulla tabella conferenze nel
@@ -55,7 +55,7 @@ public class ConferenceDAO {
 	stmt.setString(1, conf.getId().toString());
 	stmt.setString(2, conf.getTitle());
 	stmt.setString(3, conf.getDescription());
-	stmt.setString(4, conf.getDeadline().toString());
+	stmt.setDate(4, conf.getDeadline());
         int ignore = stmt.executeUpdate();
     }
 
@@ -128,7 +128,7 @@ public class ConferenceDAO {
     public ArrayList<Conference> getActiveConference() throws SQLException {
 	ArrayList<Conference> conferenze = getAllConference();
 	ArrayList<Conference> conferenzeAttive = new ArrayList<>();
-	Date now = new Date();
+	Date now = new Date(LocalDate.now().toEpochDay());
 	for (Conference conf : conferenze) {
 	    if(now.before(conf.getDeadline())){
 		conferenzeAttive.add(conf);

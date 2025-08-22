@@ -26,7 +26,9 @@ CREATE TABLE Conferenze (
        ID VARCHAR(36) PRIMARY KEY,
        TITOLO VARCHAR(140) NOT NULL,
        DESCRIZIONE VARCHAR(250) NOT NULL,
-       SCADENZA    DATE NOT NULL
+       SCADENZA    DATE NOT NULL,
+       ORGANIZZATORE VARCHAR(36) NOT NULL,
+       CONSTRAINT FK_CONFERENZE_UTENTI FOREIGN KEY(ORGANIZZATORE) REFERENCES Utenti(ID)
 );
 
 -- Tabella Autori
@@ -74,10 +76,10 @@ VALUES ('90d0f680-b4c1-416f-903c-3d2976025efb', 'Evidence for a sub-jovian plane
 
 -- Inserimento Conferenze
 INSERT INTO Conferenze
-VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc16d', 'Interstellar UniNa', 'Viaggi interstellari nel mondo universitario', '2025-12-31');
+VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc16d', 'Interstellar UniNa', 'Viaggi interstellari nel mondo universitario', '2025-12-31', 'ee719226-43d5-4bfc-bf46-3e409bbbf425');
 
 INSERT INTO Conferenze
-VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc03d', 'Nintendo', 'Perche nintendo dovrebbe essere un monopolio', '2024-12-31');
+VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc03d', 'Nintendo', 'Perche nintendo dovrebbe essere un monopolio', '2024-12-31', 'ee719226-43d5-4bfc-bf46-3e409bbbf425');
 
 -- Inserimento Autori
 INSERT INTO Autori

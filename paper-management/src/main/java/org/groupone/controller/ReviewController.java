@@ -1,12 +1,13 @@
 package org.groupone.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 import org.groupone.DTO.PossibleReviewDTO;
 import org.groupone.database.ArticleDAO;
 import org.groupone.database.ReviewDAO;
 import org.groupone.database.UserDAO;
 import org.groupone.entity.Author;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import org.groupone.utility.ID;
 
 /**
@@ -28,32 +29,27 @@ public class ReviewController {
      * Metodo per l'assegnazion di revisore
      * @param articleID
      * @param list_r
-     * @return
+     * @return Valore Booleano che indica se l'assegnazione di revisore è avvenuta con successo
      * @throws SQLException
      */
-    public boolean assignReviewer (ID articleID, ArrayList<PossibleReviewDTO> list_r ) throws SQLException{
-        int v = 0;
-        for(PossibleReviewDTO rp : list_r){
-            if(rp.getSelection() == true){
-                v++;
-            }
+    public boolean assignReviewer (ID articleID, ArrayList<PossibleReviewDTO> list_r, ArrayList<Integer> elementi_selezionati) throws SQLException{
+        /*
+         * L'oggetto Integer "elementi selezionati" rappresenta gli indici degli elementi selezionati nella lista dei revisori
+         * dove l'utente quando selezione un autore come selezione il sistema va a salvare la posizione in "elementi selezionati"
+         */
+        if(list_r.size()==0){
+            return false;
         }
-        if(v <= 3){
-            for(PossibleReviewDTO rp : list_r){
-                if(rp.getSelection() == true && u_DAO.isUserPresentByID(rp.getId())){
-                r_DAO.assignReviewer(articleID, rp.getId());
-                    }
-                }
-            return true;
+        for(Integer v :elementi_selezionati){
+            r_DAO.assignReviewer(articleID, list_r.get(v).getId());
         }
-        return false;
-        
+       return true;
     }
 
     /**
      * Metodo per ottenere una lista di possibili revisori
      * @param articleID
-     * @return
+     * @return un arraylist di PossibleReviewDTO che si possono assegnare come revisori
      * @throws SQLException
      */
     public ArrayList<PossibleReviewDTO> getListReviewer(ID articleID) throws SQLException{
@@ -61,7 +57,7 @@ public class ReviewController {
         ArrayList<Author> list_a = u_DAO.getAllAuthors();
 
         for(Author a: list_a){
-            if(r_DAO.hasConflitOfInterest(articleID, a.getId()) != true && u_DAO.isUserPresentByID(a.getId()) != true){
+            if(r_DAO.hasConflitOfInterest(articleID, a.getId()) != true && u_DAO.isUserPresentByID(a.getId()) == true){
                 PossibleReviewDTO r = new PossibleReviewDTO(a);
                 list_r.add(r);
             }
@@ -73,15 +69,15 @@ public class ReviewController {
      * Metodo per aggiorna lo status di un articolo
      * @param id_article
      * @param status
-     * @return
+     * @return Valore Booleano che indica se l'aggiornamento dello stato è avvenuto con successo
      * @throws SQLException
      */
     public boolean updateArticleStatus (ID id_article, String status) throws SQLException {
-        if(art_dao.getArticleByID(id_article) != null){
-            this.r_DAO.updateArticleStatus(id_article, status);
-            return true;
+        if(art_dao.getArticleByID(id_article) == null){
+            return false;
         }
-        return false;
+        this.r_DAO.updateArticleStatus(id_article, status);
+        return true;
     }
 
 }

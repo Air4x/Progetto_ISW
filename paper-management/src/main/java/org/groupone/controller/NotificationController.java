@@ -1,16 +1,26 @@
 package org.groupone.controller;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Properties;
+
 import org.groupone.database.ConferenceDAO;
 import org.groupone.database.UserDAO;
 import org.groupone.entity.Author;
 import org.groupone.entity.Conference;
-import jakarta.mail.*;
-import jakarta.mail.internet.*;
 import org.groupone.utility.PasswordManager;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Properties;
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeBodyPart;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMultipart;
 
 /**
  * @author Giuseppe Buglione
@@ -84,9 +94,7 @@ public class NotificationController {
         prop.put("mail.smtp.starttls.enable", "true");
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
-        prop.put("mail.smtp.ssl.trust", "sandbox.smtp.mailtrap.io");
-        prop.put("mail.smtp.ssl.trust", "*");
-        prop.put("mail.smtp.ssl.checkserveridentity", false);
+        prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 
         Session session = Session.getDefaultInstance(prop, new Authenticator() {
             @Override

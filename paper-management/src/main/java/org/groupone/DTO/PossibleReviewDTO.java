@@ -83,4 +83,9 @@ public class PossibleReviewDTO {
     public boolean getSelection() {
         return selezione;
     }
+
+    @Override
+    public String toString() {
+        return "ID=" + this.id + "\nNome=" + this.name + "\nCognome=" + this.lastname + "\nAffiliazione=" + this.affiliazione;
+    }
 }

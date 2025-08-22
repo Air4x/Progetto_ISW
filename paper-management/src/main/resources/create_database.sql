@@ -60,7 +60,7 @@ CREATE TABLE Revisori (
 INSERT INTO Utenti
 VALUES ('9c388e06-3c9e-43bd-9327-acbffed869d3', 'Gianmarco', 'Rombanini', 'Seconda Università di Napoli', 'gian.rombanini@outlook.it', 'batuffolino', 'autore');
 INSERT INTO Utenti
-VALUES ('3a9e468f-ff6b-4a84-bbc0-fb3f9e9c5024', 'Giuseppe', 'Aceto', 'Università degli Studi di Napoli Federico II', 'giuseppe.aceto@unina.it', '12345678!', 'autore');
+VALUES ('3a9e468f-ff6b-4a84-bbc0-fb3f9e9c5024', 'Giuseppe', 'Aceto', 'Università degli Studi di Napoli Federico II', 'toolvpstaiscal@gmail.com', '12345678!', 'autore');
 INSERT INTO Utenti
 VALUES ('ee719226-43d5-4bfc-bf46-3e409bbbf425', 'Domenico', 'Cotroneo', 'Università degli Studi di Napoli Federico II', 'domenico.cotroneo@unina.it', 'virtualizzazione', 'organizzatore');
 
@@ -83,7 +83,9 @@ VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc03d', 'Nintendo', 'Perche nintendo dov
 INSERT INTO Autori
 VALUES ('9c388e06-3c9e-43bd-9327-acbffed869d3', '2e24cd58-a3d7-4057-a1b8-ce9a24669cea');
 INSERT INTO Autori
-VALUES ('9c388e06-3c9e-43bd-9327-acbffed869d3', '90d0f680-b4c1-416f-903c-3d2976025efb');
+VALUES ('9c388e06-3c9e-43bd-9327-acbffed869d3', '7cf18f80-b41a-42f0-af41-fbb9b60303ab');
+INSERT INTO Autori
+VALUES ('3a9e468f-ff6b-4a84-bbc0-fb3f9e9c5024', '7cf18f80-b41a-42f0-af41-fbb9b60303ab');
 -- L'istruzione seguente è stata rimossa perché l'ID dell'utente non esiste:
 -- INSERT INTO Autori VALUES ('ee719226-43d5-4bfc-bf46-3e409bbbf425', '90d0f680-b4c1-416f-903c-3d2976025efb');
 

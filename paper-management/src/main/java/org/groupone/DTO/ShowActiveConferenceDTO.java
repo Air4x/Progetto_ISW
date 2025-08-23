@@ -1,6 +1,7 @@
 package org.groupone.DTO;
 
 import java.util.Date;
+
 import org.groupone.utility.ID;
 
 /**
@@ -60,5 +61,8 @@ public class ShowActiveConferenceDTO {
         return decrizione;
     }
     
-    
+    @Override
+    public String toString() {
+        return "ID=" + this.id + "\nTitolo=" + this.titolo + "\nScadenza=" + this.scadenza + "\nDescrizione=" + this.decrizione+"\n";
+    }
 }

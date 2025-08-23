@@ -1,8 +1,9 @@
 package org.groupone.DTO;
 
+import java.util.ArrayList;
+
 import org.groupone.entity.Article;
 import org.groupone.entity.Author;
-import java.util.ArrayList;
 import org.groupone.utility.ID;
 
 /**
@@ -77,6 +78,9 @@ public class ShowArticleDTO {
         return autori;
     }
 
-
+    @Override
+    public String toString() {
+        return "ID=" + this.id + "\nTitolo=" + this.titolo + "\nAbstract=" + this.abstr + "\nAutori=" + this.autori.toString() + "\n";
+    }
 
 }

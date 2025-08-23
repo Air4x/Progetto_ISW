@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import jakarta.mail.MessagingException;
-
+//ok
 public class NotificationControllerTest {
 
     private NotificationController notification_Controller;

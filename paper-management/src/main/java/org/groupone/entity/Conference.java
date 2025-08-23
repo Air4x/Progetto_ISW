@@ -36,6 +36,8 @@ public class Conference {
      */
     private Date deadline;
 
+    private ID organizer;
+
     /**
      * La lista degli articoli sottomessi alla conferenza
      *
@@ -50,11 +52,12 @@ public class Conference {
      * @param description
      * @param id
      */
-    public Conference(Date deadline, String title, String description, ID id) {
+    public Conference(Date deadline, String title, String description, ID id, ID organizer) {
         this.id = id;
         this.deadline = deadline;
         this.title = title;
         this.description = description;
+	this.organizer = organizer;
         this.articles = new ArrayList<>();
     }
 

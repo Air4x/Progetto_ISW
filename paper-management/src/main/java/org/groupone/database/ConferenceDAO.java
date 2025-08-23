@@ -41,8 +41,8 @@ public class ConferenceDAO {
         PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, id.toString());
         ResultSet rs = stmt.executeQuery();
-	rs.first();
-        return new Conference(rs.getDate("SCADENZA"), rs.getString("TITOLO"), rs.getString("DESCRIZIONE"), new ID(rs.getString("ID")));
+	rs.next();
+        return new Conference(rs.getDate("SCADENZA"), rs.getString("TITOLO"), rs.getString("DESCRIZIONE"), new ID(rs.getString("ID")), new ID(rs.getString("ORGANIZER")));
     }
 
     /**
@@ -56,7 +56,7 @@ public class ConferenceDAO {
 	PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, id.toString());
 	ResultSet rs = stmt.executeQuery();
-	if(rs.first()){
+	if(rs.next()){
 	    return true;
 	} else {
 	    return false;
@@ -109,7 +109,7 @@ public class ConferenceDAO {
 	    while(idAuth.next()){
 		stAuth.setString(1, idAuth.getString("id_aut"));
 		ResultSet authors = stAuth.executeQuery();
-		authors.first();
+		authors.next();
 		Author a = new Author(authors.getString("AFFILIAZIONE"), authors.getString("EMAIL"),
 				      authors.getString("COGNOME"), authors.getString("NOME"),
 				      authors.getString("PASSWORD"), new ID(authors.getString("ID")));
@@ -117,7 +117,7 @@ public class ConferenceDAO {
 	    }
 	    stArt.setString(1, idArt.getString("id_art"));
 	    ResultSet article = stArt.executeQuery();
-	    article.first();
+	    article.next();
 	    Article articolo = new Article(new ID(idArt.getString("id_art")),article.getString("ABSTRACT"), autori, article.getString("TITOLO"));
 	    articoli.add(articolo);
 	}
@@ -135,7 +135,7 @@ public class ConferenceDAO {
 	PreparedStatement st = conn.prepareStatement(query);
 	ResultSet rs = st.executeQuery();
 	while(rs.next()){
-	    Conference c = new Conference(rs.getDate("scadenza"), rs.getString("titolo"), rs.getString("descrizione"), new ID(rs.getString("id")));
+	    Conference c = new Conference(rs.getDate("SCADENZA"), rs.getString("TITOLO"), rs.getString("DESCRIZIONE"), new ID(rs.getString("ID")), new ID(rs.getString("ORGANIZZATORE")));
 	    conferenze.add(c);
 	}
 	return conferenze;

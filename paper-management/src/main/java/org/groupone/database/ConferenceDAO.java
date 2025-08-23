@@ -46,6 +46,24 @@ public class ConferenceDAO {
     }
 
     /**
+     * Dati un id controlla se la conferenza esiste
+     *
+     * @param id, l'id della conferenza
+     * @return se la conferenza esiste o meno
+     */
+    public boolean isConferencePresentByID(ID id) throws SQLException {
+	String sql = "SELECT ID FROM Conferenze WHERE ID=?";
+	PreparedStatement stmt = conn.prepareStatement(sql);
+	stmt.setString(1, id.toString());
+	ResultSet rs = stmt.executeQuery();
+	if(rs.first()){
+	    return true;
+	} else {
+	    return false;
+	}
+    }
+    
+    /**
      * Permette di salvare una conferenza nel database
      *
      * @param La conferenza da salvare

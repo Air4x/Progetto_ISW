@@ -28,15 +28,15 @@ public class ReviewController {
     /**
      * Metodo per l'assegnazion di revisore
      * @param articleID
-     * @param list_r
+     * @param list_reviewer_selected
      * @return Valore Booleano che indica se l'assegnazione di revisore è avvenuta con successo
      * @throws SQLException
      */
-    public boolean assignReviewer (ID articleID, ArrayList<PossibleReviewDTO> list_r) throws SQLException{
-        if(list_r.size()==0 || list_r.size()>3){
+    public boolean assignReviewer (ID articleID, ArrayList<PossibleReviewDTO> list_reviewer_selected) throws SQLException{
+        if(list_reviewer_selected.size()==0 || list_reviewer_selected.size()>3){
             return false;
         }
-        for(PossibleReviewDTO r: list_r){
+        for(PossibleReviewDTO r: list_reviewer_selected){
             this.r_DAO.assignReviewer(articleID, r.getId());
         }
        return true;
@@ -51,7 +51,6 @@ public class ReviewController {
     public ArrayList<PossibleReviewDTO> getListReviewer(ID articleID) throws SQLException{
         ArrayList<PossibleReviewDTO> list_r = new ArrayList<>();
         ArrayList<Author> list_a = u_DAO.getAllAuthors();
-
         for(Author a: list_a){
             if(r_DAO.hasConflitOfInterest(articleID, a.getId()) != true && u_DAO.isUserPresentByID(a.getId()) == true){
                 PossibleReviewDTO r = new PossibleReviewDTO(a);

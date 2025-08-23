@@ -21,7 +21,6 @@ public class PossibleReviewDTO {
      * @param name
      * @param lastname
      * @param affiliazione
-     * @param roule
      * @param selezione
      */
     public PossibleReviewDTO(ID id, String name, String lastname, String affiliazione,  boolean selezione) {
@@ -86,6 +85,6 @@ public class PossibleReviewDTO {
 
     @Override
     public String toString() {
-        return "ID=" + this.id + "\nNome=" + this.name + "\nCognome=" + this.lastname + "\nAffiliazione=" + this.affiliazione;
+        return "ID=" + this.id + "\nNome=" + this.name + "\nCognome=" + this.lastname + "\nAffiliazione=" + this.affiliazione+"\n";
     }
 }

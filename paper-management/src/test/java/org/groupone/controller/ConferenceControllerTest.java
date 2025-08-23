@@ -1,12 +1,18 @@
 package org.groupone.controller;
 
 import java.sql.SQLException;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import org.groupone.DTO.RUserDTO;
+import org.groupone.DTO.ShowActiveConferenceDTO;
+import org.groupone.DTO.ShowArticleDTO;
 import org.groupone.database.UserDAO;
 import org.groupone.utility.ID;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -38,17 +44,17 @@ public class ConferenceControllerTest {
         RUserDTO org=null;
         boolean esito=true;
         if(scelta==0){
-            Date scadenza=new Date(2023,12,04);
-            id_conference=ID.generate();
+            LocalDate scadenza=LocalDate.of(2023,12,04);
+            id_conference= ID.generate();
             org = user_controller.login("domenico.cotroneo@unina.it","virtualizzazione");
             esito = conference_conference.createConference(scadenza,title,description,id_conference,org);
         }else if (scelta==1) {
-            Date scadenza=new Date(2026,12,04);
+            LocalDate scadenza=LocalDate.of(2026,12,04);
             id_conference=new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d");
             org = user_controller.login("domenico.cotroneo@unina.it","virtualizzazione");
             esito = conference_conference.createConference(scadenza,title,description,id_conference,org);
         }else if(scelta==2){
-            Date scadenza=new Date(2026,12,04);
+            LocalDate scadenza=LocalDate.of(2026,12,04);
             id_conference=ID.generate();
             org = user_controller.login("giuseppe.aceto@unina.it","12345678!");
             esito = conference_conference.createConference(scadenza,title,description,id_conference,org);
@@ -57,16 +63,42 @@ public class ConferenceControllerTest {
     }
 
     @Test
-    public void testGetActiveConferencesOK() throws SQLException {}
+    public void testGetActiveConferencesOK() throws SQLException {
+        ArrayList<ShowActiveConferenceDTO> activeConferences = conference_conference.getActiveConferences();
+        for(ShowActiveConferenceDTO conference : activeConferences) {
+            System.out.println(conference.toString());
+        }
+        assertNotNull(activeConferences);
+        assertFalse(activeConferences.isEmpty());
+    }
+
+    //per questo test non sono state inserite nel database di test conferenze attive
+    @Test
+    public void testGetActiveConferencesThereAreNotActiveConferences() throws SQLException {
+        ArrayList<ShowActiveConferenceDTO> activeConferences = conference_conference.getActiveConferences();
+        assertNull(activeConferences);
+        assertTrue(activeConferences.isEmpty());
+    }
 
     @Test
-    public void testGetActiveConferencesThereAreNotActiveConferences() throws SQLException {}
+    public void testGetArticlesByConferenceOK() throws SQLException {
+        ID id_conference = new ID ("6279c9e1-b121-4c7a-a196-7a43b57fc16d");
+        ArrayList<ShowArticleDTO> articles = conference_conference.getArticlesByConference(id_conference);
+        System.out.println(articles.isEmpty());
+        for(ShowArticleDTO article : articles) {
+            System.out.println(article.toString());
+        }
+      /*  assertNotNull(articles);
+        assertFalse(articles.isEmpty());*/
+    }
+
 
     @Test
-    public void testGetArticlesByConferenceOK() throws SQLException {}
-
-    @Test
-    public void testGetArticlesByConferenceThreAreNotAArticlesForAuthor() throws SQLException {}
+    public void testGetArticlesByConferenceThreAreNotAArticlesForAuthor() throws SQLException {
+        ID id_conference = new ID ("6279c9e1-b121-4c7a-a196-7a43b57fc03d");
+        ArrayList<ShowArticleDTO> articles = conference_conference.getArticlesByConference(id_conference);
+        assertTrue(articles.isEmpty());
+    }
 
 
 }

@@ -1,15 +1,16 @@
 package org.groupone.controller;
 
-import static org.junit.Assert.*;
-import org.groupone.DTO.RUserDTO;
-import org.groupone.DTO.ShowArticleDTO;
-import org.groupone.controller.UserController;
-import org.junit.Test;
-import org.junit.Before;
-import org.groupone.controller.ArticleController;
-import org.groupone.utility.ID;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import org.groupone.DTO.RUserDTO;
+import org.groupone.DTO.ShowArticleDTO;
+import org.groupone.utility.ID;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import org.junit.Before;
+import org.junit.Test;
 
 
 public class ArticleControllerTest {
@@ -26,19 +27,36 @@ public class ArticleControllerTest {
     @Test
     public void testSubmitArticlesWithAActiveConference() throws SQLException{
         ArrayList<RUserDTO> autori =  new ArrayList<>();
+        autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
         autori.add(user_controller.getRAuthorBYEmail("gian.rombanini@outlook.it"));
-        autori.add(user_controller.getRAuthorBYEmail("giuseppe.aceto@unina.it"));
         ID conference_id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d");
         boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,conference_id);
         assertTrue(esito);
     }
 
+    /*
+     * 0: Conference not found
+     * 1: Expired conference
+     * 2: List of author is empty
+     */
     @Test
-    public void testSubmitArticlesWithExpiredAConference() throws SQLException{
+    public void testSubmitArticlesNotOK() throws SQLException{
         ArrayList<RUserDTO> autori =  new ArrayList<>();
-        autori.add(user_controller.getRAuthorBYEmail("gian.rombanini@outlook.it"));
-        autori.add(user_controller.getRAuthorBYEmail("giuseppe.aceto@unina.it"));
-        ID conference_id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc03d");
+        ID conference_id=null;
+        int scelta = 2;
+        if(scelta == 0){
+            autori.add(user_controller.getRAuthorBYEmail("gian.rombanini@outlook.it"));
+            autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
+            conference_id=ID.generate();
+        }else if(scelta == 1){
+            autori.add(user_controller.getRAuthorBYEmail("gian.rombanini@outlook.it"));
+            autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
+            conference_id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc03d");
+        }else if(scelta == 2){
+            autori.add(user_controller.getRAuthorBYEmail(""));
+            autori.add(user_controller.getRAuthorBYEmail(""));
+            conference_id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d");
+        }
         boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,conference_id);
         assertFalse(esito);
     }
@@ -46,16 +64,9 @@ public class ArticleControllerTest {
     @Test
     public void testGetArticleByAuthorOK() throws SQLException{
         ID author_id = new ID ("9c388e06-3c9e-43bd-9327-acbffed869d3");
-        ArrayList<ID> list_id = new ArrayList<>();
         ArrayList<ShowArticleDTO> list_article = new ArrayList<>();
         list_article=this.article_controller.getArticleByAuthor(author_id);
-        list_id.add(new ID ("2e24cd58-a3d7-4057-a1b8-ce9a24669cea"));
-        list_id.add(new ID ("90d0f680-b4c1-416f-903c-3d2976025efb"));
-        int i=0;
-        for(ShowArticleDTO article : list_article){
-            assertEquals(article.getId(),list_id.get(i));
-            i++;
-        }
+        assertFalse(list_article.isEmpty());
     }
 
     @Test

@@ -3,7 +3,6 @@ package org.groupone.controller;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ShowActiveConferenceDTO;
 import org.groupone.DTO.ShowArticleDTO;
@@ -16,6 +15,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+//ok
 public class ConferenceControllerTest {
 
     private ConferenceController conference_conference;
@@ -30,14 +30,22 @@ public class ConferenceControllerTest {
     }
 
     @Test
-    public void testCreateConferenceOK() throws SQLException {}
+    public void testCreateConferenceOK() throws SQLException {
+        LocalDate scadenza=LocalDate.of(2026,12,04);
+        String title ="Nintendo";
+        String description ="Perche nintendo dovrebbe essere un monopolio";
+        ID id_conference= ID.generate();
+        RUserDTO org = user_controller.login("domenico.cotroneo@unina.it","virtualizzazione");
+        boolean esito = conference_conference.createConference(scadenza,title,description,id_conference,org);
+        assertTrue(esito);
+    }
 
     // 0= Per scadenza precedente a today
     // 1= Conferenza già esistente
     // 2= Organizzatore non esistente
     @Test
     public void testCreateConferenceNotOK() throws SQLException {
-        int scelta =0;
+        int scelta =2;
         String title ="Nintendo";
         String description ="Perche nintendo dovrebbe essere un monopolio";
         ID id_conference=null;
@@ -56,7 +64,7 @@ public class ConferenceControllerTest {
         }else if(scelta==2){
             LocalDate scadenza=LocalDate.of(2026,12,04);
             id_conference=ID.generate();
-            org = user_controller.login("giuseppe.aceto@unina.it","12345678!");
+            org = user_controller.login("toolvpstaiscal@gmail.com","12345678!");
             esito = conference_conference.createConference(scadenza,title,description,id_conference,org);
         }
         assertFalse(esito);
@@ -84,12 +92,8 @@ public class ConferenceControllerTest {
     public void testGetArticlesByConferenceOK() throws SQLException {
         ID id_conference = new ID ("6279c9e1-b121-4c7a-a196-7a43b57fc16d");
         ArrayList<ShowArticleDTO> articles = conference_conference.getArticlesByConference(id_conference);
-        System.out.println(articles.isEmpty());
-        for(ShowArticleDTO article : articles) {
-            System.out.println(article.toString());
-        }
-      /*  assertNotNull(articles);
-        assertFalse(articles.isEmpty());*/
+        assertNotNull(articles);
+        assertFalse(articles.isEmpty());
     }
 
 

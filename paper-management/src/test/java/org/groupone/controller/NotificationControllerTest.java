@@ -21,5 +21,4 @@ public class NotificationControllerTest {
     public void testInvioNotifiche() throws SQLException, MessagingException{
         notification_Controller.invioNotifiche();
     }
-
 }

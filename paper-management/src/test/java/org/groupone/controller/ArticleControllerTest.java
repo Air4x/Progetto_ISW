@@ -43,7 +43,7 @@ public class ArticleControllerTest {
     public void testSubmitArticlesNotOK() throws SQLException{
         ArrayList<RUserDTO> autori =  new ArrayList<>();
         ID conference_id=null;
-        int scelta = 2;
+        int scelta = 0;
         if(scelta == 0){
             autori.add(user_controller.getRAuthorBYEmail("gian.rombanini@outlook.it"));
             autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));

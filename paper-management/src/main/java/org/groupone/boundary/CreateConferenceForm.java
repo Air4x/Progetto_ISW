@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 import java.util.Date;
 import java.sql.SQLException;
 
@@ -88,10 +89,12 @@ public class CreateConferenceForm extends JFrame {
         contentPane.add(lblduedate);
 
         JTextField txtduedate = new JTextField();
-        txtduedate.setText("DD/MM/YYYY");
+        txtduedate.setText("DD-MM-YYYY");
         txtduedate.setBounds(160, 40, 150, 20);
         contentPane.add(txtduedate);
-        Date duedate = new Date(txtduedate.getText());
+        LocalDate duedate = LocalDate.parse(txtduedate.getText());
+
+
 
 
         JButton buttonCreateConference = new JButton("Create Conference");
@@ -103,20 +106,19 @@ public class CreateConferenceForm extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 try {
                     ConferenceController cc = new ConferenceController();
-                    Date today = new Date();
-                    today.setMinutes(0);
-                    today.setHours(0);
-                    today.setSeconds(0);
-                    if (!duedate.before(today) && txttitle.getText().length() < 30 && txtareadescription.getText().length() < 100) {
+                    LocalDate today =  LocalDate.now();
+
+                    if (!duedate.isBefore(today) && txttitle.getText().length() < 30 && txtareadescription.getText().length() < 100) {
                         try {
-                            cc.createConference(duedate, txttitle.getText(), txtareadescription.getText(), ID.generate(), organizer);
+
+                            cc.createConference((LocalDate) duedate, txttitle.getText(), txtareadescription.getText(), ID.generate(), organizer);
                             JOptionPane.showMessageDialog(null, "Conference created");
                             dispose();
                         } catch (Exception ex) {
                             JOptionPane.showMessageDialog(null, ex);
                         }
                     }
-                    if (duedate.before(today)) {
+                    if (duedate.isBefore(today)) {
                         JOptionPane.showMessageDialog(null, "Conference creation failed, Due Date is earlier than today");
                     }
                     if (txttitle.getText().length() > 30) {

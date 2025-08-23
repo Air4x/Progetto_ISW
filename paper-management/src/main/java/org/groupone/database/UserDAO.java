@@ -171,7 +171,6 @@ public class UserDAO {
         String sql = "SELECT NOME, COGNOME, EMAIL, AFFILIAZIONE, ID, PASSWORD FROM Utenti WHERE RUOLO = 'autore'";
         try(PreparedStatement stmt = conn.prepareStatement(sql);) {
             ResultSet rs = stmt.executeQuery();
-            rs.next();
             while (rs.next()) {
                 Author a = new Author(rs.getString("AFFILIAZIONE"),
                         rs.getString("EMAIL"),

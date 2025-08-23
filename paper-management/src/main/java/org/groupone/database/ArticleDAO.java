@@ -37,12 +37,19 @@ public class ArticleDAO {
      * @param l'articolo che si vuole salvare
      */
     public void saveArticle(Article a) throws SQLException {
-	String sql = "INSERT INTO Articoli VALUES (?, ?, ?)";
+	String sql = "INSERT INTO Articoli VALUES (?, ?, ?);";
 	PreparedStatement pst = conn.prepareStatement(sql);
 	pst.setNString(1, a.getId().toString());
 	pst.setNString(2, a.getTitle());
 	pst.setNString(3, a.getAbstr());
 	int ignore = pst.executeUpdate();
+	String insertAuthors = "INSERT INTO Autori VALUES(?, ?);";
+	PreparedStatement stAuthors = conn.prepareStatement(insertAuthors);
+	for(Author autore : a.getAuthors()){
+	    stAuthors.setString(1, autore.getId().toString());
+	    stAuthors.setString(2, a.getId().toString());
+	    int nRow = stAuthors.executeUpdate();
+	}
     }
 
     /**
@@ -69,7 +76,7 @@ public class ArticleDAO {
 	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = ?;";
 	PreparedStatement stAutori = conn.prepareStatement(fromAutori);
 	stAutori.setString(1, id.toString());
-	ResultSet rsAutori = stArticoli.executeQuery();
+	ResultSet rsAutori = stAutori.executeQuery();
 	String fromUtenti = "SELECT NOME, COGNOME, AFFILIAZIONE, EMAIL, PASSWORD, ID FROM Utenti WHERE RUOLO = ? AND ID = ?";
 	PreparedStatement pstUtenti= conn.prepareStatement(fromUtenti);
 	while(rsAutori.next()) {

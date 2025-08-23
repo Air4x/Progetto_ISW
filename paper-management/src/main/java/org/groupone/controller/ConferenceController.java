@@ -1,10 +1,10 @@
 package org.groupone.controller;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+
 import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ShowActiveConferenceDTO;
 import org.groupone.DTO.ShowArticleDTO;
@@ -42,12 +42,13 @@ public class ConferenceController {
      * @param descr
      * @param id
      * @param org
+     * @return Valore booleano che indica se la conferenza è stata creata con successo
      * @throws SQLException
      */
     public boolean createConference (LocalDate scadenza, String title, String descr, ID id, RUserDTO org) throws SQLException {
         LocalDate today = LocalDate.now();
-        Date deadline = Date.valueOf(scadenza);
-        if(conf_dao.getConferenceByID(id)!=null){
+        Date deadline = new Date (scadenza.toEpochDay());
+        if(conf_dao.isConferencePresentByID(id)){
             System.out.println("Conference Already Exists");
             return false;
         }else if(today.isAfter(scadenza)){
@@ -67,16 +68,18 @@ public class ConferenceController {
 
     /**
      * Metodo per ottenere una lista di conferenzze attive [NON ANCORA SCADUTE]
-     * @return
+     * @return un array list di ShowActiveConferenceDTO che indicano le conferenze attive
      * @throws SQLException
      */
     public ArrayList<ShowActiveConferenceDTO> getActiveConferences() throws SQLException{
-        LocalDate today = LocalDate.now();
+        Date today = Date.valueOf(LocalDate.now());
         ArrayList<Conference> all_conf = conf_dao.getAllConference();
         ArrayList<ShowActiveConferenceDTO> actconf = new ArrayList<>();
         for(Conference conf : all_conf){
-            if(conf.getDeadline() != null && !conf.getDeadline().before(today)){
-                this.dto = new ShowActiveConferenceDTO(conf.getId(),conf.getTitle(),conf.getDeadline(),conf.getDescription());
+            Date deadline = conf.getDeadline();
+            ID id = conf.getId();
+            if(deadline != null && deadline.after(today)){
+                this.dto = new ShowActiveConferenceDTO(id,conf.getTitle(),conf.getDeadline(),conf.getDescription());
                 actconf.add(dto);
             }
         }
@@ -86,24 +89,25 @@ public class ConferenceController {
     /**
      * Metodo per ottenere una lista di articoli
      * @param conf_Id
-     * @return
+     * @return un array list di ShowArticleDTO che indicano gli articoli della conferenza
      * @throws SQLException
      */
     public ArrayList<ShowArticleDTO> getArticlesByConference(ID conf_Id) throws SQLException {
-        ArrayList<Article> art_1 = conf_dao.getArticlesByConference(conf_Id);
-        ArrayList<ShowArticleDTO> art_2 = new ArrayList<>();
-        ShowArticleDTO art_3= null;
-        ArrayList<RUserDTO> list_a  = new ArrayList<>();
-        RUserDTO usr = null;
-        for (Article a : art_1) {
+        ArrayList<Article> real_list_articles = conf_dao.getArticlesByConference(conf_Id);
+        ArrayList<ShowArticleDTO> fake_list_articles = new ArrayList<>();
+        ArrayList<RUserDTO> fake_list_author  = new ArrayList<>();
+        ShowArticleDTO fake_article= null;
+        RUserDTO fake_user = null;
+        for(Article a : real_list_articles) {
             for(Author auth : a.getAuthors()){
-                usr = new RUserDTO (auth.getName(),auth.getLastName(),auth.getEmail(),auth.getAffiliation(),auth.getRole(),false,auth.getId());
-                list_a.add(usr);
+                ID id= auth.getId();
+                fake_user = new RUserDTO (auth.getName(),auth.getLastName(),auth.getEmail(),auth.getAffiliation(),auth.getRole(),false,id);
+                fake_list_author.add(fake_user);
             }
-            art_3 = new ShowArticleDTO(a.getId(), a.getTitle(), a.getAbstr(), list_a);
-            art_2.add(dto2);
+            fake_article = new ShowArticleDTO(a.getId(), a.getTitle(), a.getAbstr(), fake_list_author);
+            fake_list_articles.add(fake_article);
         }
-        return art_2;
+        return fake_list_articles;
     }
 
 }

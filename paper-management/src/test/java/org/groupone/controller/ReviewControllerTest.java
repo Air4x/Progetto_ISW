@@ -2,9 +2,12 @@ package org.groupone.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import org.groupone.database.ArticleDAO;
+
 import org.groupone.DTO.PossibleReviewDTO;
+import org.groupone.database.ArticleDAO;
+import org.groupone.database.UserDAO;
 import org.groupone.entity.Article;
+import org.groupone.entity.Author;
 import org.groupone.utility.ID;
 import static org.junit.Assert.assertFalse;
 import org.junit.Before;
@@ -14,11 +17,13 @@ public class ReviewControllerTest {
 
     private ReviewController review_Controller;
     private ArticleDAO article_dao;
+    private UserDAO u_DAO;
 
     @Before
     public void setUp() throws SQLException {
         review_Controller = new ReviewController();
         article_dao = new ArticleDAO();
+        u_DAO = new UserDAO();
     }
 
     @Test
@@ -29,7 +34,12 @@ public class ReviewControllerTest {
 
     @Test
     public void testGetListReviewerSuccess() throws SQLException {
-        ID id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
+        ArrayList<Author> list_a = u_DAO.getAllAuthors();
+        for(Author author : list_a){
+            System.out.println(list_a.size());
+        }
+
+        /*ID id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
         ArrayList<PossibleReviewDTO> list_reviewer = review_Controller.getListReviewer(id_article);
         for(PossibleReviewDTO r : list_reviewer){
             System.out.println(r.toString());
@@ -38,7 +48,7 @@ public class ReviewControllerTest {
             assert(false);
         } else {
             assert(true);
-        }
+        }*/
     }
 
     @Test

@@ -37,12 +37,12 @@ public class ConferenceDAO {
      * conferenza ottenuta
      */
     public Conference getConferenceByID(ID id) throws SQLException {
-        String sql = "SELECT * FROM Conferenze WHERE ID = ?";
+        String sql = "SELECT ID, TITOLO, DESCRIZIONE, SCADENZA, ORGANIZZATORE FROM Conferenze WHERE ID = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, id.toString());
         ResultSet rs = stmt.executeQuery();
 	rs.next();
-        return new Conference(rs.getDate("SCADENZA"), rs.getString("TITOLO"), rs.getString("DESCRIZIONE"), new ID(rs.getString("ID")), new ID(rs.getString("ORGANIZER")));
+        return new Conference(rs.getDate("SCADENZA"), rs.getString("TITOLO"), rs.getString("DESCRIZIONE"), new ID(rs.getString("ID")), new ID(rs.getString("ORGANIZZATORE")));
     }
 
     /**
@@ -69,12 +69,13 @@ public class ConferenceDAO {
      * @param La conferenza da salvare
      */
     public void saveConference(Conference conf) throws SQLException {
-        String sql = "INSERT INTO Conferenze(ID, TITOLO, DESCRIZIONE, SCADENZA) VALUES(?, ?, ?, ?);";
+        String sql = "INSERT INTO Conferenze(ID, TITOLO, DESCRIZIONE, SCADENZA, ORGANIZZATORE) VALUES(?, ?, ?, ?, ?);";
         PreparedStatement stmt = conn.prepareStatement(sql);
 	stmt.setString(1, conf.getId().toString());
 	stmt.setString(2, conf.getTitle());
 	stmt.setString(3, conf.getDescription());
 	stmt.setDate(4, conf.getDeadline());
+	stmt.setString(5, conf.getOrganizer());
         int ignore = stmt.executeUpdate();
     }
 

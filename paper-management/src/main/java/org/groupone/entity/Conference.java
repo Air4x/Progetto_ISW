@@ -119,6 +119,10 @@ public class Conference {
         return title;
     }
 
+    public String getOrganizer() {
+	return organizer.toString();
+    }
+
     /**
      * Predicato che verifica se la conferenza è vicino (5 giorni)
      * alla sua data di scadenza per la sottomissione di articoli

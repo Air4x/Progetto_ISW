@@ -59,13 +59,26 @@ public class ConferenceDAOTest {
 	Date scadenza = Date.valueOf(LocalDate.now());
 	Conference c = new Conference(scadenza,
 				      "TITOLO_PROVA",
-				      "DESCRIZIONE_PROVA_RIMUOVERE_PRIMA_DI_TEST", ID.generate());
+				      "DESCRIZIONE_PROVA_RIMUOVERE_PRIMA_DI_TEST", ID.generate(), new ID("ee719226-43d5-4bfc-bf46-3e409bbbf425"));
 	try {
 	    ConferenceDAO dao = new ConferenceDAO();
 	    dao.saveConference(c);
 	}catch (SQLException e){
 	    e.printStackTrace();
 	    fail("saveConference - Found exception");
+	}
+    }
+
+    @Test
+    public void isConferencePresentByID(){
+	ID id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc03d");
+	try {
+	    ConferenceDAO dao = new ConferenceDAO();
+	    boolean result = dao.isConferencePresentByID(id);
+	    assertTrue("isConferencePresentByID - Conferenza non trovata", result);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    fail("isConferencePresentByID - found exception");
 	}
     }
 }

@@ -48,7 +48,8 @@ public class NotificationController {
     public void invioNotifiche() throws SQLException, MessagingException {
         ArrayList<Conference> conf = conf_dao.getActiveConference();
         ArrayList<Author> auth = user_dao.getAllAuthors();
-        String msg = " ",name_a,lastname_a,email_a,title_c;
+        System.out.println(auth.size());
+        String msg,name_a,lastname_a,email_a,title_c;
         for (Conference c : conf) {
             if (c.nearDeadline()) {
                 title_c = c.getTitle();
@@ -56,7 +57,7 @@ public class NotificationController {
                     name_a =  a.getName();
                     lastname_a =  a.getLastName();
                     email_a =  a.getEmail();
-                    creatMessage(name_a,lastname_a,title_c,msg);
+                    msg = createMessage(name_a,lastname_a,title_c);
                     sendEmail(email_a,title_c,msg);
                 }
             }
@@ -69,10 +70,9 @@ public class NotificationController {
      * @param aut_name: Nome del destinatario
      * @param aut_lastname: Cognome del destinatario
      * @param conf_title: Nome della conferenza in scadenza
-     * @param msg: Messaggio da scrivere
      */
-    private void creatMessage(String aut_name, String aut_lastname, String conf_title, String msg){
-        msg = "Saluti "+aut_name+" "+aut_lastname+"\nLe Recordiamo che la consegna per "+conf_title+" sta per scadere";
+    private String createMessage(String aut_name, String aut_lastname, String conf_title){
+        return "Saluti "+aut_name+" "+aut_lastname+".\n\nLe Recordiamo che la consegna per "+conf_title+" sta per scadere";
     }
 
     /**
@@ -108,7 +108,7 @@ public class NotificationController {
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(m_email));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email_d));
-        message.setSubject("Scadenza Consegne Articoli per"+conf_title);
+        message.setSubject("Scadenza Consegne Articoli per "+conf_title);
 
         //Codifica testo html
         MimeBodyPart mbp =  new MimeBodyPart();

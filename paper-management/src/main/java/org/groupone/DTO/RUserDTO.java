@@ -124,6 +124,6 @@ public class RUserDTO {
 
     @Override
     public String toString() {
-        return "ID=" + this.id + "\nNome=" + this.name + "\nCognome=" + this.lastname +"\nEmail=" + this.email + "\nAffiliazione=" + this.affiliazione+"\nRuolo=" + this.ruolo + "\n";
+        return "\nID=" + this.id + "\nNome=" + this.name + "\nCognome=" + this.lastname +"\nEmail=" + this.email + "\nAffiliazione=" + this.affiliazione+"\nRuolo=" + this.ruolo + "\n";
     }
 }

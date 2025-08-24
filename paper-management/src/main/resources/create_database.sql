@@ -77,9 +77,10 @@ VALUES ('90d0f680-b4c1-416f-903c-3d2976025efb', 'Evidence for a sub-jovian plane
 -- Inserimento Conferenze
 INSERT INTO Conferenze
 VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc16d', 'Interstellar UniNa', 'Viaggi interstellari nel mondo universitario', '2025-12-31', 'ee719226-43d5-4bfc-bf46-3e409bbbf425');
-
 INSERT INTO Conferenze
 VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc03d', 'Nintendo', 'Perche nintendo dovrebbe essere un monopolio', '2024-12-31', 'ee719226-43d5-4bfc-bf46-3e409bbbf425');
+INSERT INTO Conferenze
+VALUES ('611f4dff-28c2-42b9-982d-762a3e9e2b3a', 'Nvidia', 'Perche nvidia dovrebbe essere un monopolio', '2025-08-26', 'ee719226-43d5-4bfc-bf46-3e409bbbf425');
 
 -- Inserimento Autori
 INSERT INTO Autori

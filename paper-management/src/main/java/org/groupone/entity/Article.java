@@ -1,6 +1,8 @@
 package org.groupone.entity;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
 import org.groupone.utility.ID;
 
 /**
@@ -95,5 +97,16 @@ public class Article {
      */
     public ID getId(){
 	return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Article article = (Article) o;
+        return Objects.equals(getId(),
+			      article.getId()) &&
+	    Objects.equals(getTitle(), article.getTitle()) &&
+	    Objects.equals(getAbstr(), article.getAbstr()) &&
+	    Objects.equals(getAuthors(), article.getAuthors());
     }
 }

@@ -47,7 +47,7 @@ public class ConferenceController {
      */
     public boolean createConference (LocalDate scadenza, String title, String descr, ID id, RUserDTO org) throws SQLException {
         LocalDate today = LocalDate.now();
-        Date deadline = new Date (scadenza.toEpochDay());
+        Date deadline = Date.valueOf(scadenza);
         if(conf_dao.isConferencePresentByID(id)){
             System.out.println("Conference Already Exists");
             return false;
@@ -57,13 +57,10 @@ public class ConferenceController {
         }else if(user_dao.isUserPresentByID(org.getId())==false || user_dao.getUserByEmail(org.getEmail()).getRole()!="organizzatore"){
             System.out.println("Organizzarore is not Found");
             return false;
-        }else if(conf_dao.getConferenceByID(id)==null){
-            this.conf = new Conference(deadline,title,descr,id);
-            this.user = (Organizer) this.user_dao.getUserByID(org.getId());;
-            conf_dao.saveConference(this.conf);
-            return true;
         }
-        return false;
+        this.conf = new Conference(deadline,title,descr,id,org.getId());
+        conf_dao.saveConference(this.conf);
+        return true;
     }
 
     /**

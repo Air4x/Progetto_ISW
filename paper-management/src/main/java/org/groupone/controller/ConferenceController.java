@@ -13,7 +13,6 @@ import org.groupone.database.UserDAO;
 import org.groupone.entity.Article;
 import org.groupone.entity.Author;
 import org.groupone.entity.Conference;
-import org.groupone.entity.User;
 import org.groupone.utility.ID;
 
 /**
@@ -22,12 +21,8 @@ import org.groupone.utility.ID;
  */
 public class ConferenceController {
     
-    private User user;
     private UserDAO user_dao;
-    private Conference conf;
     private ConferenceDAO conf_dao;
-    private ShowActiveConferenceDTO dto;
-    private ShowArticleDTO dto2;
 
     public ConferenceController() throws SQLException {
         this.conf_dao = new ConferenceDAO();
@@ -57,17 +52,18 @@ public class ConferenceController {
             System.out.println("Organizzarore is not Found");
             return false;
         }
-        this.conf = new Conference(deadline,title,descr,id,org.getId());
-        conf_dao.saveConference(this.conf);
+        Conference new_conference = new Conference(deadline,title,descr,id,org.getId());
+        conf_dao.saveConference(new_conference);
         return true;
     }
 
     /**
      * Metodo per ottenere una lista di conferenzze attive [NON ANCORA SCADUTE]
-     * @return un array list di ShowActiveConferenceDTO che indicano le conferenze attive
+     * @return Un array list di ShowActiveConferenceDTO che indicano le conferenze attive
      * @throws SQLException
      */
     public ArrayList<ShowActiveConferenceDTO> getActiveConferences() throws SQLException{
+        ShowActiveConferenceDTO active_conference =null;
         Date today = Date.valueOf(LocalDate.now());
         ArrayList<Conference> all_conf = conf_dao.getAllConference();
         ArrayList<ShowActiveConferenceDTO> actconf = new ArrayList<>();
@@ -75,8 +71,8 @@ public class ConferenceController {
             Date deadline = conf.getDeadline();
             ID id = conf.getId();
             if(deadline != null && deadline.after(today)){
-                this.dto = new ShowActiveConferenceDTO(id,conf.getTitle(),conf.getDeadline(),conf.getDescription());
-                actconf.add(dto);
+                active_conference = new ShowActiveConferenceDTO(id,conf.getTitle(),conf.getDeadline(),conf.getDescription());
+                actconf.add(active_conference);
             }
         }
             return actconf;
@@ -84,12 +80,12 @@ public class ConferenceController {
 
     /**
      * Metodo per ottenere una lista di articoli
-     * @param conf_Id
-     * @return un array list di ShowArticleDTO che indicano gli articoli della conferenza
+     * @param ID_conference
+     * @return Un array list di ShowArticleDTO che indicano gli articoli della conferenza
      * @throws SQLException
      */
-    public ArrayList<ShowArticleDTO> getArticlesByConference(ID conf_Id) throws SQLException {
-        ArrayList<Article> real_list_articles = conf_dao.getArticlesByConference(conf_Id);
+    public ArrayList<ShowArticleDTO> getArticlesByConference(ID ID_conference) throws SQLException {
+        ArrayList<Article> real_list_articles = conf_dao.getArticlesByConference(ID_conference);
         ArrayList<ShowArticleDTO> fake_list_articles = new ArrayList<>();
         ArrayList<RUserDTO> fake_list_author  = new ArrayList<>();
         ShowArticleDTO fake_article= null;

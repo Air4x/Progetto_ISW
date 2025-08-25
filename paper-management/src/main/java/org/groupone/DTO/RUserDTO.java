@@ -35,7 +35,7 @@ public class RUserDTO {
     }
 
     /**
-     * Costruttore
+     * Costruttore di copia per un utente
      * @param user
      * @param scelta
      */
@@ -50,15 +50,15 @@ public class RUserDTO {
 
     /**
      * Costruttore di copia
-     * @param user
+     * @param Ruser
      */
-    public RUserDTO(RUserDTO user) {
-        this.name = user.getName();
-        this.lastname= user.getLastname();;
-        this.email = user.getEmail();
-        this.affiliazione = user.getAffiliation();
-        this.ruolo = user.getRole();
-        this.id = user.getId();
+    public RUserDTO(RUserDTO Ruser) {
+        this.name = Ruser.getName();
+        this.lastname= Ruser.getLastname();;
+        this.email = Ruser.getEmail();
+        this.affiliazione = Ruser.getAffiliation();
+        this.ruolo = Ruser.getRole();
+        this.id = Ruser.getId();
     }
 
     /**

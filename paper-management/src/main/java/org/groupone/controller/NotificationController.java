@@ -63,12 +63,12 @@ public class NotificationController {
             
         }
     }
-
     /**
-     * Metodo per la creazione del messaggio da inviare
+    * Metodo per la creazione del messaggio da inviare
      * @param aut_name: Nome del destinatario
      * @param aut_lastname: Cognome del destinatario
      * @param conf_title: Nome della conferenza in scadenza
+     * @return Stringa che rapresenta il messagio da inviare
      */
     private String createMessage(String aut_name, String aut_lastname, String conf_title){
         return "Saluti "+aut_name+" "+aut_lastname+".\n\nLe Recordiamo che la consegna degli articoli per la conferenza:"+conf_title+" sta per scadere.\nLa preghiamo di effetuare la consegna degli articoli al più presto. Saluti e Buona giornata";

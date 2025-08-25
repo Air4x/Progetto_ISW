@@ -32,19 +32,35 @@ public class ShowArticleDTO {
     }
 
     /**
-     * Costruttore
+     * Costruttore di copia per un articolo
      * @param article
      */
     public ShowArticleDTO (Article article){
         RUserDTO user_f= null;
+        this.id= article.getId();
+        this.titolo = article.getTitle();
+        this.abstr = article.getAbstr();
         this.autori = new ArrayList<>();
         for (Author author : article.getAuthors()){
             user_f= new RUserDTO((Author)author);
             this.autori.add(user_f);
         }
-        this.id= article.getId();
-        this.titolo = article.getTitle();
-        this.abstr = article.getAbstr();
+    }
+
+    /**
+     * Costruttore di copia
+     * @param aritcle_dto
+     */
+    public ShowArticleDTO (ShowArticleDTO aritcle_dto) {
+        RUserDTO user_f= null;
+        this.id= aritcle_dto.getId();
+        this.titolo= aritcle_dto.getTitle();
+        this.abstr= aritcle_dto.getAbstr();
+        this.autori = new ArrayList<>();
+        for(RUserDTO fake_user: aritcle_dto.getAuthors()){
+            user_f= new RUserDTO(fake_user);
+            this.autori.add(user_f);
+        }
     }
 
     /**

@@ -30,7 +30,7 @@ public class PossibleReviewDTO {
     }
 
     /**
-     * Costruttore
+     * Costruttore di copia per un autore
      * @param autore
      */
     public PossibleReviewDTO(Author autore) {

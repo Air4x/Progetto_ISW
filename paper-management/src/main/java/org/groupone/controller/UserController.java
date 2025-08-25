@@ -23,16 +23,16 @@ public class UserController {
 
     /**
      * Metodo per la registarzione di un untente
-     * @param aff
+     * @param affiliazione
      * @param email
      * @param lastname
      * @param name
      * @param password
      * @param ruole
-     * @return
+     * @return Un oggetto RUser che rappresenta l'unbtente appena registrato
      * @throws SQLException
      */
-    public RUserDTO registerUser (String aff, String email, String lastname, String name, String password, String ruole) throws SQLException{
+    public RUserDTO registerUser (String affiliazione, String email, String lastname, String name, String password, String ruole) throws SQLException{
         // true = User già presente
         // false = User non trovato
         User user = null ;
@@ -43,10 +43,10 @@ public class UserController {
         }else{
             RUserDTO fake_user = null;
             if(ruole == "organizzatore"){
-                user = new Organizer(aff,email,lastname,name,password,id);
+                user = new Organizer(affiliazione,email,lastname,name,password,id);
 
             } else if (ruole == "autore"){
-                user = new Author(aff,email,lastname,name,password,id);
+                user = new Author(affiliazione,email,lastname,name,password,id);
             }
             user_dao.saveUser(user);
             fake_user = new RUserDTO(user);
@@ -59,7 +59,7 @@ public class UserController {
      * Metodo per l'accesso di un utente
      * @param email
      * @param password
-     * @return
+     * @return Un oggetto RUserDTO che rappresenta l'uttente che ha appena fatto il login
      * @throws SQLException
      */
     public RUserDTO login (String email, String password) throws SQLException{

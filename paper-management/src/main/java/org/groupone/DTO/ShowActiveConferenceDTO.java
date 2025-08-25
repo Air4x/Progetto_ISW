@@ -1,7 +1,8 @@
 package org.groupone.DTO;
 
-import java.util.Date;
+import java.sql.Date;
 
+import org.groupone.entity.Conference;
 import org.groupone.utility.ID;
 
 /**
@@ -27,6 +28,28 @@ public class ShowActiveConferenceDTO {
         this.titolo = titolo;
         this.scadenza = scadenza;
         this.decrizione = decrizione;
+    }
+
+    /**
+     * Costruttore di copia
+     * @param active_conference
+     */
+    public ShowActiveConferenceDTO (ShowActiveConferenceDTO active_conference){
+        this.id= active_conference.getId();
+        this.titolo= active_conference.getTitle();
+        this.scadenza= active_conference.getDeadline();
+        this.decrizione= active_conference.getDescription();
+    }
+
+    /**
+     * Costrutore di copia per una conferenza
+     * @param conference
+     */
+    public ShowActiveConferenceDTO (Conference conference){
+        this.id= conference.getId();
+        this.titolo= conference.getTitle();
+        this.scadenza= conference.getDeadline();
+        this.decrizione= conference.getDescription();
     }
 
     /**

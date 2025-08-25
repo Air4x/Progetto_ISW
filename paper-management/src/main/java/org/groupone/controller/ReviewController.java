@@ -16,14 +16,14 @@ import org.groupone.utility.ID;
  */
 public class ReviewController {
 
-    private ReviewDAO r_DAO;
-    private UserDAO u_DAO;
-    private ArticleDAO art_dao;
+    private ReviewDAO reviewer_dao;
+    private UserDAO user_dao;
+    private ArticleDAO article_dao;
 
     public ReviewController () throws SQLException {
-        this.r_DAO = new ReviewDAO();
-        this.u_DAO = new UserDAO();
-        this.art_dao = new ArticleDAO();
+        this.reviewer_dao = new ReviewDAO();
+        this.user_dao = new UserDAO();
+        this.article_dao = new ArticleDAO();
     }
 
     /**
@@ -34,11 +34,11 @@ public class ReviewController {
      * @throws SQLException
      */
     public boolean assignReviewer (ID articleID, ArrayList<PossibleReviewDTO> list_reviewer_selected) throws SQLException{
-        if(list_reviewer_selected.size()==0 || list_reviewer_selected.size()>3){
+        if(list_reviewer_selected.size()==0 || list_reviewer_selected.size()>3 || list_reviewer_selected == null){
             return false;
         }
         for(PossibleReviewDTO r: list_reviewer_selected){
-            this.r_DAO.assignReviewer(articleID, r.getId());
+            this.reviewer_dao.assignReviewer(articleID, r.getId());
         }
        return true;
     }
@@ -46,14 +46,14 @@ public class ReviewController {
     /**
      * Metodo per ottenere una lista di possibili revisori
      * @param articleID
-     * @return un arraylist di PossibleReviewDTO che si possono assegnare come revisori
+     * @return Un arraylist di PossibleReviewDTO che si possono assegnare come revisori
      * @throws SQLException
      */
     public ArrayList<PossibleReviewDTO> getListReviewer(ID articleID) throws SQLException{
         ArrayList<PossibleReviewDTO> list_r = new ArrayList<>();
-        ArrayList<Author> list_a = u_DAO.getAllAuthors();
+        ArrayList<Author> list_a = user_dao.getAllAuthors();
         for(Author a: list_a){
-            if(r_DAO.hasConflitOfInterest(articleID, a.getId()) != true && u_DAO.isUserPresentByID(a.getId()) == true){
+            if(reviewer_dao.hasConflitOfInterest(articleID, a.getId()) != true && user_dao.isUserPresentByID(a.getId()) == true){
                 PossibleReviewDTO r = new PossibleReviewDTO(a);
                 list_r.add(r);
             }
@@ -69,8 +69,8 @@ public class ReviewController {
      * @throws SQLException
      */
     public boolean updateArticleStatus (ID id_article, String status) throws SQLException {
-        if(art_dao.getArticleByID(id_article) != null){
-            this.r_DAO.updateArticleStatus(id_article, status);
+        if(article_dao.getArticleByID(id_article) != null){
+            this.reviewer_dao.updateArticleStatus(id_article, status);
             return true;
         }
         return false;

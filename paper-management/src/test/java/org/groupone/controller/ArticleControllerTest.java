@@ -2,7 +2,6 @@ package org.groupone.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ShowArticleDTO;
 import org.groupone.utility.ID;
@@ -12,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-
+//ok
 public class ArticleControllerTest {
 
     private ArticleController article_controller;
@@ -43,7 +42,7 @@ public class ArticleControllerTest {
     public void testSubmitArticlesNotOK() throws SQLException{
         ArrayList<RUserDTO> autori =  new ArrayList<>();
         ID conference_id=null;
-        int scelta = 2;
+        int scelta = 0;
         if(scelta == 0){
             autori.add(user_controller.getRAuthorBYEmail("gian.rombanini@outlook.it"));
             autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
@@ -66,6 +65,7 @@ public class ArticleControllerTest {
         ID author_id = new ID ("9c388e06-3c9e-43bd-9327-acbffed869d3");
         ArrayList<ShowArticleDTO> list_article = new ArrayList<>();
         list_article=this.article_controller.getArticleByAuthor(author_id);
+        System.out.println(list_article.toString());
         assertFalse(list_article.isEmpty());
     }
 

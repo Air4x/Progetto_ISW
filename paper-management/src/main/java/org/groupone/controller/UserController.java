@@ -49,7 +49,7 @@ public class UserController {
                 user = new Author(aff,email,lastname,name,password,id);
             }
             user_dao.saveUser(user);
-            fake_user = new RUserDTO(user,false);
+            fake_user = new RUserDTO(user);
             System.out.println("User registrato con successo");
             return fake_user;
         }
@@ -65,7 +65,7 @@ public class UserController {
     public RUserDTO login (String email, String password) throws SQLException{
         if(user_dao.isUserPresentByEmail(email) == true && user_dao.getUserByEmail(email).getPassword().equals(password)){
             User user = user_dao.getUserByEmail(email);
-            RUserDTO fake_user = new RUserDTO (user,false);
+            RUserDTO fake_user = new RUserDTO (user);
             return fake_user;
         }
         System.out.println("Email o password errati");
@@ -74,7 +74,7 @@ public class UserController {
 
     public RUserDTO getRAuthorBYEmail (String email) throws SQLException{
         if(this.user_dao.isUserPresentByEmail(email)==true && this.user_dao.getUserByEmail(email).getRole()=="autore"){
-            RUserDTO fake_user = new RUserDTO(user_dao.getUserByEmail(email), false);
+            RUserDTO fake_user = new RUserDTO(user_dao.getUserByEmail(email));
             return fake_user;
         }
         return null;

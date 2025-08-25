@@ -15,7 +15,6 @@ public class RUserDTO {
     private String affiliazione;
     private String ruolo;
     private ID id;
-    private boolean scelta;
 
     /**
      * Costruttore
@@ -24,17 +23,15 @@ public class RUserDTO {
      * @param email
      * @param affiliazione
      * @param ruolo
-     * @param scelta
      * @param id
      */
-    public RUserDTO(String name, String lastname, String email, String affiliazione, String ruolo, boolean scelta,ID id) {
+    public RUserDTO(String name, String lastname, String email, String affiliazione, String ruolo, ID id) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.affiliazione = affiliazione;
         this.ruolo = ruolo;
         this.id = id;
-        this.scelta =scelta;
     }
 
     /**
@@ -42,14 +39,13 @@ public class RUserDTO {
      * @param user
      * @param scelta
      */
-    public RUserDTO(User user, boolean scelta) {
+    public RUserDTO(User user) {
         this.name = user.getName();
         this.lastname = user.getLastName();
         this.email = user.getEmail();
         this.affiliazione = user.getAffiliation();
         this.ruolo = user.getRole();
         this.id = user.getId();
-        this.scelta = scelta;
     }
 
     /**
@@ -63,7 +59,6 @@ public class RUserDTO {
         this.affiliazione = user.getAffiliation();
         this.ruolo = user.getRole();
         this.id = user.getId();
-        this.scelta =false;
     }
 
     /**
@@ -112,14 +107,6 @@ public class RUserDTO {
      */
     public ID getId() {
         return this.id;
-    }
-
-    /**
-     * Elemento per verifica della registrazione dell'untente
-     * @return
-     */
-    public boolean getResult(){
-        return this.scelta;
     }
 
     @Override

@@ -117,6 +117,21 @@ public class ArticleDAO {
     }
 
     /**
+     * Dato l'id di un articoli ne verifica la presenza nel database
+     *
+     * @param id, l'id dell'articolo
+     * @return se l'articolo esiste o meno
+     */
+    public boolean isArticlePresentByID(ID id) throws SQLException {
+	String sql = "SELECT ID FROM Articoli WHERE Articoli.ID=?;";
+	PreparedStatement stmt = conn.prepareStatement(sql);
+	stmt.setString(1, id.toString());
+	ResultSet rs = stmt.executeQuery();
+	return rs.next();
+     }
+
+    
+    /**
      * Aggiorna il titolo di un articolo dato il suo id
      *
      * @param artid, l'id dell'articolo

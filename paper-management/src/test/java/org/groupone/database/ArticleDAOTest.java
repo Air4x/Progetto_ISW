@@ -63,4 +63,16 @@ public class ArticleDAOTest {
 	}
     }
 
+    @Test
+    public void isArticlePresentByID(){
+	ID id = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
+	try {
+	    ArticleDAO dao = new ArticleDAO();
+	    assertTrue("isArticlePresentByID - articolo non trovato", dao.isArticlePresentByID(id));
+	} catch (SQLException e){
+	    e.printStackTrace();
+	    fail("isArticlePresentByID - Found exception");
+	}
+    }
+
 }

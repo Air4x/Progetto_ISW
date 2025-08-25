@@ -23,6 +23,7 @@ public class ReviewController {
     public ReviewController () throws SQLException {
         this.r_DAO = new ReviewDAO();
         this.u_DAO = new UserDAO();
+        this.art_dao = new ArticleDAO();
     }
 
     /**
@@ -68,11 +69,11 @@ public class ReviewController {
      * @throws SQLException
      */
     public boolean updateArticleStatus (ID id_article, String status) throws SQLException {
-        if(art_dao.getArticleByID(id_article) == null){
-            return false;
+        if(art_dao.getArticleByID(id_article) != null){
+            this.r_DAO.updateArticleStatus(id_article, status);
+            return true;
         }
-        this.r_DAO.updateArticleStatus(id_article, status);
-        return true;
+        return false;
     }
 
 }

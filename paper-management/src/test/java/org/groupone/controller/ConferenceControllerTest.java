@@ -3,7 +3,6 @@ package org.groupone.controller;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
 import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ShowActiveConferenceDTO;
 import org.groupone.DTO.ShowArticleDTO;
@@ -88,8 +87,8 @@ public class ConferenceControllerTest {
         for(ShowArticleDTO article : articles) {
             System.out.println(article.toString());
         }
-      /*  assertNotNull(articles);
-        assertFalse(articles.isEmpty());*/
+       assertNotNull(articles);
+        assertFalse(articles.isEmpty());
     }
 
 

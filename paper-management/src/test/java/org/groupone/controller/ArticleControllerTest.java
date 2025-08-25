@@ -65,7 +65,7 @@ public class ArticleControllerTest {
         ID author_id = new ID ("9c388e06-3c9e-43bd-9327-acbffed869d3");
         ArrayList<ShowArticleDTO> list_article = new ArrayList<>();
         list_article=this.article_controller.getArticleByAuthor(author_id);
-        System.out.println(list_article.toString());
+        System.out.println(list_article.toString()+"\n\n");
         assertFalse(list_article.isEmpty());
     }
 

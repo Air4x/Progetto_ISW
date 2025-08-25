@@ -2,7 +2,6 @@ package org.groupone.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import org.groupone.DTO.PossibleReviewDTO;
 import org.groupone.database.ArticleDAO;
 import org.groupone.database.UserDAO;
@@ -66,7 +65,7 @@ public class ReviewControllerTest {
     @Test
     public void testUpdateArticleStatusSuccess() throws SQLException {
         ID id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
-        boolean esito = review_Controller.updateArticleStatus(id_article, "UNDER_REVIEW");
+        boolean esito = review_Controller.updateArticleStatus(id_article, "in_revisione");
         assert(esito);
     }
     
@@ -75,15 +74,6 @@ public class ReviewControllerTest {
         ID id_article = ID.generate();
         boolean esito = review_Controller.updateArticleStatus(id_article, "NEW_STATUS");
         assertFalse(esito);
-    }
-
-    @Test
-    public void testDeleteArticleSuccess() throws SQLException {
-        ID id_article1= ID.generate();
-        ID id_article2 = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
-        Article article1 = article_dao.getArticleByID(id_article1);
-        Article article2 = article_dao.getArticleByID(id_article2);
-        System.out.println(article2.getTitle());
     }
 
 }

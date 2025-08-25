@@ -1,6 +1,7 @@
 package org.groupone.database;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import org.junit.Test;
 
@@ -48,4 +49,18 @@ public class ArticleDAOTest {
 	    fail("getArticleByID - Found Exception");
 	}
     }
+
+    @Test
+    public void getArticleByAuthors(){
+	ID id = new ID("95ba1fc7-bf7e-4764-341b-eac6051437fb");
+	try {
+	    ArticleDAO dao = new ArticleDAO();
+	    ArrayList<Article> actual = dao.getArticlesByAuthor(id);
+	    assertTrue("getArticleByAuthors - articoli non trovati", actual.size() > 0);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    fail("getArticleByAuthors - Found exception");
+	}
+    }
+
 }

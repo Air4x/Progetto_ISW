@@ -6,6 +6,7 @@ Classe utilizzata per la gestione degli Articoli
 \paragraph{Attributi}
 \begin{description}
 \item[art-dao] Instanza di ArticleDAO
+\item[user-dao] Instanza di UserDAO
 \item[conf-dao] Instanza di ConferenceDAO
 \end{description}
 
@@ -20,9 +21,9 @@ Costruttore
 Metodo per la sottomisione di un articolo a una conferenza
 \paragraph{Parametri}
 \begin{description}
-\item a-titolo
-\item a-abstrct
-\item a-autori
+\item article-titolo
+\item article-abstrct
+\item article-autori
 \item id-conf
 \end{description}
 \paragraph{Eccezioni}
@@ -30,9 +31,10 @@ Metodo per la sottomisione di un articolo a una conferenza
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
+Oggetto boolean che va a indicare se la sottomissione di un articoloè avvenuta con successo
 \begin{description}
-\item [Vero] se l'articolo è stato sottomesso corettamente
-\item [Falso] se non c'è nessuna conferenza con l'id indicato
+\item [Vero] l'articolo è stato sottomesso corettamente
+\item [Falso] non c'è nessuna conferenza con l'id indicato
 \end{description}
 
 \subsubsection{\texttt{controller.ArticleController.getArticleByAuthor()}}
@@ -46,19 +48,15 @@ Metodo per ottenere una lista di articoli
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-Una lista di ShowArticleDTO
+Un array list di ShowArticleDTO ottenuto attraverso l'ID dell'autore degli articoli
 
 
 
 \subsection{ConferenceController}
 \paragraph{Attributi}
 \begin{description}
-\item[user] User 
 \item[user-dao] Instanza di  UserDAO
-\item[conf] Instanza di Conference
 \item[conf-dao] Instanza di ConferenceDAO
-\item[conf-dto] Instanza di ShowActiveConferenceDTO
-\item[art-dto] Instanza di ShowArticleDTO
 \end{description}
 
 \subsubsection{\texttt{controller.ConferenceController.ConferenceController()}}
@@ -83,7 +81,11 @@ Metodo per la creazione di una conferenzza
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-metodo void
+Valore booleano che indica se la conferenza è stata creata con successo
+\begin{description}
+\item [Vero] Conferenza creata con successo
+\item [Falso] Errore nella creazione della conferenza
+\end{description}
 
 \subsubsection{\texttt{controller.ConferenceController.getActiveConferences()}}
 Metodo per ottenere una lista di conferenzze attive [NON ANCORA SCADUTE]
@@ -92,20 +94,20 @@ Metodo per ottenere una lista di conferenzze attive [NON ANCORA SCADUTE]
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-Lista di ShowActiveConferenceDTO
+Un array list di ShowActiveConferenceDTO che indicano le conferenze attive
 
 \subsubsection{\texttt{controller.ConferenceController.getArticlesByConference()}}
 Metodo per ottenere una lista di articoli
 \paragraph{Parametri}
 \begin{description}
-\item conf-id
+\item ID-conference
 \end{description}
 \paragraph{Eccezioni}
 \begin{description}
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-Lista di ShowArticleDTO
+Un array list di ShowArticleDTO che indicano gli articoli della conferenza
 
 
 
@@ -124,14 +126,13 @@ Costruttore
 \end{description}
 
 \subsubsection{\texttt{controller.NotificationController.invioNotifiche()}}
-Metodo utilizzato per l'invio di email222
+Metodo utilizzato per l'invio di email
 \paragraph{Eccezioni}
 \begin{description}
 \item[SQLException] In caso di errore di interazione con il DataBase
 \item[MessagingException] Messaggio di errore in caso di eccezione
 \end{description}
-\paragraph{Valore di ritorno}
-Metodo void
+
 
 \subsubsection{\texttt{controller.NotificationController.creatMessage()}}
 Metodo per la creazione del messaggio da inviare
@@ -140,10 +141,9 @@ Metodo per la creazione del messaggio da inviare
 \item aut-name
 \item aut-lastname
 \item conf-title
-\item msg
 \end{description}
 \paragraph{Valore di ritorno}
-Metodo void
+Stringa che rapresenta il messagio da inviare
 
 \subsubsection{\texttt{controller.NotificationController.sendEmail()}}
 Metodo utilizzo per la configurazione di un host per l'invio delle email
@@ -158,17 +158,14 @@ Metodo utilizzo per la configurazione di un host per l'invio delle email
 \item[SQLException] In caso di errore di interazione con il DataBase
 \item[MessagingException] Messaggio di errore in caso di eccezione
 \end{description}
-\paragraph{Valore di ritorno}
-Metodo void
-
 
 
 \subsection{ReviewController}
 \paragraph{Attributi}
 \begin{description}
-\item[r-DAO] Instanza di ReviewDAO
-\item[u-DAO] Instanza di UserDAO
-\item[art-dao] Instanza di ArticleDAO
+\item[reviewer-dao] Instanza di ReviewDAO
+\item[user-dao] Instanza di UserDAO
+\item[article-dao] Instanza di ArticleDAO
 \end{description}
 
 \subsubsection{\texttt{controller.ReviewController.ReviewController()}}
@@ -179,21 +176,22 @@ Costruttore
 \end{description}
 
 
-\subsubsection{\texttt{controller.ReviewController.}}
+\subsubsection{\texttt{controller.ReviewController.assignReviewer()}}
 Metodo per l'assegnazion di revisore
 \paragraph{Parametri}
 \begin{description}
 \item articleID
-\item reviewID
+\item list-reviewer-selected
 \end{description}
 \paragraph{Eccezioni}
 \begin{description}
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
+Valore Booleano che indica se l'assegnazione di revisore è avvenuta con successo
 \begin{description}
 \item[Vero] Se i revisori sono stati assegnati correttamente 
-\item[Falso] Se si sono assegnati un numero eccesivo di revisori
+\item[Falso] Se la lista risulta nulla, maggiore di 3 o pari 0 elementi o in caso che non vi e nessu articolo legato all'id dato
 \end{description}
 
 
@@ -209,14 +207,14 @@ Metodo per ottenere una lista di possibili revisori
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-Una lista di oggetti PossibleReviewDTO
+Un arraylist di PossibleReviewDTO che si possono assegnare come revisori
 
 
 \subsubsection{\texttt{controller.ArticleController.updateArticleStatus()}}
 Metodo per aggiorna lo status di un articolo
 \paragraph{Parametri}
 \begin{description}
-\item ID
+\item id-article
 \item status
 \end{description}
 \paragraph{Eccezioni}
@@ -224,6 +222,7 @@ Metodo per aggiorna lo status di un articolo
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
+Valore Booleano che indica se l'aggiornamento dello stato è avvenuto con successo
 \begin{description}
 \item[Vero] se lo stato del'articolo è sato corretamente aggiornato
 \item[Falso] articolo non trovato
@@ -245,9 +244,10 @@ Costruttore
 \end{description}
 
 \subsubsection{\texttt{controller.UserController.registerUser()}}
+Metodo per la registarzione di un untente
 \paragraph{Parametri}
 \begin{description}
-\item aff
+\item affiliazione
 \item email
 \item lastname
 \item name
@@ -259,7 +259,7 @@ Costruttore
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-Un oggetto RUserDTO
+Un oggetto RUser che rappresenta l'unbtente appena registrato
 
 \subsubsection{\texttt{controller.UserController.}}
 
@@ -273,7 +273,7 @@ Un oggetto RUserDTO
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-Un oggetto RUserDTO
+Un oggetto RUserDTO che rappresenta l'uttente che ha appena fatto il login
 
 %%% Local Variables:
 %%% mode: LaTeX

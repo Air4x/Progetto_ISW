@@ -6,12 +6,10 @@ package DTO{
         - name: String
         - lastname: String
         - affiliazione: String
-        - selezione: boolean
         + getId(): ID
         + getName(): String
         + getLastname(): String
         + getAffiliation(): String
-        + getSelection(): bolean
     }
 
     class RUserDTO {
@@ -21,14 +19,12 @@ package DTO{
         - affiliazione: String
         - ruolo: String
         - id: ID
-        - esito: boolean
         + getName(): String
         + getLastname(): String
         + getEmail(): String
         + getAffiliation(): String
         + getRole(): String
         + getId(): ID
-        + getResult(): boolean
     }
 
     class ShowActiveConferenceDTO {

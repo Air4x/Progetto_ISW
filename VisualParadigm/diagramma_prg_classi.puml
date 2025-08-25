@@ -1,7 +1,7 @@
 @startuml
 skinparam packageStyle frame
 
-package database {
+package DataBase {
   class UserDAO {
     + getUserRoleByID(userId: String): String		
     + getUserByID(userId: String): User
@@ -103,19 +103,19 @@ package Entity {
 package Controller {
 
   class UserController {
-    + registerUser(String aff, String email, String lastname, String name, String password, String ruole): RUserDTO
+    + registerUser(String affiliazione, String email, String lastname, String name, String password, String ruole): RUserDTO
     + login(email: String, password: String): RUserDTO
     + getRAuthorBYEmail (String Email): RUserDTO
   }
 
   class ConferenceController {
-    + createConference(Date scadenza, String title, String descr, ID id, RUserDTO org): void
+    + createConference(LocalDate scadenza, String title, String descr, ID id, RUserDTO org): void
     + getActiveConferences(): ArrayList<ShowActiveConferenceDTO>
-    + getArticlesByConference(id: int): ArrayList<ShowArticleDTO>
+    + getArticlesByConference(ID: ID_conference): ArrayList<ShowArticleDTO>
   }
   
   class ArticleController {
-    + submitArticle(String a_titolo, String a_abstrct,  ArrayList<RUserDTO> a_autori, ID id_conf): boolean
+    + submitArticle(String article_titolotitolo, String article_abstrct,  ArrayList<RUserDTO> article_autori, ID id_conf): boolean
     + getArticleByAuthor(ID authorID): ArrayList<ShowArticleDTO>
   }
 
@@ -127,7 +127,7 @@ package Controller {
 
   class NotificationController {
     + invioNotifiche(): void
-    + creatMessage(String aut_name, String aut_lastname, String conf_title, String msg): void
+    + creatMessage(String aut_name, String aut_lastname, String conf_title): String
     + sendEmail (String email_d, String conf_title, String msg): void
   }
 
@@ -183,12 +183,10 @@ package DTO{
         - name: String
         - lastname: String
         - affiliazione: String
-        - selezione: boolean
         + getId(): ID
         + getName(): String
         + getLastname(): String
         + getAffiliation(): String
-        + getSelection(): bolean
     }
 
     class RUserDTO {
@@ -198,14 +196,12 @@ package DTO{
         - affiliazione: String
         - ruolo: String
         - id: ID
-        - esito: boolean
         + getName(): String
         + getLastname(): String
         + getEmail(): String
         + getAffiliation(): String
         + getRole(): String
         + getId(): ID
-        + getResult(): boolean
     }
 
     class ShowActiveConferenceDTO {

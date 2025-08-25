@@ -9,7 +9,6 @@ Classe DTO per il trasporto delle informazioni di un revisore [autore]
 \item [name] Nome del revisore
 \item [lastname] Cognome del revisore 
 \item [affilazione] Affilazione del revisore
-\item [selezione] L'elemento che indica se un revisore è stato selezionato
 \end{description}
 \subsubsection{\texttt{DTO.PossibleReviewDTO.PossibleReviewDTO()}}
 Costruttore
@@ -18,11 +17,10 @@ Costruttore
 \item id
 \item name
 \item lastname
-\item affilazione
-\item selezione
+\item affiliazione
 \end{description}
 \subsubsection{\texttt{DTO.PossibleReviewDTO.PossibleReviewDTO()}}
-Costruttore
+Costruttore di copia per un autore
 \paragraph{Parametri}
 \begin{description}
 \item author
@@ -47,12 +45,6 @@ Costruttore
 \begin{description}
 \item Affilazione del revisore
 \end{description}
-\subsubsection{\texttt{DTO.PossibleReviewDTO.getSelezione()}}
-\paragraph{Valore di ritorno}
-\begin{description}
-\item [Vero] Se il revisore è stato scelto
-\item [Falso] Se il revisore non è stato scelto
-\end{description}
 
 \subsection{RUserDTO}
 \subsubsection{\texttt{DTO.RUserDTO.RUserDTO()}}
@@ -65,14 +57,18 @@ Costruttore
 \item affiliazione
 \item ruolo
 \item id
-\item esito
 \end{description}
 \subsubsection{\texttt{DTO.RUserDTO.RUserDTO()}}
-Costruttore
+Costruttore per un utente
 \paragraph{Parametri}
 \begin{description}
-\item utente
-\item esito
+\item user
+\end{description}
+\subsubsection{\texttt{DTO.RUserDTO.RUserDTO()}}
+Costruttore di copia
+\paragraph{Parametri}
+\begin{description}
+\item Ruser
 \end{description}
 \subsubsection{\texttt{DTO.RUserDTO.getName()}}
 \paragraph{Valore di ritorno}
@@ -104,22 +100,28 @@ Costruttore
 \begin{description}
 \item Id dell'utente
 \end{description}
-\subsubsection{\texttt{DTO.RUserDTO.getEsito()}}
-\paragraph{Valore di ritorno}
-\begin{description}
-\item [Vero] Se l'utente è stato registrato con successo
-\item [Falso] Se l'utente non è stato registrato con successo
-\end{description}
 
 \subsection{ShowActiveConferenceDTO}
 \subsubsection{\texttt{DTO.ShowActiveConferenceDTO.ShowActiveConferenceDTO()()}}
-Costruttore
+Costruttore di copia
 \paragraph{Parametri}
 \begin{description}
 \item id
 \item titolo
 \item scadenza
 \item descrizione
+\end{description}
+\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.ShowActiveConferenceDTO()()}}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item active-conference
+\end{description}
+\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.ShowActiveConferenceDTO()()}}
+Costruttore di copia per una conferenza
+\paragraph{Parametri}
+\begin{description}
+\item conference
 \end{description}
 \subsubsection{\texttt{DTO.ShowActiveConferenceDTO.getId()}}
 \paragraph{Valore di ritorno}
@@ -153,10 +155,16 @@ Costruttore
 \item autori
 \end{description}
 \subsubsection{\texttt{DTO.ShowArticleDTO.ShowArticleDTO()}}
-Costruttore
+Costruttore di copia per un articolo
 \paragraph{Parametri}
 \begin{description}
-\item articolo
+\item aritcle
+\end{description}
+\subsubsection{\texttt{DTO.ShowArticleDTO.ShowArticleDTO()}}
+Costruttore di copia
+\paragraph{Parametri}
+\begin{description}
+\item aritcle-dto
 \end{description}
 \subsubsection{\texttt{DTO.ShowArticleDTO.getId()}}
 \paragraph{Valore di ritorno}

@@ -13,7 +13,6 @@ public class PossibleReviewDTO {
     private String name;
     private String lastname;
     private String affiliazione;
-    private boolean selezione;
     
     /**
      * Costruttore
@@ -23,12 +22,11 @@ public class PossibleReviewDTO {
      * @param affiliazione
      * @param selezione
      */
-    public PossibleReviewDTO(ID id, String name, String lastname, String affiliazione,  boolean selezione) {
+    public PossibleReviewDTO(ID id, String name, String lastname, String affiliazione) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.affiliazione = affiliazione;
-        this.selezione = selezione;
     }
 
     /**
@@ -40,7 +38,6 @@ public class PossibleReviewDTO {
         this.name = autore.getName();
         this.lastname = autore.getLastName();
         this.affiliazione = autore.getAffiliation();
-        this.selezione = false;
     }
 
     /**
@@ -73,14 +70,6 @@ public class PossibleReviewDTO {
      */
     public String getAffiliation() {
         return affiliazione;
-    }
-
-    /**
-     * Elemento per la selezione dell'autore
-     * @return
-     */
-    public boolean getSelection() {
-        return selezione;
     }
 
     @Override

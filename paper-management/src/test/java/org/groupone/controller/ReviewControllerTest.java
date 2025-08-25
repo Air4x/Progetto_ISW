@@ -9,6 +9,8 @@ import org.groupone.entity.Article;
 import org.groupone.entity.Author;
 import org.groupone.utility.ID;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,19 +28,39 @@ public class ReviewControllerTest {
     }
 
     @Test
-    public void testAssignReviewerSuccess() throws SQLException {}
-  
+    public void testAssignReviewerSuccess() throws SQLException {
+        ID id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
+        ArrayList<PossibleReviewDTO> list_reviewer = review_Controller.getListReviewer(id_article);
+        boolean esito = review_Controller.assignReviewer(id_article, list_reviewer);
+        assertTrue(esito);
+    }
+    
+    /*
+     * 0 = Articolo non trovato
+     * 1 = Errore nella lista dei revisori
+     */
     @Test
-    public void testAssignReviewerFailure() throws SQLException {}
+    public void testAssignReviewerFailure() throws SQLException {
+        int scelta=0;
+        boolean esito = true;
+        ID id_article = null;
+        ArrayList<PossibleReviewDTO> list_reviewer = new ArrayList<>();
+        if(scelta == 0){
+            id_article = ID.generate();
+            list_reviewer = review_Controller.getListReviewer(id_article);
+            esito = review_Controller.assignReviewer(id_article, list_reviewer);
+        }
+        if(scelta == 1){
+            id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
+            esito = review_Controller.assignReviewer(id_article, list_reviewer);
+        }
+        assertFalse(esito);
+    }
 
     @Test
     public void testGetListReviewerSuccess() throws SQLException {
         ArrayList<Author> list_a = u_DAO.getAllAuthors();
-        for(Author author : list_a){
-            System.out.println(list_a.size());
-        }
-
-        /*ID id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
+        ID id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
         ArrayList<PossibleReviewDTO> list_reviewer = review_Controller.getListReviewer(id_article);
         for(PossibleReviewDTO r : list_reviewer){
             System.out.println(r.toString());
@@ -47,7 +69,7 @@ public class ReviewControllerTest {
             assert(false);
         } else {
             assert(true);
-        }*/
+        }
     }
 
     @Test

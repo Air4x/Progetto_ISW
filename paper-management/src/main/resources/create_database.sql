@@ -44,9 +44,11 @@ CREATE TABLE Autori (
 CREATE TABLE Registro (
        id_conf VARCHAR(36),
        id_art VARCHAR(36),
+       STATUS VARCHAR(14),
        CONSTRAINT PK_REGISTRO PRIMARY KEY(id_conf, id_art),
        CONSTRAINT FK_REGISTRO_CONFERENZE FOREIGN KEY(id_conf) REFERENCES Conferenze(ID),
-       CONSTRAINT FK_REGISTRO_ARTICOLI FOREIGN KEY(id_art) REFERENCES Articoli(ID)
+       CONSTRAINT FK_REGISTRO_ARTICOLI FOREIGN KEY(id_art) REFERENCES Articoli(ID),
+       CONSTRAINT CHECK_STATUS CHECK (STATUS='sottomesso' OR STATUS='in_revisione')
 );
 
 -- Tabella Revisori
@@ -95,6 +97,6 @@ VALUES ('3a9e468f-ff6b-4a84-bbc0-fb3f9e9c5024', '7cf18f80-b41a-42f0-af41-fbb9b60
 
 -- Inserimento Registro
 INSERT INTO Registro
-VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc16d', '2e24cd58-a3d7-4057-a1b8-ce9a24669cea');
+VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc16d', '2e24cd58-a3d7-4057-a1b8-ce9a24669cea', 'sottomesso');
 -- La riga seguente è stata rimossa perché era un duplicato:
 -- INSERT INTO Registro VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc16d', '2e24cd58-a3d7-4057-a1b8-ce9a24669cea');

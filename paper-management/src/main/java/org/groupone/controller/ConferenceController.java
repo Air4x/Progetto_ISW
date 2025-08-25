@@ -13,7 +13,6 @@ import org.groupone.database.UserDAO;
 import org.groupone.entity.Article;
 import org.groupone.entity.Author;
 import org.groupone.entity.Conference;
-import org.groupone.entity.Organizer;
 import org.groupone.entity.User;
 import org.groupone.utility.ID;
 

@@ -2,8 +2,8 @@ package org.groupone.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-
+import java.time.LocalDate;
+import java.sql.Date;
 import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ShowArticleDTO;
 import org.groupone.database.ArticleDAO;
@@ -13,8 +13,6 @@ import org.groupone.entity.Article;
 import org.groupone.entity.Author;
 import org.groupone.entity.Conference;
 import org.groupone.utility.ID;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 
 /**
@@ -23,7 +21,6 @@ import org.slf4j.LoggerFactory;
  */
 public class ArticleController {
 
-    private static final Logger log = LoggerFactory.getLogger(ArticleController.class);
     private ArticleDAO art_dao;
     private UserDAO user_dao;
     private ConferenceDAO conf_dao;
@@ -48,13 +45,12 @@ public class ArticleController {
         ID article_id = ID.generate();
         boolean result = false; // verifica che la lista di autori risulta tutta nulla true=not null, false=null
         ArrayList<Author> authors_list = new ArrayList<>();
-        Date today = new Date();
         if (this.conf_dao.isConferencePresentByID(id_conf)==false){
             System.out.println("Conference not found");
             return false;
         }
         Date scadenza = this.conf_dao.getConferenceByID(id_conf).getDeadline();
-        if(scadenza.before(today)){
+        if(scadenza.before(Date.valueOf(LocalDate.now()))){
             System.out.println("The selected conference is expired");
             return false;
         }

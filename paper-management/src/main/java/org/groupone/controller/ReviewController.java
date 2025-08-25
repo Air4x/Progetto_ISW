@@ -35,10 +35,14 @@ public class ReviewController {
      */
     public boolean assignReviewer (ID articleID, ArrayList<PossibleReviewDTO> list_reviewer_selected) throws SQLException{
         if(list_reviewer_selected.size()==0 || list_reviewer_selected.size()>3 || list_reviewer_selected == null){
+            System.out.println("Error in list of authors");
+            return false;
+        }else if (article_dao.isArticlePresentByID(articleID)== false){
+            System.out.println("Article not found");
             return false;
         }
-        for(PossibleReviewDTO r: list_reviewer_selected){
-            this.reviewer_dao.assignReviewer(articleID, r.getId());
+        for(PossibleReviewDTO fake_reviewer: list_reviewer_selected){
+            this.reviewer_dao.assignReviewer(articleID, fake_reviewer.getId());
         }
        return true;
     }
@@ -69,10 +73,12 @@ public class ReviewController {
      * @throws SQLException
      */
     public boolean updateArticleStatus (ID id_article, String status) throws SQLException {
-        if(article_dao.getArticleByID(id_article) != null){
+        if(article_dao.isArticlePresentByID(id_article)){
             this.reviewer_dao.updateArticleStatus(id_article, status);
+            System.out.println("Article status's is update");
             return true;
         }
+        System.out.println("Article not found");
         return false;
     }
 

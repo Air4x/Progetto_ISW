@@ -126,8 +126,6 @@ public class RegistrationForm extends JFrame {
                         if (userDTO == null) {
                             JOptionPane.showMessageDialog(null, "User already register, proceed to login", "Warining", JOptionPane.WARNING_MESSAGE);
 
-                        } else if (!userDTO.getResult()) {
-                            JOptionPane.showMessageDialog(null, "An Error has accured", "Warining", JOptionPane.WARNING_MESSAGE);
                         } else {
                             if (txtruolo.getText().equalsIgnoreCase("organizer")) {
                                 OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);

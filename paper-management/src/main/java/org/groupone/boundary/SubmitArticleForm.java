@@ -122,7 +122,7 @@ public class SubmitArticleForm extends JFrame{
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    RUserDTO userDTO = new RUserDTO("Name","Lastaname","email@test.com","affilation","Role",false,ID.generate());
+                    RUserDTO userDTO = new RUserDTO("Name","Lastaname","email@test.com","affilation","Role",ID.generate());
                     SubmitArticleForm finestra = new SubmitArticleForm(userDTO,ID.generate());
                     finestra.setVisible(true);
 

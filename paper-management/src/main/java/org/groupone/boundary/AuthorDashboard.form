@@ -15,7 +15,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="f786b" class="javax.swing.JList" binding="listActiveConference">
+          <component id="f786b" class="javax.swing.JList" binding="listactiveConference">
             <constraints/>
             <properties/>
           </component>
@@ -36,7 +36,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="36921" class="javax.swing.JList" binding="listSubmittedArticles">
+          <component id="36921" class="javax.swing.JList" binding="listarticleSubmitted">
             <constraints/>
             <properties/>
           </component>

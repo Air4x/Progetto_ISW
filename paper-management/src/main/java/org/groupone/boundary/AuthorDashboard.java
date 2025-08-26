@@ -20,6 +20,9 @@ public class AuthorDashboard extends JFrame {
     private JScrollPane scrollActiveConference;
     private JButton buttonSubmitArticle;
     private JScrollPane scrollSubmittedArticles;
+    private JList<ShowActiveConferenceDTO> listactiveConference;
+    private JList<ShowArticleDTO> listarticleSubmitted;
+
 
 
     public AuthorDashboard(RUserDTO userDTO) throws SQLException {
@@ -85,9 +88,9 @@ public class AuthorDashboard extends JFrame {
                     String affilation = new String("Affilation");
                     String role =  new String("Role");
                     ID id = ID.generate();
-                    boolean esito = true;
 
-                    RUserDTO author = new RUserDTO(name,lastName,email, affilation,role,esito,id);
+
+                    RUserDTO author = new RUserDTO(name,lastName,email, affilation,role,id);
 
                     AuthorDashboard frame=new AuthorDashboard(author);
                     frame.setVisible(true);

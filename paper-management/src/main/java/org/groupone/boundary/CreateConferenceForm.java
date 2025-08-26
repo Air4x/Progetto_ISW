@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
-import java.util.Date;
 import java.sql.SQLException;
 
 public class CreateConferenceForm extends JFrame {
@@ -33,7 +32,7 @@ public class CreateConferenceForm extends JFrame {
                     String email = new String("email");
                     String nome = new String("Nome");
                     String lastName = new String("Cognome");
-                    RUserDTO organizer = new RUserDTO(nome,lastName,email,affiliazione,"Organizer",true,ID.generate());
+                    RUserDTO organizer = new RUserDTO(nome,lastName,email,affiliazione,"Organizer",ID.generate());
                     CreateConferenceForm frame = new CreateConferenceForm(organizer);
                     frame.setVisible(true);
 
@@ -111,7 +110,7 @@ public class CreateConferenceForm extends JFrame {
                     if (!duedate.isBefore(today) && txttitle.getText().length() < 30 && txtareadescription.getText().length() < 100) {
                         try {
 
-                            cc.createConference((LocalDate) duedate, txttitle.getText(), txtareadescription.getText(), ID.generate(), organizer);
+                            cc.createConference( duedate, txttitle.getText(), txtareadescription.getText(), ID.generate(), organizer);
                             JOptionPane.showMessageDialog(null, "Conference created");
                             dispose();
                         } catch (Exception ex) {

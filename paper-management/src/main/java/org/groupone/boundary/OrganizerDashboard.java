@@ -17,8 +17,10 @@ public class OrganizerDashboard extends JFrame{
     private JPanel contentPane;
     private JScrollPane scrollConferenceList;
     private JButton buttonCreateConference;
+    private JScrollPane scrollActiveConference;
     private JList listActiveConference;
-    private JScrollPane articleSubmitted;
+    private JList listarticleSubmitted;
+    private JScrollPane scrollarticleSubmitted;
 
     //Composizione frame
     public OrganizerDashboard(RUserDTO organizer) throws SQLException {
@@ -54,12 +56,13 @@ public class OrganizerDashboard extends JFrame{
                     try {
                         int index = listActiveConference.locationToIndex(e.getPoint());
                         ShowActiveConferenceDTO selected = (ShowActiveConferenceDTO) listActiveConference.getSelectedValue();
-                        JList articleSubmitted =new JList ((ListModel) cc.getArticlesByConference(selected.getId()));
-                        JScrollPane listarticleSubmitted = (JScrollPane) articleSubmitted.getSelectedValue();
-                        articleSubmitted.addMouseListener(new MouseAdapter() {
+                        JList listarticleSubmitted =new JList ((ListModel) cc.getArticlesByConference(selected.getId()));
+                        JScrollPane scrollArticleSubmitted = new JScrollPane(listarticleSubmitted);
+                        listarticleSubmitted.addMouseListener(new MouseAdapter() {
                             public void mouseClicked(MouseEvent e) {
-                                int indexarticle = articleSubmitted.locationToIndex(e.getPoint());
-                                ShowArticleDTO selected = (ShowArticleDTO) articleSubmitted.getSelectedValue();
+                                int indexarticle = listarticleSubmitted.locationToIndex(e.getPoint());
+                                ShowArticleDTO selected = (ShowArticleDTO) listarticleSubmitted.getSelectedValue();
+
 
                             }
                         });
@@ -110,7 +113,7 @@ public class OrganizerDashboard extends JFrame{
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    RUserDTO organizer = new RUserDTO("Name","Lastname","email@email.com","Affilation","Organizer",true, ID.generate());
+                    RUserDTO organizer = new RUserDTO("Name","Lastname","email@email.com","Affilation","Organizer",ID.generate());
                     OrganizerDashboard finestra = new OrganizerDashboard(organizer);
                     finestra.setVisible(true);
 

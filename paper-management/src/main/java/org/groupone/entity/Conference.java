@@ -130,14 +130,8 @@ public class Conference {
      * @return se la conferenza è vicino alla scadenza
      */
     public boolean nearDeadline() {
-	Date now = new Date(LocalDate.now().toEpochDay());
-	Calendar.Builder calBuilder = new Calendar.Builder();
-        calBuilder.setInstant(now);
-        Calendar cNow = calBuilder.build();
-        calBuilder.setInstant(this.getDeadline());
-        Calendar cScadenza = calBuilder.build();
-        int giornoNow = cNow.get(Calendar.DAY_OF_YEAR);
-        int giornoScadenza = cScadenza.get(Calendar.DAY_OF_YEAR);
+	int giornoScadenza = this.getDeadline().toLocalDate().getDayOfYear();
+	int giornoNow = LocalDate.now().getDayOfYear();
         if((giornoScadenza - giornoNow) <= 5){
 	    return true;
         } else { return false; }

@@ -35,7 +35,6 @@ public class UserController {
     public RUserDTO registerUser (String affiliazione, String email, String lastname, String name, String password, String ruole) throws SQLException{
         // true = User già presente
         // false = User non trovato
-        User user = null ;
         ID id = ID.generate();
         if(user_dao.isUserPresentByEmail(email)==true){
             System.out.println("User già presente");
@@ -43,13 +42,15 @@ public class UserController {
         }else{
             RUserDTO fake_user = null;
             if(ruole == "organizzatore"){
-                user = new Organizer(affiliazione,email,lastname,name,password,id);
+                Organizer user = new Organizer(affiliazione,email,lastname,name,password,id);
+                user_dao.saveUser(user);
+                fake_user = new RUserDTO(user);
 
             } else if (ruole == "autore"){
-                user = new Author(affiliazione,email,lastname,name,password,id);
+                Author user = new Author(affiliazione,email,lastname,name,password,id);
+                user_dao.saveUser(user);
+                fake_user = new RUserDTO(user);
             }
-            user_dao.saveUser(user);
-            fake_user = new RUserDTO(user);
             System.out.println("User registrato con successo");
             return fake_user;
         }

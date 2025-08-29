@@ -115,19 +115,22 @@ public class RegistrationForm extends JFrame {
                     if (txtname.getText().isEmpty() || txtlastname.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Please enter a valid name and last name", "Warning", JOptionPane.WARNING_MESSAGE);
                     }
-                    if (!txtruolo.getText().equalsIgnoreCase("organizer") && !txtruolo.getText().equals("author")) {
+                    if (!txtruolo.getText().equalsIgnoreCase("organizzatore") && !txtruolo.getText().equalsIgnoreCase("autore")) {
+                        JOptionPane.showMessageDialog(null, txtruolo.getText()+" is not a role", "Warning", JOptionPane.WARNING_MESSAGE);
+                    }
+                    if(txtruolo.getText() == null ||  txtruolo.getText().equals("")){
                         JOptionPane.showMessageDialog(null, "Please enter a valid role", "Warning", JOptionPane.WARNING_MESSAGE);
                     }
 
                     //Se tutto corrisponde
-                    if (!txtemail.getText().isEmpty() && !txtemail.getText().isEmpty() && txtemail.getText().matches(regex)) {
+                    if (!txtemail.getText().isEmpty() && !txtemail.getText().isEmpty() && txtemail.getText().matches(regex)&&(txtruolo.getText().equalsIgnoreCase("autore")||txtruolo.getText().equalsIgnoreCase("organizzatore"))) {
                         UserController uc = new UserController();
                         RUserDTO userDTO = uc.registerUser(txtaffiliazione.getText(), txtemail.getText(), txtlastname.getText(), txtname.getText(), passwordField1.getSelectedText(), txtruolo.getText());
                         if (userDTO == null) {
                             JOptionPane.showMessageDialog(null, "User already register, proceed to login", "Warining", JOptionPane.WARNING_MESSAGE);
 
                         } else {
-                            if (txtruolo.getText().equalsIgnoreCase("organizer")) {
+                            if (txtruolo.getText().equals("organizzatore")) {
                                 OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
                                 organizerDashboard.setVisible(true);
                                 dispose();

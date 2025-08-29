@@ -40,6 +40,7 @@ public class LoginView extends JFrame{
 
                 LoginForm loginForm = new LoginForm();
                 loginForm.setVisible(true);
+                dispose();
 
 
             }
@@ -58,6 +59,8 @@ public class LoginView extends JFrame{
 
                 RegistrationForm registrationForm = new RegistrationForm();
                 registrationForm.setVisible(true);
+                dispose();
+
 
 
             }

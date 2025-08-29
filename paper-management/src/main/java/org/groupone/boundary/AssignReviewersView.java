@@ -40,13 +40,17 @@ public class AssignReviewersView extends JFrame {
 
             JLabel lblrevisori = new JLabel("Reviewers");
             lblrevisori.setFont(new Font("Arial", Font.PLAIN, 20));
-            lblrevisori.setBounds(10, 40, 100, 15);
+            lblrevisori.setBounds(10, 10, 100, 15);
             contentPane.add(lblrevisori);
             java.util.List<PossibleReviewDTO> listarevisori = rc.getListReviewer(article.getId());
 
             JMenu revisore1 = new JMenu("1st Reviewer");
             JMenu revisore2 = new JMenu("2nd Reviewer");
             JMenu revisore3 = new JMenu("3rd Reviewer");
+            revisore1.setBounds(10, 40, 100, 15);
+            revisore2.setBounds(120, 40, 100, 15);
+            revisore3.setBounds(230, 40, 100, 15);
+
             for (int i = 0; i < listarevisori.size(); ) {
                 JMenuItem item1 = new JMenuItem(listarevisori.get(i).toString());
                 int currenti = i;
@@ -77,10 +81,12 @@ public class AssignReviewersView extends JFrame {
                 revisore3.add(item3);
                 i++;
             }
+            contentPane.add(revisore1);
+            contentPane.add(revisore2);
+            contentPane.add(revisore3);
 
 
             JButton buttonAssignReviewers = new JButton("Assign Reviewers");
-            buttonAssignReviewers.setFont(new Font("Arial", Font.PLAIN, 15));
             buttonAssignReviewers.setBounds(230, 110, 100, 30);
             buttonAssignReviewers.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             buttonAssignReviewers.setBackground(new Color(100, 149, 237));

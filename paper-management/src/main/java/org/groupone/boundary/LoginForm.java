@@ -21,6 +21,7 @@ public class LoginForm  extends JFrame {
     private JButton sendLoginButton;
 
     public LoginForm() {
+
         setDefaultCloseOperation(2);
         setSize(200,300);
         setLocationRelativeTo(null);
@@ -33,9 +34,9 @@ public class LoginForm  extends JFrame {
         setContentPane(panel);
 
         JLabel lblEmail = new JLabel("Email:");
-        lblemail.setBounds(10,10,100,30 );
-        lblemail.setFont(new Font("Arial",Font.PLAIN,20));
-        panel.add(lblemail);
+        lblEmail.setBounds(10,10,100,30 );
+        lblEmail.setFont(new Font("Arial",Font.PLAIN,20));
+        panel.add(lblEmail);
 
 
         JTextField emailTextField = new JTextField();
@@ -76,16 +77,19 @@ public class LoginForm  extends JFrame {
                     }
                     if (passwordfield.getText().length() < 30 && Pattern.matches(regex, emailTextField.getText())) {
                         UserController userController = new UserController();
+
                         RUserDTO userDTO = userController.login(emailTextField.getText(), passwordfield.getSelectedText());
-                        if (userDTO == null) {
+                        if (userDTO==null) {
                             JOptionPane.showMessageDialog(null, "The User does not exist, proceed to register", "Warning", JOptionPane.WARNING_MESSAGE);
                         } else {
                             if (userDTO.getRole().equals("Organizer")) {
+
                                 OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
                                 organizerDashboard.setVisible(true);
                                 dispose();
 
                             } else {
+
                                 AuthorDashboard authorDashboard = new AuthorDashboard(userDTO);
                                 authorDashboard.setVisible(true);
                                 dispose();

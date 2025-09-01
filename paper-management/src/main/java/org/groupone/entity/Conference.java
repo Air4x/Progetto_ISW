@@ -1,11 +1,10 @@
 package org.groupone.entity;
 
-import org.groupone.utility.ID;
-
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+
+import org.groupone.utility.ID;
 
 /**
  * Classe che modella una Conferenza
@@ -132,7 +131,7 @@ public class Conference {
     public boolean nearDeadline() {
 	int giornoScadenza = this.getDeadline().toLocalDate().getDayOfYear();
 	int giornoNow = LocalDate.now().getDayOfYear();
-        if((giornoScadenza - giornoNow) <= 5){
+        if((giornoScadenza - giornoNow) <= 5 && (giornoScadenza - giornoNow) >= 0) {
 	    return true;
         } else { return false; }
     }

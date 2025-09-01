@@ -3,6 +3,7 @@ package org.groupone.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.TimerTask;
 
 import org.groupone.database.ConferenceDAO;
 import org.groupone.database.UserDAO;
@@ -24,9 +25,9 @@ import jakarta.mail.internet.MimeMultipart;
 
 /**
  * @author Giuseppe Buglione
- * Classe utilizzata per la gestione della creazione e invio di email
+ * Classe che estende java.util.TimerTask utilizzata per la gestione della creazione e invio di email 
 */
-public class NotificationController {
+public class NotificationController extends TimerTask {
     
     private ConferenceDAO conf_dao;
     private UserDAO user_dao;
@@ -38,6 +39,18 @@ public class NotificationController {
     public NotificationController() throws SQLException{
         this.conf_dao= new ConferenceDAO();
         this.user_dao= new UserDAO();
+    }
+
+    /**
+     * Metodo eseguito ad intervalli regolari per l'invio delle notifiche
+     */
+    @Override
+    public void run() {
+        try {
+            invioNotifiche();
+        } catch (SQLException | MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

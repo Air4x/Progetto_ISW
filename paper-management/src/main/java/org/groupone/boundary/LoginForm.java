@@ -78,7 +78,7 @@ public class LoginForm  extends JFrame {
                     if (passwordfield.getText().length() < 30 && Pattern.matches(regex, emailTextField.getText())) {
                         UserController userController = new UserController();
 
-                        RUserDTO userDTO = userController.login(emailTextField.getText(), passwordfield.getSelectedText());
+                        RUserDTO userDTO = userController.login(emailTextField.getText(), passwordfield.getText());
                         if (userDTO==null) {
                             JOptionPane.showMessageDialog(null, "The User does not exist, proceed to register", "Warning", JOptionPane.WARNING_MESSAGE);
                         } else {

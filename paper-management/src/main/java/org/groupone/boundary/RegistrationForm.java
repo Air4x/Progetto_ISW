@@ -124,8 +124,10 @@ public class RegistrationForm extends JFrame {
 
                     //Se tutto corrisponde
                     if (!txtemail.getText().isEmpty() && !txtemail.getText().isEmpty() && txtemail.getText().matches(regex)&&(txtruolo.getText().equalsIgnoreCase("autore")||txtruolo.getText().equalsIgnoreCase("organizzatore"))) {
+                        System.out.println(passwordField1.getText());
+
                         UserController uc = new UserController();
-                        RUserDTO userDTO = uc.registerUser(txtaffiliazione.getText(), txtemail.getText(), txtlastname.getText(), txtname.getText(), passwordField1.getSelectedText(), txtruolo.getText());
+                        RUserDTO userDTO = uc.registerUser(txtaffiliazione.getText(), txtemail.getText(), txtlastname.getText(), txtname.getText(), passwordField1.getText(), txtruolo.getText());
                         if (userDTO == null) {
                             JOptionPane.showMessageDialog(null, "User already register, proceed to login", "Warining", JOptionPane.WARNING_MESSAGE);
 

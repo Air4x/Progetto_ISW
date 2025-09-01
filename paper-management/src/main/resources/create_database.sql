@@ -62,11 +62,11 @@ CREATE TABLE Revisori (
 
 -- Inserimento Utenti
 INSERT INTO Utenti
-VALUES ('9c388e06-3c9e-43bd-9327-acbffed869d3', 'Gianmarco', 'Rombanini', 'Seconda Università di Napoli', 'gian.rombanini@outlook.it', 'batuffolino', 'autore');
+VALUES ('9c388e06-3c9e-43bd-9327-acbffed869d3', 'Gianmarco', 'Rombanini', 'Seconda Università di Napoli', 'fakenetflix2003@gmail.com', 'batuffolino', 'autore');
 INSERT INTO Utenti
 VALUES ('3a9e468f-ff6b-4a84-bbc0-fb3f9e9c5024', 'Giuseppe', 'Aceto', 'Università degli Studi di Napoli Federico II', 'toolvpstaiscal@gmail.com', '12345678!', 'autore');
 INSERT INTO Utenti
-VALUES ('ee719226-43d5-4bfc-bf46-3e409bbbf425', 'Domenico', 'Cotroneo', 'Università degli Studi di Napoli Federico II', 'domenico.cotroneo@unina.it', 'virtualizzazione', 'organizzatore');
+VALUES ('ee719226-43d5-4bfc-bf46-3e409bbbf425', 'Domenico', 'Cotroneo', 'Università degli Studi di Napoli Federico II', 'gpt1youtu@gmail.com', 'virtualizzazione', 'organizzatore');
 
 -- Inserimento Articoli
 INSERT INTO Articoli

@@ -62,7 +62,7 @@ CREATE TABLE Revisori (
 
 -- Inserimento Utenti
 INSERT INTO Utenti
-VALUES ('9c388e06-3c9e-43bd-9327-acbffed869d3', 'Gianmarco', 'Rombanini', 'Seconda Università di Napoli', 'fakenetflix2003@gmail.com', 'batuffolino', 'autore');
+VALUES ('9c388e06-3c9e-43bd-9327-acbffed869d3', 'Gianmarco', 'Rombanini', 'Seconda Università di Napoli', 'fakenetflix2003b@gmail.com', 'batuffolino', 'autore');
 INSERT INTO Utenti
 VALUES ('3a9e468f-ff6b-4a84-bbc0-fb3f9e9c5024', 'Giuseppe', 'Aceto', 'Università degli Studi di Napoli Federico II', 'toolvpstaiscal@gmail.com', '12345678!', 'autore');
 INSERT INTO Utenti
@@ -83,6 +83,8 @@ INSERT INTO Conferenze
 VALUES ('6279c9e1-b121-4c7a-a196-7a43b57fc03d', 'Nintendo', 'Perche nintendo dovrebbe essere un monopolio', '2024-12-31', 'ee719226-43d5-4bfc-bf46-3e409bbbf425');
 INSERT INTO Conferenze
 VALUES ('611f4dff-28c2-42b9-982d-762a3e9e2b3a', 'Nvidia', 'Perche nvidia dovrebbe essere un monopolio', '2025-08-26', 'ee719226-43d5-4bfc-bf46-3e409bbbf425');
+INSERT INTO Conferenze
+VALUES ('611f4dff-28c2-42b9-982d-762a3e9e2b3c', 'Sony', 'Perche sony non dovrebbe essere un monopolio', '2025-09-05', 'ee719226-43d5-4bfc-bf46-3e409bbbf425');
 
 -- Inserimento Autori
 INSERT INTO Autori

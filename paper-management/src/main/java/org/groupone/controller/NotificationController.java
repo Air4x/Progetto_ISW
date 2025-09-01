@@ -5,19 +5,13 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.TimerTask;
 
+import jakarta.mail.*;
 import org.groupone.database.ConferenceDAO;
 import org.groupone.database.UserDAO;
 import org.groupone.entity.Author;
 import org.groupone.entity.Conference;
 import org.groupone.utility.PasswordManager;
 
-import jakarta.mail.Authenticator;
-import jakarta.mail.Message;
-import jakarta.mail.MessagingException;
-import jakarta.mail.Multipart;
-import jakarta.mail.PasswordAuthentication;
-import jakarta.mail.Session;
-import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMessage;
@@ -79,7 +73,9 @@ public class NotificationController extends TimerTask {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Errore nell'invio delle email");
-        } catch( MessagingException e ){
+        } catch(SendFailedException e){
+            System.out.println("Errore nell'invio delle email");
+        }catch( MessagingException e ){
             e.printStackTrace();
             System.out.println("Errore nella configurazione dell'host per l'invio delle email");
         }
@@ -104,7 +100,7 @@ public class NotificationController extends TimerTask {
      * @throws SQLException
      * @throws MessagingException
      */
-    private void sendEmail (String email_d, String conf_title, String msg) throws SQLException, MessagingException {
+    private void sendEmail (String email_d, String conf_title, String msg) throws SQLException, MessagingException, SendFailedException {
         // Fare email da cui mandare messaggi
         final String m_email = PasswordManager.getInstance().get("email_username"); //mittente
         final String m_password = PasswordManager.getInstance().get("email_password");; //app_password

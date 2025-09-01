@@ -1,6 +1,5 @@
 package org.groupone;
 
-import java.sql.SQLException;
 import java.util.Timer;
 
 import org.groupone.boundary.LoginView;

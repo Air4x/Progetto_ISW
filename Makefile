@@ -50,6 +50,9 @@ er_finale.png: er_finale.pum
 diagramma_prg_dto.png: diagramma_prg_dto.puml
 	java -jar plantuml.jar $^
 
+testing_createconference.puml.png: testing_createconference.puml
+	java -jar plantuml.jar $^
+
 clean:
 	rm main.*
 

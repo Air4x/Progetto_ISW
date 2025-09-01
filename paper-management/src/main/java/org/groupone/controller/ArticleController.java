@@ -43,38 +43,25 @@ public class ArticleController {
      */
     public boolean submitArticle(String article_titolo, String article_abstract,  ArrayList<RUserDTO> article_autori, ID id_conf) throws SQLException{
         ID article_id = ID.generate();
-        boolean result = false; // verifica che la lista di autori risulta tutta nulla true=not null, false=null
         ArrayList<Author> authors_list = new ArrayList<>();
         if (this.conf_dao.isConferencePresentByID(id_conf)==false){
             System.out.println("Conference not found");
             return false;
         }
-        Date scadenza = this.conf_dao.getConferenceByID(id_conf).getDeadline();
-        if(scadenza.before(Date.valueOf(LocalDate.now()))){
+        if(this.conf_dao.getConferenceByID(id_conf).getDeadline().before(Date.valueOf(LocalDate.now()))){
             System.out.println("The selected conference is expired");
             return false;
         }
-        for(RUserDTO autori : article_autori){
-            if(autori != null){
-                result =true;
-                break;
-            }
-        }
-        if(result == false){
+        if(article_autori.isEmpty()){
             System.out.println("List of authors is empty");
             return false;
         }
-
-        Conference conf = this.conf_dao.getConferenceByID(id_conf);
         for (RUserDTO fake_user : article_autori) {
-            if(fake_user == null) {
-                System.out.println("User not found");
-            }else if(user_dao.isUserPresentByEmail(fake_user.getEmail()) == true && user_dao.getUserByEmail(fake_user.getEmail()).getRole() == "autore") {
+            if(user_dao.isUserPresentByEmail(fake_user.getEmail()) == true && user_dao.getUserByEmail(fake_user.getEmail()).getRole() == "autore" && fake_user != null) {
                 authors_list.add((Author) user_dao.getUserByEmail(fake_user.getEmail()));
-            }
-        }
+        }}
         Article art = new Article(article_id, article_abstract, authors_list, article_titolo);
-        conf.getArticles().add(art);
+        this.conf_dao.getConferenceByID(id_conf).getArticles().add(art);
         art_dao.saveArticle(art);
         return true;
     }

@@ -23,13 +23,8 @@ public class Main {
 
 		Thread notificationThread = new Thread(() -> {
 			System.out.println("Email notifications thread\n");
-			try {
-				NotificationController notification_task = new NotificationController();
-				new_timer.schedule(notification_task, 0, periodInMillis);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				System.out.println("Errore nell'inizializzazione del NotificationController");
-			}
+			NotificationController notification_task = new NotificationController();
+			new_timer.schedule(notification_task, 0, periodInMillis);
 		});
 		notificationThread.start();
     	}

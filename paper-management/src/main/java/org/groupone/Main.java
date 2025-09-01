@@ -3,6 +3,7 @@ package org.groupone;
 import java.sql.SQLException;
 import java.util.Timer;
 
+import org.groupone.boundary.LoginView;
 import org.groupone.controller.NotificationController;
 
 
@@ -13,6 +14,10 @@ public class Main {
 		
 		Thread guiThread = new Thread(() -> {
 			System.out.println("Gui thread\n");
+			LoginView loginView = new LoginView();
+			loginView.setVisible(true);
+			loginView.setLocationRelativeTo(null);
+
 		});
 		guiThread.start();
 

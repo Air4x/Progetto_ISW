@@ -1,0 +1,27 @@
+@startuml
+title Control Flow Graph - createConference()
+
+start
+:1-2. Inizializzazione variabili;
+:3. if (isConferencePresentByID(id));
+  if (true) then (true)
+    :4. Stampa "Conference Already Exists" e return false;
+    stop
+  else (false)
+  :5. else if (today.isAfter(scadenza));
+    if (true) then (true)
+      :6. Stampa "Scadenza is after today" e return false;
+      stop
+    else (false)
+    :7. else if (isUserPresentByID(id) == false OR getRole() != "organizzatore");
+      if (true) then (true)
+        :8. Stampa "Organizzatore is not Found" e return false;
+        stop
+      else (false)
+        :9-10. Creazione e salvataggio nuova conferenza;
+        :11. return true;
+        stop
+      endif
+    endif
+  endif
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+title Control Flow Graph - submitArticle()
+
+start
+:1. Inizializzazione variabili;
+
+if (2. !isConferencePresentByID(id_conf)) then (true)
+  :3. Stampa "Conference not found" e return false;
+  stop
+else (false)
+
+  if (4. deadline.before(today)) then (true)
+    :5. Stampa "The selected conference is expired" e return false;
+    stop
+  else (false)
+  
+    if (6. article_autori.isEmpty()) then (true)
+      :7. Stampa "List of authors is empty" e return false;
+      stop
+    else (false)
+      
+      :8. Inizio ciclo for;
+      repeat
+        :9. Controllo autore;
+        if (isUserPresentByEmail(...) && ...) then (true)
+          :10. authors_list.add(...);
+        else (false)
+          :Continua;
+        endif
+      repeat while (ancora autori)
+      
+      :11. Creazione e salvataggio articolo;
+      :12. return true;
+      stop
+      
+    endif
+  endif
+endif
+
+@enduml

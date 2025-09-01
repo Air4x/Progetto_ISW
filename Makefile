@@ -3,13 +3,15 @@ VPATH = VisualParadigm:Documentation
 main.pdf:  main.tex images
 	lualatex $<
 
-images: diagramma_uso.png diagramma_classi.png sequence prg er
+images: diagramma_uso.png diagramma_classi.png sequence prg er test
 
 sequence: diagramma_sequenza_sottomissione.png diagramma_sequenza_conferenza.png diagramma_sequenza_revisori.png diagramma_sequenza_accesso.png diagramma_sequenza_registrazione.png
 
 prg: diagramma_prg_classi.png diagramma_prg_database.png diagramma_prg_entity.png diagramma_prg_controller.png diagramma_prg_dto.png
 
 er: er_finale.png
+
+test: testing_createconference.puml.png test_submitArticle.png
 
 diagramma_classi.png: diagramma_classi.puml
 	java -jar plantuml.jar $^
@@ -53,6 +55,8 @@ diagramma_prg_dto.png: diagramma_prg_dto.puml
 testing_createconference.puml.png: testing_createconference.puml
 	java -jar plantuml.jar $^
 
+test_submitArticle.png: test_submitArticle.puml
+		java -jar plantuml.jar $^
 clean:
 	rm main.*
 

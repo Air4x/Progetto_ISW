@@ -23,14 +23,14 @@ public class UserControllerTest {
     public void testRegisterUserIsPresent() throws SQLException {
         RUserDTO fake_user = user_controller.registerUser("Seconda Università di Napoli","fakenetflix2003b@gmail.com","Rombanini","Gianmarco","batuffolino", "autore");
         assertNull(fake_user);
-
     }
 
     @Test
     public void testRegisterUserIsNotPresent() throws SQLException {
         /*Bisogna cambiare solo new_email per vedere che il test e andato a buon fine*/
-        String new_email = "komssp.ghysssszb@gmail.com";
+        String new_email = "komassdfslggòkdsadssp.ghyssdaasssdsfszb@gmail.com";
         RUserDTO fake_user =user_controller.registerUser("Seconda Università di Napoli",new_email,"Rombanini","Gianmarco","batuffolino", "autore");
+        System.out.println(fake_user.toString());
         assertEquals(new_email,fake_user.getEmail());
     }
 

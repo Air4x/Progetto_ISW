@@ -69,6 +69,8 @@ public class RegistrationForm extends JFrame {
         txtemail.setFont(new Font("Arial",Font.PLAIN,12));
         panel.add(txtemail);
 
+        
+
         JLabel lblpassword=new JLabel("Password:");
         lblpassword.setBounds(150,100,100,20);
         lblpassword.setFont(new Font("Arial",Font.PLAIN,20));
@@ -124,7 +126,6 @@ public class RegistrationForm extends JFrame {
 
                     //Se tutto corrisponde
                     if (!txtemail.getText().isEmpty() && !txtemail.getText().isEmpty() && txtemail.getText().matches(regex)&&(txtruolo.getText().equalsIgnoreCase("autore")||txtruolo.getText().equalsIgnoreCase("organizzatore"))) {
-                        System.out.println(passwordField1.getText());
 
                         UserController uc = new UserController();
                         RUserDTO userDTO = uc.registerUser(txtaffiliazione.getText(), txtemail.getText(), txtlastname.getText(), txtname.getText(), passwordField1.getText(), txtruolo.getText());

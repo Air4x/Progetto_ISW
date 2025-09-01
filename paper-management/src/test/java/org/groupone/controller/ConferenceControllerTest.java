@@ -56,7 +56,7 @@ public class ConferenceControllerTest {
         }else if(scelta==2){
             LocalDate scadenza=LocalDate.of(2026,12,04);
             id_conference=ID.generate();
-            org = user_controller.login("fakenetflix2003@gmail.com","12345678!");
+            org = user_controller.login("fakenetflix2003b@gmail.com","12345678!");
             esito = conference_conference.createConference(scadenza,title,description,id_conference,org);
         }
         assertFalse(esito);

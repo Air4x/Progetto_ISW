@@ -36,9 +36,14 @@ public class NotificationController extends TimerTask {
      * Costruttore
      * @throws SQLException
      */
-    public NotificationController() throws SQLException{
-        this.conf_dao= new ConferenceDAO();
-        this.user_dao= new UserDAO();
+    public NotificationController(){
+        try {
+            this.conf_dao= new ConferenceDAO();
+            this.user_dao= new UserDAO();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Errore nell'inizializzazione del NotificationController");
+        }
     }
 
     /**
@@ -46,11 +51,7 @@ public class NotificationController extends TimerTask {
      */
     @Override
     public void run() {
-        try {
             invioNotifiche();
-        } catch (SQLException | MessagingException e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -58,11 +59,12 @@ public class NotificationController extends TimerTask {
      * @throws SQLException
      * @throws MessagingException
      */
-    public void invioNotifiche() throws SQLException, MessagingException {
-        ArrayList<Conference> conf = conf_dao.getActiveConference();
-        ArrayList<Author> auth = user_dao.getAllAuthors();
+    public void invioNotifiche(){
         String msg,name_a,lastname_a,email_a,title_c;
-        for (Conference c : conf) {
+        try {  
+            ArrayList<Conference> conf = conf_dao.getActiveConference();
+            ArrayList<Author> auth = user_dao.getAllAuthors();
+            for (Conference c : conf) {
             if (c.nearDeadline()) {
                 title_c = c.getTitle();
                 for(Author a : auth){
@@ -73,8 +75,15 @@ public class NotificationController extends TimerTask {
                     sendEmail(email_a,title_c,msg);
                 }
             }
-            
         }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Errore nell'invio delle email");
+        } catch( MessagingException e ){
+            e.printStackTrace();
+            System.out.println("Errore nella configurazione dell'host per l'invio delle email");
+        }
+        
     }
     /**
     * Metodo per la creazione del messaggio da inviare

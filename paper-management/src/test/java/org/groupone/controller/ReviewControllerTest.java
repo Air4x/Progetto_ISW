@@ -2,10 +2,9 @@ package org.groupone.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import org.groupone.DTO.PossibleReviewDTO;
-import org.groupone.database.ArticleDAO;
 import org.groupone.database.UserDAO;
-import org.groupone.entity.Article;
 import org.groupone.entity.Author;
 import org.groupone.utility.ID;
 import static org.junit.Assert.assertFalse;
@@ -16,13 +15,11 @@ import org.junit.Test;
 public class ReviewControllerTest {
 
     private ReviewController review_Controller;
-    private ArticleDAO article_dao;
     private UserDAO u_DAO;
 
     @Before
     public void setUp() throws SQLException {
         review_Controller = new ReviewController();
-        article_dao = new ArticleDAO();
         u_DAO = new UserDAO();
     }
 

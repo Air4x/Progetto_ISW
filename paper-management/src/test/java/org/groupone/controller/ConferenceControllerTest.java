@@ -3,6 +3,7 @@ package org.groupone.controller;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+
 import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ShowActiveConferenceDTO;
 import org.groupone.DTO.ShowArticleDTO;
@@ -45,17 +46,17 @@ public class ConferenceControllerTest {
         if(scelta==0){
             LocalDate scadenza=LocalDate.of(2023,12,04);
             id_conference= ID.generate();
-            org = user_controller.login("domenico.cotroneo@unina.it","virtualizzazione");
+            org = user_controller.login("gpt1youtu@gmail.com","virtualizzazione");
             esito = conference_conference.createConference(scadenza,title,description,id_conference,org);
         }else if (scelta==1) {
             LocalDate scadenza=LocalDate.of(2026,12,04);
             id_conference=new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d");
-            org = user_controller.login("domenico.cotroneo@unina.it","virtualizzazione");
+            org = user_controller.login("gpt1youtu@gmail.com","virtualizzazione");
             esito = conference_conference.createConference(scadenza,title,description,id_conference,org);
         }else if(scelta==2){
             LocalDate scadenza=LocalDate.of(2026,12,04);
             id_conference=ID.generate();
-            org = user_controller.login("giuseppe.aceto@unina.it","12345678!");
+            org = user_controller.login("fakenetflix2003@gmail.com","12345678!");
             esito = conference_conference.createConference(scadenza,title,description,id_conference,org);
         }
         assertFalse(esito);

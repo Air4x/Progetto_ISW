@@ -2,6 +2,7 @@ package org.groupone.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ShowArticleDTO;
 import org.groupone.utility.ID;
@@ -27,7 +28,7 @@ public class ArticleControllerTest {
     public void testSubmitArticlesWithAActiveConference() throws SQLException{
         ArrayList<RUserDTO> autori =  new ArrayList<>();
         autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
-        autori.add(user_controller.getRAuthorBYEmail("gian.rombanini@outlook.it"));
+        autori.add(user_controller.getRAuthorBYEmail("fakenetflix2003@gmail.com"));
         ID conference_id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d");
         boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,conference_id);
         assertTrue(esito);
@@ -44,11 +45,11 @@ public class ArticleControllerTest {
         ID conference_id=null;
         int scelta = 0;
         if(scelta == 0){
-            autori.add(user_controller.getRAuthorBYEmail("gian.rombanini@outlook.it"));
+            autori.add(user_controller.getRAuthorBYEmail("fakenetflix2003@gmail.com"));
             autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
             conference_id=ID.generate();
         }else if(scelta == 1){
-            autori.add(user_controller.getRAuthorBYEmail("gian.rombanini@outlook.it"));
+            autori.add(user_controller.getRAuthorBYEmail("fakenetflix2003@gmail.com"));
             autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
             conference_id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc03d");
         }else if(scelta == 2){

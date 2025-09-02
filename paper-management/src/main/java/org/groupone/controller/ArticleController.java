@@ -57,7 +57,7 @@ public class ArticleController {
             return false;
         }
         for (RUserDTO fake_user : article_autori) {
-            if(user_dao.isUserPresentByEmail(fake_user.getEmail()) == true && user_dao.getUserByEmail(fake_user.getEmail()).getRole() == "autore" && fake_user != null) {
+            if(fake_user != null && user_dao.isUserPresentByEmail(fake_user.getEmail()) == true && user_dao.getUserByEmail(fake_user.getEmail()).getRole() == "autore") {
                 authors_list.add((Author) user_dao.getUserByEmail(fake_user.getEmail()));
         }}
         Article art = new Article(article_id, article_abstract, authors_list, article_titolo);

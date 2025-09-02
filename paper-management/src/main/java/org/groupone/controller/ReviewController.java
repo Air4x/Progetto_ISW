@@ -42,7 +42,9 @@ public class ReviewController {
             return false;
         }
         for(PossibleReviewDTO fake_reviewer: list_reviewer_selected){
+            if(fake_reviewer != null){
             this.reviewer_dao.assignReviewer(articleID, fake_reviewer.getId());
+            }
         }
        return true;
     }

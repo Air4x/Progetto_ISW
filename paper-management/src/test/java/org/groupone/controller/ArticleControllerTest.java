@@ -25,7 +25,7 @@ public class ArticleControllerTest {
     }
 
     @Test
-    public void testSubmitArticlesWithAActiveConference() throws SQLException{
+    public void testSubmitArticlesOK() throws SQLException{
         ArrayList<RUserDTO> autori =  new ArrayList<>();
         autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
         autori.add(user_controller.getRAuthorBYEmail("fakenetflix2003b@gmail.com"));
@@ -34,31 +34,36 @@ public class ArticleControllerTest {
         assertTrue(esito);
     }
 
-    /*
-     * 0: Conference not found
-     * 1: Expired conference
-     * 2: List of author is empty
-     */
+
     @Test
-    public void testSubmitArticlesNotOK() throws SQLException{
+    public void testSubmitArticlesConferencenotfound() throws SQLException{
         ArrayList<RUserDTO> autori =  new ArrayList<>();
-        ID conference_id=null;
-        int scelta = 0;
-        if(scelta == 0){
-            autori.add(user_controller.getRAuthorBYEmail("fakenetflix2003b@gmail.com"));
-            autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
-            conference_id=ID.generate();
-        }else if(scelta == 1){
-            autori.add(user_controller.getRAuthorBYEmail("fakenetflix2003b@gmail.com"));
-            autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
-            conference_id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc03d");
-        }else if(scelta == 2){
-            autori.add(user_controller.getRAuthorBYEmail(""));
-            autori.add(user_controller.getRAuthorBYEmail(""));
-            conference_id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d");
-        }
-        boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,conference_id);
+        boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,ID.generate());
         assertFalse(esito);
+    }
+
+    @Test
+    public void testSubmitArticlesConferenceExpired() throws SQLException{
+        ArrayList<RUserDTO> autori =  new ArrayList<>();
+        autori.add(user_controller.getRAuthorBYEmail("fakenetflix2003b@gmail.com"));
+        autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
+        boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,new ID("6279c9e1-b121-4c7a-a196-7a43b57fc03d"));
+        assertFalse(esito);
+    }
+
+    @Test
+    public void testSubmitArticlesListEmpty() throws SQLException{
+        ArrayList<RUserDTO> autori =  new ArrayList<>();
+        boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,new ID("611f4dff-28c2-42b9-982d-762a3e9e2b3c"));
+        assertFalse(esito);
+    }
+
+    @Test
+    public void testSubmitArticlesListDTOEmpty() throws SQLException{
+        ArrayList<RUserDTO> autori =  new ArrayList<>();
+        autori.add(user_controller.getRAuthorBYEmail(null));
+        boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,new ID("611f4dff-28c2-42b9-982d-762a3e9e2b3c"));
+        assertTrue(esito);
     }
 
     @Test

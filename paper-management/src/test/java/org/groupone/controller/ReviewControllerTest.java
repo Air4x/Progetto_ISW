@@ -30,26 +30,19 @@ public class ReviewControllerTest {
         boolean esito = review_Controller.assignReviewer(id_article, list_reviewer);
         assertTrue(esito);
     }
-    
-    /*
-     * 0 = Articolo non trovato
-     * 1 = Errore nella lista dei revisori
-     */
+
     @Test
-    public void testAssignReviewerFailure() throws SQLException {
-        int scelta=0;
-        boolean esito = true;
-        ID id_article = null;
+    public void testAssignReviewerFailureArticleNotFound() throws SQLException {
         ArrayList<PossibleReviewDTO> list_reviewer = new ArrayList<>();
-        if(scelta == 0){
-            id_article = ID.generate();
-            list_reviewer = review_Controller.getListReviewer(id_article);
-            esito = review_Controller.assignReviewer(id_article, list_reviewer);
-        }
-        if(scelta == 1){
-            id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
-            esito = review_Controller.assignReviewer(id_article, list_reviewer);
-        }
+        list_reviewer = review_Controller.getListReviewer(ID.generate());
+        boolean esito = review_Controller.assignReviewer(ID.generate(), list_reviewer);
+        assertFalse(esito);
+    }
+
+    @Test
+    public void testAssignReviewerFailureErrorListAuthor() throws SQLException {
+        ArrayList<PossibleReviewDTO> list_reviewer = new ArrayList<>();
+        boolean esito = review_Controller.assignReviewer(new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea"), list_reviewer);
         assertFalse(esito);
     }
 

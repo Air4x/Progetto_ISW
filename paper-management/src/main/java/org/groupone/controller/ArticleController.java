@@ -51,7 +51,7 @@ public class ArticleController {
         if(this.conf_dao.getConferenceByID(id_conf).getDeadline().before(Date.valueOf(LocalDate.now()))){
             System.out.println("The selected conference is expired");
             return false;
-        }
+        }            
         if(article_autori.isEmpty()){
             System.out.println("List of authors is empty");
             return false;
@@ -59,10 +59,16 @@ public class ArticleController {
         for (RUserDTO fake_user : article_autori) {
             if(fake_user != null && user_dao.isUserPresentByEmail(fake_user.getEmail()) == true && user_dao.getUserByEmail(fake_user.getEmail()).getRole() == "autore") {
                 authors_list.add((Author) user_dao.getUserByEmail(fake_user.getEmail()));
-        }}
+            }
+        }
+        if(authors_list.isEmpty()){
+            System.out.println("List of authors is empty");
+            return false;
+        }
         Article art = new Article(article_id, article_abstract, authors_list, article_titolo);
         this.conf_dao.getConferenceByID(id_conf).getArticles().add(art);
         art_dao.saveArticle(art);
+        System.out.println("Articolo consegnato");
         return true;
     }
 

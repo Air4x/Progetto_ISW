@@ -35,7 +35,7 @@ public class ConferenceControllerTest {
 
     @Test
     public void testCreateConferenceOrganizzaroreisnotFound() throws SQLException {
-        boolean esito = conference_controller.createConference(LocalDate.of(2026,12,04),"Nintendo","Perche nintendo dovrebbe essere un monopolio",new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d"),user_controller.login("gpt1youtuw@gmail.com","virtualizzazione"));
+        boolean esito = conference_controller.createConference(LocalDate.of(2026,12,04),"Nintendo","Perche nintendo dovrebbe essere un monopolio",ID.generate(),user_controller.login("toolvpstaiscal@gmail.com","12345678!"));
         assertFalse(esito);
     }
 

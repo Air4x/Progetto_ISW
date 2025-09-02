@@ -11,20 +11,20 @@ import org.groupone.DTO.RUserDTO;
 import org.groupone.controller.UserController;
 
 public class RegistrationForm extends JFrame {
-    private JTextField txtname;
-    private JLabel lblname;
-    private JPanel panel;
-    private JLabel lbllastname;
-    private JTextField txtlastname;
-    private JTextField txtemail;
-    private JLabel lblemail;
-    private JPasswordField passwordField1;
-    private JLabel lblpassword;
-    private JTextField txtaffiliazione;
-    private JLabel lblaffiliazione;
-    private JLabel lblruolo;
-    private JButton registerbutton;
-    private JComboBox comboboxruoli;
+    private JTextField txtname = new JTextField();
+    private JLabel lblname = new JLabel();
+    private JPanel panel = new JPanel();
+    private JLabel lbllastname = new JLabel();
+    private JTextField txtlastname = new JTextField();
+    private JTextField txtemail = new JTextField();
+    private JLabel lblemail = new JLabel();
+    private JPasswordField passwordField1 = new JPasswordField();
+    private JLabel lblpassword = new JLabel();
+    private JTextField txtaffiliazione = new JTextField();
+    private JLabel lblaffiliazione = new JLabel();
+    private JLabel lblruolo = new JLabel();
+    private JButton registerbutton = new JButton();
+    private JComboBox comboboxruoli = new JComboBox<>();
     private RUserDTO userDTO;
 
 

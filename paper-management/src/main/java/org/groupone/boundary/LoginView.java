@@ -22,14 +22,14 @@ public class LoginView extends JFrame{
         setTitle("Login View");
         setBounds(100, 100, 230, 150);
         setResizable(false);
-        JPanel panel = new JPanel();
+        panel = new JPanel();
         panel.setBounds(5,5,5,5);
         panel.setLayout(null);
         setLocationRelativeTo(null);
         setContentPane(panel);
 
 
-        JButton loginButton = new JButton("Login");
+        loginButton = new JButton("Login");
         loginButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
         loginButton.setBackground(new Color(100, 149, 237));
         loginButton.setForeground(Color.white);
@@ -48,7 +48,7 @@ public class LoginView extends JFrame{
         });
         panel.add(loginButton);
 
-        JButton registerButton = new JButton("Register");
+        registerButton = new JButton("Register");
         registerButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
 
         registerButton.setBounds(120,30,90,30);

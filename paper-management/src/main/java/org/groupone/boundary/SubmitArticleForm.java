@@ -31,6 +31,7 @@ public class SubmitArticleForm extends JFrame{
         setResizable(false);
         setLocationRelativeTo(null);
 
+        this.contentPane = new JPanel();
         contentPane.setBounds(5,5,5,5);
         contentPane.setLayout(null);
         setContentPane(contentPane);
@@ -58,6 +59,7 @@ public class SubmitArticleForm extends JFrame{
         lblcoauthors.setFont(new Font("Arial",Font.PLAIN,20));
         lblcoauthors.setBounds(120,10,100,20);
         contentPane.add(lblcoauthors);
+
 
         txtcoauthors.setText("Please Enter the email of the coauthors");
         txtcoauthors.setBounds(120,40,150,20);
@@ -103,6 +105,7 @@ public class SubmitArticleForm extends JFrame{
                         }
 
                         if(txtcoauthors.getText().length()<=150 && txtareaabstract.getText().length()<=250 && listacoautori.size()<=3) {
+                            System.out.println(listacoautori);
                             if (ac.submitArticle(txttitle.getText(), txtareaabstract.getText(), listacoautori, conferenceID)) {
                                 JOptionPane.showMessageDialog(null, "Article Submitted Successfully");
                                 dispose();

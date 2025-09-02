@@ -1,6 +1,98 @@
 \section{Test Funzionale}
 \label{sec:test_funzionale}
 
+\subsection{Test Suite di createConference}
+\begin{tabular}{|p{2.5cm}|p{2.5cm}|p{3cm}|p{1.5cm}|p{5cm}|}
+\hline
+\rowcolor{SkyBlue}
+\multicolumn{5}{l}{\textbf{createConference p1}}\\
+\hline
+\rowcolor{Red}
+\textbf{Test Case ID} & \textbf{Descrizione} & \textbf{Classi di equivalenza coperte} & \textbf{Pre - Condizioni} & \textbf{Input} \\
+\hline
+1&Tutti gli input validi&Validi: Scadenza, Titolo, Descrizione, ID Conference, Organizzatore &&conference-controller.createConference(LocalDate.of(2026,12,04), "Nintendo per sempre", "I was nerd before it was cool", ID.generate(), user-controller.login("gpt1youtu@gmail.com","virtualizzazione"));\\
+\hline
+2&Organizzatore non valido&Validi: Scadenza, Titolo, Descrizione, ID Conference; Non Validi: Organizzatore&&conference-controller.createConference(LocalDate.of(2026,12,04),"Nintendo","Perche nintendo dovrebbe essere un monopolio",ID.generate(),user-controller.login("toolvpstaiscal@gmail.com","12345678!"));\\
+\hline
+3&ID Conference di conferenza gia esistente&Validi: Scadenza, Titolo, Descrizione, Organizzatore; Non Validi: ID Conference &&conference-controller.createConference(LocalDate.of(2026,12,04),"Nintendo","Perche nintendo dovrebbe essere un monopolio",new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d"),user-controller.login("gpt1youtu@gmail.com","virtualizzazione"));\\
+\hline
+4&Scadenza nel passato&Validi: Titolo, Descrizione, ID Conference, Organizzatore; Non Validi: Scadenza  &&conference-controller.createConference(LocalDate.of(2023,12,04),"Nintendo","Perche nintendo dovrebbe essere un monopolio",ID.generate(),user-controller.login("gpt1youtu@gmail.com","virtualizzazione"));\\ 
+\hline
+\end{tabular}
+
+
+\begin{tabular}{|p{3.5cm}|p{3cm}|p{3cm}|p{1cm}|}
+\hline
+\rowcolor{SkyBlue}
+\multicolumn{4}{l}{\textbf{createConferenc p2}}\\
+\hline
+\rowcolor{Red}
+ \textbf{Post - Condizione Atteso} & \textbf{Output Ottenuto}& \textbf{Post - Condizione Ottenute}& \textbf{Esito}\\
+\hline
+Conferenza creata& Conference is created & la conferenza viene creata & PASS\\
+\hline
+Organizzatore non trovato&Organizzarore is not Found& la conferenza non viene creata perche non viene trovato l'organizzatore & PASS\\
+\hline
+Conferenza già esistente&Conference Already Exists& La conferenza non viene creata perche già esistente& PASS\\
+\hline
+Scadenza nel passato&Scadenza is before today&la conferenza non viene creata perche la data di scadenza è nel passato& PASS\\ 
+\hline
+\end{tabular}
+
+\subsection{Test Suite di submitArticles}
+\begin{tabular}{|p{2.5cm}|p{2.5cm}|p{3cm}|p{1.5cm}|p{4cm}|}
+\hline
+\rowcolor{SkyBlue}
+\multicolumn{5}{l}{\textbf{submitArticles p1}}\\
+\hline
+\rowcolor{Red}
+\textbf{Test Case ID} & \textbf{Descrizione} & \textbf{Classi di equivalenza coperte} & \textbf{Pre - Condizioni} & \textbf{Input} \\
+\hline
+1 & Tutti input validi &  Validi: Titolo , Abstract ,ID, Lista Autori, ID Conference && autori.add(user-controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com")); autori.add(user-controller.getRAuthorBYEmail("fakenetflix2003b@gmail.com")); conference id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d"); Titolo = "Why Nintendo?" ;Abstract = "Nintendo" \\
+\hline
+2& ID Conference non valido &Validi:   Titolo , Abstract ,ID, Lista Autori; Non Validi: ID Conference  &&autori.add(user-controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));autori.add(user-controller.getRAuthorBYEmail("fakenetflix2003b@gmail.com"));conference id = ID.generate()); Titolo = "Why Nintendo?" ;Abstract = "Nintendo" \\
+\hline
+3& Conferenza scaduta & Validi: Titolo , Abstract ,ID, Lista Autori; Non Validi: ID Conference [scaduta] &&autori.add(user-controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));autori.add(user-controller.getRAuthorBYEmail("fakenetflix2003b@gmail.com"));conference id = IID("6279c9e1-b121-4c7a-a196-7a43b57fc03d") Titolo = "Why Nintendo?" ;Abstract = "Nintendo"\\
+\hline
+\end{tabular}
+
+\begin{tabular}{|p{2.5cm}|p{2.5cm}|p{3cm}|p{1.5cm}|p{4cm}|}
+\hline
+\rowcolor{SkyBlue}
+\multicolumn{5}{l}{\textbf{submitArticles p2}}\\
+\hline
+\rowcolor{Red}
+\textbf{Test Case ID} & \textbf{Descrizione} & \textbf{Classi di equivalenza coperte} & \textbf{Pre - Condizioni} & \textbf{Input} \\
+\hline
+
+4&Lista di autori data vuota& Validi: Titolo , Abstract ,ID, ID Conference validi ; Non Validi: Lista Autori  &&conference id = IID("611f4dff-28c2-42b9-982d-762a3e9e2b3c") Titolo = "Why Nintendo?" ;Abstract = "Nintendo"\\
+\hline
+5&Lista di autori ottenuta vuota& Validi: Titolo , Abstract ,ID, ID Conference; Non Validi: Lista Autori &&autori.add(user-controller.getRAuthorBYEmail(null));conference id = IID("611f4dff-28c2-42b9-982d-762a3e9e2b3c") Titolo = "Why Nintendo?" ;Abstract = "Nintendo"\\
+\hline
+\end{tabular}
+
+
+\begin{tabular}{|p{3.5cm}|p{3cm}|p{3cm}|p{1cm}|}
+\hline
+\rowcolor{SkyBlue}
+\multicolumn{4}{l}{\textbf{submitArticles p3}}\\
+\hline
+\rowcolor{Red}
+ \textbf{Post - Condizione Atteso} & \textbf{Output Ottenuto}& \textbf{Post - Condizione Ottenute}& \textbf{Esito}\\
+\hline
+ Articolo consegnato & Articolo viene consegnato alla conferenza & L'articolo è stato consegnato alla conference& PASS\\ 
+\hline
+Conferenza non trovata &  Conference not found & La conferenza non viene trovata e di conseguenza l'articolo non viene consegnato&PASS\\
+\hline
+Conferenza scaduta & The selected conference is expired & L'articolo non viene consegnato perche si e selezionata una conferenza scaduta&PASS\\
+\hline
+Lista autori vuota&List of authors is empty&L'articolo non viene consegnato perche si è dato una lista di autori vuota&PASS\\
+\hline
+Lista autori dto vuota&List of authors is empty&L'articolo non viene consegnato perche si è ottenuta una lista di autori vuota &PASS\\
+\hline
+\end{tabular}
+
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "main"

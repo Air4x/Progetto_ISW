@@ -13,12 +13,13 @@ public boolean createConference (LocalDate scadenza, String title, String descr,
         }else if(today.isAfter(scadenza)){ [4]
             System.out.println("Scadenza is after today");
             return false; [5]
-        }else if(user_dao.isUserPresentByID(org.getId())==false || user-dao.getUserByEmail(org.getEmail()).getRole()!="organizzatore") [6]
+        }else if(org != null || user_dao.isUserPresentByID(org.getId())==false || user-dao.getUserByEmail(org.getEmail()).getRole()!="organizzatore") [6]
             System.out.println("Organizzarore is not Found");
             return false; [7]
         }
         Conference new_conference = new Conference(deadline,title,descr,id,org.getId()); [8]
         conf_dao.saveConference(new-conference); [8]
+        System.out.println("Conference is created"); [8]
         return true; [9]
 }
 \end{lstlisting}
@@ -118,28 +119,30 @@ public boolean submitArticle(String article_titolo, String article_abstract, Arr
                 authors_list.add((Author) user_dao.getUserByEmail(fake_user.getEmail()));[10]
             }
         }
-        Article art = new Article(article_id, article_abstract, authors_list, article_titolo); [11]
-        this.conf_dao.getConferenceByID(id_conf).getArticles().add(art); [11]
-        art_dao.saveArticle(art); [11]
-        return true; [12]
+	if(authors_list.isEmpty()){[11]
+            System.out.println("List of authors is empty");
+            return false;[12]
+        }
+        Article art = new Article(article_id, article_abstract, authors_list, article_titolo); [13]
+        this.conf_dao.getConferenceByID(id_conf).getArticles().add(art); [13]
+        art_dao.saveArticle(art); [13]
+        return true; [14]
    } 
 \end{lstlisting} 
 \paragraph{Control Flow Grap}
 \paragraph{Numero Ciclomatico}
 \begin{itemize}
-\item[.] numero di regioni chiuse del grafo + 1= 5 +1 = 6
-\item[.] numero di nodi predicati +1 = 5 (2,4,6,8,9) +1 = 6 
-\item[.] numero di archi - numero di nodi + 2 = 17 - 12 + 2 = 5 + 2 = 7 
+\item[.] numero di regioni chiuse del grafo + 1= 6 +1 = 7
+\item[.] numero di nodi predicati +1 = 6 (2,4,6,8,9,11) +1 = 7
+\item[.] numero di archi - numero di nodi + 2 = 15 - 14 + 2 = 1 + 2 = 3  
 \end{itemize}
 \paragraph{Cammini}
 \begin{itemize}
-\item[Percorso n. 1: ] 1 - 2 - 4 - 6 - 8 - 9 -10 -11 - 12
+\item[Percorso n. 1: ] 1 - 2 - 4 - 6 - 8 - 9 -10 -11 - 12-13
 \item[Percorso n. 2: ] 1 - 2 - 3
 \item[Percorso n. 3: ] 1 - 2 - 4 - 5
 \item[Percorso n. 4: ] 1 - 2 - 4 - 6 - 7  
-\item[Percorso n. 5: ] 1 - 2 - 4 - 6 - 8 - 9
-\item[Percorso n. 6: ] 1 - 2 - 4 - 6 - 8 - 9 - 10 (1 o pocchi autori valido)
-\item[Percorso n. 7: ] 1 - 2 - 4 - 6 - 8 - 9 - 10 (nessun autore valido)
+\item[Percorso n. 5: ] 1 - 2 - 4 - 6 - 8 - 9 - 11 -12
 \end{itemize}
 \paragraph{Casi di Test}
 \begin{figure}[ht]
@@ -159,6 +162,7 @@ public boolean submitArticle(String article_titolo, String article_abstract, Arr
 \item[.] article-autori.isEmpty() risulti false
 \item[.] user-dao.isUserPresentByEmail(fake-user.getEmail()) risulti true
 \item[.] user-dao.getUserByEmail(fake-user.getEmail()).getRole() risulti uguale "autore" 
+\item[.] authors-list.isEmpty() e false
 \item[.]  fake-user risulti diverso da null
 \end{itemize}
 \item[Input:] Fornire una id di conferenza valida non scaduta e una lista article-autori validi non vuota 
@@ -197,7 +201,7 @@ public boolean submitArticle(String article_titolo, String article_abstract, Arr
 \item[Input:] Fornire una id di conferenza valida non scaduta e una lista article-autori vuota 
 \item[Risultato:] return false
 \end{itemize}
-\item[Caso n. 5 :] Successo con lista autoti vuota perchè non validi
+\item[Caso n. 5 :] lista autoti dto vuota
 \begin{itemize}
 \item[Obiettivo:] Verificare il percorso 5
 \item[Condizione:] le condizioni: 
@@ -206,35 +210,10 @@ public boolean submitArticle(String article_titolo, String article_abstract, Arr
 \item[.]  this.conf-dao.getConferenceByID(id-conf).getDeadline().before(Date.valueOf(LocalDate.now())) risulti false
 \item[.] article-autori.isEmpty() risulti false
 \item[.] user-dao.isUserPresentByEmail(fake-user.getEmail()) risulti false o user-dao.getUserByEmail(fake-user.getEmail()).getRole() risulti diverso da "autore" o  fake-user risulti uguale a null
+\item[.] authors-list.isEmpty() e true
 \end{itemize}
 \item[Input:]  Fornire una id di conferenza valida non scaduta e una lista article-autori con autori non validi
 \item[Risultato:] return true. La lista authors-list risulterà vuota, ma il metodo continuerà e salverà l'articolo con una lista di autori vuota.
-\end{itemize}
-\item[Caso n. 6 :] Successo con un solo autore valido
-\begin{itemize}
-\item[Obiettivo:] Verificare il percorso 6
-\item[Condizione:] le condizioni:
-\begin{itemize}
-\item[.]  this.conf-dao.isConferencePresentByID() risulti true
-\item[.]  this.conf-dao.getConferenceByID(id-conf).getDeadline().before(Date.valueOf(LocalDate.now())) risulti false
-\item[.] article-autori.isEmpty() risulti false
-\item[.] user-dao.isUserPresentByEmail(fake-user.getEmail()) risulti false o user-dao.getUserByEmail(fake-user.getEmail()).getRole() risulti diverso da "autore" o  fake-user risulti uguale a null [solo in un caso]
-\end{itemize}
-\item[Input:] Fornire una id di conferenza valida non scaduta e una lista article-autori con un solo autore validi
-\item[Risultato:] return true con authors-list con un solo autore
-\end{itemize}
-\item[Caso n. 7 :] Successo con pocchi autori validi
-\begin{itemize}
-\item[Obiettivo:] Verificare il percorso 
-\item[Condizione:] le condizioni:
-\begin{itemize}
-\item[.]  this.conf-dao.isConferencePresentByID() risulti true
-\item[.]  this.conf-dao.getConferenceByID(id-conf).getDeadline().before(Date.valueOf(LocalDate.now())) risulti false
-\item[.] article-autori.isEmpty() risulti false
-\item[.] user-dao.isUserPresentByEmail(fake-user.getEmail()) risulti false o user-dao.getUserByEmail(fake-user.getEmail()).getRole() risulti diverso da "autore" o  fake-user risulti uguale a null [in alcuni casi]
-\end{itemize}
-\item[Input:] Fornire una id di conferenza valida non scaduta e una lista article-autori con un pocchi autore validi
-\item[Risultato:] return true con authors-list con pocchi autori
 \end{itemize}
 \end{itemize}
 

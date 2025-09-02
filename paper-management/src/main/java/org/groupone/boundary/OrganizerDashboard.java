@@ -17,7 +17,6 @@ public class OrganizerDashboard extends JFrame{
     private JPanel contentPane;
     private JScrollPane scrollConferenceList;
     private JButton buttonCreateConference;
-    private JScrollPane scrollActiveConference;
     private JList listActiveConference;
     private JList listarticleSubmitted;
     private JScrollPane scrollarticleSubmitted;
@@ -28,7 +27,7 @@ public class OrganizerDashboard extends JFrame{
 
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             setTitle("Organizer Dashboard");
-            setBounds(100, 100, 450, 300);
+            setBounds(100, 100, 650, 400);
             contentPane.setBounds(5, 5, 5, 5);
             setContentPane(contentPane);
             setLocationRelativeTo(null);
@@ -45,38 +44,36 @@ public class OrganizerDashboard extends JFrame{
             }
             listActiveConference.setModel(activeConferencemodel);
 
-            scrollActiveConference.getViewport().setView(listActiveConference);
-            scrollActiveConference.setBounds(10, 65, 414, 40);
+            scrollConferenceList.getViewport().setView(listActiveConference);
+            scrollConferenceList.setBounds(10, 65, 414, 200);
             listActiveConference.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     try {
                         int index = listActiveConference.locationToIndex(e.getPoint());
                         ShowActiveConferenceDTO selected = activeConferencemodel.getElementAt(index);
-                        JList listarticleSubmitted =new JList ((ListModel) cc.getArticlesByConference(selected.getId()));
-                        JScrollPane scrollArticleSubmitted = new JScrollPane(listarticleSubmitted);
+                        ShowArticleDTO[] articlesubmitted = cc.getArticlesByConference(selected.getId()).toArray(new ShowArticleDTO[0]);
+                        DefaultListModel<ShowArticleDTO> articlemodel = new DefaultListModel<>();
+                        for(ShowArticleDTO article : articlesubmitted){
+                            articlemodel.addElement(article);
+                        }
+                        listarticleSubmitted.setModel(articlemodel);
+                        scrollarticleSubmitted.getViewport().setView(listarticleSubmitted);
                         listarticleSubmitted.addMouseListener(new MouseAdapter() {
                             public void mouseClicked(MouseEvent e) {
                                 int indexarticle = listarticleSubmitted.locationToIndex(e.getPoint());
                                 ShowArticleDTO selected = (ShowArticleDTO) listarticleSubmitted.getSelectedValue();
-
-
                             }
                         });
                     }catch (SQLException ex){
                         ex.printStackTrace();
-
-
                     }
-
-
-
                 }
             });
             contentPane.add(scrollConferenceList);
 
 
             buttonCreateConference.setText("Create Conference");
-            buttonCreateConference.setBounds(50, 50, 200, 50);
+            buttonCreateConference.setBounds(50, 550, 200, 50);
             buttonCreateConference.setBackground(new Color(100, 149, 237));
             buttonCreateConference.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
             buttonCreateConference.setForeground(Color.white);

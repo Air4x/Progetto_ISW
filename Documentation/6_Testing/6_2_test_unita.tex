@@ -1,0 +1,93 @@
+\section{Test Unita}
+\label{sec:test_unita}
+
+\subsection{Test createConference}
+\paragraph{Inizializzazione Parametri}
+.
+\begin{lstlisting}
+    private ConferenceController conference_controller;
+    private UserController user_controller;
+
+    @Before
+    public void setUp() throws SQLException {
+        conference_controller = new ConferenceController();
+        user_controller = new UserController();
+    
+\end{lstlisting}
+\paragraph{Test creazione di una conferenza con successo}
+.
+\begin{lstlisting}
+@Test
+    public void testCreateConferenceOK() throws SQLException {
+        boolean conf = conference_controller.createConference(LocalDate.of(2026,12,04), "Nintendo per sempre", "I was nerd before it was cool", ID.generate(),user_controller.login("gpt1youtu@gmail.com","virtualizzazione"));
+        assertTrue(conf);
+    }
+\end{lstlisting}
+\paragraph{Test anti-pattern }
+.
+\begin{lstlisting}
+    @Test
+    public void testCreateConferenceOrganizzaroreisnotFound() throws SQLException {
+        boolean esito = conference_controller.createConference(LocalDate.of(2026,12,04),"Nintendo","Perche nintendo dovrebbe essere un monopolio",new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d"),user_controller.login("gpt1youtuw@gmail.com","virtualizzazione"));
+        assertFalse(esito);
+    }
+
+    @Test
+    public void testCreateConferenceAlreadyExists() throws SQLException {
+        boolean esito = conference_controller.createConference(LocalDate.of(2026,12,04),"Nintendo","Perche nintendo dovrebbe essere un monopolio",new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d"),user_controller.login("gpt1youtu@gmail.com","virtualizzazione"));
+        assertFalse(esito);
+    }
+
+    @Test
+    public void testCreateConferenceScadenzaisaftertoday() throws SQLException {
+        boolean esito = conference_controller.createConference(LocalDate.of(2023,12,04),"Nintendo","Perche nintendo dovrebbe essere un monopolio",ID.generate(),user_controller.login("gpt1youtu@gmail.com","virtualizzazione"));
+        assertFalse(esito);
+    }
+\end{lstlisting}
+
+\subsection{Test assignReviewer}
+\paragraph{Inizializzazione Parametri}
+.
+\begin{lstlisting}
+    private ReviewController review_Controller;
+    private UserDAO u_DAO;
+
+    @Before
+    public void setUp() throws SQLException {
+        review_Controller = new ReviewController();
+        u_DAO = new UserDAO();
+    }
+\end{lstlisting}
+\paragraph{Test di assegnazione die revisori con successo}
+.
+\begin{lstlisting}
+    @Test
+    public void testAssignReviewerSuccess() throws SQLException {
+        ID id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
+        ArrayList<PossibleReviewDTO> list_reviewer = review_Controller.getListReviewer(id_article);
+        boolean esito = review_Controller.assignReviewer(id_article, list_reviewer);
+        assertTrue(esito);
+    }
+\end{lstlisting}
+\paragraph{Test anti-pattern}
+.
+\begin{lstlisting}
+    @Test
+    public void testAssignReviewerFailureArticleNotFound() throws SQLException {
+        ArrayList<PossibleReviewDTO> list_reviewer = new ArrayList<>();
+        list_reviewer = review_Controller.getListReviewer(ID.generate());
+        boolean esito = review_Controller.assignReviewer(ID.generate(), list_reviewer);
+        assertFalse(esito);
+    }
+
+    @Test
+    public void testAssignReviewerFailureErrorListAuthor() throws SQLException {
+        ArrayList<PossibleReviewDTO> list_reviewer = new ArrayList<>();
+        boolean esito = review_Controller.assignReviewer(new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea"), list_reviewer);
+        assertFalse(esito);
+    }
+\end{lstlisting}
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

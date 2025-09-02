@@ -151,8 +151,9 @@ public class RegistrationForm extends JFrame {
 
                     //Se tutto corrisponde
                     if (txtemail.getText().matches(regexemail) && !txtlastname.getText().isEmpty() && !txtname.getText().isEmpty() && (txtname.getText().length() <= 30) && (txtlastname.getText().length() <= 30) && !passwordField1.getText().isEmpty()&&(passwordField1.getText().length() <= 40) && passwordField1.getText().matches(".*^[a-zA-Z0-9-].*")&&txtaffiliazione.getText().length() <=50) {
-                        System.out.println(passwordField1.getText());
+                        System.out.println(comboboxruoli.getSelectedItem().toString());
                         UserController uc = new UserController();
+
                         userDTO = uc.registerUser(txtaffiliazione.getText(), txtemail.getText(), txtlastname.getText(), txtname.getText(), passwordField1.getText(), comboboxruoli.getSelectedItem().toString());
                         if (userDTO == null) {
                             JOptionPane.showMessageDialog(null, "User already register, proceed to login", "Warining", JOptionPane.WARNING_MESSAGE);

@@ -18,11 +18,12 @@ import java.util.logging.Logger;
 public class AuthorDashboard extends JFrame {
     private JPanel contentPane;
     private JScrollPane scrollActiveConference;
-    private JButton buttonSubmitArticle;
     private JScrollPane scrollSubmittedArticles;
-    private JList<ShowActiveConferenceDTO> listactiveConference;
     private JList<ShowArticleDTO> listarticleSubmitted;
-
+    private JList<ShowActiveConferenceDTO> listactiveConference;
+    private JLabel lblwelcome;
+    private JLabel lblarticlesubmitted;
+    private JLabel lblactiveconference;
 
 
     public AuthorDashboard(RUserDTO userDTO) throws SQLException {
@@ -30,23 +31,40 @@ public class AuthorDashboard extends JFrame {
         ConferenceController cc = new ConferenceController();
         ArticleController ac = new ArticleController();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
-        setTitle("Autore Dashboard");
+        setBounds(100, 100, 450, 600);
+        setTitle("Dashboard Autore");
 
 
 
-        JPanel contentPane = new JPanel();
+
+
         contentPane.setBounds(5,5,5,5);
+        contentPane.setLayout(null);
         setContentPane(contentPane);
+        lblwelcome.setText("Welcome," +  userDTO.getName()+" "+userDTO.getLastname() );
+        lblwelcome.setFont(new Font("Arial", Font.PLAIN, 20));
+        lblwelcome.setBounds(10, 11, 414, 40);
+        contentPane.add(lblwelcome);
 
-        JList<ShowActiveConferenceDTO> listActiveConference = new JList<>((ListModel) cc.getActiveConferences());
+        lblactiveconference.setText("Active Conference");
+        lblactiveconference.setFont(new Font("Arial", Font.PLAIN, 13));
+        lblactiveconference.setBounds(10, 35, 414, 40);
+        contentPane.add(lblactiveconference);
 
-        JScrollPane scrollActiveConference = new JScrollPane(listActiveConference);
-        scrollActiveConference.setBounds(5,5,50,200);
-        listActiveConference.addMouseListener( new MouseAdapter() {
+        ShowActiveConferenceDTO[] activeconference = cc.getActiveConferences().toArray(new ShowActiveConferenceDTO[0]);
+        DefaultListModel<ShowActiveConferenceDTO> model = new DefaultListModel<>();
+        for(ShowActiveConferenceDTO showActiveConference : activeconference){
+            model.addElement(showActiveConference);
+        }
+        listactiveConference.setModel(model);
+
+        scrollActiveConference.setViewportView(listactiveConference);
+        scrollActiveConference.setBounds(5,65,400,200);
+        listactiveConference.addMouseListener( new MouseAdapter() {
             public void mouseClicked(MouseEvent e){
                 try {
-                    ShowActiveConferenceDTO selected = (ShowActiveConferenceDTO) listActiveConference.getSelectedValue();
+                    int indice =  listactiveConference.locationToIndex(e.getPoint());
+                    ShowActiveConferenceDTO selected = model.getElementAt(indice);
                     SubmitArticleForm submitArticleForm = new SubmitArticleForm(userDTO, selected.getId());
                     submitArticleForm.setVisible(true);
                 }
@@ -59,9 +77,19 @@ public class AuthorDashboard extends JFrame {
 
 
 
-        JList<ShowArticleDTO> listSubmittedArticles = new JList<>((ListModel<ShowArticleDTO>) ac.getArticleByAuthor(userDTO.getId()));
-        JScrollPane scrollSubmittedArticles = new JScrollPane(listSubmittedArticles);
-        scrollSubmittedArticles.setBounds(5,215,50,200);
+        lblarticlesubmitted.setText("Article Submitted");
+        lblarticlesubmitted.setFont(new Font("Arial", Font.PLAIN, 13));
+        lblarticlesubmitted.setBounds(10, 255, 414, 40);
+        contentPane.add(lblarticlesubmitted);
+
+        ShowArticleDTO[] articlesubbmitted = ac.getArticleByAuthor(userDTO.getId()).toArray(new ShowArticleDTO[0]);
+        DefaultListModel<ShowArticleDTO> articlemodel = new DefaultListModel<>();
+        for(ShowArticleDTO showArticle : articlesubbmitted){
+            articlemodel.addElement(showArticle);
+        }
+        listarticleSubmitted.setModel(articlemodel);
+        scrollSubmittedArticles.setViewportView(listarticleSubmitted);
+        scrollSubmittedArticles.setBounds(5,285,400,200);
         contentPane.add(scrollSubmittedArticles);
 
 

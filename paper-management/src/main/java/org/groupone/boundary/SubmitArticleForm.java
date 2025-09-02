@@ -20,8 +20,6 @@ public class SubmitArticleForm extends JFrame{
     private JTextArea txtareaabstract;
     private JLabel lblcoauthors;
     private JTextField txtcoauthors;
-    private JLabel lblconference;
-    private JTextField txtconference;
     private JPanel contentPane;
     private JButton buttonSubmit;
 
@@ -33,50 +31,40 @@ public class SubmitArticleForm extends JFrame{
         setResizable(false);
         setLocationRelativeTo(null);
 
-        JPanel contentPane = new JPanel();
         contentPane.setBounds(5,5,5,5);
         contentPane.setLayout(null);
         setContentPane(contentPane);
 
-        JLabel lbltitle = new JLabel("Title");
+        lbltitle.setText("Title");
         lbltitle.setFont(new Font("Arial",Font.PLAIN,20));
         lbltitle.setBounds(10,10,100,20);
         contentPane.add(lbltitle);
 
-        JTextField txttitle = new JTextField();
         txttitle.setBounds(10,40,100,20);
         contentPane.add(txttitle);
 
-        JLabel lblabstract = new JLabel("Abstract");
+        lblabstract.setText("Abstract");
         lblabstract.setFont(new Font("Arial",Font.PLAIN,20));
         lblabstract.setBounds(10,70,100,20);
         contentPane.add(lblabstract);
 
-        JTextArea txtareaabstract = new JTextArea();
         txtareaabstract.setBounds(10,100,150,100);
         txtareaabstract.setWrapStyleWord(true);
         txtareaabstract.setLineWrap(true);
         contentPane.add(txtareaabstract);
 
-        JLabel lblcoauthors = new JLabel("Email Co-Authors");
+
+        lblcoauthors.setText("Co Authors");
         lblcoauthors.setFont(new Font("Arial",Font.PLAIN,20));
-        lblcoauthors.setBounds(170,10,100,20);
+        lblcoauthors.setBounds(120,10,100,20);
         contentPane.add(lblcoauthors);
 
-        JTextField txtcoauthors = new JTextField("Please enter the email address of the Co-Authors");
-        txtcoauthors.setBounds(170,40,100,20);
+        txtcoauthors.setText("Please Enter the email of the coauthors");
+        txtcoauthors.setBounds(120,40,150,20);
         contentPane.add(txtcoauthors);
 
-        JLabel lblconference = new JLabel("Conference");
-        lblconference.setFont(new Font("Arial",Font.PLAIN,20));
-        lblconference.setBounds(170,70,150,20);
-        contentPane.add(lblconference);
 
-        JTextField txtconference = new JTextField();
-        txtconference.setBounds(170,100,100,20);
-        contentPane.add(txtconference);
-
-        JButton buttonSubmit = new JButton("Submit");
+        buttonSubmit.setText("Submit");
         buttonSubmit.setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonSubmit.setBackground(new Color(100, 149, 237));
         buttonSubmit.setForeground(Color.white);
@@ -87,14 +75,43 @@ public class SubmitArticleForm extends JFrame{
                     try {
                         ArticleController ac = new ArticleController();
                         UserController uc = new UserController();
-                        ArrayList<RUserDTO> listacoautori = new ArrayList<>(Integer.parseInt(Arrays.asList(uc.getRAuthorBYEmail(Arrays.toString(txtcoauthors.getText().split(",")))).toString()));
+                        String[] coautori = txtareaabstract.getText().split(",");
+                        ArrayList<RUserDTO> listacoautori =new ArrayList<>();
 
-                        if (ac.submitArticle(txttitle.getText(), txtareaabstract.getText(), listacoautori, conferenceID)) {
-                            JOptionPane.showMessageDialog(null, "Article Submitted Successfully");
-                            dispose();
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Article Not Submitted", "Error", JOptionPane.ERROR_MESSAGE);
+                        for (String s : coautori) {
+                            listacoautori.add(uc.getRAuthorBYEmail(s));
                         }
+                        if(listacoautori.size()>3){
+                            JOptionPane.showMessageDialog(null,"There are more than 3 coauthors in your article.");
+
+                        }
+                        if(txttitle.getText().length()>150) {
+                            JOptionPane.showMessageDialog(null,"The title is too long.");
+                        }
+                        if(txtareaabstract.getText().length()>250) {
+                            JOptionPane.showMessageDialog(null,"The abstract is too long.");
+
+                        }
+                        if(txtcoauthors.getText().isEmpty()) {
+                            JOptionPane.showMessageDialog(null,"Please Enter Co Author.");
+                        }
+                        if(txtareaabstract.getText().isEmpty()){
+                            JOptionPane.showMessageDialog(null,"Please Enter the Abstract.");
+                        }
+                        if(txttitle.getText().isEmpty()){
+                            JOptionPane.showMessageDialog(null,"Please Enter the Title.");
+                        }
+
+                        if(txtcoauthors.getText().length()<=150 && txtareaabstract.getText().length()<=250 && listacoautori.size()<=3) {
+                            if (ac.submitArticle(txttitle.getText(), txtareaabstract.getText(), listacoautori, conferenceID)) {
+                                JOptionPane.showMessageDialog(null, "Article Submitted Successfully");
+                                dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Article Not Submitted", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+
+                        }
+
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }

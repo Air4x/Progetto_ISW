@@ -29,7 +29,6 @@ public class OrganizerDashboard extends JFrame{
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             setTitle("Organizer Dashboard");
             setBounds(100, 100, 450, 300);
-            JPanel contentPane = new JPanel();
             contentPane.setBounds(5, 5, 5, 5);
             setContentPane(contentPane);
             setLocationRelativeTo(null);
@@ -38,24 +37,21 @@ public class OrganizerDashboard extends JFrame{
 
             //Parte gestione delle Lista conferenze attive
             ConferenceController cc = new ConferenceController();
-
-            JScrollPane scrollConferenceList = new JScrollPane();
-            scrollConferenceList.getViewport().add(contentPane);
-            scrollConferenceList.getViewport().setBackground(Color.LIGHT_GRAY);
-            scrollConferenceList.setBounds(0, 0, 0, 0);
-            JList listActiveConference = new JList(cc.getActiveConferences().toArray(new ShowActiveConferenceDTO[0]));
-            listActiveConference.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-            for (int i = 0; i < listActiveConference.getModel().getSize(); i++) {
-                JLabel label = new JLabel(listActiveConference.getModel().getElementAt(i).toString());
-                label.setHorizontalAlignment(JLabel.CENTER);
-                scrollConferenceList.getViewport().add(label);
-
+            
+            ShowActiveConferenceDTO[] activeConference = cc.getActiveConferences().toArray(new ShowActiveConferenceDTO[0]);
+            DefaultListModel<ShowActiveConferenceDTO> activeConferencemodel = new DefaultListModel<>();
+            for(ShowActiveConferenceDTO activeConf : activeConference){
+                activeConferencemodel.addElement(activeConf);
             }
+            listActiveConference.setModel(activeConferencemodel);
+
+            scrollActiveConference.getViewport().setView(listActiveConference);
+            scrollActiveConference.setBounds(10, 65, 414, 40);
             listActiveConference.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     try {
                         int index = listActiveConference.locationToIndex(e.getPoint());
-                        ShowActiveConferenceDTO selected = (ShowActiveConferenceDTO) listActiveConference.getSelectedValue();
+                        ShowActiveConferenceDTO selected = activeConferencemodel.getElementAt(index);
                         JList listarticleSubmitted =new JList ((ListModel) cc.getArticlesByConference(selected.getId()));
                         JScrollPane scrollArticleSubmitted = new JScrollPane(listarticleSubmitted);
                         listarticleSubmitted.addMouseListener(new MouseAdapter() {
@@ -79,7 +75,7 @@ public class OrganizerDashboard extends JFrame{
             contentPane.add(scrollConferenceList);
 
 
-            JButton buttonCreateConference = new JButton("New Conference");
+            buttonCreateConference.setText("Create Conference");
             buttonCreateConference.setBounds(50, 50, 200, 50);
             buttonCreateConference.setBackground(new Color(100, 149, 237));
             buttonCreateConference.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));

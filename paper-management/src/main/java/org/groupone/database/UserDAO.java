@@ -1,9 +1,9 @@
 package org.groupone.database;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 import org.groupone.entity.Author;
@@ -111,7 +111,6 @@ public class UserDAO {
      * @return se l'utente è presente o meno
      */
     public boolean isUserPresentByEmail(String email) throws SQLException {
-        boolean result = false;
         String sql = "SELECT ID FROM Utenti WHERE EMAIL = ?";
         try(PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, email);
@@ -120,11 +119,11 @@ public class UserDAO {
             // the set is empty (there is no next row) it returns false,
             // so we can verify if a user is in the database with a while
             // loop on rs.next()
-            while (rs.next()) {
-                result = true;
+            if (rs.next()) {
+                return true;
             }
         }
-        return result;
+        return false;
     }
 
     /**

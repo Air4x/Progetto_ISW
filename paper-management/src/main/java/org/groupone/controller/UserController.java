@@ -41,12 +41,12 @@ public class UserController {
             return null;
         }else{
             RUserDTO fake_user = null;
-            if(ruole == "organizzatore"){
+            if(ruole.equals("organizzatore")){
                 Organizer user = new Organizer(affiliazione,email,lastname,name,password,id);
                 user_dao.saveUser(user);
                 fake_user = new RUserDTO(user);
 
-            } else if (ruole == "autore"){
+            } else if (ruole.equals("autore")){
                 Author user = new Author(affiliazione,email,lastname,name,password,id);
                 user_dao.saveUser(user);
                 fake_user = new RUserDTO(user);

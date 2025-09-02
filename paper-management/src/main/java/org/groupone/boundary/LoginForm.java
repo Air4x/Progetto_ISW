@@ -19,6 +19,7 @@ public class LoginForm  extends JFrame {
     private JLabel lblpassword;
     private JPanel panel;
     private JButton sendLoginButton;
+    private RUserDTO userDTO;
 
     public LoginForm() {
 
@@ -26,33 +27,32 @@ public class LoginForm  extends JFrame {
         setSize(200,300);
         setLocationRelativeTo(null);
         setResizable(false);
-        JPanel panel = new JPanel();
+
         panel.setBounds(5,5,5,5);
         setTitle("Login Form");
 
         panel.setLayout(null);
         setContentPane(panel);
 
-        JLabel lblEmail = new JLabel("Email:");
-        lblEmail.setBounds(10,10,100,30 );
-        lblEmail.setFont(new Font("Arial",Font.PLAIN,20));
-        panel.add(lblEmail);
+        lblemail.setText("Email:");
+        lblemail.setBounds(10,10,100,30 );
+        lblemail.setFont(new Font("Arial",Font.PLAIN,20));
+        panel.add(lblemail);
 
 
-        JTextField emailTextField = new JTextField();
         emailTextField.setBounds(10,50,150,30);
         panel.add(emailTextField);
 
-        JLabel lblpassword = new JLabel("Password:");
+        lblpassword.setText("Password:");
         lblpassword.setFont(new Font("Arial",Font.PLAIN,20));
         lblpassword.setBounds(10,90,100,30 );
         panel.add(lblpassword);
 
-        JPasswordField passwordfield = new JPasswordField();
+
         passwordfield.setBounds(10,130,150,30);
         panel.add(passwordfield);
 
-        JButton sendLoginButton = new JButton("Send");
+        sendLoginButton.setText("Login");
         sendLoginButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
 
         sendLoginButton.setBounds(10,170,100,30);
@@ -70,7 +70,7 @@ public class LoginForm  extends JFrame {
 
                     }
                     if (passwordfield.getText().length() > 30) {
-                        JOptionPane.showMessageDialog(null, "The password is too long(>30 characters)", "Warning", JOptionPane.WARNING_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "The password is too long", "Warning", JOptionPane.WARNING_MESSAGE);
                     }
                     if (!Pattern.matches(regex, emailTextField.getText())) {
                         JOptionPane.showMessageDialog(null, "Please enter a valid email", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -78,7 +78,7 @@ public class LoginForm  extends JFrame {
                     if (passwordfield.getText().length() < 30 && Pattern.matches(regex, emailTextField.getText())) {
                         UserController userController = new UserController();
 
-                        RUserDTO userDTO = userController.login(emailTextField.getText(), passwordfield.getText());
+                        userDTO = userController.login(emailTextField.getText(), passwordfield.getText());
                         if (userDTO==null) {
                             JOptionPane.showMessageDialog(null, "The User does not exist, proceed to register", "Warning", JOptionPane.WARNING_MESSAGE);
                         } else {

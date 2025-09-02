@@ -86,10 +86,10 @@ public class RegistrationForm extends JFrame {
         lblaffiliazione.setFont(new Font("Arial",Font.PLAIN,20));
         panel.add(lblaffiliazione);
 
-        JTextField txtfaffiliazione=new JTextField();
-        txtfaffiliazione.setBounds(10,210,100,20);
+        JTextField txtaffiliazione=new JTextField();
+        txtaffiliazione.setBounds(10,210,100,20);
         txtaffiliazione.setFont(new Font("Arial",Font.PLAIN,12));
-        panel.add(txtfaffiliazione);
+        panel.add(txtaffiliazione);
 
         JLabel lblruolo=new JLabel("Role:");
         lblruolo.setBounds(150,190,100,20);
@@ -111,7 +111,7 @@ public class RegistrationForm extends JFrame {
                 try {
                     String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 
-                    if (!txtemail.getText().matches(regex)) {
+                    if (!txtemail.getText().matches(regex) || txtemail.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Please enter a valid email", "Warning", JOptionPane.WARNING_MESSAGE);
                     }
                     if (txtname.getText().isEmpty() || txtlastname.getText().isEmpty()) {
@@ -125,7 +125,7 @@ public class RegistrationForm extends JFrame {
                     }
 
                     //Se tutto corrisponde
-                    if (!txtemail.getText().isEmpty() && !txtemail.getText().isEmpty() && txtemail.getText().matches(regex)&&(txtruolo.getText().equalsIgnoreCase("autore")||txtruolo.getText().equalsIgnoreCase("organizzatore"))) {
+                    if (txtemail.getText().matches(regex)&&(txtruolo.getText().equalsIgnoreCase("autore")||txtruolo.getText().equalsIgnoreCase("organizzatore"))) {
 
                         UserController uc = new UserController();
                         RUserDTO userDTO = uc.registerUser(txtaffiliazione.getText(), txtemail.getText(), txtlastname.getText(), txtname.getText(), passwordField1.getText(), txtruolo.getText());

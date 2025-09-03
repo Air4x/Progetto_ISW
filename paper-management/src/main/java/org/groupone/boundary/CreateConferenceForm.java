@@ -12,14 +12,14 @@ import java.time.LocalDate;
 import java.sql.SQLException;
 
 public class CreateConferenceForm extends JFrame {
-    private JPanel contentPane;
-    private JLabel lbltitle;
-    private JTextField txttitle;
-    private JLabel lbldescription;
-    private JLabel lblduedate;
-    private JTextField txtduedate;
-    private JTextArea txtareadescription;
-    private JButton buttonCreateConference;
+    private JPanel contentPane = new JPanel();
+    private JLabel lbltitle= new JLabel();
+    private JTextField txttitle = new JTextField();
+    private JLabel lbldescription = new JLabel();
+    private JLabel lblduedate =  new JLabel();
+    private JTextField txtduedate  = new JTextField();
+    private JTextArea txtareadescription =  new JTextArea();
+    private JButton buttonCreateConference = new JButton();
 
 
     //Run method
@@ -54,27 +54,26 @@ public class CreateConferenceForm extends JFrame {
         setBounds(100, 100, 450, 300);
         setTitle("Create Conference");
 
-        JPanel contentPane = new JPanel();
-        //contentPane.setBackground(Color.lightGray);
+
         contentPane.setLayout(null);
         setContentPane(contentPane);
 
-        JLabel lbltitle = new JLabel("Title");
+        lbltitle.setText("Title");
         lbltitle.setFont(new Font("Arial", Font.PLAIN, 20));
         lbltitle.setBounds(10, 11, 80, 20);
         contentPane.add(lbltitle);
 
-        JTextField txttitle = new JTextField();
+
         txttitle.setText("Title");
         txttitle.setBounds(10, 40, 80, 20);
         contentPane.add(txttitle);
 
-        JLabel lbldescription = new JLabel("Description");
+        lbldescription.setText("Description");
         lbldescription.setFont(new Font("Arial", Font.PLAIN, 20));
         lbldescription.setBounds(10, 70, 150, 20);
         contentPane.add(lbldescription);
 
-        JTextArea txtareadescription = new JTextArea();
+
         txtareadescription.setText("Description");
         txtareadescription.setBounds(10, 100, 300, 300);
         txtareadescription.setBackground(new Color(255, 255, 255));
@@ -82,21 +81,21 @@ public class CreateConferenceForm extends JFrame {
         txtareadescription.setWrapStyleWord(true);
         contentPane.add(txtareadescription);
 
-        JLabel lblduedate = new JLabel("Due Date:");
+        lblduedate.setText("Due date");
         lblduedate.setFont(new Font("Arial", Font.PLAIN, 20));
         lblduedate.setBounds(160, 10, 150, 20);
         contentPane.add(lblduedate);
 
-        JTextField txtduedate = new JTextField();
+
         txtduedate.setText("DD-MM-YYYY");
         txtduedate.setBounds(160, 40, 150, 20);
         contentPane.add(txtduedate);
-        LocalDate duedate = LocalDate.parse(txtduedate.getText());
 
 
 
 
-        JButton buttonCreateConference = new JButton("Create Conference");
+
+        buttonCreateConference.setText("Create Conference");
         buttonCreateConference.setBackground(new Color(100, 149, 237));
         buttonCreateConference.setBounds(160, 70, 150, 30);
         buttonCreateConference.setForeground(Color.white);
@@ -104,12 +103,12 @@ public class CreateConferenceForm extends JFrame {
         buttonCreateConference.addMouseListener(new  MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 try {
+                    LocalDate duedate = LocalDate.parse(txtduedate.getText());
                     ConferenceController cc = new ConferenceController();
                     LocalDate today =  LocalDate.now();
 
                     if (!duedate.isBefore(today) && txttitle.getText().length() < 30 && txtareadescription.getText().length() < 100) {
                         try {
-
                             cc.createConference( duedate, txttitle.getText(), txtareadescription.getText(), ID.generate(), organizer);
                             JOptionPane.showMessageDialog(null, "Conference created");
                             dispose();

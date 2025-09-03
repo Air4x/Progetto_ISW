@@ -10,9 +10,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class LoginView extends JFrame{
-    private JButton loginButton;
-    private JPanel panel;
-    private JButton registerButton;
+    private JButton loginButton =  new JButton();
+    private JPanel panel =  new JPanel();
+    private JButton registerButton = new JButton();
 
 
 
@@ -22,20 +22,20 @@ public class LoginView extends JFrame{
         setTitle("Login View");
         setBounds(100, 100, 230, 150);
         setResizable(false);
-        panel = new JPanel();
         panel.setBounds(5,5,5,5);
         panel.setLayout(null);
         setLocationRelativeTo(null);
         setContentPane(panel);
 
 
-        loginButton = new JButton("Login");
+        loginButton.setText("Login");
         loginButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
         loginButton.setBackground(new Color(100, 149, 237));
         loginButton.setForeground(Color.white);
         loginButton.setBounds(10,30,90,30);
         loginButton.addMouseListener(new MouseAdapter() {
 
+            @Override
             public void mouseClicked(MouseEvent e) {
 
                 LoginForm loginForm = new LoginForm();
@@ -48,7 +48,7 @@ public class LoginView extends JFrame{
         });
         panel.add(loginButton);
 
-        registerButton = new JButton("Register");
+        registerButton.setText("Register");
         registerButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
 
         registerButton.setBounds(120,30,90,30);
@@ -70,9 +70,5 @@ public class LoginView extends JFrame{
 
 
     }
-    public static void main(String[] args) {
-        LoginView loginView = new LoginView();
-        loginView.setVisible(true);
 
-    }
 }

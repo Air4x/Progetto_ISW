@@ -14,28 +14,43 @@ import java.sql.SQLException;
 
 
 public class OrganizerDashboard extends JFrame{
-    private JPanel contentPane;
-    private JScrollPane scrollConferenceList;
-    private JButton buttonCreateConference;
-    private JList listActiveConference;
-    private JList listarticleSubmitted;
-    private JScrollPane scrollarticleSubmitted;
+    private JPanel contentPane =  new JPanel();
+    private JScrollPane scrollConferenceList =  new JScrollPane();
+    private JButton buttonCreateConference =   new JButton();
+    private JList listActiveConference =  new JList();
+    private JList listarticleSubmitted =  new JList();
+    private JScrollPane scrollarticleSubmitted =   new JScrollPane();
+    private JLabel lblwelcome =   new JLabel();
+    private JLabel lblactiveconference =    new JLabel();
+    private JLabel lblarticlesubmitted =    new JLabel();
 
     //Composizione frame
     public OrganizerDashboard(RUserDTO organizer) throws SQLException {
         try {
 
-            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setTitle("Organizer Dashboard");
-            setBounds(100, 100, 650, 400);
+            setBounds(100, 100, 650, 800);
             contentPane.setBounds(5, 5, 5, 5);
             setContentPane(contentPane);
             setLocationRelativeTo(null);
+            setResizable(false);
 
             contentPane.setLayout(null);
 
             //Parte gestione delle Lista conferenze attive
             ConferenceController cc = new ConferenceController();
+
+            lblwelcome.setText("Welcome, "+organizer.getName()+" "+organizer.getLastname());
+            lblwelcome.setFont(new Font("Arial",Font.PLAIN,20));
+            lblwelcome.setBounds(10,10,550,20);
+            contentPane.add(lblwelcome);
+
+            lblactiveconference.setText("Active Conference");
+            lblactiveconference.setFont(new Font("Arial",Font.PLAIN,13));
+            lblactiveconference.setBounds(10,40,550,20);
+            contentPane.add(lblactiveconference);
+
             
             ShowActiveConferenceDTO[] activeConference = cc.getActiveConferences().toArray(new ShowActiveConferenceDTO[0]);
             DefaultListModel<ShowActiveConferenceDTO> activeConferencemodel = new DefaultListModel<>();
@@ -45,13 +60,13 @@ public class OrganizerDashboard extends JFrame{
             listActiveConference.setModel(activeConferencemodel);
 
             scrollConferenceList.getViewport().setView(listActiveConference);
-            scrollConferenceList.setBounds(10, 65, 414, 200);
+            scrollConferenceList.setBounds(10, 70, 414, 200);
             listActiveConference.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     try {
-                        int index = listActiveConference.locationToIndex(e.getPoint());
-                        ShowActiveConferenceDTO selected = activeConferencemodel.getElementAt(index);
-                        ShowArticleDTO[] articlesubmitted = cc.getArticlesByConference(selected.getId()).toArray(new ShowArticleDTO[0]);
+                        int indexc = listActiveConference.locationToIndex(e.getPoint());
+                        ShowActiveConferenceDTO selectedconference = activeConferencemodel.getElementAt(indexc);
+                        ShowArticleDTO[] articlesubmitted = cc.getArticlesByConference(selectedconference.getId()).toArray(new ShowArticleDTO[0]);
                         DefaultListModel<ShowArticleDTO> articlemodel = new DefaultListModel<>();
                         for(ShowArticleDTO article : articlesubmitted){
                             articlemodel.addElement(article);
@@ -60,16 +75,27 @@ public class OrganizerDashboard extends JFrame{
                         scrollarticleSubmitted.getViewport().setView(listarticleSubmitted);
                         listarticleSubmitted.addMouseListener(new MouseAdapter() {
                             public void mouseClicked(MouseEvent e) {
-                                int indexarticle = listarticleSubmitted.locationToIndex(e.getPoint());
-                                ShowArticleDTO selected = (ShowArticleDTO) listarticleSubmitted.getSelectedValue();
+                                int indexa = listarticleSubmitted.locationToIndex(e.getPoint());
+                                ShowArticleDTO selectedarticle = articlemodel.getElementAt(indexa);
+                                AssignReviewersView frame  = new AssignReviewersView(selectedarticle);
+                                frame.setVisible(true);
+
                             }
                         });
+
                     }catch (SQLException ex){
                         ex.printStackTrace();
                     }
                 }
             });
+            scrollarticleSubmitted.setBounds(10, 290, 414, 200);
+            contentPane.add(scrollarticleSubmitted);
+            lblarticlesubmitted.setText("Article Submitted");
+            lblarticlesubmitted.setFont(new Font("Arial",Font.PLAIN,13));
+            lblarticlesubmitted.setBounds(10,270,550,20);
+            contentPane.add(lblarticlesubmitted);
             contentPane.add(scrollConferenceList);
+
 
 
             buttonCreateConference.setText("Create Conference");

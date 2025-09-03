@@ -1,5 +1,216 @@
 \section{Pacchetto Boundary}
 \label{sec:package_boundary}
+
+\subsection{LoginVIew}
+Classe utilizzata per la scelta delle opzioni di accesso 
+\paragraph{Attributi}
+\begin{description}
+\item[panel] Istanza di JPanel
+\item[loginButton] Istanza di JButton
+\item[registerButton] Istanza di JButton
+\end{description}
+
+\subsubsection{\texttt{boundary.LoginView.LoginView()}}
+Costruttore
+
+
+\subsection{RegistrationForm}
+Classe utilizzata per registrare l'utente e, in caso di successo, accedere alla Dashboard
+\paragraph{Attributi}
+\begin{description}
+\item[txtname] Istanza di JTextField
+\item[lblname] Istanza di JLabel
+\item[txtlastname] Istanza di JTextField
+\item[lbllastname] Istanza di JLabel
+\item[txtemail] Istanza di JTextField
+\item[lblemail] Istanza di JLabel
+\item[passwordField] Istanza di JPasswordField
+\item[lblpassword] Istanza di JLabel
+\item[txtaffilazione] Istanza di JTextField
+\item[lblaffiliazione] Istanza di JLabel
+\item[lblruolo] Istanza di JLabel
+\item[comboboxruoli] Istanza di JComboBox
+\item[registerbutton] Istanza di JButton
+\item[userDTO] Istanza di RUserDTO
+\item[panel] Istanza di JPanel 
+\end{description}
+
+\subsubsection{boundary.RegistrationForm.RegistrationForm()}
+Costruttore
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il Database
+\end{description}
+
+\subsection{LoginForm}
+Classe utilizzata per accedere alla propria DashBoard di un utente precedentemente Registrato
+\paragraph{Attributi}
+\begin{description}
+\item[txtemail] Istanza di JTextField
+\item[lblemail] Istanza di JLabel
+\item[passwordfield] Istanza di JPasswordField
+\item[lblpassword] Istanza di JLabel
+\item[loginbutton] Istanza di JButton
+\item[panel] Istanza di JPanel
+\item[userDTO] Istanza di RUserDTO
+\end{description}
+
+\subsubsection{boundary.LoginForm.LoginForm()}
+Costruttore
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il Database
+\end{description}
+
+\subsection{AuthorDashboard}
+Classe Utilizzata per visualizzare tutte le conferenze attive e di poter inoltrare articoli e visualizzarli 
+\paragraph{Attributi}
+\begin{description}
+\item[contentPane] Istanza di JPanel 
+\item[scrollActiveConference] Istanza di JScrollPane
+\item[scrollSubmittedArticle] Istanza di JScrollPane
+\item[listactiveconference] Istanza di JList
+\item[listarticlesubmitted] Istanza di JList
+\item[lblwelcome] Istanza di JLabel
+\item[lblarticlesubmitted] Istanza di JLabel
+\item[lblactiveconference] Istanza di JLabel
+\end{description}
+
+\subsubsection{boundary.AuthorDashboard.AuthorDashboard()}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item[userDTO] RUserDTO
+•
+\end{description}•
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il Database
+\end{description}
+
+\subsection{OrganizerDashboard}
+Classe utilizzata per visualizzare le conferenze attive e gestire gli articoli delle suddette conferenze, assegnando per ogni articolo i revisori
+\paragraph{Attributi}
+\begin{description}
+\item[contentPane] Istanza di JPanel
+\item[scrollConferenceList] Istanza di JScrollPane
+\item[buttonCreateConference] Istanza di JButton
+\item[listActiveConference] Istanza di JList
+\item[listArticleSubmitted] Istanza di JList
+\item[scrollarticleSubmitted] Istanza di JScrollPane
+\item[lblwelcome] Istanza di JLabel
+\item[lblactiveconference] Istanza di JLabel
+\item[lblarticlesubmitted] Istanza di JLabel
+\end{description}
+
+\subsubsection{boundary.OrganizerDashboard.OrganizerDashboard()}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item[organizer] RUserDTO
+•
+\end{description}•
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il Database
+\end{description}}
+
+\subsection{SubmitArticleForm}
+Classe per la compilazione del form per la sottomissione di un articolo alla conferenza selezionata
+\paragraph{Attributi}
+\begin{description}
+\item[lbltitle] Istanza di JLabel
+\item[txttitle] Istanza di JTextField
+\item[lblabstract] Istanza di JLabel
+\item[txtareaabstract] Istanza di JTextArea
+\item[lblcoauthors] Istanza di JLabel
+\item[txtcoauthors] Istanza di JTextField
+\item[contentPane] Istanza di JPanel
+\item[buttonSubmit] Istanza di JButton
+\item[buttonBack] Istanza di JButton
+\end{description}•}
+
+\subsubsection{boundary.SubmitArticleForm.SubmitArticleForm()}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item[userDTO] RUserDTO
+\item[conferenceID] ID
+• 
+\end{description}•
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il Database
+
+\end{description}•}
+
+\subsection{AssignReviewersView}
+Classe che permette ad un Organizzatore di assegnare i revisori ad un determinato articolo
+\paragraph{Attributi}
+\begin{description}
+\item[contentPane] Istanza di JPanel
+\item[lblrevisori] Istanza di JLabel
+\item[buttonAssignReviewers] Istanza di JButton
+\item[reviewer1]Istanza di JComboBox
+\item[reviewer2]Istanza di JComboBox
+\item[reviewer3] Istanza di JComboBox
+\item[selected1] Istanza di PossibleReviewDTO
+\item[selected2] Istanza di PossibleReviewDTO
+\item[selected3] Istanza di PossibleReviewDTO
+\end{description}•}
+
+\subsubsection{boundary.AssignReviewersView.AssignReviewersView()}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item[article] ShowArticleDTO
+\end{description}•
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException]  In caso di errore di interazione con il Database
+•
+\end{description}•
+
+\subsection{CreateConferenceForm}
+Classe per la creazione da parte di un organizzatore di una conferenza
+\paragraph{Attributi}
+\begin{description}
+\item[contentPane] Istanza di JPanel
+\item[lbltitle] Istanza di JLabel
+\item[txttitle] Istanza di JTextField
+\item[lbldescription] Istanza di JLabel
+\item[txtareadescription] Istanza di JTextArea
+\item[lblduedate] Istanza di JLabel
+\item[txtduedate] Istanza di JTextField
+\item[buttonCreateConference] Istanza di JButton
+
+\end{description}•
+
+\subsubsection{boundary.CreateConferenceForm.CreateConferenceForm()}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item[organizer] RUserDTO
+\end{description}•
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException]  In caso di errore di interazione con il Database
+•
+\end{description}• 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-master: "main"

@@ -12,16 +12,19 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SubmitArticleForm extends JFrame{
-    private JLabel lbltitle;
-    private JTextField txttitle;
-    private JLabel lblabstract;
-    private JTextArea txtareaabstract;
-    private JLabel lblcoauthors;
-    private JTextField txtcoauthors;
-    private JPanel contentPane;
-    private JButton buttonSubmit;
+    private JLabel lbltitle = new  JLabel();
+    private JTextField txttitle =  new  JTextField();
+    private JLabel lblabstract =  new  JLabel();
+    private JTextArea txtareaabstract = new JTextArea();
+    private JLabel lblcoauthors =  new  JLabel();
+    private JTextField txtcoauthors = new  JTextField();
+    private JPanel contentPane = new JPanel();
+    private JButton buttonSubmit =  new JButton();
+    private JButton buttonBack =   new JButton();
 
 
     public SubmitArticleForm(RUserDTO userDTO, ID conferenceID) throws SQLException{
@@ -31,7 +34,6 @@ public class SubmitArticleForm extends JFrame{
         setResizable(false);
         setLocationRelativeTo(null);
 
-        this.contentPane = new JPanel();
         contentPane.setBounds(5,5,5,5);
         contentPane.setLayout(null);
         setContentPane(contentPane);
@@ -73,17 +75,17 @@ public class SubmitArticleForm extends JFrame{
         buttonSubmit.setBounds(170,170,100,30);
         buttonSubmit.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if(txtareaabstract.getText().length()<100) {
+
                     try {
                         ArticleController ac = new ArticleController();
                         UserController uc = new UserController();
-                        String[] coautori = txtareaabstract.getText().split(",");
+                        String[] coautori = txtcoauthors.getText().split(",");
                         ArrayList<RUserDTO> listacoautori =new ArrayList<>();
 
                         for (String s : coautori) {
                             listacoautori.add(uc.getRAuthorBYEmail(s));
                         }
-                        if(listacoautori.size()>3){
+                                               if(listacoautori.size()>3){
                             JOptionPane.showMessageDialog(null,"There are more than 3 coauthors in your article.");
 
                         }
@@ -106,8 +108,11 @@ public class SubmitArticleForm extends JFrame{
 
                         if(txtcoauthors.getText().length()<=150 && txtareaabstract.getText().length()<=250 && listacoautori.size()<=3) {
                             System.out.println(listacoautori);
+                            System.out.println(Arrays.toString(coautori));
                             if (ac.submitArticle(txttitle.getText(), txtareaabstract.getText(), listacoautori, conferenceID)) {
                                 JOptionPane.showMessageDialog(null, "Article Submitted Successfully");
+                                AuthorDashboard frame = new AuthorDashboard(userDTO);
+                                frame.setVisible(true);
                                 dispose();
                             } else {
                                 JOptionPane.showMessageDialog(null, "Article Not Submitted", "Error", JOptionPane.ERROR_MESSAGE);
@@ -120,7 +125,7 @@ public class SubmitArticleForm extends JFrame{
                     }
 
 
-                }
+
 
 
 
@@ -130,6 +135,28 @@ public class SubmitArticleForm extends JFrame{
             }
         });
         contentPane.add(buttonSubmit);
+
+        buttonBack.setText("Back");
+        buttonBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        buttonBack.setForeground(Color.white);
+        buttonBack.setBackground(new Color(100, 149, 237));
+        buttonBack.setBounds(170,210,100,30);
+        buttonBack.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    AuthorDashboard frame = new AuthorDashboard(userDTO);
+                    frame.setVisible(true);
+
+
+                    dispose();
+                }catch (SQLException ex) {
+                    Logger.getLogger(AuthorDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
+
 
 
 

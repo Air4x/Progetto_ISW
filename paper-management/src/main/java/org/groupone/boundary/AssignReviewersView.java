@@ -18,9 +18,12 @@ import java.util.logging.Logger;
 public class AssignReviewersView extends JFrame {
 
 
-    private JPanel contentPane;
-    private JLabel lblrevisori;
-    private JButton buttonAssignReviewers;
+    private JPanel contentPane = new JPanel();
+    private JLabel lblrevisori = new JLabel();
+    private JButton buttonAssignReviewers= new JButton();
+    private JComboBox reviewer1= new JComboBox();
+    private JComboBox reviewer2= new JComboBox();
+    private JComboBox reviewer3 = new JComboBox();
     private PossibleReviewDTO selected1,selected2,selected3;
 
     public AssignReviewersView(ShowArticleDTO article) {
@@ -32,68 +35,79 @@ public class AssignReviewersView extends JFrame {
             setTitle("Assign Reviewers");
 
 
-            JPanel contentPane = new JPanel();
+
             contentPane.setBounds(5, 5, 5, 5);
             contentPane.setLayout(null);
             setContentPane(contentPane);
 
 
-            JLabel lblrevisori = new JLabel("Reviewers");
+            lblrevisori.setText("Reviewers");
             lblrevisori.setFont(new Font("Arial", Font.PLAIN, 20));
             lblrevisori.setBounds(10, 10, 100, 15);
             contentPane.add(lblrevisori);
-            java.util.List<PossibleReviewDTO> listarevisori = rc.getListReviewer(article.getId());
+            PossibleReviewDTO[] listreviewers = rc.getListReviewer(article.getId()).toArray(new PossibleReviewDTO[0]);
 
-            JMenu revisore1 = new JMenu("1st Reviewer");
-            JMenu revisore2 = new JMenu("2nd Reviewer");
-            JMenu revisore3 = new JMenu("3rd Reviewer");
-            revisore1.setBounds(10, 40, 100, 15);
-            revisore2.setBounds(120, 40, 100, 15);
-            revisore3.setBounds(230, 40, 100, 15);
-
-            for (int i = 0; i < listarevisori.size(); ) {
-                JMenuItem item1 = new JMenuItem(listarevisori.get(i).toString());
-                int currenti = i;
-                item1.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        selected1 = listarevisori.get(currenti);
-
+            reviewer1.setModel(new DefaultComboBoxModel(listreviewers));
+            reviewer1.setRenderer(new DefaultListCellRenderer() {
+                @Override
+                public java.awt.Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if (value instanceof PossibleReviewDTO) {
+                        PossibleReviewDTO p = (PossibleReviewDTO) value;
+                        setText(p.getName() +" "+p.getLastname());
                     }
-                });
-                revisore1.add(item1);
-                JMenuItem item2 = new JMenuItem(listarevisori.get(currenti).toString());
-                item2.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        selected2 = listarevisori.get(currenti);
+                    return this;
+                }
+            });
+            reviewer1.setFont(new Font("Arial", Font.PLAIN, 13));
+            reviewer1.setBounds(10, 40, 250, 20);
+            contentPane.add(reviewer1);
+
+            reviewer2.setModel(new DefaultComboBoxModel(listreviewers));
+            reviewer2.setRenderer(new DefaultListCellRenderer() {
+                @Override
+                public java.awt.Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if (value instanceof PossibleReviewDTO) {
+                        PossibleReviewDTO p = (PossibleReviewDTO) value;
+                        setText(p.getName() +" "+p.getLastname());
                     }
+                    return this;
+                }
+            });
+            reviewer2.setFont(new Font("Arial", Font.PLAIN, 13));
+            reviewer2.setBounds(10, 60, 250, 20);
+            contentPane.add(reviewer2);
 
-                });
-                revisore2.add(item2);
-                JMenuItem item3 = new JMenuItem(listarevisori.get(i).toString());
-                item3.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
-                        selected3 = listarevisori.get(currenti);
+            reviewer3.setModel(new DefaultComboBoxModel(listreviewers));
+            reviewer3.setRenderer(new DefaultListCellRenderer() {
+                @Override
+               public java.awt.Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if (value instanceof PossibleReviewDTO) {
+                        PossibleReviewDTO p = (PossibleReviewDTO) value;
+                        setText(p.getName() +" "+p.getLastname());
                     }
-                });
-                revisore3.add(item3);
-                i++;
-            }
-            contentPane.add(revisore1);
-            contentPane.add(revisore2);
-            contentPane.add(revisore3);
+                    return this;
+                }
+            });
+            reviewer3.setFont(new Font("Arial", Font.PLAIN, 13));
+            reviewer3.setBounds(10, 80, 250, 20);
+            contentPane.add(reviewer3);
 
 
-            JButton buttonAssignReviewers = new JButton("Assign Reviewers");
-            buttonAssignReviewers.setBounds(230, 110, 100, 30);
+
+            buttonAssignReviewers.setText("Assign Reviewers");
+            buttonAssignReviewers.setBounds(10, 150, 100, 30);
             buttonAssignReviewers.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
             buttonAssignReviewers.setBackground(new Color(100, 149, 237));
             buttonAssignReviewers.setForeground(Color.white);
             buttonAssignReviewers.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
+                    selected1 = (PossibleReviewDTO) reviewer1.getSelectedItem();
+                    selected2 = (PossibleReviewDTO) reviewer2.getSelectedItem();
+                    selected3 = (PossibleReviewDTO) reviewer3.getSelectedItem();
 
                     if (selected1.getId().equals(selected2.getId()) || selected3.getId().equals(selected1.getId()) || selected2.getId().equals(selected3.getId())) {
                         JOptionPane.showMessageDialog(null, "At least one of the reviewers is duplicated");
@@ -106,6 +120,8 @@ public class AssignReviewersView extends JFrame {
                             reviewrs.add(selected2);
                             reviewrs.add(selected3);
                             rc.assignReviewer(article.getId(), reviewrs);
+                            JOptionPane.showMessageDialog(null, "Reviewers assigned successfully");
+                            dispose();
                         }catch(SQLException ex) {
                             Logger.getLogger(ReviewController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -114,6 +130,8 @@ public class AssignReviewersView extends JFrame {
                     }
                 }
             });
+            contentPane.add(buttonAssignReviewers);
+
         }catch (SQLException e){
             e.printStackTrace();
         }

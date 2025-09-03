@@ -13,12 +13,12 @@ import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 public class LoginForm  extends JFrame {
-    private JTextField emailTextField;
-    private JLabel lblemail;
-    private JPasswordField passwordfield;
-    private JLabel lblpassword;
-    private JPanel panel;
-    private JButton sendLoginButton;
+    private JTextField txtemail = new JTextField();
+    private JLabel lblemail = new JLabel();
+    private JPasswordField passwordfield =  new JPasswordField();
+    private JLabel lblpassword =  new JLabel();
+    private JPanel panel =  new JPanel();
+    private JButton loginbutton = new JButton();
     private RUserDTO userDTO;
 
     public LoginForm() {
@@ -39,50 +39,51 @@ public class LoginForm  extends JFrame {
         lblemail.setFont(new Font("Arial",Font.PLAIN,20));
         panel.add(lblemail);
 
-
-        emailTextField.setBounds(10,50,150,30);
-        panel.add(emailTextField);
+        txtemail.setText("");
+        txtemail.setBounds(10,50,150,30);
+        panel.add(txtemail);
 
         lblpassword.setText("Password:");
         lblpassword.setFont(new Font("Arial",Font.PLAIN,20));
         lblpassword.setBounds(10,90,100,30 );
         panel.add(lblpassword);
 
-
+        passwordfield.setText("");
+        passwordfield.setEchoChar((char)0);
         passwordfield.setBounds(10,130,150,30);
         panel.add(passwordfield);
 
-        sendLoginButton.setText("Login");
-        sendLoginButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
+        loginbutton.setText("Login");
+        loginbutton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
 
-        sendLoginButton.setBounds(10,170,100,30);
-        sendLoginButton.setBackground(new Color(100, 149, 237));
-        sendLoginButton.setForeground(Color.white);
-        sendLoginButton.addMouseListener(new MouseAdapter() {
+        loginbutton.setBounds(10,170,100,30);
+        loginbutton.setBackground(new Color(100, 149, 237));
+        loginbutton.setForeground(Color.white);
+        loginbutton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 try {
 
                     //Validazione Credenziali ed effettivo accesso
                     String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-                    if (emailTextField.getText().equals("") || passwordfield.getText().equals("")) {
+                    if (txtemail.getText().equals("") || passwordfield.getText().equals("")) {
                         JOptionPane.showMessageDialog(null, "Please fill all the fields", "Warning", JOptionPane.WARNING_MESSAGE);
 
                     }
                     if (passwordfield.getText().length() > 30) {
                         JOptionPane.showMessageDialog(null, "The password is too long", "Warning", JOptionPane.WARNING_MESSAGE);
                     }
-                    if (!Pattern.matches(regex, emailTextField.getText())) {
+                    if (!Pattern.matches(regex, txtemail.getText())) {
                         JOptionPane.showMessageDialog(null, "Please enter a valid email", "Warning", JOptionPane.WARNING_MESSAGE);
                     }
-                    if (passwordfield.getText().length() < 30 && Pattern.matches(regex, emailTextField.getText())) {
+                    if (passwordfield.getText().length() < 30 && Pattern.matches(regex, txtemail.getText())) {
                         UserController userController = new UserController();
 
-                        userDTO = userController.login(emailTextField.getText(), passwordfield.getText());
+                        userDTO = userController.login(txtemail.getText(), passwordfield.getText());
                         if (userDTO==null) {
                             JOptionPane.showMessageDialog(null, "The User does not exist, proceed to register", "Warning", JOptionPane.WARNING_MESSAGE);
                         } else {
-                            if (userDTO.getRole().equals("Organizer")) {
+                            if (userDTO.getRole().equals("organizzatore")) {
 
                                 OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
                                 organizerDashboard.setVisible(true);
@@ -107,26 +108,9 @@ public class LoginForm  extends JFrame {
 
             }
         });
-        panel.add(sendLoginButton);
+        panel.add(loginbutton);
 
 
-
-    }
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-
-                try {
-                    LoginForm loginForm = new LoginForm();
-                    loginForm.setVisible(true);
-
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
-
-            }
-        });
 
     }
 }

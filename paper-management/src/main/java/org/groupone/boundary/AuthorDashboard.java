@@ -16,14 +16,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AuthorDashboard extends JFrame {
-    private JPanel contentPane;
-    private JScrollPane scrollActiveConference;
-    private JScrollPane scrollSubmittedArticles;
-    private JList<ShowArticleDTO> listarticleSubmitted;
-    private JList<ShowActiveConferenceDTO> listactiveConference;
-    private JLabel lblwelcome;
-    private JLabel lblarticlesubmitted;
-    private JLabel lblactiveconference;
+    private JPanel contentPane = new JPanel();
+    private JScrollPane scrollActiveConference = new JScrollPane();
+    private JScrollPane scrollSubmittedArticles = new JScrollPane();
+    private JList<ShowArticleDTO> listarticleSubmitted = new JList<>();
+    private JList<ShowActiveConferenceDTO> listactiveConference = new JList<>();
+    private JLabel lblwelcome = new JLabel();
+    private JLabel lblarticlesubmitted= new JLabel();
+    private JLabel lblactiveconference= new JLabel();
 
 
     public AuthorDashboard(RUserDTO userDTO) throws SQLException {
@@ -33,6 +33,8 @@ public class AuthorDashboard extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 600);
         setTitle("Dashboard Autore");
+        setLocationRelativeTo(null);
+        setResizable(false);
 
 
 
@@ -57,6 +59,18 @@ public class AuthorDashboard extends JFrame {
             model.addElement(showActiveConference);
         }
         listactiveConference.setModel(model);
+        listactiveConference.setCellRenderer(new DefaultListCellRenderer() {
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                if(value instanceof ShowActiveConferenceDTO){
+                    ShowActiveConferenceDTO showActiveConference = (ShowActiveConferenceDTO) value;
+                    setText("Title: "+showActiveConference.getTitle());
+                }
+                return this;
+
+            }
+        });
 
         scrollActiveConference.setViewportView(listactiveConference);
         scrollActiveConference.setBounds(5,65,400,200);
@@ -67,12 +81,14 @@ public class AuthorDashboard extends JFrame {
                     ShowActiveConferenceDTO selected = model.getElementAt(indice);
                     SubmitArticleForm submitArticleForm = new SubmitArticleForm(userDTO, selected.getId());
                     submitArticleForm.setVisible(true);
+                    dispose();
                 }
                 catch (SQLException ex) {
                     Logger.getLogger(AuthorDashboard.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
+
         contentPane.add(scrollActiveConference);
 
 
@@ -88,6 +104,19 @@ public class AuthorDashboard extends JFrame {
             articlemodel.addElement(showArticle);
         }
         listarticleSubmitted.setModel(articlemodel);
+        listarticleSubmitted.setCellRenderer( new DefaultListCellRenderer(){
+            @Override
+            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+
+                if(value instanceof ShowArticleDTO){
+                    ShowArticleDTO showArticle = (ShowArticleDTO) value;
+                    setText("Title: "+showArticle.getTitle()+" Status:"+showArticle.getAuthors());
+                }
+                return this;
+            }
+        });
+
         scrollSubmittedArticles.setViewportView(listarticleSubmitted);
         scrollSubmittedArticles.setBounds(5,285,400,200);
         contentPane.add(scrollSubmittedArticles);

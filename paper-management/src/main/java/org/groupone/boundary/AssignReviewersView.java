@@ -137,24 +137,4 @@ public class AssignReviewersView extends JFrame {
         }
     }
 
-    public static void main(String[] args){
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    ArrayList<RUserDTO> lista = new  ArrayList();
-
-
-                    ShowArticleDTO article =  new ShowArticleDTO(ID.generate(),"Title","Abstract",lista);
-                    AssignReviewersView frame = new AssignReviewersView(article);
-                    frame.setVisible(true);
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
-
-    }
 }

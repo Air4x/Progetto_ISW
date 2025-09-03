@@ -46,14 +46,15 @@ public class ConferenceController {
             System.out.println("Conference Already Exists");
             return false;
         }else if(today.isAfter(scadenza)){
-            System.out.println("Scadenza is after today");
+            System.out.println("Scadenza is before today");
             return false;
-        }else if(user_dao.isUserPresentByID(org.getId())==false || user_dao.getUserByEmail(org.getEmail()).getRole()!="organizzatore"){
+        }else if(org != null || user_dao.isUserPresentByID(org.getId())==false || user_dao.getUserByEmail(org.getEmail()).getRole()!="organizzatore"){
             System.out.println("Organizzarore is not Found");
             return false;
         }
         Conference new_conference = new Conference(deadline,title,descr,id,org.getId());
         conf_dao.saveConference(new_conference);
+        System.out.println("Conference is created");
         return true;
     }
 

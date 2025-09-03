@@ -28,7 +28,7 @@
 \begin{lstlisting}
     @Test
     public void testCreateConferenceOrganizzaroreisnotFound() throws SQLException {
-        boolean esito = conference_controller.createConference(LocalDate.of(2026,12,04),"Nintendo","Perche nintendo dovrebbe essere un monopolio",new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d"),user_controller.login("gpt1youtuw@gmail.com","virtualizzazione"));
+        boolean esito = conference_controller.createConference(LocalDate.of(2026,12,04),"Nintendo","Perche nintendo dovrebbe essere un monopolio",new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d"),user_controller.login("toolvpstaiscal@gmail.com","12345678!"));
         assertFalse(esito);
     }
 
@@ -45,27 +45,29 @@
     }
 \end{lstlisting}
 
-\subsection{Test assignReviewer}
-\paragraph{Inizializzazione Parametri}
+\subsection{Test submitArticles}
+\paragraph{Parametri}
 .
 \begin{lstlisting}
-    private ReviewController review_Controller;
-    private UserDAO u_DAO;
+    private ArticleController article_controller;
+    private UserController user_controller;
 
     @Before
     public void setUp() throws SQLException {
-        review_Controller = new ReviewController();
-        u_DAO = new UserDAO();
+        article_controller = new ArticleController();
+        user_controller = new UserController();
     }
 \end{lstlisting}
-\paragraph{Test di assegnazione die revisori con successo}
+\paragraph{Test di consegna articolo con successo}
 .
 \begin{lstlisting}
-    @Test
-    public void testAssignReviewerSuccess() throws SQLException {
-        ID id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
-        ArrayList<PossibleReviewDTO> list_reviewer = review_Controller.getListReviewer(id_article);
-        boolean esito = review_Controller.assignReviewer(id_article, list_reviewer);
+@Test
+    public void testSubmitArticlesOK() throws SQLException{
+        ArrayList<RUserDTO> autori =  new ArrayList<>();
+        autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
+        autori.add(user_controller.getRAuthorBYEmail("fakenetflix2003b@gmail.com"));
+        ID conference_id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d");
+        boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,conference_id);
         assertTrue(esito);
     }
 \end{lstlisting}
@@ -73,18 +75,33 @@
 .
 \begin{lstlisting}
     @Test
-    public void testAssignReviewerFailureArticleNotFound() throws SQLException {
-        ArrayList<PossibleReviewDTO> list_reviewer = new ArrayList<>();
-        list_reviewer = review_Controller.getListReviewer(ID.generate());
-        boolean esito = review_Controller.assignReviewer(ID.generate(), list_reviewer);
+    public void testSubmitArticlesConferencenotfound() throws SQLException{
+        ArrayList<RUserDTO> autori =  new ArrayList<>();
+        boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,ID.generate());
         assertFalse(esito);
     }
 
     @Test
-    public void testAssignReviewerFailureErrorListAuthor() throws SQLException {
-        ArrayList<PossibleReviewDTO> list_reviewer = new ArrayList<>();
-        boolean esito = review_Controller.assignReviewer(new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea"), list_reviewer);
+    public void testSubmitArticlesConferenceExpired() throws SQLException{
+        ArrayList<RUserDTO> autori =  new ArrayList<>();
+        autori.add(user_controller.getRAuthorBYEmail("fakenetflix2003b@gmail.com"));
+        autori.add(user_controller.getRAuthorBYEmail("toolvpstaiscal@gmail.com"));
+        boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,new ID("6279c9e1-b121-4c7a-a196-7a43b57fc03d"));
         assertFalse(esito);
+    }
+
+    @Test
+    public void testSubmitArticlesListEmpty() throws SQLException{
+        ArrayList<RUserDTO> autori =  new ArrayList<>();
+        boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,new ID("611f4dff-28c2-42b9-982d-762a3e9e2b3c"));
+        assertFalse(esito);
+    }
+    @Test
+    public void testSubmitArticlesListDTOEmpty() throws SQLException{
+        ArrayList<RUserDTO> autori =  new ArrayList<>();
+        autori.add(user_controller.getRAuthorBYEmail(null));
+        boolean esito = article_controller.submitArticle("Why Nintendo?","Nintendo",autori,new ID("611f4dff-28c2-42b9-982d-762a3e9e2b3c"));
+        assertTrue(esito);
     }
 \end{lstlisting}
 %%% Local Variables:

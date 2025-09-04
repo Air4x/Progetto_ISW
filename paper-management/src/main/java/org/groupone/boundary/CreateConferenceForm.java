@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +24,7 @@ public class CreateConferenceForm extends JFrame {
     private JTextField txtduedate  = new JTextField();
     private JTextArea txtareadescription =  new JTextArea();
     private JButton buttonCreateConference = new JButton();
-    private JButton buttonBack;
+    private JButton buttonBack = new JButton();
 
 
     public CreateConferenceForm(RUserDTO organizer) {
@@ -43,7 +44,7 @@ public class CreateConferenceForm extends JFrame {
         contentPane.add(lbltitle);
 
 
-        txttitle.setText("Title");
+        txttitle.setText(" ");
         txttitle.setBounds(10, 40, 80, 20);
         contentPane.add(txttitle);
 
@@ -53,7 +54,7 @@ public class CreateConferenceForm extends JFrame {
         contentPane.add(lbldescription);
 
 
-        txtareadescription.setText("Description");
+        txtareadescription.setText(" ");
         txtareadescription.setBounds(10, 100, 300, 300);
         txtareadescription.setBackground(new Color(255, 255, 255));
         txtareadescription.setLineWrap(true);
@@ -66,7 +67,7 @@ public class CreateConferenceForm extends JFrame {
         contentPane.add(lblduedate);
 
 
-        txtduedate.setText("YYYY-MM-DD");
+        txtduedate.setText("DD/MM/YYYY");
         txtduedate.setBounds(160, 40, 150, 20);
         contentPane.add(txtduedate);
 
@@ -82,7 +83,9 @@ public class CreateConferenceForm extends JFrame {
         buttonCreateConference.addMouseListener(new  MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 try {
-                    LocalDate duedate = LocalDate.parse(txtduedate.getText());
+                    System.out.println(organizer);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate duedate = LocalDate.parse(txtduedate.getText(),formatter);
                     ConferenceController cc = new ConferenceController();
                     LocalDate today =  LocalDate.now();
                     if (duedate.isBefore(today)) {

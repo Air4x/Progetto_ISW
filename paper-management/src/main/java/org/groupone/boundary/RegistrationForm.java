@@ -153,12 +153,13 @@ public class RegistrationForm extends JFrame {
                         System.out.println(comboboxruoli.getSelectedItem().toString());
                         UserController uc = new UserController();
 
-                        userDTO = uc.registerUser(txtaffiliazione.getText(), txtemail.getText(), txtlastname.getText(), txtname.getText(), passwordField.getText(), comboboxruoli.getSelectedItem().toString());
+                        userDTO = uc.registerUser(txtaffiliazione.getText(), txtemail.getText(), txtlastname.getText(), txtname.getText(), passwordField.getText(),comboboxruoli.getSelectedItem().toString());
                         if (userDTO == null) {
                             JOptionPane.showMessageDialog(null, "User already register, proceed to login", "Warining", JOptionPane.WARNING_MESSAGE);
 
                         } else {
                             if (comboboxruoli.getSelectedItem().toString().equals("organizzatore")) {
+                                System.out.println(comboboxruoli.getSelectedItem().toString());
                                 OrganizerDashboard organizerDashboard = new OrganizerDashboard(userDTO);
                                 organizerDashboard.setVisible(true);
                                 dispose();

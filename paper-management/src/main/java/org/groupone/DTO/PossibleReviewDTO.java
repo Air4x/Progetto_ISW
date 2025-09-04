@@ -74,6 +74,6 @@ public class PossibleReviewDTO {
 
     @Override
     public String toString() {
-        return "ID=" + this.id + "\nNome=" + this.name + "\nCognome=" + this.lastname + "\nAffiliazione=" + this.affiliazione+"\n";
+        return "\nNome: " + this.name + "\nCognome: " + this.lastname + "\nAffiliazione: " + this.affiliazione + "\n";
     }
 }

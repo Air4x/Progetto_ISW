@@ -58,6 +58,17 @@ public class OrganizerDashboard extends JFrame{
                 activeConferencemodel.addElement(activeConf);
             }
             listActiveConference.setModel(activeConferencemodel);
+            listActiveConference.setCellRenderer( new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof ShowActiveConferenceDTO){
+                        ShowActiveConferenceDTO activeConf = (ShowActiveConferenceDTO)value;
+                        setText("Conference Name : "+activeConf.getTitle()+"\tDescription: "+activeConf.getDescription() +"\tDue Date : " + activeConf.getDeadline() );
+                    }
+                    return this;
+                }
+            });
 
             scrollConferenceList.getViewport().setView(listActiveConference);
             scrollConferenceList.setBounds(10, 70, 414, 200);
@@ -88,6 +99,17 @@ public class OrganizerDashboard extends JFrame{
                     }
                 }
             });
+            listarticleSubmitted.setCellRenderer( new DefaultListCellRenderer(){
+                @Override
+                public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                    super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                    if(value instanceof ShowArticleDTO){
+                        ShowArticleDTO article = (ShowArticleDTO)value;
+                        setText("Title : "+article.getTitle()+ "\tCoauthors : "+article.getAuthors());
+                    }
+                    return this;
+                }
+            });
             scrollarticleSubmitted.setBounds(10, 290, 414, 200);
             contentPane.add(scrollarticleSubmitted);
             lblarticlesubmitted.setText("Article Submitted");
@@ -108,6 +130,7 @@ public class OrganizerDashboard extends JFrame{
                     //Crea la conferenza la conferenza
                     CreateConferenceForm form = new CreateConferenceForm(organizer);
                     form.setVisible(true);
+                    dispose();
 
                 }
             });

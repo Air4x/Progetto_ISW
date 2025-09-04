@@ -2,6 +2,7 @@ package org.groupone.boundary;
 
 import org.groupone.DTO.RUserDTO;
 import org.groupone.controller.ConferenceController;
+import org.groupone.entity.Organizer;
 import org.groupone.utility.ID;
 
 import javax.swing.*;
@@ -10,6 +11,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CreateConferenceForm extends JFrame {
     private JPanel contentPane = new JPanel();
@@ -20,39 +23,15 @@ public class CreateConferenceForm extends JFrame {
     private JTextField txtduedate  = new JTextField();
     private JTextArea txtareadescription =  new JTextArea();
     private JButton buttonCreateConference = new JButton();
-
-
-    //Run method
-
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    String affiliazione = new String("Affiliazione") ;
-                    String email = new String("email");
-                    String nome = new String("Nome");
-                    String lastName = new String("Cognome");
-                    RUserDTO organizer = new RUserDTO(nome,lastName,email,affiliazione,"Organizer",ID.generate());
-                    CreateConferenceForm frame = new CreateConferenceForm(organizer);
-                    frame.setVisible(true);
-
-                }catch(Exception e){
-                    e.printStackTrace();
-
-
-                }
-            }
-        });
-    }
-
-
-
+    private JButton buttonBack;
 
 
     public CreateConferenceForm(RUserDTO organizer) {
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         setTitle("Create Conference");
+        setResizable(false);
+        setLocationRelativeTo(null);
 
 
         contentPane.setLayout(null);
@@ -87,7 +66,7 @@ public class CreateConferenceForm extends JFrame {
         contentPane.add(lblduedate);
 
 
-        txtduedate.setText("DD-MM-YYYY");
+        txtduedate.setText("YYYY-MM-DD");
         txtduedate.setBounds(160, 40, 150, 20);
         contentPane.add(txtduedate);
 
@@ -106,16 +85,6 @@ public class CreateConferenceForm extends JFrame {
                     LocalDate duedate = LocalDate.parse(txtduedate.getText());
                     ConferenceController cc = new ConferenceController();
                     LocalDate today =  LocalDate.now();
-
-                    if (!duedate.isBefore(today) && txttitle.getText().length() < 30 && txtareadescription.getText().length() < 100) {
-                        try {
-                            cc.createConference( duedate, txttitle.getText(), txtareadescription.getText(), ID.generate(), organizer);
-                            JOptionPane.showMessageDialog(null, "Conference created");
-                            dispose();
-                        } catch (Exception ex) {
-                            JOptionPane.showMessageDialog(null, ex);
-                        }
-                    }
                     if (duedate.isBefore(today)) {
                         JOptionPane.showMessageDialog(null, "Conference creation failed, Due Date is earlier than today");
                     }
@@ -125,6 +94,18 @@ public class CreateConferenceForm extends JFrame {
                     if (txtareadescription.getText().length() > 100) {
                         JOptionPane.showMessageDialog(null, "Conference creation failed, Description is too long");
                     }
+                    if (!duedate.isBefore(today) && txttitle.getText().length() <= 30 && txtareadescription.getText().length() <= 100) {
+                        try {
+                            cc.createConference( duedate, txttitle.getText(), txtareadescription.getText(), ID.generate(), organizer);
+                            JOptionPane.showMessageDialog(null, "Conference created");
+                            OrganizerDashboard frame = new OrganizerDashboard(organizer);
+                            frame.setVisible(true);
+                            dispose();
+                        } catch (Exception ex) {
+                            JOptionPane.showMessageDialog(null, ex);
+                        }
+                    }
+
                 }catch(SQLException ex){
                     JOptionPane.showMessageDialog(null, "Errore SQL");
 
@@ -134,5 +115,27 @@ public class CreateConferenceForm extends JFrame {
 
         });
         contentPane.add(buttonCreateConference);
+
+        buttonBack.setText("Back");
+        buttonBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        buttonBack.setForeground(Color.white);
+        buttonBack.setBackground(new Color(100, 149, 237));
+        buttonBack.setBounds(320, 70, 100, 30);
+        buttonBack.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    OrganizerDashboard frame = new OrganizerDashboard(organizer);
+                    frame.setVisible(true);
+
+
+                    dispose();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AuthorDashboard.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        contentPane.add(buttonBack);
+
     }
 }

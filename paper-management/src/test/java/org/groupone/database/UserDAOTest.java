@@ -147,6 +147,7 @@ public class UserDAOTest {
 		Organizer user = new Organizer("GG","g@gmail.com","Panzatti","Giulio","PPPPP",ID.generate());
 		dao.saveUser(user); 
 		}catch(SQLException | NullPointerException e){
+			System.out.println("SQLException");
 			assertTrue(true);
 		}
 	}

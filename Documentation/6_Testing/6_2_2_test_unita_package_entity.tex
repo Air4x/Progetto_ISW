@@ -1,0 +1,28 @@
+\subsection{Package Entity}
+\label{sec:test_unita_package_entity}
+
+\subsubsection{Test nearDeadline}
+\paragraph{Test di verifica di scadenza di una conferenza }
+.
+\begin{lstlisting}
+    @Test
+    public void nearDeadlineOK() {
+        Date scadenza = Date.valueOf(LocalDate.of(2026,12,04));
+        Conference c = new Conference(scadenza, "Prova1", "prova1 descrizione", ID.generate(), new ID("ee719226-43d5-4bfc-bf46-3e409bbbf425"));
+        Assert.assertFalse("Conferenza è in scadenza?: ",c.nearDeadline());
+    }
+\end{lstlisting}
+\paragraph{Test anti-pattern }
+.
+\begin{lstlisting}
+    @Test
+    public void nearDeadlineNotOK() {
+        Date scadenza = Date.valueOf(LocalDate.now());
+        Conference c = new Conference(scadenza, "Prova1", "prova1 descrizione", ID.generate(), new ID("ee719226-43d5-4bfc-bf46-3e409bbbf425"));
+        Assert.assertTrue("Conferenza è in scadenza?: ",c.nearDeadline());
+    }
+\end{lstlisting}
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

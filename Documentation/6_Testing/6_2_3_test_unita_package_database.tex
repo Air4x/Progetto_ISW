@@ -1,0 +1,44 @@
+\subsection{Package Database}
+\label{sec:test_unita_package_database}
+
+\subsubsection{Test getArticleByID}
+\paragraph{Inizializzazione Parametri}
+.
+\begin{lstlisting}  
+\end{lstlisting}
+\paragraph{Test per ottenere un articolo attraverso l'id dell'autore  }
+.
+\begin{lstlisting}
+    @Test
+    public void getArticleByAuthorsOK(){
+	ID id = new ID("9c388e06-3c9e-43bd-9327-acbffed869d3");
+	try {
+	    ArticleDAO dao = new ArticleDAO();
+	    ArrayList<Article> actual = dao.getArticlesByAuthor(id);
+	    assertTrue("getArticleByAuthors - articoli non trovati", actual.size() > 0);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    fail("getArticleByAuthors - Found exception");
+	}
+    }
+\end{lstlisting}
+\paragraph{Test anti-pattern }
+.
+\begin{lstlisting}
+	@Test
+    public void getArticleByAuthorsArticleNotFound(){
+	ID id = ID.generate();
+	try {
+	    ArticleDAO dao = new ArticleDAO();
+	    ArrayList<Article> actual = dao.getArticlesByAuthor(id);
+	    assertTrue("getArticleByAuthors - articoli non trovati", actual.size() <= 0);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    fail("getArticleByAuthors - Found exception");
+	}
+    }
+\end{lstlisting}
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

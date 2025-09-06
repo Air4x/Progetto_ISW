@@ -1,0 +1,37 @@
+\subsection{Package Entity}
+\label{sec:test_funzionale_package_entity}
+
+\subsubsection{Test Suite di nearDeadline}
+\begin{tabular}{|p{2.5cm}|p{2.5cm}|p{3cm}|p{1.5cm}|p{5cm}|}
+\hline
+\rowcolor{SkyBlue}
+\multicolumn{5}{l}{\textbf{p1}}\\
+\hline
+\rowcolor{Red}
+\textbf{Test Case ID} & \textbf{Descrizione} & \textbf{Classi di equivalenza coperte} & \textbf{Pre - Condizioni} & \textbf{Input} \\
+\hline
+1&il metodo chiamato su una conferenza in scadenza&Che la conferenza abbia la scandenza a 5 giorni di distanza o meno dal giorno attuale&&\\
+\hline
+2&il metodo chiamato su una conferenza in scadenza&Che la conferenza non abbia la scandenza a 5 giorni di distanza o meno dal giorno attuale&&\\
+\hline
+\end{tabular}
+
+
+\begin{tabular}{|p{3.5cm}|p{3cm}|p{3cm}|p{1cm}|}
+\hline
+\rowcolor{SkyBlue}
+\multicolumn{4}{l}{\textbf{p2}}\\
+\hline
+\rowcolor{Red}
+ \textbf{Post - Condizione Atteso} & \textbf{Output Ottenuto}& \textbf{Post - Condizione Ottenute}& \textbf{Esito}\\
+\hline
+Che la conferenza risulti in scadenza&Che il metodo ritorna un valore booleano true&Che la conferenza risulta in scadenza&PASS\\
+\hline
+Che la conferenza non risulti in scadenza&Che il metodo ritorna un valore booleano false&Che la conferenza non risulta in scadenza&PASS\\
+\hline
+\end{tabular}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

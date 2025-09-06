@@ -1,0 +1,61 @@
+\subsection{Package Database}
+\label{sec:test_strutturale_package_database}
+
+\subsubsection{Ottenere articoli da un autore: getArticleByID}
+\begin{lstlisting}
+public Article getArticleByID(ID id) throws SQLException {
+	String titolo = null;
+	String abs = null;
+	ArrayList<Author> autori = new ArrayList<>();
+	// ======To get title, id and abstract=====
+	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID FROM Articoli WHERE ID = ?;";
+	PreparedStatement stArticoli = conn.prepareStatement(fromArticoli);
+	stArticoli.setString(1, id.toString());
+	ResultSet rsArticoli = stArticoli.executeQuery();
+	while(rsArticoli.next()){
+	    titolo = rsArticoli.getString("TITOLO");
+	    abs = rsArticoli.getString("ABSTRACT");
+	}
+	// ======To get all the authors========
+	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = ?;";
+	PreparedStatement stAutori = conn.prepareStatement(fromAutori);
+	stAutori.setString(1, id.toString());
+	ResultSet rsAutori = stAutori.executeQuery();
+	String fromUtenti = "SELECT NOME, COGNOME, AFFILIAZIONE, EMAIL, PASSWORD, ID FROM Utenti WHERE RUOLO = ? AND ID = ?";
+	PreparedStatement pstUtenti= conn.prepareStatement(fromUtenti);
+	while(rsAutori.next()) {
+	    pstUtenti.setNString(1, "autore");
+	    pstUtenti.setNString(2 , rsAutori.getString("id_aut"));
+	    ResultSet rsUtenti = pstUtenti.executeQuery();
+	    while(rsUtenti.next()){
+		String affiliazione = rsUtenti.getString("AFFILIAZIONE");
+		String email = rsUtenti.getString("EMAIL");
+		String cognome = rsUtenti.getString("COGNOME");
+		String nome = rsUtenti.getString("NOME");
+		String password = rsUtenti.getString("PASSWORD");
+		Author a = new Author(affiliazione, email, cognome, nome, password, new ID(rsAutori.getString("id_aut")));
+		autori.add(a);
+	    }  
+	}
+	return new Article(id, abs, autori, titolo);
+    }
+
+\end{lstlisting}
+\paragraph{Control Flow Grap}
+\paragraph{Numero Ciclomatico}
+\begin{itemize}
+\item
+\end{itemize}
+\paragraph{Cammini}
+\begin{itemize}
+\item
+\end{itemize}
+\paragraph{Casi di Test}
+\begin{itemize}
+\item
+\end{itemize}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

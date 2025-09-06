@@ -1,0 +1,63 @@
+\subsection{Package Entity}
+\label{sec:test_strutturale_package_entity}
+
+\subsubsection{Vedere se un conferenza sta per scadere: nearDeadline}
+\begin{lstlisting}
+public boolean nearDeadline() {
+	int giornoScadenza = this.getDeadline().toLocalDate().getDayOfYear(); [1]
+	int giornoNow = LocalDate.now().getDayOfYear(); [2]
+        if((giornoScadenza - giornoNow) <= 5 && (giornoScadenza - giornoNow) >= 0) { [3]
+	    return true; [4]
+        } else { return false; } [5]
+    }
+\end{lstlisting}
+\paragraph{Control Flow Grap}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\linewidth]{VisualParadigm/test_nearDeadline.png}
+  \caption{Control Flow Grap di nearDeadline}
+  \label{fig:cfg_nearDeadline}
+\end{figure}
+\paragraph{Numero Ciclomatico}
+\begin{itemize}
+\item[.] numero di regioni chiuse del grafo +1 = 2 + 1= 3 
+\item[.] numero di nodi predicati + 1 = 2 (2,3) +1= 3
+\item[.] numero di archi - numero di nodi + 2 = 4 - 5 + 2 = 1 
+\end{itemize}
+\paragraph{Cammini}
+\begin{itemize}
+\item[Percorso 1:] 1 - 2 - 3
+\item[Percorso 2:] 1 - 2 - 4
+\end{itemize}
+\paragraph{Casi di Test}
+\begin{itemize}
+\item[Casi n. 1:]
+\begin{itemize}
+\item[Obiettivo:] Verificare il percorso 
+\item[Condizioni:] Le condizioni sono:
+\begin{itemize}
+\item[.] (giornoScadenza - giornoNow) <= 5 e  (giornoScadenza - giornoNow ristituisca true
+\end{itemize}
+\item[Input:]  Che la data della conferenza abbia un scadenza distante 5 giorni dal giorno attuale
+\item[Risultato:] return false
+\end{itemize}
+\item[Casi n. 2:]
+\begin{itemize}
+\item[Obiettivo:] Verificare il percorso 
+\item[Condizioni:] Le condizioni sono:
+\begin{itemize}
+\item[.] (giornoScadenza - giornoNow) <= 5 e (giornoScadenza - giornoNow ristituisca false
+\end{itemize}
+\item[Input:] Che la data della conferenza abbia un scadenza distante più distante di 5 giorni dal giorno attuale
+\item[Risultato:] return false
+\end{itemize}
+\end{itemize}
+
+
+
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "main"
+%%% End:

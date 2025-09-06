@@ -1,42 +1,49 @@
 \subsection{Package Database}
 \label{sec:test_unita_package_database}
 
-\subsubsection{Test getArticleByID}
+\subsubsection{Test saveUser}
 \paragraph{Inizializzazione Parametri}
 .
 \begin{lstlisting}  
 \end{lstlisting}
-\paragraph{Test per ottenere un articolo attraverso l'id dell'autore  }
+\paragraph{Test per salvare un utente  }
 .
 \begin{lstlisting}
-    @Test
-    public void getArticleByAuthorsOK(){
-	ID id = new ID("9c388e06-3c9e-43bd-9327-acbffed869d3");
-	try {
-	    ArticleDAO dao = new ArticleDAO();
-	    ArrayList<Article> actual = dao.getArticlesByAuthor(id);
-	    assertTrue("getArticleByAuthors - articoli non trovati", actual.size() > 0);
-	} catch (SQLException e) {
-	    e.printStackTrace();
-	    fail("getArticleByAuthors - Found exception");
+	@Test
+	public void testSaveUserOKAuthor(){
+		try{
+		Author user = new Author("GG","g@gmail.com","Panzatti","Giulio","PPPPP",ID.generate());
+		dao.saveUser(user);
+		}catch(SQLException e){
+			e.printStackTrace();
+			System.out.println("Erreor in save user");
+		}
 	}
-    }
+
+	@Test
+	public void testSaveUserOrganizer(){
+		try{
+		Organizer user = new Organizer("GG","g@gmail.com","Panzatti","Giulio","PPPPP",ID.generate());
+		dao.saveUser(user);
+		}catch(SQLException e){
+			e.printStackTrace();
+			System.out.println("Erreor in save user");
+		}
+	}}
 \end{lstlisting}
 \paragraph{Test anti-pattern }
 .
 \begin{lstlisting}
 	@Test
-    public void getArticleByAuthorsArticleNotFound(){
-	ID id = ID.generate();
-	try {
-	    ArticleDAO dao = new ArticleDAO();
-	    ArrayList<Article> actual = dao.getArticlesByAuthor(id);
-	    assertTrue("getArticleByAuthors - articoli non trovati", actual.size() <= 0);
-	} catch (SQLException e) {
-	    e.printStackTrace();
-	    fail("getArticleByAuthors - Found exception");
+	public void testSaveUserNullInsert (){
+		this.dao= null;
+		try{
+		Organizer user = new Organizer("GG","g@gmail.com","Panzatti","Giulio","PPPPP",ID.generate());
+		dao.saveUser(user); 
+		}catch(SQLException | NullPointerException e){
+			assertTrue(true);
+		}
 	}
-    }
 \end{lstlisting}
 %%% Local Variables:
 %%% mode: LaTeX

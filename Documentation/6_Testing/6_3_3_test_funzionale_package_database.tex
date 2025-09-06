@@ -10,6 +10,12 @@
 \rowcolor{Red}
 \textbf{Test Case ID} & \textbf{Descrizione} & \textbf{Classi di equivalenza coperte} & \textbf{Pre - Condizioni} & \textbf{Input} \\
 \hline
+1&Medote che viene chiamato per salvare un autore&Che il ruolo dell' user passata sia autore&&Author user = new Author("GG","g@gmail.com","Panzatti","Giulio","PPPPP",ID.generate());\\
+\hline
+2&Medote che viene chiamato per salvare un organizzatore&Che il ruolo dell' user passata sia organizzatore&&Organizer user = new Organizer("GG","g@gmail.com","Panzatti","Giulio","PPPPP",ID.generate());\\
+\hline
+3&Medote che viene chiamato per salvare un user che non ne un autore che organizzatore&Che il ruolo dell' user passata non sia ne autore che organizzatore&&Organizer user = new Organizer("GG","g@gmail.com","Panzatti","Giulio","PPPPP",ID.generate());\\
+\hline
 \end{tabular}
 
 
@@ -20,6 +26,12 @@
 \hline
 \rowcolor{Red}
  \textbf{Post - Condizione Atteso} & \textbf{Output Ottenuto}& \textbf{Post - Condizione Ottenute}& \textbf{Esito}\\
+\hline
+Che l'user viene salvato&L'user viene salvato&User salvato&PASS\\
+\hline
+Che l'user viene salvato&L'user viene salvato&User salvato&PASS\\
+\hline
+Che l'user viene non salvato& Un SQLException e di consequenzza l'user non viene salvato&User non salvato&PASS\\
 \hline
 \end{tabular}
 

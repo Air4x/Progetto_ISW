@@ -1,58 +1,87 @@
 \subsection{Package Database}
 \label{sec:test_strutturale_package_database}
 
-\subsubsection{Ottenere articoli da un autore: getArticleByID}
+\subsubsection{Registrazione di un utente: saveUser()}
 \begin{lstlisting}
-public Article getArticleByID(ID id) throws SQLException {
-	String titolo = null;
-	String abs = null;
-	ArrayList<Author> autori = new ArrayList<>();
-	// ======To get title, id and abstract=====
-	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID FROM Articoli WHERE ID = ?;";
-	PreparedStatement stArticoli = conn.prepareStatement(fromArticoli);
-	stArticoli.setString(1, id.toString());
-	ResultSet rsArticoli = stArticoli.executeQuery();
-	while(rsArticoli.next()){
-	    titolo = rsArticoli.getString("TITOLO");
-	    abs = rsArticoli.getString("ABSTRACT");
-	}
-	// ======To get all the authors========
-	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = ?;";
-	PreparedStatement stAutori = conn.prepareStatement(fromAutori);
-	stAutori.setString(1, id.toString());
-	ResultSet rsAutori = stAutori.executeQuery();
-	String fromUtenti = "SELECT NOME, COGNOME, AFFILIAZIONE, EMAIL, PASSWORD, ID FROM Utenti WHERE RUOLO = ? AND ID = ?";
-	PreparedStatement pstUtenti= conn.prepareStatement(fromUtenti);
-	while(rsAutori.next()) {
-	    pstUtenti.setNString(1, "autore");
-	    pstUtenti.setNString(2 , rsAutori.getString("id_aut"));
-	    ResultSet rsUtenti = pstUtenti.executeQuery();
-	    while(rsUtenti.next()){
-		String affiliazione = rsUtenti.getString("AFFILIAZIONE");
-		String email = rsUtenti.getString("EMAIL");
-		String cognome = rsUtenti.getString("COGNOME");
-		String nome = rsUtenti.getString("NOME");
-		String password = rsUtenti.getString("PASSWORD");
-		Author a = new Author(affiliazione, email, cognome, nome, password, new ID(rsAutori.getString("id_aut")));
-		autori.add(a);
-	    }  
-	}
-	return new Article(id, abs, autori, titolo);
+   public void saveUser(User user) throws SQLException {
+        if (user.getRole().equals("autore")) { [1]
+            Author a = (Author) user; [2]
+            String sql = "Insert Into Utenti(ID, NOME, COGNOME, EMAIL, PASSWORD, AFFILIAZIONE, RUOLO) VALUES(?, ?, ?, ?, ?, ?,'autore');";  [3]
+            try(PreparedStatement stmt = conn.prepareStatement(sql);) {  [4]
+                stmt.setString(1, a.getId().toString());  [5]
+                stmt.setString(2, a.getName());  [6]
+                stmt.setString(3, a.getLastName());  [7]
+                stmt.setString(4, a.getEmail());  [8]
+                stmt.setString(5, a.getPassword());  [9]
+                stmt.setString(6, a.getAffiliation());  [10]
+                int ignore = stmt.executeUpdate();  [11]
+            }
+        } else if (user.getRole().equals("organizzatore")) {  [12]
+            Organizer o = (Organizer) user;  [13]
+            String sql = "INSERT INTO Utenti(ID, NOME, COGNOME, EMAIL, PASSWORD, AFFILIAZIONE, RUOLO) VALUES(?, ?, ? ,?, ?, ?,'organizzatore');";  [14]
+            try(PreparedStatement stmt = conn.prepareStatement(sql);) { [ [15]
+                stmt.setString(1, o.getId().toString());  [16]
+                stmt.setString(2, o.getName());  [17]
+                stmt.setString(3, o.getLastName());  [18]
+                stmt.setString(4, o.getEmail());  [19]
+                stmt.setString(5, o.getPassword());  [20]
+                stmt.setString(6, o.getAffiliation());  [21]
+                int ignore = stmt.executeUpdate();  [22]
+            }
+        }
     }
-
 \end{lstlisting}
 \paragraph{Control Flow Grap}
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\linewidth]{VisualParadigm/test_saveUser.png}
+  \caption{Control Flow Grap di saveUser}
+  \label{fig:cfg_di saveUser}
+\end{figure}
 \paragraph{Numero Ciclomatico}
 \begin{itemize}
-\item
+\item[.] numero di regioni chiuse del grafo +1 = 2 + 1= 3 
+\item[.] numero di nodi predicati + 1 = 2 (1,12) +1= 3
+\item[.] numero di archi - numero di nodi + 2 = 22 - 21 +2 = 3
 \end{itemize}
 \paragraph{Cammini}
 \begin{itemize}
-\item
+\item[Percorso 1:] 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10 - 11
+\item[Percorso 2:] 1 - 12 - 13 - 14 - 15 - 16 - 17 - 18 - 19 - 20 - 21 - 22
+\item[Percorso 3:] 1 - 12
 \end{itemize}
 \paragraph{Casi di Test}
 \begin{itemize}
-\item
+\item[Casi n. 1:]
+\begin{itemize}
+\item[Obiettivo:] Verificare il percorso 1
+\item[Condizioni:] Che l'user passato abbia come ruolo 
+\begin{itemize}
+\item[.] user.getRole().equals("autore") risulti true
+\end{itemize}
+\item[Input:] Che l'user in input sia un autore
+\item[Risultato:] Che salvi l'user
+\end{itemize}
+\item[Casi n. 2:]
+\begin{itemize}
+\item[Obiettivo:] Verificare il percorso 2
+\item[Condizioni:] Che l'user passato abbia come ruolo organizzatore
+\begin{itemize}
+\item[.] (user.getRole().equals("organizzatore") risulti true
+\end{itemize}
+\item[Input:] Che l'user in input sia un organizzatore
+\item[Risultato:] Che salvi l'user
+\end{itemize}
+\item[Casi n. 3:]
+\begin{itemize}
+\item[Obiettivo:] Verificare il percorso 3
+\item[Condizioni:] Che l'user passato abbia un ruolo diverso da organizzatore o autore; che l'user passato risulti null
+\begin{itemize}
+\item[.]  user.getRole().equals("autore") e (user.getRole().equals("organizzatore") risulti false
+\end{itemize}
+\item[Input:] Che l'user in input abbia un ruolo diverso da autore e organizzatore o che risulti null
+\item[Risultato:] Che non salvi l'user
+\end{itemize}
 \end{itemize}
 
 %%% Local Variables:

@@ -10,9 +10,9 @@
 \rowcolor{Red}
 \textbf{Test Case ID} & \textbf{Descrizione} & \textbf{Classi di equivalenza coperte} & \textbf{Pre - Condizioni} & \textbf{Input} \\
 \hline
-1&il metodo chiamato su una conferenza in scadenza&Che la conferenza abbia la scandenza a 5 giorni di distanza o meno dal giorno attuale&&\\
+1&il metodo chiamato su una conferenza in scadenza&Che la conferenza abbia la scandenza a 5 giorni di distanza o meno dal giorno attuale&&Conference c = new Conference(Date.valueOf(LocalDate.of(2026,12,04)), "Prova1", "prova1 descrizione", ID.generate(), new ID("ee719226-43d5-4bfc-bf46-3e409bbbf425"));\\
 \hline
-2&il metodo chiamato su una conferenza in scadenza&Che la conferenza non abbia la scandenza a 5 giorni di distanza o meno dal giorno attuale&&\\
+2&il metodo chiamato su una conferenza in scadenza&Che la conferenza non abbia la scandenza a 5 giorni di distanza o meno dal giorno attuale&&Conference c = new Conference(Date.valueOf(LocalDate.now()), "Prova1", "prova1 descrizione", ID.generate(), new ID("ee719226-43d5-4bfc-bf46-3e409bbbf425"));\\
 \hline
 \end{tabular}
 

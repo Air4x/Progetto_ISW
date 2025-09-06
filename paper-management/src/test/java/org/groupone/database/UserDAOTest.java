@@ -3,7 +3,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.groupone.entity.Author;
+import org.groupone.entity.Organizer;
 import org.groupone.entity.User;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert.*;
 import org.groupone.utility.ID;
@@ -11,6 +13,13 @@ import org.groupone.utility.ID;
 import static org.junit.Assert.*;
 
 public class UserDAOTest {
+
+	private UserDAO dao;
+
+	@Before
+	public void setUP() throws SQLException{
+			dao = new UserDAO();
+	}
 
 	@Test
 	public void isUserPresentByIDPositive() throws SQLException {
@@ -107,5 +116,38 @@ public class UserDAOTest {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Test
+	public void testSaveUserOKAuthor(){
+		try{
+		Author user = new Author("GG","g@gmail.com","Panzatti","Giulio","PPPPP",ID.generate());
+		dao.saveUser(user);
+		}catch(SQLException e){
+			e.printStackTrace();
+			System.out.println("Erreor in save user");
+		}
+	}
+
+	@Test
+	public void testSaveUserOrganizer(){
+		try{
+		Organizer user = new Organizer("GG","g@gmail.com","Panzatti","Giulio","PPPPP",ID.generate());
+		dao.saveUser(user);
+		}catch(SQLException e){
+			e.printStackTrace();
+			System.out.println("Erreor in save user");
+		}
+	}
+
+	@Test
+	public void testSaveUserNullInsert (){
+		this.dao= null;
+		try{
+		Organizer user = new Organizer("GG","g@gmail.com","Panzatti","Giulio","PPPPP",ID.generate());
+		dao.saveUser(user); 
+		}catch(SQLException | NullPointerException e){
+			assertTrue(true);
+		}
 	}
 }

@@ -1,16 +1,16 @@
 package org.groupone.database;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-import org.junit.Test;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.groupone.entity.Article;
 import org.groupone.entity.Author;
 import org.groupone.utility.ID;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import org.junit.Test;
+
 
 
 public class ArticleDAOTest {
@@ -51,12 +51,25 @@ public class ArticleDAOTest {
     }
 
     @Test
-    public void getArticleByAuthors(){
-	ID id = new ID("95ba1fc7-bf7e-4764-341b-eac6051437fb");
+    public void getArticleByAuthorsOK(){
+	ID id = new ID("9c388e06-3c9e-43bd-9327-acbffed869d3");
 	try {
 	    ArticleDAO dao = new ArticleDAO();
 	    ArrayList<Article> actual = dao.getArticlesByAuthor(id);
 	    assertTrue("getArticleByAuthors - articoli non trovati", actual.size() > 0);
+	} catch (SQLException e) {
+	    e.printStackTrace();
+	    fail("getArticleByAuthors - Found exception");
+	}
+    }
+
+	@Test
+    public void getArticleByAuthorsArticleNotFound(){
+	ID id = ID.generate();
+	try {
+	    ArticleDAO dao = new ArticleDAO();
+	    ArrayList<Article> actual = dao.getArticlesByAuthor(id);
+	    assertTrue("getArticleByAuthors - articoli non trovati", actual.size() <= 0);
 	} catch (SQLException e) {
 	    e.printStackTrace();
 	    fail("getArticleByAuthors - Found exception");

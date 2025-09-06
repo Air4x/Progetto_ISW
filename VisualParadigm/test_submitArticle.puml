@@ -1,40 +1,40 @@
 @startuml
-title Control Flow Graph - submitArticle()
-
 start
-:1. Inizializzazione variabili;
 
-if (2. !isConferencePresentByID(id_conf)) then (true)
-  :3. Stampa "Conference not found" e return false;
+:[1] article_id = ID.generate();
+:[2] authors_list = new ArrayList<>();
+
+if ("Conference present?" [3]) then (no)
+  :[4] "Conference not found";
   stop
-else (false)
-
-  if (4. deadline.before(today)) then (true)
-    :5. Stampa "The selected conference is expired" e return false;
+else (yes)
+  if ("Conference expired?" [6]) then (yes)
+    :[7] "The selected conference is expired";
     stop
-  else (false)
-  
-    if (6. article_autori.isEmpty()) then (true)
-      :7. Stampa "List of authors is empty" e return false;
+  else (no)
+    if ("Authors list empty?" [9]) then (yes)
+      :[10] "List of authors is empty";
       stop
-    else (false)
-      
-      :8. Inizio ciclo for;
-      repeat
-        :9. Controllo autore;
-        if (isUserPresentByEmail(...) && ...) then (true)
-          :10. authors_list.add(...);
-        else (false)
-          :Continua;
-        endif
-      repeat while (ancora autori)
-      
-      :11. Creazione e salvataggio articolo;
-      :12. return true;
-      stop
-      
+    else (no)
+      :for each fake_user in article_autori [12];
+      if ("Valid author?" [13]) then (yes)
+        :[14] add author to authors_list;
+      else (no)
+        -->[12] continue loop;
+      endif
     endif
   endif
+endif
+
+if ("authors_list empty?" [15]) then (yes)
+  :[16] "List of authors is empty";
+  stop
+else (no)
+  :[18] create Article;
+  :[19] add Article to conference;
+  :[20] save Article;
+  :[21] return true;
+  stop
 endif
 
 @enduml

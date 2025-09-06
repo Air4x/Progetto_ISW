@@ -1,0 +1,28 @@
+@startuml
+start
+
+:[1] today = LocalDate.now();
+:[2] deadline = Date.valueOf(scadenza);
+
+if ("Conference exists?" [3]) then (yes)
+  :[4] "Conference Already Exists";
+  stop
+else (no)
+  if ("today after scadenza?" [6]) then (yes)
+    :[7] "Scadenza is before today";
+    stop
+  else (no)
+    if ("org invalid?" [9]) then (yes)
+      :[10] "Organizzatore is not Found";
+      stop
+    else (no)
+      :[12] create new Conference;
+      :[13] save Conference;
+      :[14] "Conference is created";
+      :[15] return true;
+      stop
+    endif
+  endif
+endif
+
+@enduml

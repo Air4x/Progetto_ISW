@@ -1,0 +1,15 @@
+@startuml
+start
+
+:[1] giornoScadenza = deadline.getDayOfYear();
+:[2] giornoNow = LocalDate.now().getDayOfYear();
+
+if ("giornoScadenza - giornoNow <= 5 AND >= 0 ?" [3]) then (yes)
+  :[4] return true;
+  stop
+else (no)
+  :[5] return false;
+  stop
+endif
+
+@enduml

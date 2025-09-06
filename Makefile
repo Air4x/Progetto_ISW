@@ -11,7 +11,7 @@ prg: diagramma_prg_classi.png diagramma_prg_database.png diagramma_prg_entity.pn
 
 er: er_finale.png
 
-test: test_createConference.png test_submitArticle.png test_nearDeadline.png
+test: test_createConference.png test_submitArticle.png test_nearDeadline.png test_saveUser.png
 
 diagramma_classi.png: diagramma_classi.puml
 	java -jar plantuml.jar $^
@@ -59,6 +59,9 @@ test_createConference.png: test_createConference.puml
 		java -jar plantuml.jar $^
 
 test_nearDeadline.png: test_nearDeadline.puml
+		java -jar plantuml.jar $^
+
+test_saveUser.png: test_saveUser.puml
 		java -jar plantuml.jar $^
 
 clean:

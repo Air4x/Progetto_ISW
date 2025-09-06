@@ -1,0 +1,19 @@
+@startuml
+title Control Flow Graph per saveUser()
+
+start
+:if (user.getRole().equals("autore"));
+if (is "autore") then (true)
+  :Autore Block\n(Cast a Autore\nEsegui INSERT INTO);
+else (false)
+  :if (user.getRole().equals("organizzatore"))?;
+  if (is "organizzatore") then (true)
+    :Organizzatore Block\n(Cast a Organizzatore\nEsegui INSERT INTO);
+  else (false)
+    :Fine del metodo;
+  endif
+endif
+:Fine del metodo;
+end
+
+@enduml

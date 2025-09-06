@@ -188,7 +188,7 @@ public class UserDAO {
      *
      * @param Un user da salvare
      */
-    public void saveUser(User user) throws SQLException {
+    public void saveUser(User user) throws SQLException,NullPointerException{
         if (user.getRole().equals("autore")) {
             Author a = (Author) user;
             String sql = "Insert Into Utenti(ID, NOME, COGNOME, EMAIL, PASSWORD, AFFILIAZIONE, RUOLO) VALUES(?, ?, ?, ?, ?, ?,'autore');";
@@ -203,7 +203,7 @@ public class UserDAO {
             }
         } else if (user.getRole().equals("organizzatore")) {
             Organizer o = (Organizer) user;
-            String sql = "INSERT INTO Utenti(ID, NOME, COGNOME, EMAIL, PASSWORD, AFFILIAZIONE, RUOLO) VALUES(?, ?, ? ,?, ?, ?,'organizzatore);'";
+            String sql = "Insert Into Utenti(ID, NOME, COGNOME, EMAIL, PASSWORD, AFFILIAZIONE, RUOLO) VALUES(?, ?, ?, ?, ?, ?,'organizzatore');";
             try(PreparedStatement stmt = conn.prepareStatement(sql);) {
                 stmt.setString(1, o.getId().toString());
                 stmt.setString(2, o.getName());
@@ -211,7 +211,7 @@ public class UserDAO {
                 stmt.setString(4, o.getEmail());
                 stmt.setString(5, o.getPassword());
                 stmt.setString(6, o.getAffiliation());
-                int ignore = stmt.executeUpdate(sql);
+                int ignore = stmt.executeUpdate();
             }
         }
     }

@@ -152,7 +152,10 @@ public abstract class User {
      * @return il ruolo dell'utente
      */
     public abstract String getRole();
-
+    /**
+     * Override le metodo equals
+     * @param o, l'elemento con cui fare la comparazione
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

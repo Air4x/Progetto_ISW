@@ -19,6 +19,10 @@ Metodo statico che permette di ottenere la connesione al database
 \begin{itemize}
 \item Un oggetto Connection che rappresenta la connesione al database
 \end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 
 \subsection{UserDAO}
@@ -41,6 +45,10 @@ Permette di ottenere il ruolo di un utente dato il suo id
 \begin{itemize}
 \item Il ruolo dell'utente sotto forma di stringa
 \end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.UserDAO.getUserByID()}}
 Permette di ottenere un utente dato il suo id
@@ -54,6 +62,10 @@ Permette di ottenere un utente dato il suo id
   \texttt{entity.Author}/\texttt{entity.Organizer} rappresentante
   l'utente
 \end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.UserDAO.isUserPresentByID()}}
 Predicato che verifica la presenza di un utente nel database
@@ -65,6 +77,10 @@ Predicato che verifica la presenza di un utente nel database
 \begin{itemize}
 \item Un valore booleano corrispondente alla presenza dell'utente
 \end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.UserDAO.isUserPresentByEmail()}}
 Predicato che verifica la presenza di un utente data la sua email
@@ -75,6 +91,10 @@ Predicato che verifica la presenza di un utente data la sua email
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item Un valore booleano corrispondente alla presenza dell'utente
+\end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
 \end{itemize}
 
 \subsubsection{\texttt{database.UserDAO.getUserByEmail()}}
@@ -88,6 +108,10 @@ Permette di ottenere un utente data la sua email
 \item La corrispondente istanza di \texttt{entity.Author} o di
   \texttt{entity.Organizer}
 \end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.UserDAO.getAllAuthors()}} Permette
 di ottenere una lista di tutti gli autori presenti nel database
@@ -95,12 +119,20 @@ di ottenere una lista di tutti gli autori presenti nel database
 \begin{itemize}
 \item La lista di tutti gli autori nel database
 \end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.UserDAO.saveUser()}} Permette di
 inserire un nuovo utente all'interno del database
 \paragraph{Parametri}
 \begin{itemize}
 \item L'utente da inserire
+\end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
 \end{itemize}
 
 
@@ -112,6 +144,10 @@ Classe responsabile per le operazioni sulla tabella articoli del database
 
 \subsubsection{\texttt{database.ArticleDAO.ArticleDAO()}}
 Costruttore, imposta la connesione al database
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.ArticleDAO.saveArticle()}}
 Permette di aggiungere un articolo al database
@@ -119,7 +155,10 @@ Permette di aggiungere un articolo al database
 \begin{itemize}
 \item L'articolo da aggiungere
 \end{itemize}
-\paragraph{Valore di ritorno}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.ArticleDAO.getArticleByID()}}
 Permette di ottenere un articolo dato il suo id
@@ -130,6 +169,10 @@ Permette di ottenere un articolo dato il suo id
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item Un istanza di Articolo rappresentante l'articolo ottenuto
+\end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
 \end{itemize}
 
 \subsubsection{\texttt{database.ArticleDAO.getArticlesByAuthor()}}
@@ -142,6 +185,10 @@ Permette di ottenere tutti gli articoli scritti da un'utente
 \begin{itemize}
 \item La lista di articoli scritti dall'autore
 \end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.ArticleDAO.updateTitle()}}
 Aggiorna il titolo di un articolo dato il suo id
@@ -150,6 +197,10 @@ Aggiorna il titolo di un articolo dato il suo id
 \item l'id dell'articolo              
 \item il nuovo titolo dell'articolo
 \end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.ArticleDAO.updateAbstract()}}
 Aggiorna l'abstract di un articolo dato il suo id
@@ -157,6 +208,10 @@ Aggiorna l'abstract di un articolo dato il suo id
 \begin{itemize}
 \item l'id dell'articolo              
 \item il nuovo abstract dell'articolo
+\end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
 \end{itemize}
 
 \subsection{ConferenceDAO}
@@ -167,6 +222,10 @@ Classe che si occupa delle operazioni sulla tabella conferenze nel database
 
 \subsubsection{\texttt{database.ConferenceDAO.ConferenceDAO()}}
 Costruttore, si occupa di impostare la connesione
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.ConferenceDAO.getConferenceByID()}}
 Permette di ottenere una conferenza dato il suo di
@@ -177,6 +236,10 @@ Permette di ottenere una conferenza dato il suo di
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item Un istanza di \texttt{entity.Conference} rappresentante la conferenza ottenuta
+\end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
 \end{itemize}
 
 \subsubsection{\texttt{database.ConferenceDAO.saveConference()}}
@@ -195,6 +258,10 @@ Permette di ottenere la lista di tutti gli articoli sottomessi ad una conferenza
 \begin{itemize}
 \item La lista degli articoli sottomessi
 \end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.ConferenceDAO.getAllConferences()}}
 Permette di ottenere una lista di tutte le conferenze nel database
@@ -202,12 +269,20 @@ Permette di ottenere una lista di tutte le conferenze nel database
 \begin{itemize}
 \item La lista di tutte le conferenze
 \end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.ConferenceDAO.getActiveConferences}}
 Permette di ottenere la lista di tutte le conferenze attive
 \paragraph{Valore di ritorno}
 \begin{itemize}
 \item La lista di tutte le conferenze attive
+\end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
 \end{itemize}
 
 
@@ -219,6 +294,10 @@ Classe responsabile per le operazioni sulla tabella registro nel database
 
 \subsubsection{\texttt{database.ReviewDAO.ReviewDAO()}}
 Costruttore, imposta la connesione al database
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.ReviewDAO.hasConflitOfInterest}}
 Predicato che verifica la presenza di conflitti di interesse
@@ -231,6 +310,10 @@ Predicato che verifica la presenza di conflitti di interesse
 \begin{itemize}
 \item Valore booleano corrispondente alla presenza di conflitti di interesse
 \end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.ReviewDAO.assignReviewer()}}
 Permette di assegnare un autore come revisore ad un articolo
@@ -238,6 +321,10 @@ Permette di assegnare un autore come revisore ad un articolo
 \begin{itemize}
 \item L'id dell'articolo
 \item L'id del revisore
+\end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
 \end{itemize}
 
 \subsubsection{\texttt{database.ReviewDAO.getReviewersByArticles()}}
@@ -250,6 +337,10 @@ Permette di ottenere tutti i revisori assegnati ad un articolo
 \begin{itemize}
 \item La lista dei revisori assegnati
 \end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
+\end{itemize}
 
 \subsubsection{\texttt{database.ReviewDAO.updateArticleStatus()}}
 Permette di aggiornare lo stato di un articolo
@@ -257,6 +348,10 @@ Permette di aggiornare lo stato di un articolo
 \begin{itemize}
 \item L'id dell'articolo da aggiornare
 \item Il nuovo stato
+\end{itemize}
+\paragraph{Eccezzioni}
+\begin{itemize}
+  \item SQLException
 \end{itemize}
 
 %%% Local Variables:

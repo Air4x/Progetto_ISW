@@ -46,7 +46,11 @@ public class Organizer extends User {
     public String getRole() {
         return this.role;
     }
-
+    /**
+     * Override le metodo equals
+     * @param o, l'elemento con cui fare la comparazione
+     * @return se i due oggetti sono uguali o meno
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

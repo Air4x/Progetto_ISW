@@ -98,7 +98,10 @@ public class Article {
     public ID getId(){
 	return id;
     }
-
+    /**
+     * Override le metodo equals
+     * @param o, l'elemento con cui fare la comparazione
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;

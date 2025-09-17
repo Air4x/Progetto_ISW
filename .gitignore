@@ -36,6 +36,7 @@ Documentation/*.toc
 *.toc
 *.out
 # Auctex files
+Documentation/*/auto/*
 Documentation/auto/*
 
 # Immagini

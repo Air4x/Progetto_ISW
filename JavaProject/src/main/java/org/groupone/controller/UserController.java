@@ -1,6 +1,7 @@
 package org.groupone.controller;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.groupone.DTO.RUserDTO;
 import org.groupone.database.UserDAO;
@@ -79,6 +80,16 @@ public class UserController {
             return fake_user;
         }
         return null;
+    }
+
+    public ArrayList<RUserDTO> getCooAuthors(String email) throws SQLException{
+        ArrayList<RUserDTO> list_cooauthors = new ArrayList<>();
+        for(Author a : user_dao.getAllAuthors()){
+            if(!a.getEmail().equals(email)){
+                list_cooauthors.add(new RUserDTO(a));
+            }
+        }
+        return list_cooauthors;
     }
     
 }

@@ -1,12 +1,7 @@
 #!/usr/bin/env perl
 
-# find_todos.pl
-#
-# A simple Perl script to find all "Todo" comments within .tex files
-# in a 'Documentation' subdirectory and its children.
-#
-# It has no external dependencies and is compatible with Linux and Windows.
-#
+# Semplice script per cercare tutti i commenti di TODO nei file .tex
+
 # Usage:
 # 1. Save this code as 'find_todos.pl'.
 # 2. Place it in the directory that contains the 'Documentation' folder.
@@ -24,16 +19,9 @@ my $search_dir = 'Documentation';
 if ( ! -d $search_dir ) {
     die "Error: The directory '$search_dir' was not found in the current location.\n";
 }
-
-print "Searching for 'Todo' comments in '$search_dir'...\n";
-print "--------------------------------------------------\n";
-
 # The 'find' function from File::Find will recursively walk the directory tree.
 # It calls the 'process_file' subroutine for each file and directory it finds.
 find( \&process_file, $search_dir );
-
-print "--------------------------------------------------\n";
-print "Search complete.\n";
 
 # This subroutine is called by File::Find for every item in the search directory.
 sub process_file {

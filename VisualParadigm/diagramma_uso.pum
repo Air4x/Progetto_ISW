@@ -12,6 +12,7 @@ package Sistema {
 	usecase SottomettiArticolo
 	usecase AssegnaRevisori
 	usecase NotificaScadenza
+	usecase InserimentoEsitoRevisione
 	usecase VerificaConflittiInteresse
 	usecase GestionePermessiVisibilità
 }
@@ -29,7 +30,9 @@ Autore -- SottomettiArticolo
 Organizzatore -- CreaConferenza
 Organizzatore -- AssegnaRevisori
 AssegnaRevisori -- Revisore
+Revisore -- InserimentoEsitoRevisione
 AssegnaRevisori ..|> VerificaConflittiInteresse: <<include>>
 SistemaNotifiche -- NotificaScadenza
+NotificaScadenza -- Autore
 
 @enduml

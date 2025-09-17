@@ -1,0 +1,35 @@
+@startuml
+actor Utente
+actor Autore
+actor Organizzatore
+actor Revisore
+
+package Sistema {
+	actor SistemaNotifiche
+	usecase Registrazione
+	usecase Accesso
+	usecase CreaConferenza
+	usecase SottomettiArticolo
+	usecase AssegnaRevisori
+	usecase NotificaScadenza
+	usecase VerificaConflittiInteresse
+	usecase GestionePermessiVisibilità
+}
+
+'Definizione ereditarietà tra ruoli
+Utente <|- Autore
+Utente <|- Organizzatore
+Autore <|- Revisore
+'Definizione interazione Usecase <-> Attori
+Utente -- Registrazione
+Autore -- Accesso
+Organizzatore -- Accesso
+Accesso <|.. GestionePermessiVisibilità: <<estende>>
+Autore -- SottomettiArticolo
+Organizzatore -- CreaConferenza
+Organizzatore -- AssegnaRevisori
+AssegnaRevisori -- Revisore
+AssegnaRevisori ..|> VerificaConflittiInteresse: <<include>>
+SistemaNotifiche -- NotificaScadenza
+
+@enduml

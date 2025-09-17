@@ -16,7 +16,7 @@ test: test_createConference.png test_submitArticle.png test_nearDeadline.png tes
 diagramma_classi.png: diagramma_classi.puml
 	java -jar plantuml.jar $^
 
-diagramma_uso.png: diagramma_uso.puml
+diagramma_uso.png: diagramma_uso.pum
 	java -jar plantuml.jar $^
 
 diagramma_sequenza_accesso.png: diagramma_sequenza_accesso.puml
@@ -51,7 +51,7 @@ er_finale.png: er_finale.pum
 
 diagramma_prg_dto.png: diagramma_prg_dto.puml
 	java -jar plantuml.jar $^
-	
+
 test_submitArticle.png: test_submitArticle.puml
 		java -jar plantuml.jar $^
 

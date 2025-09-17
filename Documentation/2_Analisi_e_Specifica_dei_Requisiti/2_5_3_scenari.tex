@@ -1,6 +1,9 @@
 \subsection{Scenari}
 % TODO: Rifare i scenari
 \label{sec:scenari}
+
+\subsubsection{Scenario Registrazione}
+% DONE: Rifare scenario Registrazione
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
@@ -13,21 +16,46 @@ Attore Secondario & \\
 Descrizione & Permette la registrazione di un utente\\
 \hline
   Sequenza Eventi &
-                    \begin{enumerate}
-                    \item Il caso d'uso inizia quando l'Utente inserisce Nome,Congome, Affiliazione, Email e Password
-                    \item Il sistema verifica che l'email non sia utilizzata anche per altri
-                    \item Se il controllo è positivo e non si è verifcato alcun errrore
-                      \begin{enumerate}
-                      \item il sistema informa all'utente la buona uscita dell'operazione e gli assegnerà un ID univoco
-                      \end{enumerate}
-                    \end{enumerate}\\
+  \begin{enumerate}
+    \item L'utente inserisce Nome, Cognome, Email, Password, affiliazione
+    \item L'utente sceglie il proprio ruolo
+    \item L'utente clicca sul bottone registrarsi
+    \item Il sistema verifica la validità dell'indirizzo email
+    \item IF l'indirizzo email è valido
+   \begin{enumerate}
+    \item il sistema controlla che l'indirizzo non sia già presente
+     \item IF indirizzo email non è presente
+       \begin{enumerate}
+         \item il sistema controlla la validità della password
+           \begin{enumerate}
+            \item IF la password è valida
+               \begin{enumerate}
+               \item Il sistema salva i dati dell'Utente
+               \item punto di estensione: GestionePermessiVisibilià
+               \end{enumerate}
+            \item ALTRIMENTI il Sistema mostra un messaggio di errore
+          \end{enumerate}
+        \item ALTRIMENTI il Sistema mostra un messaggio di errore spiegando che non è possibile usare l'email
+       \end{enumerate}         
+      \end{enumerate}
+ \item ALTRIMENTI il Sistema mostra un messaggio di errore spiegando che l'email non è valida
+  \end{enumerate}\\
 \hline
 Post-Condizioni: & Il cliente è registrato nel sistema \\
+  \hline
+\end{tabular}\\ 
+\begin{tabular}{|p{3cm}|p{7cm}|}
+  \hline
+  Sequenza degli eventi alternativa & \begin{itemize}
+  \item Se nel punto 5 l'indirizzo email non è valido viene mostrato un messaggio di errore all'utente e gli si chiede di inserire un nuovo indirizzo email
+\item Se nel punto 5.2 l'indirizzo email è già presente nel sistema si mostra un messaggio di errore e si chiede all'utente di usare credenziali diverse
+\item Se nel punto 5.2.1.1 la password risulta non valida viene mostrato un messaggio di errore all'utente e gli viene chiesto di inserire una nuova password
+  \end{itemize}\\
 \hline
-Sequenza degli eventi alternativa & Al punto 3 il cliente immette una Email non compatibile o che sia già utilizzata restituendo un messaggio di errore\\
-\hline
-\end{tabular}
+\end{tabular} \\
 
+\subsubsection{Scenario Accesso}
+% TODO: Rifare scenario Accesso
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}

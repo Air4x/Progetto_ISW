@@ -86,6 +86,6 @@ public class ShowActiveConferenceDTO {
     
     @Override
     public String toString() {
-        return  this.titolo + " \n" + this.decrizione + " \n" + this.scadenza +"\n\n";
+        return  "\n"+this.titolo + " \n" + this.decrizione + " \n" + this.scadenza +"\n\n";
     }
 }

@@ -65,26 +65,46 @@ Attore Primario & Utente\\
 \hline
 Attore Secondario & \\
 \hline
-Descrizione & Permette l'accesso ad un utente al suo account\\
+Descrizione & Permette l'accesso di un utente al suo account\\
 \hline
 Pre-Condizioni& L'utente sia già registrato\\
 \hline
   Sequenza Eventi&
-                   \begin{enumerate}
-                   \item Il caso d'uso inizia quando l'Utente inserisce Email E Password
-                   \item Il sistema verifica che l'email e  passoword coincidono con l'utente già registrato
-                   \item Se il controllo è positivo e non si è verifcato alcun errrore
-                     \begin{enumerate}
-                     \item il sistema informa all'utente la buona uscita dell'operazione
-                     \end{enumerate}
-                   \end{enumerate}\\
+\begin{enumerate}
+  \item L'utente inserisce email e password
+\item Il sistema controlla la validità dell'email
+\item IF l'email inserita è valida
+\begin{enumerate}
+  \item Il sistema controlla se l'email è presente nel sistema
+  \item IF l'email è presente nel sistema
+\begin{enumerate}
+  \item il sistema controlla se le credenziali sono corrette
+\item IF le credenziali sono corrette
+\begin{enumerate}
+  \item punto di estensione: GestionePermessiVisibilità
+\item IF la GestionePermessiVisibilità va a buon fine
+\begin{enumerate}
+  \item mostra all'utente la giusta schermata per il suo ruolo
+\end{enumerate}
+\item ALTRIMENTI mostra un messaggio di errore
+\end{enumerate}
+\item ALTRIMENTI mostra un messaggio di errore e chiede
+all'utente nuove credenziali
+\end{enumerate}
+\item ALTRIMENTI mostra un messaggio di errore e
+chiede all'utente di inserire nuove credenziali
+\end{enumerate}
+\item ALTRIMENTI mostra un messaggio di errore e
+chiede all'utente di inserire nuove credenziali
+\end{enumerate}\\
 \hline
 Post-Condizioni: &il cliente ha l'accesso al suo account \\
 \hline
-Sequenza degli eventi alternativa & Al punto 3 il cliente immette una Email collegato ad alcun account  oppure che l'email e passoword non coincidono restituendo un messaggio di errore\\
+Sequenza degli eventi alternativa & \\
 \hline
-\end{tabular}
+\end{tabular}\\
 
+% TODO: Rifare scenario Crea Conferenza
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
@@ -113,6 +133,7 @@ Sequenza degli eventi alternativa & Nel caso in cui la data di scadenza inserita
 \hline
 \end{tabular}
 
+% TODO: Rifare scenario SottomettiArticolo
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
@@ -141,6 +162,7 @@ Sequenza degli eventi alternativa & Il sistema nel caso in cui i co-autori non s
 \hline
 \end{tabular}
 
+% TODO: Rifare scenario AssegnaRevisori
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
@@ -167,7 +189,7 @@ Sequenza degli eventi alternativa & \\
 \hline
 \end{tabular}
   
-
+% TODO: Rifare scenario NotificaScadenza
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
@@ -193,6 +215,8 @@ Post-Condizioni: & \\
 Sequenza degli eventi alternativa & \\
 \hline
 \end{tabular}
+
+% TODO: Scrivere scenario InserimentoEsitoRevisione
 
 %%% Local Variables:
 %%% mode: LaTeX

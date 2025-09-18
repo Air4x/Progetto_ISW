@@ -5,13 +5,20 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.TimerTask;
 
-import jakarta.mail.*;
 import org.groupone.database.ConferenceDAO;
 import org.groupone.database.UserDAO;
 import org.groupone.entity.Author;
 import org.groupone.entity.Conference;
 import org.groupone.utility.PasswordManager;
 
+import jakarta.mail.Authenticator;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Multipart;
+import jakarta.mail.PasswordAuthentication;
+import jakarta.mail.SendFailedException;
+import jakarta.mail.Session;
+import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeBodyPart;
 import jakarta.mail.internet.MimeMessage;
@@ -27,8 +34,7 @@ public class NotificationController extends TimerTask {
     private UserDAO user_dao;
 
     /**
-     * Costruttore
-     * @throws SQLException
+     * Costruttore della classe
      */
     public NotificationController(){
         try {
@@ -54,22 +60,20 @@ public class NotificationController extends TimerTask {
      * @throws MessagingException
      */
     public void invioNotifiche(){
-        String msg,name_a,lastname_a,email_a,title_c;
         try {  
             ArrayList<Conference> conf = conf_dao.getActiveConference();
             ArrayList<Author> auth = user_dao.getAllAuthors();
+            ArrayList<String> emails = new ArrayList<String>();
             for (Conference c : conf) {
             if (c.nearDeadline()) {
-                title_c = c.getTitle();
-                for(Author a : auth){
-                    name_a =  a.getName();
-                    lastname_a =  a.getLastName();
-                    email_a =  a.getEmail();
-                    msg = createMessage(name_a,lastname_a,title_c);
-                    sendEmail(email_a,title_c,msg);
-                }
-            }
-        }
+                System.out.println("Conferenza in scadenza: " + c.getTitle());
+                emails.add(c.getTitle());
+            }}
+            if(!emails.isEmpty()){
+            for(Author a : auth){
+                sendEmail(a.getEmail(), createMessage(a.getName(), a.getLastName(), emails));
+            }}
+
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Errore nell'invio delle email");
@@ -85,22 +89,37 @@ public class NotificationController extends TimerTask {
     * Metodo per la creazione del messaggio da inviare
      * @param aut_name: Nome del destinatario
      * @param aut_lastname: Cognome del destinatario
-     * @param conf_title: Nome della conferenza in scadenza
+     * @param conf_title: Lista dei nome della conferenza in scadenza
      * @return Stringa che rapresenta il messagio da inviare
      */
-    private String createMessage(String aut_name, String aut_lastname, String conf_title){
-        return "Saluti "+aut_name+" "+aut_lastname+".\n\nLe Recordiamo che la consegna degli articoli per la conferenza:"+conf_title+" sta per scadere.\nLa preghiamo di effetuare la consegna degli articoli al più presto. Saluti e Buona giornata";
+    private String createMessage(String aut_name, String aut_lastname, ArrayList<String> conf_title){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Saluti ").append(aut_name).append(" ").append(aut_lastname).append(".<br><br>");
+        sb.append("Le ricordiamo che le seguenti conferenze risultano in scadenza:<br>");
+
+        if (!conf_title.isEmpty()) {
+            sb.append("<ul>");
+            for (String title : conf_title) {
+                sb.append("<li>").append(title).append("</li>");
+            }
+            sb.append("</ul>");
+        } else {
+            sb.append("<br>Nessuna conferenza in scadenza nei prossimi giorni.<br>");
+        }
+
+        sb.append("La preghiamo di effettuare la consegna degli articoli al più presto.<br>");
+        sb.append("Saluti e Buona giornata");
+        return sb.toString();
     }
 
     /**
      * Metodo utilizzo per la configurazione di un host per l'invio delle email
-     * @param email_d
-     * @param conf_title
-     * @param msg
+     * @param email_d: Email del destinatario
+     * @param msg: Messaggio da inviare
      * @throws SQLException
      * @throws MessagingException
      */
-    private void sendEmail (String email_d, String conf_title, String msg) throws SQLException, MessagingException, SendFailedException {
+    private void sendEmail (String email_d, String msg) throws SQLException, MessagingException, SendFailedException {
         // Fare email da cui mandare messaggi
         final String m_email = PasswordManager.getInstance().get("email_username"); //mittente
         final String m_password = PasswordManager.getInstance().get("email_password");; //app_password
@@ -125,7 +144,7 @@ public class NotificationController extends TimerTask {
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(m_email));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email_d));
-        message.setSubject("Scadenza Consegne Articoli per "+conf_title);
+        message.setSubject("Scadenza Consegne Articoli ");
 
         //Codifica testo html
         MimeBodyPart mbp =  new MimeBodyPart();

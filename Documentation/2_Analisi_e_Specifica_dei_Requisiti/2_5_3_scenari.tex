@@ -247,8 +247,7 @@ Post-Condizioni: &L'articolo passa da uno stato di "sottomesso" a quello di "rev
 Sequenza degli eventi alternativa & \\
 \hline
 \end{tabular}
-  
-% TODO: Rifare scenario NotificaScadenza
+
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
@@ -256,26 +255,89 @@ Caso d'uso & NotificaScadenza \\
 \hline
 Attore Primario & Sistema di Notifica\\
 \hline
-Attore Secondario & Autore\\
+Attore Secondario & \\
 \hline
-Descrizione & Permette la notifica automatica via email per le principali scadenze\\
+Descrizione & Permette l'invio automatico di email a tutti gli autori per conferenze la scadenza è imminente\\
 \hline
-Pre-Condizioni& L'utente sia già registrato\\
+Pre-Condizioni& Che una conferenza risulta in scadenza\\
 \hline
   Sequenza Eventi&
                    \begin{enumerate}
-                   \item Il caso d'uso inizia quando la scadenza è imminente
-                   \item Il sistema invia delle notifiche agli autori per le scadenze delle varie conferenze
-                   \item Tramite Email vengono notificati gli autori
+                   \item Il sistema verifica l'imminenzza della scadenza di una conferenzza
+                   \item IF la conferenza è in scadenza
+                   \item Il sistema invia delle notifiche agli autori per notificare che la conferenza è in scadenza
+                   \item Altrimenti non viene inviata nessuana email
+                   \end{enumerate}\\
+\hline
+Post-Condizioni: & Il sistema invia automaticamente l'email per la notifica della scadenzza di una conferenzza\\
+\hline
+Sequenza degli eventi alternativa & \begin{itemize}
+  \item Nel punto 2 se non c'è nessuna conferenza in scadenza non viene inviata nessuan email
+\end{itemize} \\
+\hline
+\end{tabular}
+
+% TODO: \begin{tabular}{|p{3cm}|p{7cm}|}
+\hline 
+\rowcolor{Orchid}
+Caso d'uso & Inserimento Esito Revisione\\
+\hline
+Attore Primario & Autore \\
+\hline
+Attore Secondario & \\
+\hline
+Descrizione & L'autore selezionato come revisore inserisce esito della revisione\\
+\hline
+Pre-Condizioni& \\
+\hline
+  Sequenza Eventi&
+                   \begin{enumerate}
+                   \item Il revisore inserisce esito della revisore e descrizione
+                   \item IF l'esito di tutti i revisori dell'articolo è positivo
+                   \item Il sistema aggiorna lo stato dell'articolo
+                   \item L'articolo viene accettato
+                   \item ALTRIMENTI l'articolo viene rifiutato
+                   \item Il sistema notifica l'autore dell'esito della revisione
                    \end{enumerate}\\
 \hline
 Post-Condizioni: & \\
 \hline
-Sequenza degli eventi alternativa & \\
+Sequenza degli eventi alternativa & \begin{itemize}
+  \item Nel punto 2 se uno devi revisore da come esito della revisione negativo l'articolo viene rifiutato
+\end{itemize} \\
 \hline
 \end{tabular}
-
-% TODO: Scrivere scenario InserimentoEsitoRevisione
+% TODO: Visionare scenario InserimentoEsitoRevisione
+\begin{tabular}{|p{3cm}|p{7cm}|}
+\hline 
+\rowcolor{Orchid}
+Caso d'uso & Inserimento Esito Revisione\\
+\hline
+Attore Primario & Autore \\
+\hline
+Attore Secondario & \\
+\hline
+Descrizione & L'autore selezionato come revisore inserisce esito della revisione\\
+\hline
+Pre-Condizioni& L'articolo è in fase di revisione\\
+\hline
+  Sequenza Eventi&
+                   \begin{enumerate}
+                   \item Il revisore inserisce esito della revisore e descrizione
+                   \item IF l'esito di tutti i revisori dell'articolo è positivo
+                   \item Il sistema aggiorna lo stato dell'articolo
+                   \item L'articolo viene accettato
+                   \item ALTRIMENTI l'articolo viene rifiutato
+                   \item Il sistema notifica l'autore dell'esito della revisione
+                   \end{enumerate}\\
+\hline
+Post-Condizioni: & L'articolo viene aggiornato con l'esito della revisione\\
+\hline
+Sequenza degli eventi alternativa & \begin{itemize}
+  \item Nel punto 2 se uno dei revisori da come esito della revisione negativo l'articolo viene rifiutato
+\end{itemize} \\
+\hline
+\end{tabular}
 
 %%% Local Variables:
 %%% mode: LaTeX

@@ -69,10 +69,10 @@ public class NotificationController extends TimerTask {
                 System.out.println("Conferenza in scadenza: " + c.getTitle());
                 emails.add(c.getTitle());
             }}
+            if(!emails.isEmpty()){
             for(Author a : auth){
-                String msg = createMessage(a.getName(), a.getLastName(), emails);
-                sendEmail(a.getEmail(), msg);
-            }
+                sendEmail(a.getEmail(), createMessage(a.getName(), a.getLastName(), emails));
+            }}
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -89,7 +89,7 @@ public class NotificationController extends TimerTask {
     * Metodo per la creazione del messaggio da inviare
      * @param aut_name: Nome del destinatario
      * @param aut_lastname: Cognome del destinatario
-     * @param conf_title: Nome della conferenza in scadenza
+     * @param conf_title: Lista dei nome della conferenza in scadenza
      * @return Stringa che rapresenta il messagio da inviare
      */
     private String createMessage(String aut_name, String aut_lastname, ArrayList<String> conf_title){
@@ -114,9 +114,8 @@ public class NotificationController extends TimerTask {
 
     /**
      * Metodo utilizzo per la configurazione di un host per l'invio delle email
-     * @param email_d
-     * @param conf_title
-     * @param msg
+     * @param email_d: Email del destinatario
+     * @param msg: Messaggio da inviare
      * @throws SQLException
      * @throws MessagingException
      */

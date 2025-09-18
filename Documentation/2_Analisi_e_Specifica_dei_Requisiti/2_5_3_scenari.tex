@@ -3,6 +3,7 @@
 \label{sec:scenari}
 
 \subsubsection{Scenario Registrazione}
+\label{sec:scenari:registrazione}
 % DONE: Rifare scenario Registrazione
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
@@ -99,11 +100,26 @@ chiede all'utente di inserire nuove credenziali
 \end{enumerate}\\
 \hline
 Post-Condizioni: &il cliente ha l'accesso al suo account \\
+  \hline
+\end{tabular}\\
+\begin{tabular}{|p{3cm}|p{7cm}|}
 \hline
-Sequenza degli eventi alternativa & \\
+  Sequenza degli eventi alternativa & \begin{itemize}
+  \item Nel punto 3 se l'email inserita non è valida viene mostrato un messaggio di
+errore e viene chiesto all'utente di inserire un nuovo indirizzo email
+\item Nel punto 3.2 se l'indirizzo email non è presente nel sistema viene mostrato un
+messaggio di errore e viene chiesto all'utente di inserire delle credenziali corrette
+\item Nel punto 3.2.2 se le credenziali non sono corrette viene mostrato un messaggio
+di errore e viene chiesto all'utente di inserire delle credenziali corrette
+\item Nel punto 3.2.2.2 se la GestioneVisibilitàPermessi non va a buon fine
+viene mostrato un messaggio di errore
+\end{itemize}\\
 \hline
 \end{tabular}\\
 
+\subsubsection{Scenario GestionePermessiVisibilità}
+
+\subsubsection{Scenario CreaConferenza}
 % TODO: Rifare scenario Crea Conferenza
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 

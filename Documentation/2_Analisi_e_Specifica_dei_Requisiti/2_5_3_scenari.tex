@@ -128,26 +128,37 @@ Caso d'uso & Crea Conferenza \\
 \hline
 Attore Primario & Organizzatore\\
 \hline
-Attore Secondario & Sistema Di notifica\\
+Attore Secondario & \\
 \hline
 Descrizione & L'organizzatore crea una conferenza \\
 \hline
   Sequenza Eventi &
                     \begin{enumerate}
-                    \item L'organizzatore crea una Conferenza inserendo il Titolo, una Descrizione dell'evento e una singola data di scadenza per le sottomissioni
-                    \item Il sistema verifica che la data non sia passata o non sia valida
-                    \item Se il controllo è positivo e non si è verifcato alcun errrore
+                      \item L'organizzatore inserisce Titolo, Descrizione e la data di scadenza per la sottomissione degli articoli
+                      \item Il sistema verifica che la data inserita sia valida
+                      \item IF la data inserita è valida
                       \begin{enumerate}
-                      \item il sistema informa all'utente la buona uscita dell'operazione
-                      \item Il sistema permette il monitoraggio dei vari articoli sottomessi per la conferenza
+                        \item Il sistema controlla che la data inserita non sia nel passato
+                        \item IF la data inserita non è nel passato
+                        \begin{enumerate}
+                          \item Il sistema salva la conferenza
+                          \item Il sistema rende la conferenza disponibile per la sottomissione di articoli
+                        \end{enumerate}
+                        \item ALTRIMENTI Il sistema mostra un messaggio di errore
                       \end{enumerate}
+                    \item ALTRMIENTI Il sistema mostra un messaggio di errore
                     \end{enumerate}\\
 \hline
 Post Condizioni: & L'organizzatore crea una conferenza a cui i vari autori possono sottomettere degli articoli \\
 \hline
-Sequenza degli eventi alternativa & Nel caso in cui la data di scadenza inserita non sia valida o che sia già passata invia un messaggio di errore \\
+Sequenza degli eventi alternativa &
+                                    \begin{itemize}
+                                      \item Nel punto 3 se la data inserita è in un formato non valido viene mostrato un messaggio di errore con il formato da utilizzare e viene chiesta una nuova scadenza
+                                      \item Nel punto 3.2 se la data inserita è nel passato viene mostrato un messaggio di errore e viene chiesta una nuova scadenza
+                                      \end{itemize}\\
 \hline
 \end{tabular}
+
 
 % TODO: Rifare scenario SottomettiArticolo
 \begin{tabular}{|p{3cm}|p{7cm}|}
@@ -155,7 +166,9 @@ Sequenza degli eventi alternativa & Nel caso in cui la data di scadenza inserita
 \rowcolor{Orchid}
 Caso d'uso & SottomettiArticolo \\
 \hline
-Attore Primario & Autore\\
+  Attore Primario & Autore\\
+  \hline
+  Attore Secondario & \\
 \hline
 Descrizione & L'autore sottomette un articolo per una determinata conferenza\\
 \hline

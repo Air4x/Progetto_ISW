@@ -155,6 +155,7 @@ Sequenza degli eventi alternativa & \begin{itemize}
 \end{tabular}\\
 
 \subsubsection{Scenario CreaConferenza}
+
 % DONE: Rifare scenario Crea Conferenza
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
@@ -193,10 +194,8 @@ Sequenza degli eventi alternativa &
                                       \end{itemize}\\
 \hline
 \end{tabular}\\
-
-
+% DONE: Rifare scenario SottomettiArticolo
 \subsubsection{Scenario SottomettiArticolo}
-% TODO: Rifare scenario SottomettiArticolo
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
@@ -212,26 +211,38 @@ Pre-Condizioni& Esiste la conferenza\\
 \hline
   Sequenza Eventi &
                     \begin{enumerate}
-                    \item L'autore inserisce un articolo composto da un Titolo,Abstract e dai Co-Autori
-                    \item Il sistema inserisce l'articolo e verifica che l'autore e i co-autori siano registrati al sistema
-                    \item Se il controllo è positivo e non si è verifcato alcun errrore
+                      \item L'autore inserisce un articolo composto da un Titolo,Abstract e dai Co-Autori per una conferenza
+                      \item IF la conferenza esiste
                       \begin{enumerate}
-                      \item Il sistema informa all'utente la buona uscita dell'operazione
-                      \item Il sistema inserisce l'articolo e permette agli autori di poter visualizzare lo stato dell'articolo
+                          \item IF la conferenza non risulta scaduta
+                          \begin{enumerate}
+                            \item IF autori sono registrati nel sistema 
+                            \begin{enumerate}
+                              \item L'articolo viene recipito e gli viene messo lo stato di "sottomesso"
+                            \end{enumerate}
+                            \item ALTRIMENTI il sitema mostra un messaggio di errore
+                          \end{enumerate}
+                        \item ALTRIMENTI il sitema mostra un messaggio di errore
                       \end{enumerate}
+                      \item ALTRIMENTI il sitema mostra un messaggio di errore
                     \end{enumerate} \\
 \hline
 Post-Condizioni: &L'articolo è inserito e possibile per la verica degli articoli da parte dei Revisori\\
 \hline
-Sequenza degli eventi alternativa & Il sistema nel caso in cui i co-autori non sono stati registrati non procede con l'inserimento dell'articolo e restituisce un messaggio di errore\\
+Sequenza degli eventi alternativa & \begin{enumerate}
+  \item nel punto 2 se la conferenza non esiste viene mostrato a schermo un messaggio di errore
+  \item nel punto 2.1 se la conferenza selezionata risulta scadute viene mostrato a schermo un messaggio di errore
+  \item nel punto 2.1.1 se gli autoriu dell'articolo non risultano registrati nel sistema viene mostrato a schermo un messaggio di errore
+\end{enumerate}\\
 \hline
 \end{tabular}
 
-
+% DONE: Rifare scenario AssegnaRevisori
+\subsubsection{Scenario AssegnaRevisori}
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
-Caso d'uso & AssegnaRevisori \\
+Caso d'uso & AssegnaRevisori\\
 \hline
 Attore Primario & Organizzatore\\
 \hline
@@ -251,7 +262,6 @@ Pre-Condizioni& L'Autore ha sottomesso l'articolo\\
                     \item IF VerificaConflittiInterrese va buon fine
                     \begin{enumerate}
                       \item Il sitema aggiorna lo stato dell'articolo passa da "sottomesso" a "in revisione"
-                      \item I revisori selezionati vengono assegnati all'articolo
                       \item IF InserimentoEsitoRevisione va buon fine
                       \begin{enumerate}
                         \item Il sitema aggiorna lo stato dell'articolo da "in revisione" ad "approvato"
@@ -268,12 +278,13 @@ Post-Condizioni: &L'articolo passa da uno stato di "sottomesso" a quello di "rev
 Sequenza degli eventi alternativa & \begin{itemize}
 \item Nel punto 4 se la data di scadenza della revisione non viene rispetata, l'articolo viene automaticamente rifiutato
 \item Nel punto 4.1 se la VerificaConflittiInterrese risulta negativo, l'organizzatore deve selezionare altri revisori
-\item Nel punto 4.1.3 se InserimentoEsitoRevisione ha esito negativo, l'articolo automaticamente rifiutato
+\item Nel punto 4.1.2 se InserimentoEsitoRevisione ha esito negativo, l'articolo automaticamente rifiutato
 \end{itemize}\\
 \hline
-\end{tabular}\\
+\end{tabular}
 
-% TODO: Visionare scenario InserimentoEsitoRevisione
+% DONE: Rifare scenario InserimentoEsitoRevisione
+\subsubsection{Scenario InserimentoEsitoRevisione}
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
@@ -307,37 +318,41 @@ Sequenza degli eventi alternativa & \begin{itemize}
 \hline
 \end{tabular}
 
-<<<<<<< Updated upstream
-% TODO: Scrivere scenario VerificaConflittiInterrese
 
+% DONE: Scrivere scenario VerificaConflittiInterrese
+\subsubsection{Scenario VerificaConflittiInterrese}
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
-Caso d'uso & NotificaScadenza \\
+Caso d'uso & VerificaConflittiInterrese \\
 \hline
-Attore Primario & VerificaConflittiInterrese\\
+Attore Primario & Sistema\\
 \hline
 Attore Secondario & \\
 \hline
-Descrizione & \\
+Descrizione & Il sistema va a verificare che non ci siano conflitti tra autori che scrivono l'articolo e autori che vanno a revisionare l'articolo\\
 \hline
-Pre-Condizioni& \\
+Pre-Condizioni& L'articolo risulti sottomesso a una conferenza\\
 \hline
   Sequenza Eventi&
                   \begin{enumerate}
-                   \item
+                   \item Il sistema va verificare che autori dell'articolo non coicidono con gli revisore
+                   \item IF verifica va buon fine
+                    \begin{enumerate}
+                      \item Il sitema va ad assegnare l'articolo agli revisori
+                    \end{enumerate}
+                    \item ALTRIMENTI il sistema va a mostrare un messaggio di errore
                   \end{enumerate}\\
 \hline
-Post-Condizioni: & 
+Post-Condizioni: & L'articolo è stato assegnato ai revisori\\
 \hline
 Sequenza degli eventi alternativa & \begin{itemize}
-  \item 
+  \item Nel punto 2 se la verifica non va buon fine l'articolo non viene assegnato ai revisori
 \end{itemize} \\
 \hline
 \end{tabular}
 
-=======
->>>>>>> Stashed changes
+% DONE: Rifare scenario NotificaScadenza
 \subsubsection{Scenario NotificaScadenza}
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
@@ -356,8 +371,10 @@ Pre-Condizioni& Che una conferenza risulta in scadenza\\
                    \begin{enumerate}
                    \item Il sistema verifica l'imminenzza della scadenza di una conferenzza
                    \item IF la conferenza è in scadenza
-                   \item Il sistema invia delle notifiche che la conferenza è in scadenza
-                   \item Ogni autore riceve una notifica che l'informa che la conferenza è in scadenza
+                    \begin{enumerate}
+                    \item Il sistema invia delle notifiche che la conferenza è in scadenza
+                    \item Ogni autore riceve una notifica che l'informa che la conferenza è in scadenza
+                    \end{enumerate}
                    \item Altrimenti non viene inviata nessuana notifica
                    \end{enumerate}\\
 \hline

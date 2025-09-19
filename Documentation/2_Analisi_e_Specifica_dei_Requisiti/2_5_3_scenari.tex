@@ -152,7 +152,7 @@ Sequenza degli eventi alternativa & \begin{itemize}
   \item Nel punto 3.2 il ruolo dell'utente non risulta organizzatore il sistema va a visualizare la sezione dedicata agli autori
 \end{itemize} \\
   \hline
-\end{tabular}
+\end{tabular}\\
 
 \subsubsection{Scenario CreaConferenza}
 % DONE: Rifare scenario Crea Conferenza
@@ -192,9 +192,10 @@ Sequenza degli eventi alternativa &
                                       \item Nel punto 3.2 se la data inserita è nel passato viene mostrato un messaggio di errore e viene chiesta una nuova scadenza
                                       \end{itemize}\\
 \hline
-\end{tabular}
+\end{tabular}\\
 
 
+\subsubsection{Scenario SottomettiArticolo}
 % TODO: Rifare scenario SottomettiArticolo
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
@@ -270,9 +271,7 @@ Sequenza degli eventi alternativa & \begin{itemize}
 \item Nel punto 4.1.3 se InserimentoEsitoRevisione ha esito negativo, l'articolo automaticamente rifiutato
 \end{itemize}\\
 \hline
-\end{tabular}
-
-
+\end{tabular}\\
 
 % TODO: Visionare scenario InserimentoEsitoRevisione
 \begin{tabular}{|p{3cm}|p{7cm}|}
@@ -336,6 +335,7 @@ Sequenza degli eventi alternativa & \begin{itemize}
 \hline
 \end{tabular}
 
+\subsubsection{Scenario NotificaScadenza}
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
@@ -362,6 +362,69 @@ Post-Condizioni: & Il sistema invia automaticamente l'email per la notifica dell
 \hline
 Sequenza degli eventi alternativa & \begin{itemize}
   \item Nel punto 2 se non c'è nessuna conferenza in scadenza non viene inviata nessuan email
+\end{itemize} \\
+\hline
+\end{tabular}
+
+% TODO: Scrivere Scenario InserimentoEsitoRevisione
+\begin{tabular}{|p{3cm}|p{7cm}|}
+\hline 
+\rowcolor{Orchid}
+Caso d'uso & Inserimento Esito Revisione\\
+\hline
+Attore Primario & Autore \\
+\hline
+Attore Secondario & \\
+\hline
+Descrizione & L'autore selezionato come revisore inserisce esito della revisione\\
+\hline
+Pre-Condizioni& \\
+\hline
+  Sequenza Eventi&
+                   \begin{enumerate}
+                   \item Il revisore inserisce esito della revisore e descrizione
+                   \item IF l'esito di tutti i revisori dell'articolo è positivo
+                   \item Il sistema aggiorna lo stato dell'articolo
+                   \item L'articolo viene accettato
+                   \item ALTRIMENTI l'articolo viene rifiutato
+                   \item Il sistema notifica l'autore dell'esito della revisione
+                   \end{enumerate}\\
+\hline
+Post-Condizioni: & \\
+\hline
+Sequenza degli eventi alternativa & \begin{itemize}
+  \item Nel punto 2 se uno devi revisore da come esito della revisione negativo l'articolo viene rifiutato
+\end{itemize} \\
+\hline
+\end{tabular}
+% TODO: Visionare scenario InserimentoEsitoRevisione
+\begin{tabular}{|p{3cm}|p{7cm}|}
+\hline 
+\rowcolor{Orchid}
+Caso d'uso & Inserimento Esito Revisione\\
+\hline
+Attore Primario & Autore \\
+\hline
+Attore Secondario & \\
+\hline
+Descrizione & L'autore selezionato come revisore inserisce esito della revisione\\
+\hline
+Pre-Condizioni& L'articolo è in fase di revisione\\
+\hline
+  Sequenza Eventi&
+                   \begin{enumerate}
+                   \item Il revisore inserisce esito della revisore e descrizione
+                   \item IF l'esito di tutti i revisori dell'articolo è positivo
+                   \item Il sistema aggiorna lo stato dell'articolo
+                   \item L'articolo viene accettato
+                   \item ALTRIMENTI l'articolo viene rifiutato
+                   \item Il sistema notifica l'autore dell'esito della revisione
+                   \end{enumerate}\\
+\hline
+Post-Condizioni: & L'articolo viene aggiornato con l'esito della revisione\\
+\hline
+Sequenza degli eventi alternativa & \begin{itemize}
+  \item Nel punto 2 se uno dei revisori da come esito della revisione negativo l'articolo viene rifiutato
 \end{itemize} \\
 \hline
 \end{tabular}

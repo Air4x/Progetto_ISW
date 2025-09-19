@@ -134,17 +134,22 @@ Descrizione & Il sistama va a far visualizzare la sezione dedicata all'utente in
   \item L'untente va ad inserire le credenziali di accesso
   \item Il sitema va a verificare la validità delle credenziali inserite 
   \item IF le credenziali inserite risultino valide
-  \item IF il ruolo occupato dall'utente è organizzatore
-  \item Il sitema va a far visualizzare la sezione dedicata agli organizzatori
+  \begin{enumerate}
+    \item L'utente accede al sistema
+    \item IF il ruolo occupato dall'utente è organizzatore
+    \begin{enumerate}
+      \item Il sitema va a far visualizzare la sezione dedicata agli organizzatori
+    \end{enumerate}
   \item ALTRIMENTI il sistema va a visualizzare la sezione dedicata agli autori
-  \item ALTRIMENTI il sistema mopstra a schermo un messaggio di errore e chiede il rinserimento delle crdenziali di accesso
+  \end{enumerate}
+\item ALTRIMENTI il sistema mopstra a schermo un messaggio di errore e chiede il rinserimento delle crdenziali di accesso
 \end{enumerate}\\
 \hline
 Post Condizioni: & L'utente va la a visualizare la sezzione dedicata in base al ruolo occupato\\
 \hline
 Sequenza degli eventi alternativa & \begin{itemize}
   \item Nel punto 3 se le credenziali non risultinano valide il sistema va a mostrare a schermo un messaggio di errore e chiede il rinserimento delle credenziali
-  \item Nel punto 4 il ruolo dell'utente non risulta organizzatore il sistema va a visualizare la sezione dedicata agli autori
+  \item Nel punto 3.2 il ruolo dell'utente non risulta organizzatore il sistema va a visualizare la sezione dedicata agli autori
 \end{itemize} \\
   \hline
 \end{tabular}
@@ -221,7 +226,7 @@ Sequenza degli eventi alternativa & Il sistema nel caso in cui i co-autori non s
 \hline
 \end{tabular}
 
-% TODO: Rifare scenario AssegnaRevisori
+
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
@@ -237,14 +242,97 @@ Pre-Condizioni& L'Autore ha sottomesso l'articolo\\
 \hline
   Sequenza Eventi&
                    \begin{enumerate}
-                   \item Il caso d'uso inizia allo scadere della data di revisione
-                   \item L'organizzatore assegna ad ogni articolo sottomesso tre revisori
-                   \item L'assegnazione può essere tramite ID oppure scegliendoli dalla lista di quelli registrati
+                   \item L'organizzatore seleziona l'articolo da revisionare
+                   \item L'organizzatore seleziona la data di scadanza della revisione
+                   \item L'organizzatore va selezionare i revisore
+                   \item IF vine rispetata la data di scadenza
+                   \begin{enumerate}
+                    \item IF VerificaConflittiInterrese va buon fine
+                    \begin{enumerate}
+                      \item Il sitema aggiorna lo stato dell'articolo passa da "sottomesso" a "in revisione"
+                      \item I revisori selezionati vengono assegnati all'articolo
+                      \item IF InserimentoEsitoRevisione va buon fine
+                      \begin{enumerate}
+                        \item Il sitema aggiorna lo stato dell'articolo da "in revisione" ad "approvato"
+                      \end{enumerate}
+                      \item ALTRIMENTI lo stato dell'articolo passa da "in revisione" ad "rifiutato"
+                    \end{enumerate}
+                    \item ALTRIMENTI l'organizzatore deve selezionare altri revisori
+                   \end{enumerate}
+                   \item ALTRIMENTI lo stato dell'articolo passa da "in revisione" ad "rifiutato"
                    \end{enumerate}\\
 \hline
 Post-Condizioni: &L'articolo passa da uno stato di "sottomesso" a quello di "revisione" \\
 \hline
-Sequenza degli eventi alternativa & \\
+Sequenza degli eventi alternativa & \begin{itemize}
+\item Nel punto 4 se la data di scadenza della revisione non viene rispetata, l'articolo viene automaticamente rifiutato
+\item Nel punto 4.1 se la VerificaConflittiInterrese risulta negativo, l'organizzatore deve selezionare altri revisori
+\item Nel punto 4.1.3 se InserimentoEsitoRevisione ha esito negativo, l'articolo automaticamente rifiutato
+\end{itemize}\\
+\hline
+\end{tabular}
+
+
+
+% TODO: Visionare scenario InserimentoEsitoRevisione
+\begin{tabular}{|p{3cm}|p{7cm}|}
+\hline 
+\rowcolor{Orchid}
+Caso d'uso & Inserimento Esito Revisione\\
+\hline
+Attore Primario & Autore \\
+\hline
+Attore Secondario & \\
+\hline
+Descrizione & L'autore selezionato come revisore inserisce esito della revisione\\
+\hline
+Pre-Condizioni& L'articolo è in fase di revisione\\
+\hline
+  Sequenza Eventi&
+                   \begin{enumerate}
+                   \item Il revisore inserisce esito della revisore e descrizione
+                   \item IF l'esito di tutti i revisori dell'articolo è positivo
+                   \begin{enumerate}
+                    \item Il sistema aggiorna lo stato dell'articolo da "in revisione" ad "approvato" 
+                    \item L'articolo viene viene inserito alla conferenza
+                   \end{enumerate}
+                   \item ALTRIMENTI Il sistema aggiorna lo stato dell'articolo da "in revisione" ad "rifiutato"
+                   \item Il sistema notifica l'autore dell'esito della revisione
+                   \end{enumerate}\\
+\hline
+Post-Condizioni: & L'articolo viene aggiornato con l'esito della revisione\\
+\hline
+Sequenza degli eventi alternativa & \begin{itemize}
+  \item Nel punto 2 se uno dei revisori da come esito della revisione negativo l'articolo viene rifiutato
+\end{itemize} \\
+\hline
+\end{tabular}
+
+% TODO: Scrivere scenario VerificaConflittiInterrese
+
+\begin{tabular}{|p{3cm}|p{7cm}|}
+\hline 
+\rowcolor{Orchid}
+Caso d'uso & NotificaScadenza \\
+\hline
+Attore Primario & VerificaConflittiInterrese\\
+\hline
+Attore Secondario & \\
+\hline
+Descrizione & \\
+\hline
+Pre-Condizioni& \\
+\hline
+  Sequenza Eventi&
+                  \begin{enumerate}
+                   \item
+                  \end{enumerate}\\
+\hline
+Post-Condizioni: & 
+\hline
+Sequenza degli eventi alternativa & \begin{itemize}
+  \item 
+\end{itemize} \\
 \hline
 \end{tabular}
 
@@ -265,76 +353,15 @@ Pre-Condizioni& Che una conferenza risulta in scadenza\\
                    \begin{enumerate}
                    \item Il sistema verifica l'imminenzza della scadenza di una conferenzza
                    \item IF la conferenza è in scadenza
-                   \item Il sistema invia delle notifiche agli autori per notificare che la conferenza è in scadenza
-                   \item Altrimenti non viene inviata nessuana email
+                   \item Il sistema invia delle notifiche che la conferenza è in scadenza
+                   \item Ogni autore riceve una notifica che l'informa che la conferenza è in scadenza
+                   \item Altrimenti non viene inviata nessuana notifica
                    \end{enumerate}\\
 \hline
 Post-Condizioni: & Il sistema invia automaticamente l'email per la notifica della scadenzza di una conferenzza\\
 \hline
 Sequenza degli eventi alternativa & \begin{itemize}
   \item Nel punto 2 se non c'è nessuna conferenza in scadenza non viene inviata nessuan email
-\end{itemize} \\
-\hline
-\end{tabular}
-
-% TODO: \begin{tabular}{|p{3cm}|p{7cm}|}
-\hline 
-\rowcolor{Orchid}
-Caso d'uso & Inserimento Esito Revisione\\
-\hline
-Attore Primario & Autore \\
-\hline
-Attore Secondario & \\
-\hline
-Descrizione & L'autore selezionato come revisore inserisce esito della revisione\\
-\hline
-Pre-Condizioni& \\
-\hline
-  Sequenza Eventi&
-                   \begin{enumerate}
-                   \item Il revisore inserisce esito della revisore e descrizione
-                   \item IF l'esito di tutti i revisori dell'articolo è positivo
-                   \item Il sistema aggiorna lo stato dell'articolo
-                   \item L'articolo viene accettato
-                   \item ALTRIMENTI l'articolo viene rifiutato
-                   \item Il sistema notifica l'autore dell'esito della revisione
-                   \end{enumerate}\\
-\hline
-Post-Condizioni: & \\
-\hline
-Sequenza degli eventi alternativa & \begin{itemize}
-  \item Nel punto 2 se uno devi revisore da come esito della revisione negativo l'articolo viene rifiutato
-\end{itemize} \\
-\hline
-\end{tabular}
-% TODO: Visionare scenario InserimentoEsitoRevisione
-\begin{tabular}{|p{3cm}|p{7cm}|}
-\hline 
-\rowcolor{Orchid}
-Caso d'uso & Inserimento Esito Revisione\\
-\hline
-Attore Primario & Autore \\
-\hline
-Attore Secondario & \\
-\hline
-Descrizione & L'autore selezionato come revisore inserisce esito della revisione\\
-\hline
-Pre-Condizioni& L'articolo è in fase di revisione\\
-\hline
-  Sequenza Eventi&
-                   \begin{enumerate}
-                   \item Il revisore inserisce esito della revisore e descrizione
-                   \item IF l'esito di tutti i revisori dell'articolo è positivo
-                   \item Il sistema aggiorna lo stato dell'articolo
-                   \item L'articolo viene accettato
-                   \item ALTRIMENTI l'articolo viene rifiutato
-                   \item Il sistema notifica l'autore dell'esito della revisione
-                   \end{enumerate}\\
-\hline
-Post-Condizioni: & L'articolo viene aggiornato con l'esito della revisione\\
-\hline
-Sequenza degli eventi alternativa & \begin{itemize}
-  \item Nel punto 2 se uno dei revisori da come esito della revisione negativo l'articolo viene rifiutato
 \end{itemize} \\
 \hline
 \end{tabular}

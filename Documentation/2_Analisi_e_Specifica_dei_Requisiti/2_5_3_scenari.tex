@@ -123,7 +123,7 @@ viene mostrato un messaggio di errore
 \rowcolor{Orchid}
 Caso d'uso & Scenario Gestione Permessi di Visibilità \\
 \hline
-Attore Primario & Sistema\\
+Attore Primario & Sistema di notifica\\
 \hline
 Attore Secondario & \\
 \hline
@@ -290,9 +290,9 @@ Sequenza degli eventi alternativa & \begin{itemize}
 \rowcolor{Orchid}
 Caso d'uso & Inserimento Esito Revisione\\
 \hline
-Attore Primario & Autore \\
+Attore Primario & Revisore\\
 \hline
-Attore Secondario & \\
+Attore Secondario & Sistema di notifica\\
 \hline
 Descrizione & L'autore selezionato come revisore inserisce esito della revisione\\
 \hline
@@ -326,7 +326,7 @@ Sequenza degli eventi alternativa & \begin{itemize}
 \rowcolor{Orchid}
 Caso d'uso & VerificaConflittiInterrese \\
 \hline
-Attore Primario & Sistema\\
+Attore Primario & Sistema di notifica\\
 \hline
 Attore Secondario & \\
 \hline
@@ -359,7 +359,7 @@ Sequenza degli eventi alternativa & \begin{itemize}
 \rowcolor{Orchid}
 Caso d'uso & NotificaScadenza \\
 \hline
-Attore Primario & Sistema di Notifica\\
+Attore Primario & Sistema di notifica\\
 \hline
 Attore Secondario & \\
 \hline
@@ -382,40 +382,6 @@ Post-Condizioni: & Il sistema invia automaticamente l'email per la notifica dell
 \hline
 Sequenza degli eventi alternativa & \begin{itemize}
   \item Nel punto 2 se non c'è nessuna conferenza in scadenza non viene inviata nessuan email
-\end{itemize} \\
-\hline
-\end{tabular}
-
-% DONE: Visionare scenario InserimentoEsitoRevisione
-\begin{tabular}{|p{3cm}|p{7cm}|}
-\hline 
-\rowcolor{Orchid}
-Caso d'uso & Inserimento Esito Revisione\\
-\hline
-Attore Primario & Autore \\
-\hline
-Attore Secondario & \\
-\hline
-Descrizione & L'autore selezionato come revisore inserisce esito della revisione\\
-\hline
-Pre-Condizioni& L'articolo è in fase di revisione\\
-\hline
-  Sequenza Eventi&
-                   \begin{enumerate}
-                   \item Il revisore inserisce esito della revisore e descrizione
-                   \item IF l'esito di tutti i revisori dell'articolo è positivo
-                   \begin{enumerate}
-                   \item Il sistema aggiorna lo stato dell'articolo
-                   \item L'articolo viene accettato
-                   \end{enumerate}
-                   \item ALTRIMENTI l'articolo viene rifiutato
-                   \item Il sistema notifica l'autore dell'esito della revisione
-                   \end{enumerate}\\
-\hline
-Post-Condizioni: & L'articolo viene aggiornato con l'esito della revisione\\
-\hline
-Sequenza degli eventi alternativa & \begin{itemize}
-  \item Nel punto 2 se uno dei revisori da come esito della revisione negativo l'articolo viene rifiutato
 \end{itemize} \\
 \hline
 \end{tabular}

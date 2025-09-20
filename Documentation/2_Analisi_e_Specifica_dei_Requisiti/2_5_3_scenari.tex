@@ -386,38 +386,7 @@ Sequenza degli eventi alternativa & \begin{itemize}
 \hline
 \end{tabular}
 
-% TODO: Scrivere Scenario InserimentoEsitoRevisione
-\begin{tabular}{|p{3cm}|p{7cm}|}
-\hline 
-\rowcolor{Orchid}
-Caso d'uso & Inserimento Esito Revisione\\
-\hline
-Attore Primario & Autore \\
-\hline
-Attore Secondario & \\
-\hline
-Descrizione & L'autore selezionato come revisore inserisce esito della revisione\\
-\hline
-Pre-Condizioni& \\
-\hline
-  Sequenza Eventi&
-                   \begin{enumerate}
-                   \item Il revisore inserisce esito della revisore e descrizione
-                   \item IF l'esito di tutti i revisori dell'articolo è positivo
-                   \item Il sistema aggiorna lo stato dell'articolo
-                   \item L'articolo viene accettato
-                   \item ALTRIMENTI l'articolo viene rifiutato
-                   \item Il sistema notifica l'autore dell'esito della revisione
-                   \end{enumerate}\\
-\hline
-Post-Condizioni: & \\
-\hline
-Sequenza degli eventi alternativa & \begin{itemize}
-  \item Nel punto 2 se uno devi revisore da come esito della revisione negativo l'articolo viene rifiutato
-\end{itemize} \\
-\hline
-\end{tabular}
-% TODO: Visionare scenario InserimentoEsitoRevisione
+% DONE: Visionare scenario InserimentoEsitoRevisione
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
@@ -435,8 +404,10 @@ Pre-Condizioni& L'articolo è in fase di revisione\\
                    \begin{enumerate}
                    \item Il revisore inserisce esito della revisore e descrizione
                    \item IF l'esito di tutti i revisori dell'articolo è positivo
+                   \begin{enumerate}
                    \item Il sistema aggiorna lo stato dell'articolo
                    \item L'articolo viene accettato
+                   \end{enumerate}
                    \item ALTRIMENTI l'articolo viene rifiutato
                    \item Il sistema notifica l'autore dell'esito della revisione
                    \end{enumerate}\\

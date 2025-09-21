@@ -51,7 +51,7 @@ public class NotificationController extends TimerTask {
      */
     @Override
     public void run() {
-            invioNotifiche();
+            sendNotificationDeadline();
     }
 
     /**
@@ -59,7 +59,7 @@ public class NotificationController extends TimerTask {
      * @throws SQLException
      * @throws MessagingException
      */
-    public void invioNotifiche(){
+    public void sendNotificationDeadline(){
         try {  
             ArrayList<Conference> conf = conf_dao.getActiveConference();
             ArrayList<Author> auth = user_dao.getAllAuthors();
@@ -71,7 +71,7 @@ public class NotificationController extends TimerTask {
             }}
             if(!emails.isEmpty()){
             for(Author a : auth){
-                sendEmail(a.getEmail(), createMessage(a.getName(), a.getLastName(), emails));
+                sendEmail(a.getEmail(), createMessage(a.getName(), a.getLastName(), emails),"Scadenza Consegne Articoli ");
             }}
 
         } catch (SQLException e) {
@@ -119,7 +119,7 @@ public class NotificationController extends TimerTask {
      * @throws SQLException
      * @throws MessagingException
      */
-    private void sendEmail (String email_d, String msg) throws SQLException, MessagingException, SendFailedException {
+    private void sendEmail (String email_d, String msg, String subject) throws SQLException, MessagingException, SendFailedException {
         // Fare email da cui mandare messaggi
         final String m_email = PasswordManager.getInstance().get("email_username"); //mittente
         final String m_password = PasswordManager.getInstance().get("email_password");; //app_password
@@ -144,7 +144,7 @@ public class NotificationController extends TimerTask {
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(m_email));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email_d));
-        message.setSubject("Scadenza Consegne Articoli ");
+        message.setSubject(subject);
 
         //Codifica testo html
         MimeBodyPart mbp =  new MimeBodyPart();

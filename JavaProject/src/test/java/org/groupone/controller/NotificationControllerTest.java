@@ -17,7 +17,7 @@ public class NotificationControllerTest {
     // Test per l'invio delle notifiche e in maniera implicita test di createMessage() e sendEmail()
     @Test
     public void testInvioNotifiche() throws SQLException, MessagingException{
-        notification_Controller.invioNotifiche();
+        notification_Controller.sendNotificationDeadline();
     }
 
 }

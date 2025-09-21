@@ -13,22 +13,28 @@ package DataBase {
   }
   
   class ConferenceDAO {
-    + getAllConferences(): List<Conference>
+    + getConferenceByID(id: ID): Conference
+    + isConferencePresentByID(id: ID): boolean
+    + getAllConferences(): ArrayList<Conference>
+    + getActiveConferences(): ArrayList<Conference>
     + saveConference(conf: Conference): void
-    + getArticlesByConference(confId: String): List<Article>
+    + getArticlesByConference(conf_id: ID): ArrayList<Article>
   }
   
   class ArticleDAO {
     + saveArticle(art: Article): void
-    + getArticlesByAuthor(authorId: String): List<Article>
-    + getArticleByID(id: String): Article
-    + updateArticleStatus(id: String, status: String): void
+    + getArticlesByAuthor(id_aut: ID): ArrayList<Article>
+    + getArticleByID(id: ID): Article
+    + isArticlePresentByID(id: ID): boolean
+    + updateTitle(artid: ID, newTitle: String): void
+    + updateAbstract(artid: ID, newAbstract: String): void
   }
   
   class ReviewDAO {
-    + assignReviewer(articleID: String, reviewerId: String): void
-    + getReviewersForArticle(articleId: STring): List<Integer>
-    + hasConflictOfInterest(articleId, reviewerId): boolean
+    + hasConflictOfInterest(idArt: ID, idUser: ID): boolean
+    + assignReviewer(idArt: ID, idUser: ID): void
+    + getReviewersForArticle(idArt: ID): ArrayList<String>
+    + updateArticleStatus(id: ID, status: String): void
   }
 
   class DBManager {
@@ -49,13 +55,16 @@ package Entity {
     - lastName: String
     - email: String
     - Affiliazione: String
-    # User(aff: String, email: String, lastName: String, name: String, password: String, id: String);
+    # User(aff: String, email: String, lastName: String, name: String, password: String, id: ID);
+    # User(aff: String, email: String, lastName: String, name: String, password: String);
     # User(u: User)
+    + getId(): ID
     + getName(): String
     + getLastName(): String
-    + getEmail(): String
-    + getId(): int
     + getAffiliazione(): String
+    + getEmail(): String
+    + getPassword(): String
+    + {abstract} getRole(): String 
     + setAffiliazione(aff: String): void
     + setEmail(email: String): void
   }
@@ -74,25 +83,32 @@ package Entity {
     + getRole(): String
   }
 
-  class Articolo {
-    - titolo: String
-    - abstract: String
-    - coautori: List<Author>
-    + Articolo(id: String, abstr: String, autori: List<Author>, titolo: String)
+  class Article {
+    - title: String
+    - abstr: String
+    - authors: ArrayList<Author>
+    + Articolo(id: ID, abstr: String, autori: ArrayList<Author>, titolo: String)
     + Articolo(a: Articolo)
+    + getAuthors(): ArrayList<Author>
+    + getAbstract: String
+    + getTitle: String
+    + getId: ID
   }
   
   class Conference {
-    - titolo: String
-    - descrizione: String
-    - scadenza: Date
-    - articoli: List<Article>
-    + Conference(scadenza: Date, titolo: String, descrizione: String, id: String)
+    - title: String
+    - description: String
+    - deadline: Date
+    - articles: ArrayList<Article>
+    + Conference(deadline: Date, title: String, description: String, id: ID, organizer: ID);
     + Conference(conf: Conference)
-    + getTitolo(): String
-    + getDescrizione(): String
-    + getScadenza(): Date
-    + getArticoli(): List<Article>
+    + getTitle(): String
+    + getDescription(): String
+    + getDeadline(): Date
+    + getArticles(): ArrayList<Article>
+    + getId: ID
+    + getOrganizer: String
+    + nearDeadline: boolean
   }
 
   User <|-- Author
@@ -103,33 +119,53 @@ package Entity {
 package Controller {
 
   class UserController {
+    - user_dao: UserDAO
+    + UserController();
     + registerUser(String affiliazione, String email, String lastname, String name, String password, String ruole): RUserDTO
     + login(email: String, password: String): RUserDTO
-    + getRAuthorBYEmail (String Email): RUserDTO
+    + getRAuthorBYEmail (Email: String): RUserDTO
+    + getCooAythors(email: String): ArrayList<RUSerDTO>
   }
 
   class ConferenceController {
-    + createConference(LocalDate scadenza, String title, String descr, ID id, RUserDTO org): void
+    - user_dao: UserDAO
+    - conf_dao: ConferenceDAO
+    + ConferenceController(),
+    + createConference(LocalDate scadenza, String title, String descr, ID id, RUserDTO org): boolean
     + getActiveConferences(): ArrayList<ShowActiveConferenceDTO>
     + getArticlesByConference(ID: ID_conference): ArrayList<ShowArticleDTO>
   }
   
   class ArticleController {
-    + submitArticle(String article_titolotitolo, String article_abstrct,  ArrayList<RUserDTO> article_autori, ID id_conf): boolean
+    - art_dao: ArticleDAO
+    - user_dao: UserDAO
+    - conf_dao: ConferenceDAO
+    + ArticleController (),
+    + submitArticle(String article_titolo, String article_abstrct,  ArrayList<RUserDTO> article_autori, ID id_conf): boolean
     + getArticleByAuthor(ID authorID): ArrayList<ShowArticleDTO>
   }
 
   class ReviewController {
-    + assignReviewer(ID articleID, ArrayList<PossibleReviewDTO> list_r): boolean
+    - reviewer_dao: ReviewDAO
+    - user_dao: UserDAO
+    - article_dao: ArticleDAO
+    + ReviewController();
+    + assignReviewer(ID articleID, ArrayList<PossibleReviewDTO> list_reviewer_selected): boolean
     + getListReviewer(ID articleID): ArrayList<PossibleReviewDTO>
     + updateArticleStatus (ID id_article, String status): boolean
   }
 
   class NotificationController {
-    + invioNotifiche(): void
-    + creatMessage(String aut_name, String aut_lastname, String conf_title): String
-    + sendEmail (String email_d, String conf_title, String msg): void
+    - conf_dao: ConferenceDAO
+    - user_dao: UserDAO
+    + NotificationController(),
+    + sendNotificationDeadline(): void
+    + creatMessage(String aut_name, String aut_lastname, ArrayList<String> conf_title): String
+    + sendEmail (String email_d, String msg, String subject): void
+    + run(): void
   }
+
+TimerTask <|-- NotificationController
 
 }
 
@@ -183,6 +219,8 @@ package DTO{
         - name: String
         - lastname: String
         - affiliazione: String
+        + PossibleReviewDTO(id: ID, name: String, lastname: String, affiliazione: String),
+        + PossibleReviewDTO(autore: Author),
         + getId(): ID
         + getName(): String
         + getLastname(): String
@@ -196,6 +234,9 @@ package DTO{
         - affiliazione: String
         - ruolo: String
         - id: ID
+        + RUserDTO(name: String, lastname: String, email: String, affiliazione: String, ruolo: String, id: ID),
+        + RUserDTO(user User),
+        + RUserDTO(Ruser RUserDTO),
         + getName(): String
         + getLastname(): String
         + getEmail(): String
@@ -209,6 +250,9 @@ package DTO{
         - titolo: String
         - scadenza: Date
         - descrizione: String
+        + ShowActiveConferenceDTO(id: ID ,titolo: String ,scadenza: Date, decrizione: String),
+        + ShowActiveConferenceDTO(active_conference: ShowActiveConferenceDTO),
+        + ShowActiveConferenceDTO(conference: Conference),
         + getId(): ID
         + getTitle(): String
         + getDeadline(): Date
@@ -220,10 +264,13 @@ package DTO{
         - titolo: String
         - abstr: String
         - autori: ArrayList<RUserDTO>
+        + ShowArticleDTO(id: ID,titolo: String, abstr: String, autori: ArrayList<RUserDTO>),
+        + ShowArticleDTO(article: Article),
+        + ShowArticleDTO(article_dto: ShowArticleDTO),
         + getId(): ID
         + getTitle(): String
         + getAbstr(): String
-        +getAuthors(): ArrayList<RUserDTO>
+        + getAuthors(): ArrayList<RUserDTO>
     }
 
 }

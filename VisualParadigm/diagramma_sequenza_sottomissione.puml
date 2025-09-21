@@ -1,37 +1,27 @@
 @startuml
-actor Autore
-participant "Interfaccia Utente" as UI
-participant "Sistema" as Sistema
-participant "Database" as DB
+actor Autore as at
+participant "Sistema" as ui
+participant "Database" as db
 
-Autore -> UI : Effettua login
-activate Autore
-activate UI
-UI -> Sistema : Richiesta autenticazione (email, password)
-activate Sistema	
-Sistema -> DB : Verifica credenziali
-activate DB
-DB --> Sistema : Credenziali valide
-Sistema --> UI : Accesso consentito
+activate at
+activate ui
+at -> ui: Inserimento dati articoli [Title, Abstract, Co-autori]
+alt Conferenzza scelta  risulta esistente
+alt Conferenzza scelta attiva
+alt Autori presenti nel sistema
+activate db
+ ui -> db: L’articolo viene recipito e gli viene messo lo stato di ”sottomesso”
+deactivate db
+else Autori non presenti nel sistema
+  ui -> at: Messaggio di errore
+ end
+else Conferenzza scelta non attiva
+ui -> at: Messaggio di errore
+end
+else Conferenzza scelta non esistente
+ ui -> at: Messaggio di errore
+end
 
-Autore -> UI : Visualizza conferenze attive
-UI -> Sistema : Richiesta elenco conferenze attive
-Sistema -> DB : Query conferenze con scadenza futura
-DB --> Sistema : Elenco conferenze
-Sistema --> UI : Mostra elenco
-
-Autore -> UI : Compila modulo articolo (titolo, abstract, co-autori)
-deactivate Autore		
-UI -> Sistema : Invia dati articolo
-Sistema -> DB : Verifica co-autori registrati
-
-DB --> Sistema : Co-autori validati
-
-Sistema -> DB : Salva articolo (stato = "sottomesso")
-
-DB --> Sistema : ID articolo salvato
-deactivate DB
-Sistema --> UI : Conferma sottomissione riuscita
-deactivate UI
-deactivate Sistema
+deactivate at
+deactivate ui
 @enduml

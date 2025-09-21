@@ -1,30 +1,35 @@
 @startuml
-actor Organizzatore
-participant "Interfaccia Utente" as UI
-participant "Sistema" as Sistema
-participant "Database" as DB
+actor Organizzatore as org
+participant "Sistema" as ui
+participant "VerificaConflittiInteresse" as vc
+participant "InserimentoEsitoRevisione" as rev
 
-Organizzatore -> UI : Effettua login
-UI -> Sistema : Richiesta autenticazione
-Sistema -> DB : Verifica credenziali
-DB --> Sistema : OK
-Sistema --> UI : Accesso consentito
-
-Organizzatore -> UI : Visualizza articoli sottomessi
-UI -> Sistema : Richiesta elenco articoli
-Sistema -> DB : Query articoli sottomessi
-DB --> Sistema : Elenco articoli
-Sistema --> UI : Mostra articoli
-
-Organizzatore -> UI : Assegna revisori a un articolo
-UI -> Sistema : Invia ID revisori e ID articolo
-Sistema -> DB : Verifica revisori non autori
-alt Conflitto di interesse
-    Sistema --> UI : Errore: revisore è autore
-else Nessun conflitto
-    Sistema -> DB : Salva assegnazione revisori
-    Sistema -> DB : Aggiorna stato articolo a "in revisione"
-    Sistema --> UI : Assegnazione completata
+activate org
+activate ui
+org -> ui: Selezione dell'articolo da revisionare
+org -> ui: Selezione della data di fine revisione
+org -> ui: Selezione dei revisori
+activate vc
+alt data di scadenza rispetata
+ui -> vc: Verifica di conflitti
+vc -> ui: Esito verifica conflitti
+alt Verifica dei conflitti di interesse negativa
+activate rev
+    ui -> ui: Aggiornamento stato "sottomesso" -> "in revisione"
+    rev -> ui: Inserimento esito della revisione dell'articolo
+alt Inserimento esito revisione positivo
+    ui -> ui: Aggiornamento stato da "in revisione"->"approvato"
+else Inserimento esito revisione negativo
+    ui -> ui: Aggiornamento stato da "in revisione"->"rifiutato"
 end
-
+else Verifica dei conflitti di interesse negativa
+    ui -> org: Richiesta di riassegnazione dei revisori
+end
+else Data di scadenza non rispettata
+    ui -> ui: Aggiornamento stato da "in revisione"->"rifiutato"
+end
+deactivate rev
+deactivate vc
+deactivate ui
+deactivate org
 @enduml

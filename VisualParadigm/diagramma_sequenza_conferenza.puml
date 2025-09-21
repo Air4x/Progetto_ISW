@@ -1,36 +1,22 @@
 @startuml
-actor Organizzatore
-participant "Interfaccia Utente" as UI
-participant "Sistema" as Sistema
-participant "Database" as DB
+actor Organizzatore as or
+participant "Sistema" as ui
+participant "Database" as db
 
-Organizzatore -> UI : Effettua login
-activate Organizzatore
-activate UI
-UI -> Sistema : Richiesta autenticazione
-activate Sistema		
-Sistema -> DB : Verifica credenziali
-activate DB			
-DB --> Sistema : OK
-Sistema --> UI : Accesso consentito
-
-Organizzatore -> UI : Crea nuova conferenza (titolo, descrizione, scadenza)
-UI -> Sistema : Invia dati conferenza
-Sistema -> DB : Salva conferenza
-DB --> Sistema : ID conferenza creato
-Sistema --> UI : Conferma creazione conferenza
-
-Organizzatore -> UI : Visualizza articoli ricevuti
-UI -> Sistema : Richiesta articoli per conferenza
-Sistema -> DB : Query articoli per ID conferenza
-DB --> Sistema : Elenco articoli
-Sistema --> UI : Mostra elenco articoli
-
-Organizzatore -> UI : Seleziona articolo
-deactivate Organizzatore				
-UI -> Sistema : Richiesta dettaglio articolo
-Sistema -> DB : Recupera dettagli articolo
-DB --> Sistema : Dettagli articolo
-Sistema --> UI : Mostra dettagli articolo
-
+activate or
+activate ui
+or->ui: inserimento dati conferenza [title,description,deadline]
+ui->ui: Verifica dati inseriti
+alt Tutti dati validi
+activate db
+    ui->db: Creazione della conferenza
+    ui->ui: Conferenza disponibile per tutti utenti
+else Data non valida
+    ui->or: Messaggio di errore
+else Data nel passato
+    ui->or: Messaggio di errore
+end
+deactivate ui
+deactivate or
+deactivate db
 @enduml

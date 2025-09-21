@@ -1,33 +1,28 @@
 @startuml
-actor Utente
 
-participant "Interfaccia Utente" as UI
-participant "Sistema" as SI
-participant "Database" as DB
+actor User as us
+participant "Sistema" as ui
+participant "Database" as db
 
-Utente -> UI : Richiesta di registazione (Inserimento dati)
-activate Utente
-activate UI
-UI -> SI : Convalidazione dati
-activate SI
-SI -> DB : Verifica Dati
-activate DB
-DB ->SI : Esito
-
-alt Esito Positivo
-DB -> SI : Email non presente
-SI -> UI : Registrazione effetuata
-UI -> Utente: Messaggio  di Avenuta Registrazione 
-else Esito Negativo
-DB -> SI : Email già presente
-SI -> UI : Richiesta di registrazione negata
-UI -> Utente: Messagio di Registrazione Fallità
+activate us
+activate ui
+us -> ui : Inserimento dati per la registrazione [name,lastname,email,password,affiliation] e selezione del ruolo
+us -> ui : click sul tasto registrazione
+ui->ui: Verifica dei dati
+alt Tutti dati validi
+activate db
+ui->db: Salvataggio informazioni dell'utente
+deactivate db
+else Email non presente
+ui->us: Il sistema mostra un messaggio di errore
+else Email non valida
+ui->us: Il sistema mostra un messaggio di errore
+else Password non valida
+ui->us:  Il sistema mostra un messaggio di errore 
 end
 
-deactivate Utente
-deactivate UI
-deactivate Sistema
-deactivate DB
+deactivate us
+deactivate ui
 
 
 @enduml

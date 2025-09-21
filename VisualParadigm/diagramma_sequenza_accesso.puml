@@ -1,31 +1,28 @@
 @startuml
-actor Utente
 
-participant "Interfaccia Utente" as UI
-participant "Sistema" as SI
-participant "Database" as DB
+actor User as US
+participant "Sistema" as UI
+participant "GestionePermessiVisibilita" as PV
 
-Utente -> UI : Richiesta di accesso (Inserimento dati)
-activate Utente
+activate US
 activate UI
-UI -> SI : Autenticazione 
-activate SI
-SI -> DB : Verifica Credenziali
-activate DB
-DB ->SI : Esito
 
-alt Esito Positivo
-DB -> SI : Credeziali Autenticate
-SI -> UI: Accesso Consentito
-else Esito Negativo
-DB -> SI : Errore di Autenticazione
-SI -> UI : Credenziali non corrette
-UI -> Utente: Messagio di Errore di Logion
+US -> UI : Inserimento Credenziali: login(email, password)
+UI->UI : Validazione Credenziali
+
+alt Credenziali Valide
+activate PV
+UI -> PV : Credenziali valide
+PV -> US : Redirezione alla pagina in base al ruolo dell'utente
+else Email già Presente 
+UI -> US : Accesso Negato: Messaggio di errore
+else Credenziali Non Valide 
+UI -> US : Accesso Negato: Messaggio di errore
+else Email inserita non valida 
+UI -> US : Accesso Negato: Messaggio di errore
 end
 
-deactivate Utente
+deactivate US
 deactivate UI
-deactivate Sistema
-deactivate DB
-
+deactivate PV
 @enduml

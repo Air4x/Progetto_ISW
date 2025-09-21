@@ -1,54 +1,67 @@
 @startuml 
 
-abstract class Utente {
-  - nome: String
-  - cognome: String
-  - email: String
-  - affiliazione: String
-  - ruolo: String
-  - id: String
-  + registrarsi(): void
-}
+  abstract class User {
+    - id: int
+    - name: String
+    - lastName: String
+    - email: String
+    - Affiliazione: String
+    # User(aff: String, email: String, lastName: String, name: String, password: String, id: String);
+    # User(u: User)
+    + getName(): String
+    + getLastName(): String
+    + getEmail(): String
+    + getId(): int
+    + getAffiliazione(): String
+    + setAffiliazione(aff: String): void
+    + setEmail(email: String): void
+  }
+  
+  class Author {
+    - final role: String
+    + Author(aff: String, email: String, lastName: String, name: String, password: String, id: String)
+    + Author(a: Author)		
+    + getRole(): String
+  }
 
-class Autore {
-  + visualizzareConferenzeAttive(): void
-  + sottomettereArticolo(): void
-  + visualizzareArticoliSottomessi(): void
-}
+  class Organizer {
+    - final role: String
+    + Organizer(aff: String, email: String, lastName: String, name: String, password: String, id: String)
+    + Organizer(o: Organizer)
+    + getRole(): String
+  }
 
-class Organizzatore {
-  + creareConferenza(titolo, descrizione, scadenza): void
-  + visualizzareElencoPaper(conferenza): void
-  + dettaglioArticolo(id): void
-  + monitorareStato(): void
-  + assegnareRevisori(articolo): void
-  + consultareStatoAggregato(): void
-}
+  class Article {
+    - title: String
+    - abstract: String
+    - status: String
+    - coAuthors: List<Author>
+    + Article(id: String, abstract: String, coAuthors: List<Author>, title: String)
+    + Article(a: Article)
+  }
+  
+  class Conference {
+    - title: String
+    - description: String
+    - deadline: Date
+    - articles: List<Article>
+    + Conference(deadline: Date, title: String, description: String, id: String)
+    + Conference(conf: Conference)
+    + getTitle(): String
+    + getDescription(): String
+    + getDeadline(): Date
+    + getArticles(): List<Article>
+  }
 
-class Conferenza {
-  - titolo: String
-  - descrizione: String
-  - scadenza: Date
-  - organizzatore: Organizzatore
-}
-
-class Articolo {
-  - titolo: String
-  - abstract: String
-  - stato: Int 
-  - coAutori: List<Autore>
-}
-
-' Ereditarietà
-Utente <|-- Autore
-Utente <|-- Organizzatore
+  User <|-- Author
+  User <|-- Organizer
 
 ' Relazioni
-Organizzatore "1" -- "0..*" Conferenza
-Conferenza "1" -- "0..*" Articolo :Sottomesso a
-Articolo "1" -- "0..*" Autore : Scritto da
+Organizer "1" -- "0..*" Conference : Gestisce
+Conference "1" -- "0..*" Article : Sottomesso a
+Article "1" -- "0..*" Author : Scritto da
 
 ' Revisori: relazione molti-a-molti tra Autore e Articolo
-Autore "0..*" -- "3" Articolo : <<revisore>>
+Author "0..*" -- "3" Article : <<revisore>>
 
 @enduml

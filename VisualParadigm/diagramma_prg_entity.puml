@@ -1,0 +1,70 @@
+@startuml
+package Entity {
+
+  abstract class User {
+    - id: int
+    - name: String
+    - lastName: String
+    - email: String
+    - Affiliazione: String
+    # User(aff: String, email: String, lastName: String, name: String, password: String, id: ID);
+    # User(aff: String, email: String, lastName: String, name: String, password: String);
+    # User(u: User)
+    + getId(): ID
+    + getName(): String
+    + getLastName(): String
+    + getAffiliazione(): String
+    + getEmail(): String
+    + getPassword(): String
+    + {abstract} getRole(): String 
+    + setAffiliazione(aff: String): void
+    + setEmail(email: String): void
+  }
+
+  class Author {
+    - final role: String
+    + Author(aff: String, email: String, lastName: String, name: String, password: String, id: String)
+    + Author(a: Author)		
+    + getRole(): String
+  }
+
+  class Organizer {
+    - final role: String
+    + Organizer(aff: String, email: String, lastName: String, name: String, password: String, id: String)
+    + Organizer(o: Organizer)
+    + getRole(): String
+  }
+
+  class Article {
+    - title: String
+    - abstr: String
+    - authors: ArrayList<Author>
+    + Articolo(id: ID, abstr: String, autori: ArrayList<Author>, titolo: String)
+    + Articolo(a: Articolo)
+    + getAuthors(): ArrayList<Author>
+    + getAbstract: String
+    + getTitle: String
+    + getId: ID
+  }
+  
+  class Conference {
+    - title: String
+    - description: String
+    - deadline: Date
+    - articles: ArrayList<Article>
+    + Conference(deadline: Date, title: String, description: String, id: ID, organizer: ID);
+    + Conference(conf: Conference)
+    + getTitle(): String
+    + getDescription(): String
+    + getDeadline(): Date
+    + getArticles(): ArrayList<Article>
+    + getId: ID
+    + getOrganizer: String
+    + nearDeadline: boolean
+  }
+
+  User <|-- Author
+  User <|-- Organizer
+  Conference o-- Article
+}
+@enduml

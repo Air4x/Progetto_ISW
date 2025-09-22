@@ -1,0 +1,44 @@
+@startuml
+package Boundary {
+  class LoginView {
+    + showLoginForm()
+    + showRegistretionForm()
+    + handleLogin()
+    + handleRegistration()
+  }
+  class LoginForm{
+    +displayForm()
+    +submitLogin()
+  }
+  class RegisterForm{
+    +displayForm()
+    submitRegistration()
+  }
+  
+  class AuthorDashboard {
+    + showActiveConferences()
+    + showSubmittedArticles()
+  }
+  
+  class SubmitArticleForm {
+    + displayForm()
+    + submitArticle()
+  }
+  
+  class OrganizerDashboard {
+    + showConferenceList()
+    + viewStats()
+  }
+  
+  class CreateConferenceForm {
+    + displayForm()
+    + createConference()
+  }
+  
+  class AssignReviewrsView {
+    + showPendingArticles()
+    + assignReviewers()
+  }
+  
+}
+@enduml

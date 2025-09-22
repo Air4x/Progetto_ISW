@@ -1,0 +1,22 @@
+@startuml
+actor Organizzatore as or
+participant "Sistema" as ui
+participant "Database" as db
+
+activate or
+activate ui
+or->ui: inserimento dati conferenza [title,description,deadline]
+ui->ui: Verifica dati inseriti
+alt Tutti dati validi
+activate db
+    ui->db: Creazione della conferenza
+    ui->ui: Conferenza disponibile per tutti utenti
+else Data non valida
+    ui->or: Messaggio di errore
+else Data nel passato
+    ui->or: Messaggio di errore
+end
+deactivate ui
+deactivate or
+deactivate db
+@enduml

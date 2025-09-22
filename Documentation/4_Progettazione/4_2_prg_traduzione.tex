@@ -8,7 +8,7 @@ Dove le scelte di progettazione sono state influenzzate da:
 \item Rispettare i vicoli del modello \textbf{BCED}
 \end{itemize}
 
-\paragraph{Classi Entity}
+\subsubsection{Classi Entity}
 \begin{description}
 \item [User] Generalizzazione del concetto di utente, classe astratta, poiche nel sistema un user può essere solo o un \textbf{author} o un \textbf{organizer}. Caratterizatto dagli segueni attributi:
 \begin{itemize}
@@ -53,16 +53,42 @@ Dove le scelte di progettazione sono state influenzzate da:
 \item getReviewersForArticle(articleId)
 \end{itemize}
 \end{description}
-% TODO: Scrivere la traduzione per classi e associazioni per il package Controller
-\paragraph{Controller}
-%\begin{description}
-    % TODO: Scrivere la traduzione per classi e associazioni per il package Controller
 
-%\end{description}
-
-\paragraph{Data Access Layer}
-%\begin{description}
+% TODOPROF: Far visionare alla prof la traduzioone del package controller e dto.
+% DONE: Scrivere la traduzione per classi e associazioni per il package Controller
+\subsubsection{Classi Controller}
+Le classi del package controller vanno a gestire la logica di business occupando il ruolo di tramite tra le classi del package Entity e le classi del package Boundary.
+\begin{description}
+\item[UserController] Classe che implementa la logica di gestione utenti.
+    \begin{itemize}
+        \item registerUser (...): Metodo per la creazione di un nuovo utente.
+        \item login (...): Metodo per l'accesso di un utente.
+        \item getRAuthorBYEmail (...): Metodo per ottenere un autore mediante email.
+        \item getCooAuthors(...): Metodo per ottenere un autore mediante email.
+    \end{itemize}
+\item[ConferenceController] Classe che implementa la logica di gestione delle Conferenzze.
+    \begin{itemize}
+        \item createConference (...): Metodo per la creazione di una conferenzza.
+        \item getActiveConferences(): Metodo per ottenere una lista di conferenzze attive [NON ANCORA SCADUTE].
+        \item getArticlesByConference(...): Metodo per ottenere una lista di articoli.
+    \end{itemize}
+\item[ArticleController] Classe che implementa la logica di gestione degli Articoli.
+    \begin{itemize}
+        \item submitArticle(...): Metodo per la sottomisione di un articolo a una conferenza.
+        \item getArticleByAuthor(...): Metodo per ottenere un articolo attraverso gli autori.
+    \end{itemize}
+\item[NotificationController] Classe che estende java.util.TimerTask Classe che implementa la logica di gestione della creazione e invio di email
+    \begin{itemize}
+        \item run(): Override del metodo run della classe TimerTask per esecuzione ad intervalli regolari per l'invio delle notifiche.
+        \item sendNotificationDeadline(): Metodo utilizzato per l'invio di email.
+        \item createMessageExpireConference(...): Metodo per la creazione del messaggio da inviare.
+        \item sendEmail (...): Metodo utilizzo per la configurazione di un host per l'invio delle email.
+    \end{itemize}
+\end{description}
 % TODO: Scrivere la traduzione per classi e associazioni per il package DTO
+\subsubsection{Classi Data Transfer Object}
+%\begin{description}
+
 %\end{description}
 
 %%% Local Variables:

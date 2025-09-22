@@ -7,7 +7,7 @@ images: diagramma_uso.png diagramma_classi.png sequence prg er test
 
 sequence: diagramma_sequenza_sottomissione.png diagramma_sequenza_conferenza.png diagramma_sequenza_revisori.png diagramma_sequenza_accesso.png diagramma_sequenza_registrazione.png
 
-prg: diagramma_prg_classi.png diagramma_prg_database.png diagramma_prg_entity.png diagramma_prg_controller.png diagramma_prg_dto.png
+prg: diagramma_prg_classi.png diagramma_prg_database.png diagramma_prg_entity.png diagramma_prg_controller.png diagramma_prg_dto.png diagramma_prg_boundary.png
 
 er: er_finale.png
 
@@ -16,7 +16,7 @@ test: test_createConference.png test_submitArticle.png test_nearDeadline.png tes
 diagramma_classi.png: diagramma_classi.puml
 	java -jar plantuml.jar $^
 
-diagramma_uso.png: diagramma_uso.pum
+diagramma_uso.png: diagramma_uso.puml
 	java -jar plantuml.jar $^
 
 diagramma_sequenza_accesso.png: diagramma_sequenza_accesso.puml
@@ -40,13 +40,16 @@ diagramma_prg_classi.png: diagramma_prg_classi.puml
 diagramma_prg_database.png: diagramma_prg_database.puml
 	java -jar plantuml.jar $^
 
-diagramma_prg_entity.png: diagramma_prg_entity.pum
+diagramma_prg_entity.png: diagramma_prg_entity.puml
 	java -jar plantuml.jar $^
 
 diagramma_prg_controller.png: diagramma_prg_controller.puml
 	java -jar plantuml.jar $^
 
-er_finale.png: er_finale.pum
+diagramma_prg_boundary.png: diagramma_prg_boundary.puml
+	java -jar plantuml.jar $^
+
+er_finale.png: er_finale.puml
 	java -jar plantuml.jar $^
 
 diagramma_prg_dto.png: diagramma_prg_dto.puml

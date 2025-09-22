@@ -17,7 +17,7 @@ Dove le scelte di progettazione sono state influenzzate da:
 \item Lastname: cognome dell'user
 \item Email: elemento identificativo per l'accesso al database per l'user
 \item Password:  elemento identificativo per l'accesso al database per l'user 
-\item Affiliazzione: organnizazione di appartenenza dell'user
+\item Affiliation: organnizazione di appartenenza dell'user
 \end{itemize}
 \item [Author] Estende la classe \textbf{User}, ereditando tutti gli attributi e metodi. Caratterizzato dall'attributo:
 \begin{itemize}
@@ -29,16 +29,19 @@ Dove le scelte di progettazione sono state influenzzate da:
 \end{itemize}
 \item [Conference] rappresenta una conferenza creata da un \textbf{organizer}, caratterizzata dagli seguenti attributi:
 \begin{itemize}
-\item Titolo: Il nome della conferenzza
-\item Descrizione: descrizione dell'argomento su cui è incetratta la conferenzza
-\item Scadenza: data di scadenzza per la consegna degli articoli
-\item Articoli: lista di riferimenti agli articoli sottomessi
+\item ID: Che va a indetificare in maniera \textbf{univoca} un conferenza
+\item Title: Il nome della conferenzza
+\item Description: descrizione dell'argomento su cui è incetratta la conferenzza
+\item Deadline: data di scadenzza per la consegna degli articoli
+\item Organizer: Che va a indetificare in maniera \textbf{univoca} l'organnizatore della conferenza
+\item Articles: lista di riferimenti agli articoli sottomessi
 \end{itemize}
 \item [Article] rappresenta un articolo sottomesso, caratterizzato dagli seguenti attributi:
 \begin{itemize}
- \item Titolo: Titolo dell'articolo
-\item Abstract: Contenuto dell'articolo
-\item Co-Autori: lista di riferimenti degli auto che hanno partecipato alla creazione dell'articolo
+\item ID: Che va a indetificare in maniera \textbf{univoca} un articolo
+\item Title: Titolo dell'articolo
+\item Abstr: Contenuto dell'articolo
+\item Authors: lista di riferimenti degli auto che hanno partecipato alla creazione dell'articolo
 \end{itemize}
 \end{description}
 
@@ -85,11 +88,47 @@ Le classi del package controller vanno a gestire la logica di business occupando
         \item sendEmail (...): Metodo utilizzo per la configurazione di un host per l'invio delle email.
     \end{itemize}
 \end{description}
-% TODO: Scrivere la traduzione per classi e associazioni per il package DTO
-\subsubsection{Classi Data Transfer Object}
-%\begin{description}
 
-%\end{description}
+% DONE: Scrivere la traduzione per classi e associazioni per il package DTO
+\subsubsection{Classi Data Transfer Object}
+\begin{description}
+\item[RUserDTO] Classe DTO per il trasporto delle informazioni di un utente
+\begin{itemize}
+\item ID: Che va a indetificare in maniera \textbf{univoca} un user
+\item Name: nome dell'user
+\item Lastname: cognome dell'user
+\item Email: elemento identificativo per l'accesso al database per l'user
+\item Ruolo: che rapresenta il ruolo occupato dall'user
+\item Affiliazzione: organnizazione di appartenenza dell'user
+\end{itemize}
+\item[PossibleReviewDTO] Classe DTO per il trasporto delle informazioni di un revisore [autore]
+\begin{itemize}
+\item ID: Che va a indetificare in maniera \textbf{univoca} un user
+\item Name: nome dell'user
+\item Lastname: cognome dell'user
+\item Affiliazzione: organnizazione di appartenenza dell'user
+\end{itemize}
+\item[ShowArticleDTO] Classe DTO per il trasporto delle informazioni di un articolo
+\begin{itemize}
+\item ID: Che va a indetificare in maniera \textbf{univoca} un articolo
+\item Titolo: Titolo dell'articolo
+\item Abstr: Contenuto dell'articolo
+\item Autori: lista di riferimenti degli auto che hanno partecipato alla creazione dell'articolo
+\end{itemize}
+\item[ShowActiveConferenceDTO]
+\begin{itemize}
+\item ID: Che va a indetificare in maniera \textbf{univoca} un conferenza
+\item Title: Il nome della conferenzza
+\item Description: descrizione dell'argomento su cui è incetratta la conferenzza
+\item Deadline: data di scadenzza per la consegna degli articoli
+\end{itemize}
+\end{description}
+
+La notazione [...] è stata utilizzata per motivi di spazio per vedere la dati di ingresso dei vari metodi si prega di andare a vedere:
+\begin{itemize}
+    \item Per le classi del package controller \ref{sec:package_controller_prg_image}
+    \item Per le classi del package data transfer object \ref{sec:package_dto_prg_image}
+\end{itemize}
 
 %%% Local Variables:
 %%% mode: LaTeX

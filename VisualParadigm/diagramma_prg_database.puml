@@ -1,9 +1,9 @@
 @startuml
-package database {
+package DataBase {
   class UserDAO {
-    + getUserRoleByID(userId: int): String		
-    + getUserByID(userId: int): User
-    + isUserPresentByID(userId: int): boolean
+    + getUserRoleByID(userId: String): String		
+    + getUserByID(userId: String): User
+    + isUserPresentByID(userId: String): boolean
     + isUserPresentByEmail(email: String): boolean
     + getUserIdByEmail(email: String): int
     + getAllAuthors(): List<User>
@@ -11,22 +11,28 @@ package database {
   }
   
   class ConferenceDAO {
-    + getAllConferences(): List<Conference>
+    + getConferenceByID(id: ID): Conference
+    + isConferencePresentByID(id: ID): boolean
+    + getAllConferences(): ArrayList<Conference>
+    + getActiveConferences(): ArrayList<Conference>
     + saveConference(conf: Conference): void
-    + getArticlesByConference(confId: int): List<Article>
+    + getArticlesByConference(conf_id: ID): ArrayList<Article>
   }
   
   class ArticleDAO {
     + saveArticle(art: Article): void
-    + getArticlesByAuthor(authorId: int): List<Article>
-    + getArticleByID(id: int): Article
-    + updateArticleStatus(id: int, status: String): void
+    + getArticlesByAuthor(id_aut: ID): ArrayList<Article>
+    + getArticleByID(id: ID): Article
+    + isArticlePresentByID(id: ID): boolean
+    + updateTitle(artid: ID, newTitle: String): void
+    + updateAbstract(artid: ID, newAbstract: String): void
   }
   
   class ReviewDAO {
-    + assignReviewer(articleID: int, reviewerId: int): void
-    + getReviewersForArticle(articleId: int): List<Integer>
-    + hasConflictOfInterest(articleId, reviewerId): boolean
+    + hasConflictOfInterest(idArt: ID, idUser: ID): boolean
+    + assignReviewer(idArt: ID, idUser: ID): void
+    + getReviewersForArticle(idArt: ID): ArrayList<String>
+    + updateArticleStatus(id: ID, status: String): void
   }
 
   class DBManager {

@@ -6,6 +6,8 @@ package DTO{
         - name: String
         - lastname: String
         - affiliazione: String
+        + PossibleReviewDTO(id: ID, name: String, lastname: String, affiliazione: String),
+        + PossibleReviewDTO(autore: Author),
         + getId(): ID
         + getName(): String
         + getLastname(): String
@@ -19,6 +21,9 @@ package DTO{
         - affiliazione: String
         - ruolo: String
         - id: ID
+        + RUserDTO(name: String, lastname: String, email: String, affiliazione: String, ruolo: String, id: ID),
+        + RUserDTO(user User),
+        + RUserDTO(Ruser RUserDTO),
         + getName(): String
         + getLastname(): String
         + getEmail(): String
@@ -32,6 +37,9 @@ package DTO{
         - titolo: String
         - scadenza: Date
         - descrizione: String
+        + ShowActiveConferenceDTO(id: ID ,titolo: String ,scadenza: Date, decrizione: String),
+        + ShowActiveConferenceDTO(active_conference: ShowActiveConferenceDTO),
+        + ShowActiveConferenceDTO(conference: Conference),
         + getId(): ID
         + getTitle(): String
         + getDeadline(): Date
@@ -43,10 +51,13 @@ package DTO{
         - titolo: String
         - abstr: String
         - autori: ArrayList<RUserDTO>
+        + ShowArticleDTO(id: ID,titolo: String, abstr: String, autori: ArrayList<RUserDTO>),
+        + ShowArticleDTO(article: Article),
+        + ShowArticleDTO(article_dto: ShowArticleDTO),
         + getId(): ID
         + getTitle(): String
         + getAbstr(): String
-        +getAuthors(): ArrayList<RUserDTO>
+        + getAuthors(): ArrayList<RUserDTO>
     }
 
 }

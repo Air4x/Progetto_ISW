@@ -2,33 +2,53 @@
 package Controller {
 
   class UserController {
+    - user_dao: UserDAO
+    + UserController();
     + registerUser(String affiliazione, String email, String lastname, String name, String password, String ruole): RUserDTO
     + login(email: String, password: String): RUserDTO
-    + getRAuthorBYEmail (String Email): RUserDTO
+    + getRAuthorBYEmail (Email: String): RUserDTO
+    + getCooAythors(email: String): ArrayList<RUSerDTO>
   }
 
   class ConferenceController {
-    + createConference(LocalDate scadenza, String title, String descr, ID id, RUserDTO org): void
+    - user_dao: UserDAO
+    - conf_dao: ConferenceDAO
+    + ConferenceController(),
+    + createConference(LocalDate scadenza, String title, String descr, ID id, RUserDTO org): boolean
     + getActiveConferences(): ArrayList<ShowActiveConferenceDTO>
     + getArticlesByConference(ID: ID_conference): ArrayList<ShowArticleDTO>
   }
   
   class ArticleController {
-    + submitArticle(String article_titolotitolo, String article_abstrct,  ArrayList<RUserDTO> article_autori, ID id_conf): boolean
+    - art_dao: ArticleDAO
+    - user_dao: UserDAO
+    - conf_dao: ConferenceDAO
+    + ArticleController (),
+    + submitArticle(String article_titolo, String article_abstrct,  ArrayList<RUserDTO> article_autori, ID id_conf): boolean
     + getArticleByAuthor(ID authorID): ArrayList<ShowArticleDTO>
   }
 
   class ReviewController {
-    + assignReviewer(ID articleID, ArrayList<PossibleReviewDTO> list_r): boolean
+    - reviewer_dao: ReviewDAO
+    - user_dao: UserDAO
+    - article_dao: ArticleDAO
+    + ReviewController();
+    + assignReviewer(ID articleID, ArrayList<PossibleReviewDTO> list_reviewer_selected): boolean
     + getListReviewer(ID articleID): ArrayList<PossibleReviewDTO>
     + updateArticleStatus (ID id_article, String status): boolean
   }
 
   class NotificationController {
-    + invioNotifiche(): void
-    + creatMessage(String aut_name, String aut_lastname, String conf_title): String
-    + sendEmail (String email_d, String conf_title, String msg): void
+    - conf_dao: ConferenceDAO
+    - user_dao: UserDAO
+    + NotificationController(),
+    + sendNotificationDeadline(): void
+    + creatMessage(String aut_name, String aut_lastname, ArrayList<String> conf_title): String
+    + sendEmail (String email_d, String msg, String subject): void
+    + run(): void
   }
+
+TimerTask <|-- NotificationController
 
 }
 @enduml

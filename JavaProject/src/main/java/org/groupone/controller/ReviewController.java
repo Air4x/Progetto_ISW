@@ -12,7 +12,7 @@ import org.groupone.utility.ID;
 
 /**
  * @author Giuseppe Buglione
- * Classe utilizzata per la gestione dei revisori
+ * Classe che implementa la logica di gestione dei revisori
  */
 public class ReviewController {
 

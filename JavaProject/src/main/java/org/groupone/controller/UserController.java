@@ -12,7 +12,7 @@ import org.groupone.utility.ID;
 
 /**
  * @author Giuseppe Buglione
- * Classe per la gestione degli utenti 
+ * Classe che implementa la logica di gestione utenti
  */
 public class UserController {
 
@@ -61,7 +61,7 @@ public class UserController {
      * Metodo per l'accesso di un utente
      * @param email
      * @param password
-     * @return Un oggetto RUserDTO che rappresenta l'uttente che ha appena fatto il login
+     * @return Un oggetto RUserDTO che rappresenta l'utente che ha appena fatto il login
      * @throws SQLException
      */
     public RUserDTO login (String email, String password) throws SQLException{
@@ -74,6 +74,12 @@ public class UserController {
         return null;
     }
 
+    /**
+     * Metodo per ottenere un autore mediante email
+     * @param email
+     * @return oggetto RUserDTO 
+     * @throws SQLException
+     */
     public RUserDTO getRAuthorBYEmail (String email) throws SQLException{
         if(this.user_dao.isUserPresentByEmail(email)==true && this.user_dao.getUserByEmail(email).getRole()=="autore"){
             RUserDTO fake_user = new RUserDTO(user_dao.getUserByEmail(email));
@@ -82,6 +88,12 @@ public class UserController {
         return null;
     }
 
+    /**
+     * Metodo per ottenere una lista di coo-autori mediante email
+     * @param email
+     * @return ArrayList<RUserDTO>
+     * @throws SQLException
+     */
     public ArrayList<RUserDTO> getCooAuthors(String email) throws SQLException{
         ArrayList<RUserDTO> list_cooauthors = new ArrayList<>();
         for(Author a : user_dao.getAllAuthors()){

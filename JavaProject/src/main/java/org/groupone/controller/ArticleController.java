@@ -17,7 +17,7 @@ import org.groupone.utility.ID;
 
 /**
  * @author Giuseppe Buglione
- * Classe per utilizzata per la gestione degli Articoli
+ * Classe che implementa la logica di gestione degli Articoli
  */
 public class ArticleController {
 

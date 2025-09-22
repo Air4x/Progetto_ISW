@@ -26,7 +26,7 @@ import jakarta.mail.internet.MimeMultipart;
 
 /**
  * @author Giuseppe Buglione
- * Classe che estende java.util.TimerTask utilizzata per la gestione della creazione e invio di email 
+ * Classe che estende java.util.TimerTask Classe che implementa la logica di gestione della creazione e invio di email 
 */
 public class NotificationController extends TimerTask {
     
@@ -47,7 +47,7 @@ public class NotificationController extends TimerTask {
     }
 
     /**
-     * Metodo eseguito ad intervalli regolari per l'invio delle notifiche
+     * Override del metodo run della classe TimerTask per esecuzione ad intervalli regolari per l'invio delle notifiche
      */
     @Override
     public void run() {
@@ -71,7 +71,7 @@ public class NotificationController extends TimerTask {
             }}
             if(!emails.isEmpty()){
             for(Author a : auth){
-                sendEmail(a.getEmail(), createMessage(a.getName(), a.getLastName(), emails),"Scadenza Consegne Articoli ");
+                sendEmail(a.getEmail(), createMessageExpireConference(a.getName(), a.getLastName(), emails),"Scadenza Consegne Articoli ");
             }}
 
         } catch (SQLException e) {
@@ -86,13 +86,13 @@ public class NotificationController extends TimerTask {
         
     }
     /**
-    * Metodo per la creazione del messaggio da inviare
+     * Metodo per la creazione del messaggio da inviare
      * @param aut_name: Nome del destinatario
      * @param aut_lastname: Cognome del destinatario
      * @param conf_title: Lista dei nome della conferenza in scadenza
      * @return Stringa che rapresenta il messagio da inviare
      */
-    private String createMessage(String aut_name, String aut_lastname, ArrayList<String> conf_title){
+    private String createMessageExpireConference(String aut_name, String aut_lastname, ArrayList<String> conf_title){
         StringBuilder sb = new StringBuilder();
         sb.append("Saluti ").append(aut_name).append(" ").append(aut_lastname).append(".<br><br>");
         sb.append("Le ricordiamo che le seguenti conferenze risultano in scadenza:<br>");

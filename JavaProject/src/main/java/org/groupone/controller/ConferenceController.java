@@ -17,7 +17,7 @@ import org.groupone.utility.ID;
 
 /**
  * @author Giuseppe Buglione
- * Classe utilizzata per la gestione delle Conferenzze
+ * Classe che implementa la logica di gestione delle Conferenzze
  */
 public class ConferenceController {
     

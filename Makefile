@@ -1,6 +1,6 @@
 VPATH = VisualParadigm:Documentation
 
-main.pdf:  main.tex images
+main.pdf: main.tex images
 	lualatex $<
 
 images: diagramma_uso.png diagramma_classi.png sequence prg er test
@@ -14,61 +14,61 @@ er: er_finale.png
 test: test_createConference.png test_submitArticle.png test_nearDeadline.png test_saveUser.png
 
 diagramma_classi.png: diagramma_classi.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_uso.png: diagramma_uso.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_sequenza_accesso.png: diagramma_sequenza_accesso.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_sequenza_registrazione.png: diagramma_sequenza_registrazione.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_sequenza_sottomissione.png: diagramma_sequenza_sottomissione.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_sequenza_conferenza.png: diagramma_sequenza_conferenza.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_sequenza_revisori.png: diagramma_sequenza_revisori.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_prg_classi.png: diagramma_prg_classi.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_prg_database.png: diagramma_prg_database.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_prg_entity.png: diagramma_prg_entity.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_prg_controller.png: diagramma_prg_controller.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_prg_boundary.png: diagramma_prg_boundary.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
-er_finale.png: er_finale.puml
-	java -jar plantuml.jar $^
+er_finale.png: er_finale.pum
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_prg_dto.png: diagramma_prg_dto.puml
-	java -jar plantuml.jar $^
+	java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 test_submitArticle.png: test_submitArticle.puml
-		java -jar plantuml.jar $^
+		java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 test_createConference.png: test_createConference.puml
-		java -jar plantuml.jar $^
+		java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 test_nearDeadline.png: test_nearDeadline.puml
-		java -jar plantuml.jar $^
+		java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 diagramma_sequenza_conferenza_V2.png: diagramma_sequenza_conferenza_V2.puml
-		java -jar plantuml.jar $^
+		java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 test_saveUser.png: test_saveUser.puml
-		java -jar plantuml.jar $^
+		java -DPLANTUML_LIMIT_SIZE=16384 -jar plantuml.jar $^
 
 clean:
 	rm main.*

@@ -1,0 +1,90 @@
+@startchen
+top to bottom direction
+entity Utente {
+  id <<key>>
+  Nome
+  Cognome
+  Email
+  Affiliazione
+  Password
+  Ruolo
+}
+
+entity Autore {
+}
+
+entity Organizzatore {
+}
+
+entity Articolo {
+  id <<key>>
+  Titolo
+  abs
+  stato
+}
+
+entity Conferenza {
+  id <<key>>
+  Titolo
+  Descrizine
+  Scadenza
+}
+
+entity Sottomissione {
+	id_articolo
+	id_conferenza
+}
+
+entity Revisione {
+	Id_articolo
+	Id_revisore
+	Esito
+	Punteggio
+}
+
+relationship Scrive {
+}
+
+relationship Crea {
+}
+
+relationship Assegna {
+}
+relationship Partecipa {
+}
+relationship Rivisto {
+}
+
+relationship Aggiunge {
+}
+relationship Contiene {
+}
+relationship Appartiene {
+}	
+
+Utente ->- d { Autore,Organizzatore }
+
+Autore -N- Scrive
+Scrive -N- Articolo
+
+Organizzatore -- Crea
+Crea -- Conferenza
+
+Organizzatore -- Assegna
+Assegna -- Revisione
+
+Autore -- Partecipa
+Partecipa -- Revisione
+
+Articolo -- Rivisto
+Rivisto -- Revisione
+
+Autore -- Aggiunge
+Aggiunge -- Sottomissione
+
+Conferenza -- Contiene
+Sottomissione -- Contiene
+
+Articolo -- Appartiene
+Appartiene -- Sottomissione
+@endchen

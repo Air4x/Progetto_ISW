@@ -1,11 +1,11 @@
 @startuml
+left to right direction
 actor Utente
 actor Autore
 actor Organizzatore
 actor Revisore
 
 package Sistema {
-	actor SistemaNotifiche
 	usecase Registrazione
 	usecase Accesso
 	usecase CreaConferenza
@@ -14,7 +14,6 @@ package Sistema {
 	usecase NotificaScadenza
 	usecase InserimentoEsitoRevisione
 	usecase VerificaConflittiInteresse
-	usecase GestionePermessiVisibilità
 }
 
 'Definizione ereditarietà tra ruoli
@@ -23,16 +22,13 @@ Utente <|- Organizzatore
 Autore <|- Revisore
 'Definizione interazione Usecase <-> Attori
 Utente -- Registrazione
-Autore -- Accesso
-Organizzatore -- Accesso
-Accesso <|.. GestionePermessiVisibilità: <<estende>>
+Utente -- Accesso
 Autore -- SottomettiArticolo
 Organizzatore -- CreaConferenza
 Organizzatore -- AssegnaRevisori
-AssegnaRevisori -- Revisore
+AssegnaRevisori -r- Revisore
 Revisore -- InserimentoEsitoRevisione
 AssegnaRevisori ..|> VerificaConflittiInteresse: <<include>>
-SistemaNotifiche -- NotificaScadenza
 NotificaScadenza -- Autore
 
 @enduml

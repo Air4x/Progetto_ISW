@@ -1,6 +1,15 @@
 \subsection{Scenari}
-% DONE: Rifare i scenari
 \label{sec:scenari}
+Per semplicita abbiamo deciso di affrontare i seguenti casi d'uso:
+\begin{itemize}
+  \item Accesso
+\item Registrazione
+\item CreaConferenza
+\item NotificaScadenze
+\item AssengaRevisori
+\end{itemize}
+% DONE: Rifare i scenari
+
 
 \subsubsection{Scenario Registrazione}
 \label{sec:scenari:registrazione}
@@ -8,10 +17,10 @@
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
 \rowcolor{Orchid}
-Caso d'uso & Registrazione \\
-\hline
-Attore Primario & Utente\\
-\hline
+  Caso d'uso & Registrazione \\
+  \hline
+  Attore Primario & Utente\\
+  \hline
 Attore Secondario & \\
 \hline
 Descrizione & Permette la registrazione di un utente\\
@@ -117,45 +126,7 @@ viene mostrato un messaggio di errore
 \hline
 \end{tabular}\\
 
-\subsubsection{Scenario Gestione Permessi di Visibilità}
-\begin{tabular}{|p{3cm}|p{7cm}|}
-\hline 
-\rowcolor{Orchid}
-Caso d'uso & Scenario Gestione Permessi di Visibilità \\
-\hline
-Attore Primario & Sistema di notifica\\
-\hline
-Attore Secondario & \\
-\hline
-Descrizione & Il sistama va a far visualizzare la sezione dedicata all'utente in base al ruolo occupato\\
-\hline
- Sequenza Eventi & 
-\begin{enumerate}
-  \item L'untente va ad inserire le credenziali di accesso
-  \item Il sitema va a verificare la validità delle credenziali inserite 
-  \item IF le credenziali inserite risultino valide
-  \begin{enumerate}
-    \item L'utente accede al sistema
-    \item IF il ruolo occupato dall'utente è organizzatore
-    \begin{enumerate}
-      \item Il sitema va a far visualizzare la sezione dedicata agli organizzatori
-    \end{enumerate}
-  \item ALTRIMENTI il sistema va a visualizzare la sezione dedicata agli autori
-  \end{enumerate}
-\item ALTRIMENTI il sistema mopstra a schermo un messaggio di errore e chiede il rinserimento delle crdenziali di accesso
-\end{enumerate}\\
-\hline
-Post Condizioni: & L'utente va la a visualizare la sezzione dedicata in base al ruolo occupato\\
-\hline
-Sequenza degli eventi alternativa & \begin{itemize}
-  \item Nel punto 3 se le credenziali non risultinano valide il sistema va a mostrare a schermo un messaggio di errore e chiede il rinserimento delle credenziali
-  \item Nel punto 3.2 il ruolo dell'utente non risulta organizzatore il sistema va a visualizare la sezione dedicata agli autori
-\end{itemize} \\
-  \hline
-\end{tabular}\\
-
 \subsubsection{Scenario CreaConferenza}
-
 % DONE: Rifare scenario Crea Conferenza
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
@@ -195,49 +166,6 @@ Sequenza degli eventi alternativa &
 \hline
 \end{tabular}\\
 % DONE: Rifare scenario SottomettiArticolo
-\subsubsection{Scenario SottomettiArticolo}
-\begin{tabular}{|p{3cm}|p{7cm}|}
-\hline 
-\rowcolor{Orchid}
-Caso d'uso & SottomettiArticolo \\
-\hline
-  Attore Primario & Autore\\
-  \hline
-  Attore Secondario & \\
-\hline
-Descrizione & L'autore sottomette un articolo per una determinata conferenza\\
-\hline
-Pre-Condizioni& Esiste la conferenza\\
-\hline
-  Sequenza Eventi &
-                    \begin{enumerate}
-                      \item L'autore inserisce un articolo composto da un Titolo,Abstract e dai Co-Autori per una conferenza
-                      \item IF la conferenza esiste
-                      \begin{enumerate}
-                          \item IF la conferenza non risulta scaduta
-                          \begin{enumerate}
-                            \item IF autori sono registrati nel sistema 
-                            \begin{enumerate}
-                              \item L'articolo viene recipito e gli viene messo lo stato di "sottomesso"
-                            \end{enumerate}
-                            \item ALTRIMENTI il sitema mostra un messaggio di errore
-                          \end{enumerate}
-                        \item ALTRIMENTI il sitema mostra un messaggio di errore
-                      \end{enumerate}
-                      \item ALTRIMENTI il sitema mostra un messaggio di errore
-                    \end{enumerate} \\
-\hline
-Post-Condizioni: &L'articolo è inserito e possibile per la verica degli articoli da parte dei Revisori\\
-\hline
-Sequenza degli eventi alternativa & \begin{enumerate}
-  \item nel punto 2 se la conferenza non esiste viene mostrato a schermo un messaggio di errore
-  \item nel punto 2.1 se la conferenza selezionata risulta scadute viene mostrato a schermo un messaggio di errore
-  \item nel punto 2.1.1 se gli autoriu dell'articolo non risultano registrati nel sistema viene mostrato a schermo un messaggio di errore
-\end{enumerate}\\
-\hline
-\end{tabular}
-
-% DONE: Rifare scenario AssegnaRevisori
 \subsubsection{Scenario AssegnaRevisori}
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 
@@ -284,42 +212,6 @@ Sequenza degli eventi alternativa & \begin{itemize}
 \end{tabular}
 
 % DONE: Rifare scenario InserimentoEsitoRevisione
-\subsubsection{Scenario InserimentoEsitoRevisione}
-\begin{tabular}{|p{3cm}|p{7cm}|}
-\hline 
-\rowcolor{Orchid}
-Caso d'uso & Inserimento Esito Revisione\\
-\hline
-Attore Primario & Revisore\\
-\hline
-Attore Secondario & \\
-\hline
-Descrizione & L'autore selezionato come revisore inserisce esito della revisione\\
-\hline
-Pre-Condizioni& L'articolo è in fase di revisione\\
-\hline
-  Sequenza Eventi&
-                   \begin{enumerate}
-                   \item Il revisore inserisce esito della revisore e descrizione
-                   \item IF l'esito di tutti i revisori dell'articolo è positivo
-                   \begin{enumerate}
-                    \item Il sistema aggiorna lo stato dell'articolo da "in revisione" ad "approvato" 
-                    \item L'articolo viene viene inserito alla conferenza
-                   \end{enumerate}
-                   \item ALTRIMENTI Il sistema aggiorna lo stato dell'articolo da "in revisione" ad "rifiutato"
-                   \item Il sistema notifica l'autore dell'esito della revisione
-                   \end{enumerate}\\
-\hline
-Post-Condizioni: & L'articolo viene aggiornato con l'esito della revisione\\
-\hline
-Sequenza degli eventi alternativa & \begin{itemize}
-  \item Nel punto 2 se uno dei revisori da come esito della revisione negativo l'articolo viene rifiutato
-\end{itemize} \\
-\hline
-\end{tabular}
-
-
-% DONE: Scrivere scenario VerificaConflittiInterrese
 \subsubsection{Scenario VerificaConflittiInterrese}
 \begin{tabular}{|p{3cm}|p{7cm}|}
 \hline 

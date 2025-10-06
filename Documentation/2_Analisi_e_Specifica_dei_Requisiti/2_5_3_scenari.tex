@@ -82,7 +82,8 @@ Pre-Condizioni& L'utente sia già registrato\\
 \hline
   Sequenza Eventi&
 \begin{enumerate}
-  \item L'utente inserisce email e password
+\item Lo scenario inizia quando l'utente clicca sul bottone Accedi
+\item L'utente inserisce email e password
 \item Il sistema controlla la validità dell'email
 \item IF l'email inserita è valida
 \begin{enumerate}
@@ -92,21 +93,14 @@ Pre-Condizioni& L'utente sia già registrato\\
   \item il sistema controlla se le credenziali sono corrette
 \item IF le credenziali sono corrette
 \begin{enumerate}
-  \item punto di estensione: GestionePermessiVisibilità
+\item punto di estensione: GestionePermessiVisibilità
 \item IF la GestionePermessiVisibilità va a buon fine
 \begin{enumerate}
   \item mostra all'utente la giusta schermata per il suo ruolo
 \end{enumerate}
-\item ALTRIMENTI mostra un messaggio di errore
 \end{enumerate}
-\item ALTRIMENTI mostra un messaggio di errore e chiede
-all'utente nuove credenziali
 \end{enumerate}
-\item ALTRIMENTI mostra un messaggio di errore e
-chiede all'utente di inserire nuove credenziali
 \end{enumerate}
-\item ALTRIMENTI mostra un messaggio di errore e
-chiede all'utente di inserire nuove credenziali
 \end{enumerate}\\
 \hline
 Post-Condizioni: &il cliente ha l'accesso al suo account \\
@@ -142,6 +136,7 @@ Descrizione & L'organizzatore crea una conferenza \\
 \hline
   Sequenza Eventi &
                     \begin{enumerate}
+                      \item L'utente che ha fatto l'accesso come organizzatore clicca il tasto crea conferenza
                       \item L'organizzatore inserisce Titolo, Descrizione e la data di scadenza per la sottomissione degli articoli
                       \item Il sistema verifica che la data inserita sia valida
                       \item IF la data inserita è valida
@@ -152,9 +147,7 @@ Descrizione & L'organizzatore crea una conferenza \\
                           \item Il sistema salva la conferenza
                           \item Il sistema rende la conferenza disponibile per la sottomissione di articoli
                         \end{enumerate}
-                        \item ALTRIMENTI Il sistema mostra un messaggio di errore
                       \end{enumerate}
-                    \item ALTRMIENTI Il sistema mostra un messaggio di errore
                     \end{enumerate}\\
 \hline
 Post Condizioni: & L'organizzatore crea una conferenza a cui i vari autori possono sottomettere degli articoli \\

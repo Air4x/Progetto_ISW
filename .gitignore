@@ -42,8 +42,8 @@ Documentation/auto/*
 # Immagini
 VisualParadigm/*.png
 
-paper-management/target
-paper-management/src/main/resources/*
-paper-management/src/test/resources/*
+JavaProject/target
+JavaProject/src/main/resources/*
+JavaProject/src/test/resources/*
 
-./paper-management/.idea/workspace.xml
+./JavaProject/.idea/workspace.xml

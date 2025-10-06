@@ -136,7 +136,7 @@ Descrizione & L'organizzatore crea una conferenza \\
 \hline
   Sequenza Eventi &
                     \begin{enumerate}
-                      \item L'utente che ha fatto l'accesso come organizzatore clicca il tasto crea conferenza
+                      \item Lo scenario organizzatore clicca il tasto crea conferenza
                       \item L'organizzatore inserisce Titolo, Descrizione e la data di scadenza per la sottomissione degli articoli
                       \item Il sistema verifica che la data inserita sia valida
                       \item IF la data inserita è valida
@@ -176,7 +176,8 @@ Pre-Condizioni& L'Autore ha sottomesso l'articolo\\
 \hline
   Sequenza Eventi&
                    \begin{enumerate}
-                   \item L'organizzatore seleziona l'articolo da revisionare
+                     \item Lo scenario inizia quando l'organizzatore seleziona l'articolo da revisionare
+\item L'organizzatore clicca sul tasto assegna revisore
                    \item L'organizzatore seleziona la data di scadanza della revisione
                    \item L'organizzatore va selezionare i revisore
                    \item IF vine rispetata la data di scadenza
@@ -255,6 +256,7 @@ Pre-Condizioni& Che una conferenza risulta in scadenza\\
 \hline
   Sequenza Eventi&
                    \begin{enumerate}
+                     \item Lo scenario inizia allo scadere di un timer interno del sistema una volta al giorno
                    \item Il sistema verifica l'imminenzza della scadenza di una conferenzza
                    \item IF la conferenza è in scadenza
                     \begin{enumerate}

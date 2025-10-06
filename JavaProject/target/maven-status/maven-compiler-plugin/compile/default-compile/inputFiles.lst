@@ -25,6 +25,8 @@
 /home/mario/Progetti/Progetto_ISW/JavaProject/src/main/java/org/groupone/entity/Author.java
 /home/mario/Progetti/Progetto_ISW/JavaProject/src/main/java/org/groupone/entity/Conference.java
 /home/mario/Progetti/Progetto_ISW/JavaProject/src/main/java/org/groupone/entity/Organizer.java
+/home/mario/Progetti/Progetto_ISW/JavaProject/src/main/java/org/groupone/entity/Review.java
 /home/mario/Progetti/Progetto_ISW/JavaProject/src/main/java/org/groupone/entity/User.java
+/home/mario/Progetti/Progetto_ISW/JavaProject/src/main/java/org/groupone/utility/CheckListItem.java
 /home/mario/Progetti/Progetto_ISW/JavaProject/src/main/java/org/groupone/utility/ID.java
 /home/mario/Progetti/Progetto_ISW/JavaProject/src/main/java/org/groupone/utility/PasswordManager.java

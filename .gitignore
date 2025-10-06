@@ -42,7 +42,7 @@ Documentation/auto/*
 # Immagini
 VisualParadigm/*.png
 
-JavaProject/target
+./JavaProject/target/*
 JavaProject/src/main/resources/*
 JavaProject/src/test/resources/*
 

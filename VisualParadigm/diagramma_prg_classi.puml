@@ -1,6 +1,14 @@
 @startuml
 skinparam packageStyle frame
 top to bottom direction
+
+package Util {
+    class ID {
+    }
+
+    class PasswordManager {
+    }
+}
 package DataBase {
   class UserDAO {
     /'
@@ -327,11 +335,16 @@ package DTO{
          ' + getAbstr(): String
 	 '/
 '        + getAuthors(): ArrayList<RUserDTO>
-    }
+	}
 
 }
 
 ' Database -> Entity
+User --> ID <<use>>
+Article --> ID <<use>>
+Conference --> ID <<use>>
+Review --> ID <<use>>
+DBManager --> PasswordManager    
 UserDAO -u-> User
 UserDAO -u-> Author
 UserDAO -u-> Organizer	

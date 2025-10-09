@@ -3,12 +3,10 @@ skinparam packageStyle frame
 top to bottom direction
 
 package Util {
-    class ID {
-    }
-
-    class PasswordManager {
-    }
+    class ID { }
+    class PasswordManager { }
 }
+
 package DataBase {
   class UserDAO {
     /'
@@ -29,7 +27,7 @@ package DataBase {
      ' + getAllConferences(): ArrayList<Conference>
      ' + getActiveConferences(): ArrayList<Conference>
      ' + saveConference(conf: Conference): void
-     ' + getArticlesByConference(conf_id: ID): ArrayList<Article>>
+     ' + getArticlesByConference(conf_id: ID): ArrayList<Article>
      '/
   }
   
@@ -340,10 +338,10 @@ package DTO{
 }
 
 ' Database -> Entity
-User --> ID <<use>>
-Article --> ID <<use>>
-Conference --> ID <<use>>
-Review --> ID <<use>>
+User --> ID
+Article --> ID
+Conference --> ID
+Review --> ID
 DBManager --> PasswordManager    
 UserDAO -u-> User
 UserDAO -u-> Author

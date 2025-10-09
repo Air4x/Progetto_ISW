@@ -35,32 +35,20 @@ Descrizione & Permette la registrazione di un utente\\
     \item IF l'indirizzo email è valido
    \begin{enumerate}
     \item il sistema controlla che l'indirizzo non sia già presente
-     \item IF indirizzo email non è presente
-       \begin{enumerate}
-         \item il sistema controlla la validità della password
-           \begin{enumerate}
-            \item IF la password è valida
-               \begin{enumerate}
-               \item Il sistema salva i dati dell'Utente
-               \item punto di estensione: GestionePermessiVisibilià
-               \end{enumerate}
-            \item ALTRIMENTI il Sistema mostra un messaggio di errore
-          \end{enumerate}
-        \item ALTRIMENTI il Sistema mostra un messaggio di errore spiegando che non è possibile usare l'email
-       \end{enumerate}         
+     \item IF indirizzo email non è presente e la password è valida
+     \begin{enumerate}
+       \item Il sistema salva i dati dell'Utente
+       \item punto di estensione: GestionePermessiVisibilià
       \end{enumerate}
- \item ALTRIMENTI il Sistema mostra un messaggio di errore spiegando che l'email non è valida
-  \end{enumerate}\\
+     \end{enumerate}
+    \end{enumerate}\\
 \hline
 Post-Condizioni: & Il cliente è registrato nel sistema \\
   \hline
-\end{tabular}\\ 
-\begin{tabular}{|p{3cm}|p{7cm}|}
-  \hline
   Sequenza degli eventi alternativa & \begin{itemize}
-  \item Se nel punto 5 l'indirizzo email non è valido viene mostrato un messaggio di errore all'utente e gli si chiede di inserire un nuovo indirizzo email
-\item Se nel punto 5.2 l'indirizzo email è già presente nel sistema si mostra un messaggio di errore e si chiede all'utente di usare credenziali diverse
-\item Se nel punto 5.2.1.1 la password risulta non valida viene mostrato un messaggio di errore all'utente e gli viene chiesto di inserire una nuova password
+  \item Se nel punto 6 l'indirizzo email non è valido viene mostrato un messaggio di errore all'utente e gli si chiede di inserire un nuovo indirizzo email
+\item Se nel punto 6.2 l'indirizzo email è già presente nel sistema si mostra un messaggio di errore e si chiede all'utente di usare credenziali diverse
+\item Se nel punto 6.2 la password risulta non valida viene mostrato un messaggio di errore all'utente e gli viene chiesto di inserire una nuova password
   \end{itemize}\\
 \hline
 \end{tabular} \\
@@ -101,9 +89,6 @@ Pre-Condizioni& L'utente sia già registrato\\
 \hline
 Post-Condizioni: &il cliente ha l'accesso al suo account \\
   \hline
-\end{tabular}\\
-\begin{tabular}{|p{3cm}|p{7cm}|}
-\hline
   Sequenza degli eventi alternativa & \begin{itemize}
   \item Nel punto 3 se l'email inserita non è valida viene mostrato un messaggio di
 errore e viene chiesto all'utente di inserire un nuovo indirizzo email
@@ -176,7 +161,7 @@ Pre-Condizioni& L'Autore ha sottomesso l'articolo\\
 \item L'organizzatore clicca sul tasto assegna revisore
                    \item L'organizzatore seleziona la data di scadanza della revisione
                    \item L'organizzatore va selezionare i revisore
-                   \item IF vine rispetata la data di scadenza
+                   \item IF viene rispettata la data di scadenza
                    \begin{enumerate}
                     \item IF VerificaConflittiInterrese va buon fine
                     \begin{enumerate}
@@ -185,19 +170,16 @@ Pre-Condizioni& L'Autore ha sottomesso l'articolo\\
                       \begin{enumerate}
                         \item Il sitema aggiorna lo stato dell'articolo da "in revisione" ad "approvato"
                       \end{enumerate}
-                      \item ALTRIMENTI lo stato dell'articolo passa da "in revisione" ad "rifiutato"
                     \end{enumerate}
-                    \item ALTRIMENTI l'organizzatore deve selezionare altri revisori
                    \end{enumerate}
-                   \item ALTRIMENTI lo stato dell'articolo passa da "in revisione" ad "rifiutato"
                    \end{enumerate}\\
 \hline
 Post-Condizioni: &L'articolo passa da uno stato di "sottomesso" a quello di "revisione" \\
 \hline
 Sequenza degli eventi alternativa & \begin{itemize}
-\item Nel punto 4 se la data di scadenza della revisione non viene rispetata, l'articolo viene automaticamente rifiutato
-\item Nel punto 4.1 se la VerificaConflittiInterrese risulta negativo, l'organizzatore deve selezionare altri revisori
-\item Nel punto 4.1.2 se InserimentoEsitoRevisione ha esito negativo, l'articolo automaticamente rifiutato
+\item Nel punto 5 se la data di scadenza della revisione non viene rispetata, l'articolo viene automaticamente rifiutato
+\item Nel punto 5.1 se la VerificaConflittiInterrese risulta negativo, l'organizzatore deve selezionare altri revisori
+\item Nel punto 5.1.2 se InserimentoEsitoRevisione ha esito negativo, l'articolo automaticamente rifiutato
 \end{itemize}\\
 \hline
 \end{tabular}
@@ -224,13 +206,12 @@ Pre-Condizioni& L'articolo risulti sottomesso a una conferenza\\
                     \begin{enumerate}
                       \item Il sitema va ad assegnare l'articolo agli revisori
                     \end{enumerate}
-                    \item ALTRIMENTI il sistema va a mostrare un messaggio di errore
                   \end{enumerate}\\
 \hline
 Post-Condizioni: & L'articolo è stato assegnato ai revisori\\
 \hline
 Sequenza degli eventi alternativa & \begin{itemize}
-  \item Nel punto 2 se la verifica non va buon fine l'articolo non viene assegnato ai revisori
+  \item Nel punto 3 se la verifica non va buon fine l'articolo non viene assegnato ai revisori
 \end{itemize} \\
 \hline
 \end{tabular}

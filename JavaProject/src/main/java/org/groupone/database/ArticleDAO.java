@@ -141,7 +141,7 @@ public class ArticleDAO {
      * @param newTitle, il nuovo titolo dell'articolo
      */
     public void updateTitle(ID artId, String newTitle) throws SQLException {
-	String updateQuery = "UPDATE Articoli SET Articoli.TITLE=? WHERE Articoli.ID=?;";
+	String updateQuery = "UPDATE Articoli SET Articoli.TITOLO=? WHERE Articoli.ID=?;";
 	PreparedStatement updateArticoli = conn.prepareStatement(updateQuery);
 	updateArticoli.setString(1, artId.toString());
 	updateArticoli.setString(2, newTitle);

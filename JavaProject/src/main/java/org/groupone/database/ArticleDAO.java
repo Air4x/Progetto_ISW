@@ -76,7 +76,7 @@ public class ArticleDAO {
 	    stato = rsArticoli.getString("STATO");
 	}
 	// ======To get all the authors========
-	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = ?;";
+	String fromAutori = "SELECT ID_UTENTE FROM Autori WHERE ID_ARTICOLO = ?;";
 	PreparedStatement stAutori = conn.prepareStatement(fromAutori);
 	stAutori.setString(1, id.toString());
 	ResultSet rsAutori = stAutori.executeQuery();

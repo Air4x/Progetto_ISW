@@ -63,15 +63,17 @@ public class ArticleDAO {
     public Article getArticleByID(ID id) throws SQLException {
 	String titolo = null;
 	String abs = null;
+	String stato = null;
 	ArrayList<Author> autori = new ArrayList<>();
 	// ======To get title, id and abstract=====
-	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID FROM Articoli WHERE ID = ?;";
+	String fromArticoli = "SELECT TITOLO, ABSTRACT, ID, STATO FROM Articoli WHERE ID = ?;";
 	PreparedStatement stArticoli = conn.prepareStatement(fromArticoli);
 	stArticoli.setString(1, id.toString());
 	ResultSet rsArticoli = stArticoli.executeQuery();
 	while(rsArticoli.next()){
 	    titolo = rsArticoli.getString("TITOLO");
 	    abs = rsArticoli.getString("ABSTRACT");
+	    stato = rsArticoli.getString("STATO");
 	}
 	// ======To get all the authors========
 	String fromAutori = "SELECT id_aut FROM Autori WHERE id_art = ?;";
@@ -94,7 +96,7 @@ public class ArticleDAO {
 		autori.add(a);
 	    }  
 	}
-	return new Article(id, abs, autori, titolo);
+	return new Article(id, abs, autori, titolo, stato);
     }
 
     /**

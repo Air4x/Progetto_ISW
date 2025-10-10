@@ -108,12 +108,12 @@ public class ArticleDAO {
     public ArrayList<Article> getArticlesByAuthor(ID id_aut) throws SQLException {
 	ArrayList<Integer> articleIds = new ArrayList<>();
 	ArrayList<Article> articoli = new ArrayList<>();
-	String fromAutori = "SELECT id_art FROM Autori WHERE id_aut = ?";
+	String fromAutori = "SELECT ID_ARTICOLO FROM Autori WHERE ID_UTENTE = ?";
 	PreparedStatement stAutori = conn.prepareStatement(fromAutori);
 	stAutori.setString(1, id_aut.toString());
 	ResultSet rsAutori = stAutori.executeQuery();
 	while(rsAutori.next()){
-	    Article a = getArticleByID(new ID(rsAutori.getString("id_art")));
+	    Article a = getArticleByID(new ID(rsAutori.getString("ID_ARTICOLO")));
 	    articoli.add(a);
 	}
 	return articoli;

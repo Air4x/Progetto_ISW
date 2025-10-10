@@ -31,6 +31,11 @@ public class Article {
     private String abstr;
 
     /**
+     * Lo stato dell'articolo
+     *
+     */
+    private String stato;
+    /**
      * Lista degli autori dell'articolo
      *
      */
@@ -49,6 +54,7 @@ public class Article {
         this.authors = authors;
         this.title = titolo;
 	this.id = id;
+	this.stato = "sottomesso";
     }
 
     /**
@@ -61,6 +67,7 @@ public class Article {
 	this.title = a.getTitle();
 	this.abstr = a.getAbstr();
 	this.authors = a.getAuthors();
+	this.stato = a.getStato();
     }
 
     /**
@@ -88,6 +95,15 @@ public class Article {
      */
     public String getTitle() {
         return title;
+    }
+
+    /**
+     * Getter per lo stato
+     *
+     * @return lo stato attuale dell'articolo
+     */
+    public String getStato() {
+	return this.stato;
     }
 
     /**

@@ -41,7 +41,7 @@ public class UserDAO {
      * @return una stringa, che può essere "autore" o "organizzatore"
      */
     public String getUserRoleByID(ID id) throws SQLException {
-        String sql = "SELECT RUOLO FROM Utenti WHERE ID = ?";
+        String sql = "SELECT RUOLO FROM Utenti WHERE ID = ?;";
         try(PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, id.toString());
             ResultSet rs = stmt.executeQuery();
@@ -57,7 +57,7 @@ public class UserDAO {
      * @return Un istanza della classe Autore/Organizer rappresentante l'utente
      */
     public User getUserByID(ID id) throws SQLException {
-        String sql = "SELECT AFFILIAZIONE, EMAIL, COGNOME, NOME, PASSWORD, ID, RUOLO FROM Utenti WHERE id = ?";
+        String sql = "SELECT AFFILIAZIONE, EMAIL, COGNOME, NOME, PASSWORD, ID, RUOLO FROM Utenti WHERE ID = ?;";
         try(PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, id.toString());
             ResultSet rs = stmt.executeQuery();
@@ -90,7 +90,7 @@ public class UserDAO {
      */
     public boolean isUserPresentByID(ID id) throws SQLException {
         boolean result = false;
-        String sql = "SELECT ID FROM Utenti WHERE ID = ?";
+        String sql = "SELECT ID FROM Utenti WHERE ID = ?;";
         try(PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, id.toString());
             ResultSet rs = stmt.executeQuery();
@@ -111,7 +111,7 @@ public class UserDAO {
      * @return se l'utente è presente o meno
      */
     public boolean isUserPresentByEmail(String email) throws SQLException {
-        String sql = "SELECT ID FROM Utenti WHERE EMAIL = ?";
+        String sql = "SELECT ID FROM Utenti WHERE EMAIL = ?;";
         try(PreparedStatement stmt = conn.prepareStatement(sql);) {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
@@ -167,7 +167,7 @@ public class UserDAO {
      */
     public ArrayList<Author> getAllAuthors() throws SQLException {
         ArrayList<Author> authors = new ArrayList<>();
-        String sql = "SELECT NOME, COGNOME, EMAIL, AFFILIAZIONE, ID, PASSWORD FROM Utenti WHERE RUOLO = 'autore'";
+        String sql = "SELECT NOME, COGNOME, EMAIL, AFFILIAZIONE, ID, PASSWORD FROM Utenti WHERE RUOLO = 'autore';";
         try(PreparedStatement stmt = conn.prepareStatement(sql);) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -199,7 +199,7 @@ public class UserDAO {
                 stmt.setString(4, a.getEmail());
                 stmt.setString(5, a.getPassword());
                 stmt.setString(6, a.getAffiliation());
-                int ignore = stmt.executeUpdate();
+		stmt.executeUpdate();
             }
         } else if (user.getRole().equals("organizzatore")) {
             Organizer o = (Organizer) user;
@@ -211,7 +211,7 @@ public class UserDAO {
                 stmt.setString(4, o.getEmail());
                 stmt.setString(5, o.getPassword());
                 stmt.setString(6, o.getAffiliation());
-                int ignore = stmt.executeUpdate();
+		stmt.executeUpdate();
             }
         }
     }

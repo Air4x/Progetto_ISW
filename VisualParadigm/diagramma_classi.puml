@@ -1,5 +1,12 @@
 @startuml 
 
+class ConferenceManager {
+  + submitArticle(author: Author, article: Article, conf: Conference)
+  + assignReviewer(reviewer: Author, article: Article)
+  + getSubmissions(conf: Conference): List<Article>
+  + setArticleStatus(article: Article, status: String)
+}
+
   abstract class User {
     - id: int
     - name: String
@@ -55,6 +62,12 @@
 
   User <|-- Author
   User <|-- Organizer
+
+
+Organizer "1" -- "1" ConferenceManager : Manages
+ConferenceManager "1" -- "0..*" Conference : Knows about
+ConferenceManager "1" -- "0..*" Article : Knows about
+ConferenceManager "1" -- "0..*" Author : Knows about
 
 ' Relazioni
 Organizer "1" -- "0..*" Conference : Gestisce

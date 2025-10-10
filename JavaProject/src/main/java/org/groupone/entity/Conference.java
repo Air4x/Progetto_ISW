@@ -35,6 +35,10 @@ public class Conference {
      */
     private Date deadline;
 
+    /**
+     * L'id dell'organizzatore
+     *
+     */
     private ID organizer;
 
     /**

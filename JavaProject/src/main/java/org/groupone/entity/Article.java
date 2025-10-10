@@ -59,6 +59,23 @@ public class Article {
     }
 
     /**
+     * Costruttore per Article
+     *
+     * @param id
+     * @param abstr
+     * @param authors
+     * @param titolo
+     * @param stato
+     */
+    public Article(ID id, String abstr, ArrayList<Author> authors, String titolo, String stato) {
+        this.abstr = abstr;
+        this.authors = authors;
+        this.title = titolo;
+	this.id = id;
+	this.stato = stato;
+    }
+
+    /**
      * Costruttore di copia per Article
      *
      * @param a

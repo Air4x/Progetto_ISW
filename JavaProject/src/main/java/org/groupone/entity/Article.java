@@ -35,6 +35,7 @@ public class Article {
      *
      */
     private String stato;
+
     /**
      * Lista degli autori dell'articolo
      *

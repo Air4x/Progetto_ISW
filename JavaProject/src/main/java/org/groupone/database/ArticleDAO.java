@@ -34,14 +34,15 @@ public class ArticleDAO {
     /**
      * Permette di aggiungere un articolo al database
      *
-     * @param l'articolo che si vuole salvare
+     * @param [a] l'articolo che si vuole salvare
      */
     public void saveArticle(Article a) throws SQLException {
-	String sql = "INSERT INTO Articoli VALUES (?, ?, ?);";
+	String sql = "INSERT INTO Articoli VALUES (?, ?, ?, ?);";
 	PreparedStatement pst = conn.prepareStatement(sql);
 	pst.setNString(1, a.getId().toString());
 	pst.setNString(2, a.getTitle());
 	pst.setNString(3, a.getAbstr());
+	pst.setNString(4, a.getStato());
 	int ignore = pst.executeUpdate();
 	String insertAuthors = "INSERT INTO Autori VALUES(?, ?);";
 	PreparedStatement stAuthors = conn.prepareStatement(insertAuthors);

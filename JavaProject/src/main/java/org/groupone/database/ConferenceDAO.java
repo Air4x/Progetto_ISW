@@ -76,7 +76,7 @@ public class ConferenceDAO {
 	stmt.setString(3, conf.getDescription());
 	stmt.setDate(4, conf.getDeadline());
 	stmt.setString(5, conf.getOrganizer());
-        int ignore = stmt.executeUpdate();
+	stmt.executeUpdate();
     }
 
     /**
@@ -89,18 +89,18 @@ public class ConferenceDAO {
     public ArrayList<Article> getArticlesByConference(ID conf_id) throws SQLException {
 	ArrayList<Article> articoli = new ArrayList<>();
 	// ========Ottenimento id articoli====================
-	String queryIdArt = "SELECT id_art FROM Registro WHERE id_conf = ?";
+	String queryIdArt = "SELECT ID_ARTICOLO FROM Sottomissioni WHERE ID_CONFERENZA = ?";
 	PreparedStatement stIdArt =  conn.prepareStatement(queryIdArt);
 	stIdArt.setString(1, conf_id.toString());
 	ResultSet idArt = stIdArt.executeQuery();
 	// =======Ottenimento id autori=======================
-	String queryIdAuth = "SELECT id_aut FROM Autori WHERE id_art = ?";
+	String queryIdAuth = "SELECT ID_UTENTE FROM Autori WHERE ID_ARTICOLO = ?";
 	PreparedStatement stIdAuth = conn.prepareStatement(queryIdAuth);
 	// =======Ottenimento dati autore=====================
 	String queryAuth = "SELECT ID, NOME, COGNOME, PASSWORD, AFFILIAZIONE, EMAIL FROM Utenti WHERE ID = ?";
 	PreparedStatement stAuth = conn.prepareStatement(queryAuth);
 	// =======Ottenimento dati articolo==================
-	String queryArt = "SELECT ID, TITOLO, ABSTRACT FROM Articoli WHERE ID = ?";
+	String queryArt = "SELECT ID, TITOLO, ABSTRACT, STATO FROM Articoli WHERE ID = ?";
 	PreparedStatement stArt = conn.prepareStatement(queryArt);
 	// =======Esecuzione queries=========================
 	while(idArt.next()){
@@ -119,7 +119,7 @@ public class ConferenceDAO {
 	    stArt.setString(1, idArt.getString("id_art"));
 	    ResultSet article = stArt.executeQuery();
 	    article.next();
-	    Article articolo = new Article(new ID(idArt.getString("id_art")),article.getString("ABSTRACT"), autori, article.getString("TITOLO"));
+	    Article articolo = new Article(new ID(idArt.getString("id_art")),article.getString("ABSTRACT"), autori, article.getString("TITOLO"), article.getString("STATO"));
 	    articoli.add(articolo);
 	}
 	return articoli;

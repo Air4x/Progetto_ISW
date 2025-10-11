@@ -47,3 +47,5 @@ JavaProject/src/main/resources/*
 JavaProject/src/test/resources/*
 
 ./JavaProject/.idea/workspace.xml
+_minted/
+JavaProject/target/classes/org/

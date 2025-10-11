@@ -47,7 +47,7 @@ public class ReviewDAO {
 	stAutori.setString(1, idArt.toString());
 	ResultSet rsAutori = stAutori.executeQuery();
 	while(rsAutori.next()) {
-	    autori.add(rsAutori.getString("id_aut"));
+	    autori.add(rsAutori.getString("ID_UTENTE"));
 	}
 	if (autori.contains(idUser.toString())) {
 	    return true;
@@ -62,7 +62,6 @@ public class ReviewDAO {
      *
      * @param review, la revisione da salvare
      */
-
     public void saveReview(Review review) throws SQLException {
 	String intoRevisioni = "INSERT INTO Revisioni VALUES (?, ?, ?, ?, ?);";
 	PreparedStatement stRevisioni = conn.prepareStatement(intoRevisioni);

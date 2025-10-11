@@ -66,7 +66,7 @@ La classe ReviewDAO presenta i seguenti metodi:
 \end{itemize}
 
 \paragraph{Progettazione Database}
-% TODO: Riscrivere modello ER e relativa progettazione fisica
+% DONE: Riscrivere modello ER e relativa progettazione fisica
 Nella figura \ref{fig:modello_er} è presentato il modello ER su cui è basato il
 database
 \begin{figure}[!ht]
@@ -75,6 +75,76 @@ database
   \caption{Modello ER del database}
   \label{fig:modello_er}
 \end{figure}
+
+Di seguito la progettazione fisica del database:
+\begin{minted}[breaklines]{sql}
+    DROP DATABASE IF EXISTS testDB;
+CREATE DATABASE testDB;
+
+USE testDB;
+
+-- Tabelle
+---- Utenti
+CREATE TABLE Utenti (
+       ID varchar(36) primary key,
+       NOME varchar(100) not null,
+       COGNOME varchar(100) not null,
+       AFFILIAZIONE varchar(100) not null,
+       EMAIL varchar(200) not null,
+       PASSWORD varchar(130) not null,
+       RUOLO varchar(13) not null,
+       constraint CHECK_RUOLO check (RUOLO = 'autore' or RUOLO = 'organizzatore')
+);
+
+---- Articoli
+CREATE TABLE Articoli (
+       ID varchar(36) primary key,
+       TITOLO varchar(140) not null,
+       ABSTRACT varchar(250) not null,
+       STATO varchar(11) not null,
+       constraint CHECK_STATO check (STATO = 'sottomesso' or STATO = 'in revisione')
+);
+
+---- Autori (Tabella di supporto per relazionare Utenti e Articoli)
+CREATE TABLE Autori (
+       ID_UTENTE VARCHAR(36),
+       ID_ARTICOLO VARCHAR(36),
+       constraint PK_AUTORI primary key(ID_UTENTE, ID_ARTICOLO),
+       constraint FK_AUTORI_UTENTI foreign key(ID_UTENTE) references Utenti(ID),
+       constraint FK_AUTORI_ARTICOLI foreign key(ID_ARTICOLO) references Articoli(ID)
+);
+
+---- Conferenze
+CREATE TABLE Conferenze (
+       ID varchar(36) primary key,
+       TITOLO varchar(140),
+       DESCRIZIONE varchar(250),
+       SCADENZA date not null,
+       ORGANIZZATORE varchar(36),
+       constraint FK_CONFERENZE_UTENTI foreign key(ORGANIZZATORE) references Utenti(ID)
+);
+
+---- Sottomissioni (Tabella di supporto per relazionare Utenti, Articolo e Conferenza)
+CREATE TABLE Sottomissioni (
+       ID_ARTICOLO varchar(36),
+       ID_CONFERENZA varchar(36),
+       constraint PK_SOTTOMISSIONI primary key(ID_ARTICOLO, ID_CONFERENZA),
+       constraint FK_SOTTOMISSIONI_ARTICOLI foreign key(ID_ARTICOLO) references Articoli(ID),
+       constraint FK_SOTTOMISSIONI_CONFERENZE foreign key(ID_CONFERENZA) references Conferenze(ID)
+);
+
+---- Revisione (Tabella che implementa le revisioni e i revisori)
+CREATE TABLE Revisioni (
+       ID varchar(36),
+       ID_REVISORE varchar(36),
+       ID_ARTICOLO varchar(36),
+       PUNTEGGIO integer,
+       ESITO varchar(9),
+       constraint FK_REVISIONI_UTENTI foreign key(ID_REVISORE) references Utenti(ID),
+       constraint FK_REVISIONI_ARTICOLI foreign key(ID_ARTICOLO) references Articoli(ID),
+       constraint CHEK_ESITO check (ESITO = 'accettato' or ESITO = 'rifiutato')
+);
+  \end{minted}
 
 %%% Local Variables:
 %%% mode: LaTeX

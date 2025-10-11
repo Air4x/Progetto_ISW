@@ -117,6 +117,22 @@ public class ReviewDAO {
 	return revs;
      }
 
+    public Review getAllReviewByID(ID rev) throws SQLException {
+	ArticleDAO articledao = new ArticleDAO();	
+	UserDAO userdao = new UserDAO();
+	String fromRevisioni = "SELECT ID, ID_REVISORE, ID_ARTICOLO, PUNTEGGIO, ESITO FROM Revisioni WHERE ID = ?;";
+	PreparedStatement stRevisioni = conn.prepareStatement(fromRevisioni);
+	stRevisioni.setNString(1, rev.toString());
+	ResultSet rs = stRevisioni.executeQuery();
+	rs.next();
+	return new Review(new ID(rs.getString("ID")),
+			  (Author) userdao.getUserByID(new ID(rs.getString("ID_REVISORE"))),
+			  articledao.getArticleByID(new ID(rs.getString("ID_ARTICOLO"))),
+			  rs.getInt("PUNTEGGIO"),
+			  rs.getString("ESITO"));
+    }
+
+
     /**
      * Permette di aggiornare il punteggio e l'esito di una revisione.
      *

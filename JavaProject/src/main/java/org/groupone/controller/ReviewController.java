@@ -2,17 +2,21 @@ package org.groupone.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
-import org.groupone.DTO.PossibleReviewDTO;
+import org.groupone.DTO.RUserDTO;
+import org.groupone.DTO.ReviewDTO;
+import org.groupone.DTO.ShowArticleDTO;
 import org.groupone.database.ArticleDAO;
 import org.groupone.database.ReviewDAO;
 import org.groupone.database.UserDAO;
 import org.groupone.entity.Author;
+import org.groupone.entity.Review;
 import org.groupone.utility.ID;
 
 /**
  * @author Giuseppe Buglione
- * Classe che implementa la logica di gestione dei revisori
+ * Classe che implementa la logica di gestione di una revisione
  */
 public class ReviewController {
 
@@ -27,61 +31,103 @@ public class ReviewController {
     }
 
     /**
-     * Metodo per l'assegnazion di revisore
-     * @param articleID
-     * @param list_reviewer_selected
-     * @return Valore Booleano che indica se l'assegnazione di revisore è avvenuta con successo
+     * Crea una revisione per ogni revisore passato come parametro
+     * @param reviewers
+     * @param article
+     * @return
      * @throws SQLException
      */
-    public boolean assignReviewer (ID articleID, ArrayList<PossibleReviewDTO> list_reviewer_selected) throws SQLException{
-        if(list_reviewer_selected.size()==0 || list_reviewer_selected.size()>3 || list_reviewer_selected == null){
-            System.out.println("Error in list of authors");
-            return false;
-        }else if (article_dao.isArticlePresentByID(articleID)== false){
-            System.out.println("Article not found");
+    public boolean createReview(ArrayList<RUserDTO> reviewers, ShowArticleDTO article) throws SQLException {
+        if (reviewers == null || reviewers.isEmpty()) {
+            System.out.println("Invalid reviewers list");
             return false;
         }
-        for(PossibleReviewDTO fake_reviewer: list_reviewer_selected){
-            if(fake_reviewer != null){
-            this.reviewer_dao.assignReviewer(articleID, fake_reviewer.getId());
+        if (article == null) {
+            System.out.println("Invalid article");
+            return false;
+        }
+        for (RUserDTO reviewer : reviewers) {
+            if (reviewer != null) {
+                this.reviewer_dao.saveReview(new Review((Author)user_dao.getUserByID(reviewer.getId()), article_dao.getArticleByID(article.getId())));
             }
+            
         }
-       return true;
+        return true;
     }
 
     /**
-     * Metodo per ottenere una lista di possibili revisori
-     * @param articleID
-     * @return Un arraylist di PossibleReviewDTO che si possono assegnare come revisori
+     * Restituisce la lista di revisori che non hanno conflitti di interesse con l'articolo
+     * @param articleId
+     * @return
      * @throws SQLException
      */
-    public ArrayList<PossibleReviewDTO> getListReviewer(ID articleID) throws SQLException{
-        ArrayList<PossibleReviewDTO> list_r = new ArrayList<>();
-        ArrayList<Author> list_a = user_dao.getAllAuthors();
-        for(Author a: list_a){
-            if(reviewer_dao.hasConflitOfInterest(articleID, a.getId()) != true && user_dao.isUserPresentByID(a.getId()) == true){
-                PossibleReviewDTO r = new PossibleReviewDTO(a);
-                list_r.add(r);
+    public ArrayList<RUserDTO> getPossibleReviewers(ID articleId) throws SQLException {
+        ArrayList<RUserDTO> possibleReviewers = new ArrayList<>();
+        ArrayList<Author> authors = user_dao.getAllAuthors();
+        for (Author author : authors) {
+            if (!this.reviewer_dao.hasConflitOfInterest(articleId, author.getId())) {
+                possibleReviewers.add(new RUserDTO(author));
             }
         }
-        return list_r;
+        return possibleReviewers;
     }
 
     /**
-     * Metodo per aggiorna lo status di un articolo
-     * @param id_article
-     * @param status
-     * @return Valore Booleano che indica se l'aggiornamento dello stato è avvenuto con successo
+     * Permette di aggiornare una revisione
+     * @param final_review
+     * @param new_score
+     * @param new_result
+     * @return
      * @throws SQLException
-     */
-    public boolean updateArticleStatus (ID id_article, String status) throws SQLException {
-        if(article_dao.isArticlePresentByID(id_article)){
-            this.reviewer_dao.updateArticleStatus(id_article, status);
-            System.out.println("Article status's is update");
-            return true;
+     */    
+    public ReviewDTO updateReview (ReviewDTO final_review, int new_score, String new_result) throws SQLException {
+        Review r = this.reviewer_dao.getAllReviewByID(final_review.getId());
+        if (final_review == null) {
+            System.out.println("Invalid review");
+            return null;
         }
-        System.out.println("Article not found");
-        return false;
+        r.setScore(new_score);
+        r.setResult(new_result);
+        this.reviewer_dao.updateReview(r);
+        return new ReviewDTO(r);
+    }
+
+    /**
+     * Permette di ottenere la lista di tutte le revisioni di un dato
+     * revisore
+     *
+     * @param reviewer, l'id del revisore
+     */
+    public ArrayList<ReviewDTO> getAllReviewsByReviewer(ID reviewer) throws SQLException {
+        ArrayList<Review> reviews = (ArrayList<Review>) this.reviewer_dao.getAllReviewByReviewer(reviewer);
+        ArrayList<ReviewDTO> reviews_dto = new ArrayList<>();
+        for (Review r : reviews) {
+            reviews_dto.add(new ReviewDTO(r));
+        }
+        return reviews_dto;
+    }
+
+    /**
+     * Permette di ottenere la lista di tutte le revisioni di un dato
+     * articolo
+     *
+     * @param article, l'id dell'articolo
+     */
+    public ArrayList<ReviewDTO> getAllReviewsByArticle(ID articleId) throws SQLException {
+        ArrayList<Review> reviews = (ArrayList<Review>) this.reviewer_dao.getAllReviewByArticle(articleId);
+        ArrayList<ReviewDTO> reviews_dto = new ArrayList<>();
+        for (Review r : reviews) {
+            reviews_dto.add(new ReviewDTO(r));
+        }
+        return reviews_dto;
+    }
+
+    @Deprecated
+    public boolean assignReviewers(ShowArticleDTO article, ArrayList<RUserDTO> reviewers) throws SQLException {
+        return this.createReview(reviewers, article);
     }
 
 }
+
+
+

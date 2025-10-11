@@ -11,7 +11,6 @@ import org.groupone.database.ConferenceDAO;
 import org.groupone.database.UserDAO;
 import org.groupone.entity.Article;
 import org.groupone.entity.Author;
-import org.groupone.entity.Conference;
 import org.groupone.utility.ID;
 
 

@@ -1,17 +1,17 @@
 @startuml
 package DTO{
 
-    class PossibleReviewDTO {
+    class ReviewDTO {
         - id: ID 
-        - name: String
-        - lastname: String
-        - affiliazione: String
-        + PossibleReviewDTO(id: ID, name: String, lastname: String, affiliazione: String),
-        + PossibleReviewDTO(autore: Author),
+        - article: String
+        - score: int
+        - result: String
+        + ReviewDTO(id: ID, article: String, score: int, result: String),
+        + ReviewDTO(review: Review),
         + getId(): ID
-        + getName(): String
-        + getLastname(): String
-        + getAffiliation(): String
+        + getArticle(): String
+        + getScore(): int
+        + getResult(): String
     }
 
     class RUserDTO {
@@ -22,8 +22,8 @@ package DTO{
         - ruolo: String
         - id: ID
         + RUserDTO(name: String, lastname: String, email: String, affiliazione: String, ruolo: String, id: ID),
-        + RUserDTO(user User),
-        + RUserDTO(Ruser RUserDTO),
+        + RUserDTO(user: User),
+        + RUserDTO(Ruser: RUserDTO),
         + getName(): String
         + getLastname(): String
         + getEmail(): String

@@ -1,0 +1,13 @@
+@startuml
+package Utility {
+	class ID {
+		- id: UUDI
+		+ ID(String s)
+		- ID()
+		+ generate(): ID
+		+ toString(): String
+		+ equals(o: Object): boolean
+		+ hashCode(): int
+	}
+}
+@enduml

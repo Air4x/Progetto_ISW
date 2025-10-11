@@ -176,58 +176,82 @@ Costruttore
 \end{description}
 
 
-\subsubsection{\texttt{controller.ReviewController.assignReviewer()}}
-Metodo per l'assegnazion di revisore
+\subsubsection{\texttt{controller.ReviewController.createReview()}}
+ Metodo per creare una revisione per ogni revisore passato come parametro 
 \paragraph{Parametri}
 \begin{description}
-\item articleID
-\item list-reviewer-selected
+\item reviewers
+\item articles
 \end{description}
 \paragraph{Eccezioni}
 \begin{description}
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-Valore Booleano che indica se l'assegnazione di revisore è avvenuta con successo
+Valore Booleano che indica se la revisione è stata creata con successo
 \begin{description}
-\item[Vero] Se i revisori sono stati assegnati correttamente 
-\item[Falso] Se la lista risulta nulla, maggiore di 3 o pari 0 elementi o in caso che non vi e nessu articolo legato all'id dato
+\item[Vero] Se la revisione è stata creata correttamente
+\item[Falso] Se la lista di revisori è nulla, maggiore di 3 o pari a 0 elementi, o in caso non vi sia nessun articolo legato all'id dato
 \end{description}
 
 
 
-\subsubsection{\texttt{controller.ReviewController.getListReviewer()}}
-Metodo per ottenere una lista di possibili revisori
+\subsubsection{\texttt{controller.ReviewController.getPossibleReviewers()}}
+Metodo che restituisce la lista di revisori che non hanno conflitti di interesse con l'articolo
 \paragraph{Parametri}
 \begin{description}
-\item articleID
+\item articleId
 \end{description}
 \paragraph{Eccezioni}
 \begin{description}
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-Un arraylist di PossibleReviewDTO che si possono assegnare come revisori
+Un arraylist di RUser che possono essere scelti come revisori per l'articolo senza conplitti di interesse
 
 
-\subsubsection{\texttt{controller.ArticleController.updateArticleStatus()}}
-Metodo per aggiorna lo status di un articolo
+\subsubsection{\texttt{controller.ArticleController.updateReview()}}
+Metodo che permette di aggiornare una revisione
 \paragraph{Parametri}
 \begin{description}
-\item id-article
-\item status
+\item final-review
+\item new-score
+\item new-result
 \end{description}
 \paragraph{Eccezioni}
 \begin{description}
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-Valore Booleano che indica se l'aggiornamento dello stato è avvenuto con successo
-\begin{description}
-\item[Vero] se lo stato del'articolo è sato corretamente aggiornato
-\item[Falso] articolo non trovato
-\end{description}
+un oggetto reviewDTO che rappresenta la revisione aggiornata
 
+
+\subsubsection{\texttt{controller.ArticleController.getAllReviewsByReviewer()}}
+Metodo che permette di ottenere la lista di tutte le revisioni di un datorevisore
+\paragraph{Parametri}
+\begin{description}
+\item reviewer
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+un arraylist di reviewDTO che rappresenta la lista di tutte le revisioni di un dato revisore
+
+
+\subsubsection{\texttt{controller.ArticleController.getAllReviewsByArticle()}}
+Metodo che permette di ottenere la lista di tutte le revisioni di un dato articolo
+\paragraph{Parametri}
+\begin{description}
+\item articleId
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+un arraylist di reviewDTO che rappresenta la lista di tutte le revisioni di un dato articolo
 
 
 \subsection{UserController}

@@ -2,7 +2,6 @@ package org.groupone.controller;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ReviewDTO;
@@ -31,7 +30,7 @@ public class ReviewController {
     }
 
     /**
-     * Crea una revisione per ogni revisore passato come parametro
+     * Metodo per creare una revisione per ogni revisore passato come parametro
      * @param reviewers
      * @param article
      * @return
@@ -56,7 +55,7 @@ public class ReviewController {
     }
 
     /**
-     * Restituisce la lista di revisori che non hanno conflitti di interesse con l'articolo
+     * Metodo che restituisce la lista di revisori che non hanno conflitti di interesse con l'articolo
      * @param articleId
      * @return
      * @throws SQLException
@@ -73,7 +72,7 @@ public class ReviewController {
     }
 
     /**
-     * Permette di aggiornare una revisione
+     * Metodo che permette di aggiornare una revisione
      * @param final_review
      * @param new_score
      * @param new_result
@@ -93,7 +92,7 @@ public class ReviewController {
     }
 
     /**
-     * Permette di ottenere la lista di tutte le revisioni di un dato
+     * Metodo che permette di ottenere la lista di tutte le revisioni di un dato
      * revisore
      *
      * @param reviewer, l'id del revisore
@@ -108,7 +107,7 @@ public class ReviewController {
     }
 
     /**
-     * Permette di ottenere la lista di tutte le revisioni di un dato
+     * Metodo che permette di ottenere la lista di tutte le revisioni di un dato
      * articolo
      *
      * @param article, l'id dell'articolo

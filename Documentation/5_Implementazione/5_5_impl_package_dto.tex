@@ -1,49 +1,49 @@
 \section{Pacchetto DTO}
 \label{sec:package_dto}
 
-\subsection{PossibleReviewDTO}
+\subsection{ReviewDTO}
 Classe DTO per il trasporto delle informazioni di un revisore [autore]
 \paragraph{Attributi}
 \begin{description}
 \item [id] ID che va indentificare in maiera \texttt{univoca} un revisore
-\item [name] Nome del revisore
-\item [lastname] Cognome del revisore 
-\item [affilazione] Affilazione del revisore
+\item [article] Nome dell'articolo in revisione
+\item [score] Punteggio della revisione
+\item [result] Risultato della revisione
 \end{description}
 \subsubsection{\texttt{DTO.PossibleReviewDTO.PossibleReviewDTO()}}
 Costruttore
 \paragraph{Parametri}
 \begin{description}
 \item id
-\item name
-\item lastname
-\item affiliazione
+\item article
+\item score
+\item result
 \end{description}
 \subsubsection{\texttt{DTO.PossibleReviewDTO.PossibleReviewDTO()}}
 Costruttore di copia per un autore
 \paragraph{Parametri}
 \begin{description}
-\item author
+\item review
 \end{description}
 \subsubsection{\texttt{DTO.PossibleReviewDTO.getId()}}
 \paragraph{Valore di ritorno}
 \begin{description}
-\item L'id del revisore
+\item L'id della revisione
 \end{description}
 \subsubsection{\texttt{DTO.PossibleReviewDTO.getName()}}
 \paragraph{Valore di ritorno}
 \begin{description}
-\item Nome del revisore
+\item Nome dell'articolo in revisione
 \end{description}
-\subsubsection{\texttt{DTO.PossibleReviewDTO.getLastname()}}
+\subsubsection{\texttt{DTO.PossibleReviewDTO.getScore()}}
 \paragraph{Valore di ritorno}
 \begin{description}
-\item Cognome del revisore
+\item Punteggio della revisione
 \end{description}
-\subsubsection{\texttt{DTO.PossibleReviewDTO.getAffiliazione()}}
+\subsubsection{\texttt{DTO.PossibleReviewDTO.getResult()}}
 \paragraph{Valore di ritorno}
 \begin{description}
-\item Affilazione del revisore
+\item Risultato della revisione
 \end{description}
 
 \subsection{RUserDTO}

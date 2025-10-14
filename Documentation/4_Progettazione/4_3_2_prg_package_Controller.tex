@@ -12,11 +12,11 @@ Il \texttt{package Controller} contiene le classi che si occupano delle
 responsabilità, in particolare dei requisiti funzionali (vedere \ref{sec:requisiti_funzionali}).
 In particolare abbiamo:
 \begin{description}
-\item[UserController] Si occupa del login e della registrazione
-\item[ConferenceController] Si occupa di creare le conferenze e di richiedere
-  i dati relative ad esse tramite le classi DAO
-\item[ArticleController] Si occupa della sottomissione degli articoli, di ottenere gli articoli dato un autore e di aggiornare lo stato di un articolo.
-\item[ReviewController] Si occupa di assegnare i revisori ad un articolo
+\item[UserController] :Classe che implementa la logica di gestione utenti
+\item[ConferenceController] :Classe che implementa la logica di gestione delle Conferenzze
+\item[ArticleController] :Classe che implementa la logica di gestione degli Articoli
+\item[ReviewController] :Classe che implementa la logica di gestione di una revisione
+\item[NotificationController] :Classe che estende java.util.TimerTask e implementa la logica di gestione della creazione e invio di email
 \end{description}
 
 %%% Local Variables:

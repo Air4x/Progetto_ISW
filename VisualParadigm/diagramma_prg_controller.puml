@@ -4,7 +4,7 @@ package Controller {
   class UserController {
     - user_dao: UserDAO
     + UserController();
-    + registerUser(String affiliazione, String email, String lastname, String name, String password, String ruole): RUserDTO
+    + registerUser(affiliazione: String, email: String, lastname: String, name: String, password: String, ruole: String): RUserDTO
     + login(email: String, password: String): RUserDTO
     + getRAuthorBYEmail (Email: String): RUserDTO
     + getCooAythors(email: String): ArrayList<RUSerDTO>
@@ -14,7 +14,7 @@ package Controller {
     - user_dao: UserDAO
     - conf_dao: ConferenceDAO
     + ConferenceController(),
-    + createConference(LocalDate scadenza, String title, String descr, ID id, RUserDTO org): boolean
+    + createConference(loscadenza: LocalDate, title: String, descr: String, id: ID, org: RUserDTO): boolean
     + getActiveConferences(): ArrayList<ShowActiveConferenceDTO>
     + getArticlesByConference(ID: ID_conference): ArrayList<ShowArticleDTO>
   }
@@ -24,8 +24,8 @@ package Controller {
     - user_dao: UserDAO
     - conf_dao: ConferenceDAO
     + ArticleController (),
-    + submitArticle(String article_titolo, String article_abstrct,  ArrayList<RUserDTO> article_autori, ID id_conf): boolean
-    + getArticleByAuthor(ID authorID): ArrayList<ShowArticleDTO>
+    + submitArticle(article_titolo: String, article_abstrct: String, article_autori: ArrayList<RUserDTO>, id_conf: ID): boolean
+    + getArticleByAuthor(authorID: ID): ArrayList<ShowArticleDTO>
   }
 
   class ReviewController {
@@ -33,9 +33,9 @@ package Controller {
     - user_dao: UserDAO
     - article_dao: ArticleDAO
     + ReviewController();
-    + assignReviewer(ID articleID, ArrayList<PossibleReviewDTO> list_reviewer_selected): boolean
-    + getListReviewer(ID articleID): ArrayList<PossibleReviewDTO>
-    + updateArticleStatus (ID id_article, String status): boolean
+    + createReview(reviewers: ArrayList<RUserDTO>, article: ShowArticleDTO): boolean
+    + getListReviewer(articleID: ID): ArrayList<PossibleReviewDTO>
+    + updateArticleStatus (id_article: ID, status: String): boolean
   }
 
   class NotificationController {
@@ -43,8 +43,8 @@ package Controller {
     - user_dao: UserDAO
     + NotificationController(),
     + sendNotificationDeadline(): void
-    + creatMessage(String aut_name, String aut_lastname, ArrayList<String> conf_title): String
-    + sendEmail (String email_d, String msg, String subject): void
+    + creatMessage(aut_name: String, aut_lastname: String, conf_title: ArrayList<String>): String
+    + sendEmail (email_d: String, msg: String, subject: String): void
     + run(): void
   }
 

@@ -84,7 +84,7 @@ public class ArticleDAO {
 	PreparedStatement pstUtenti= conn.prepareStatement(fromUtenti);
 	while(rsAutori.next()) {
 	    pstUtenti.setNString(1, "autore");
-	    pstUtenti.setNString(2 , rsAutori.getString("id_aut"));
+	    pstUtenti.setNString(2 , rsAutori.getString("ID_UTENTE"));
 	    ResultSet rsUtenti = pstUtenti.executeQuery();
 	    while(rsUtenti.next()){
 		String affiliazione = rsUtenti.getString("AFFILIAZIONE");
@@ -92,7 +92,7 @@ public class ArticleDAO {
 		String cognome = rsUtenti.getString("COGNOME");
 		String nome = rsUtenti.getString("NOME");
 		String password = rsUtenti.getString("PASSWORD");
-		Author a = new Author(affiliazione, email, cognome, nome, password, new ID(rsAutori.getString("id_aut")));
+		Author a = new Author(affiliazione, email, cognome, nome, password, new ID(rsAutori.getString("ID_UTENTE")));
 		autori.add(a);
 	    }  
 	}

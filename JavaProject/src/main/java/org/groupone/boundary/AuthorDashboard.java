@@ -24,6 +24,7 @@ public class AuthorDashboard extends JFrame {
     private JLabel lblwelcome = new JLabel();
     private JLabel lblarticlesubmitted= new JLabel();
     private JLabel lblactiveconference= new JLabel();
+    private JButton reviewDashboardButton = new  JButton();
 
 
     public AuthorDashboard(RUserDTO userDTO) throws SQLException {
@@ -65,7 +66,7 @@ public class AuthorDashboard extends JFrame {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 if(value instanceof ShowActiveConferenceDTO){
                     ShowActiveConferenceDTO showActiveConference = (ShowActiveConferenceDTO) value;
-                    setText("Title: "+showActiveConference.getTitle());
+                    setText("Title: \t"+showActiveConference.getTitle()+"\t Description: "+showActiveConference.getDescription() +"\t Due Date : " + showActiveConference.getDeadline());
                 }
                 return this;
 
@@ -111,15 +112,30 @@ public class AuthorDashboard extends JFrame {
 
                 if(value instanceof ShowArticleDTO){
                     ShowArticleDTO showArticle = (ShowArticleDTO) value;
-                    setText("Title: "+showArticle.getTitle()+" Status:"+showArticle.getAuthors());
+                    setText("Title: "+showArticle.getTitle());
                 }
                 return this;
             }
         });
-
         scrollSubmittedArticles.setViewportView(listarticleSubmitted);
         scrollSubmittedArticles.setBounds(5,285,400,200);
         contentPane.add(scrollSubmittedArticles);
+
+        reviewDashboardButton.setBackground(new Color(100, 149, 237));
+        reviewDashboardButton.setBounds(5, 285, 400, 200);
+        reviewDashboardButton.setForeground(Color.white);
+        reviewDashboardButton.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e){
+                ReviewDashboard frame = new ReviewDashboard(userDTO);
+                frame.setVisible(true);
+
+            }
+        });
+
+
+
+
+
 
 
 

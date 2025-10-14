@@ -20,19 +20,20 @@ public class LoginView extends JFrame{
 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("Login View");
-        setBounds(100, 100, 230, 150);
-        setResizable(false);
+        setBounds(100, 100, 250, 80);
+        setResizable(true);
         panel.setBounds(5,5,5,5);
         panel.setLayout(null);
         setLocationRelativeTo(null);
         setContentPane(panel);
 
 
+
         loginButton.setText("Login");
+        loginButton.setBounds(5,5,100,30);
         loginButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
         loginButton.setBackground(new Color(100, 149, 237));
         loginButton.setForeground(Color.white);
-        loginButton.setBounds(10,30,90,30);
         loginButton.addMouseListener(new MouseAdapter() {
 
             @Override
@@ -46,13 +47,15 @@ public class LoginView extends JFrame{
             }
 
         });
-        panel.add(loginButton);
+        panel.add(loginButton, BorderLayout.EAST);
 
         registerButton.setText("Register");
         registerButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
 
-        registerButton.setBounds(120,30,90,30);
+
         registerButton.setBackground(new Color(100, 149, 237));
+
+        registerButton.setBounds(120,5,100,30);
         registerButton.setForeground(Color.white);
         registerButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

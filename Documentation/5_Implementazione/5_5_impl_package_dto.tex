@@ -9,8 +9,9 @@ Classe DTO per il trasporto delle informazioni di un revisore [autore]
 \item [article] Nome dell'articolo in revisione
 \item [score] Punteggio della revisione
 \item [result] Risultato della revisione
+\item [status] Stato dell'articolo in revisione
 \end{description}
-\subsubsection{\texttt{DTO.PossibleReviewDTO.PossibleReviewDTO()}}
+\subsubsection{\texttt{DTO.ReviewDTO.ReviewDTO()}}
 Costruttore
 \paragraph{Parametri}
 \begin{description}
@@ -18,33 +19,40 @@ Costruttore
 \item article
 \item score
 \item result
+\item status
 \end{description}
-\subsubsection{\texttt{DTO.PossibleReviewDTO.PossibleReviewDTO()}}
+\subsubsection{\texttt{DTO.ReviewDTO.eReviewDTO()}}
 Costruttore di copia per un autore
 \paragraph{Parametri}
 \begin{description}
 \item review
 \end{description}
-\subsubsection{\texttt{DTO.PossibleReviewDTO.getId()}}
+\subsubsection{\texttt{DTO.ReviewDTO.getId()}}
 \paragraph{Valore di ritorno}
 \begin{description}
 \item L'id della revisione
 \end{description}
-\subsubsection{\texttt{DTO.PossibleReviewDTO.getName()}}
+\subsubsection{\texttt{DTO.ReviewDTO.getName()}}
 \paragraph{Valore di ritorno}
 \begin{description}
 \item Nome dell'articolo in revisione
 \end{description}
-\subsubsection{\texttt{DTO.PossibleReviewDTO.getScore()}}
+\subsubsection{\texttt{DTO.ReviewDTO.getScore()}}
 \paragraph{Valore di ritorno}
 \begin{description}
 \item Punteggio della revisione
 \end{description}
-\subsubsection{\texttt{DTO.PossibleReviewDTO.getResult()}}
+\subsubsection{\texttt{DTO.ReviewDTO.getResult()}}
 \paragraph{Valore di ritorno}
 \begin{description}
 \item Risultato della revisione
 \end{description}
+\subsubsection{\texttt{DTO.ReviewDTO.getStatus()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Stato dell' articolo in revisione
+\end{description}
+
 
 \subsection{RUserDTO}
 \subsubsection{\texttt{DTO.RUserDTO.RUserDTO()}}
@@ -102,7 +110,7 @@ Costruttore di copia
 \end{description}
 
 \subsection{ShowActiveConferenceDTO}
-\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.ShowActiveConferenceDTO()()}}
+\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.ShowActiveConferenceDTO()}}
 Costruttore di copia
 \paragraph{Parametri}
 \begin{description}
@@ -111,13 +119,13 @@ Costruttore di copia
 \item scadenza
 \item descrizione
 \end{description}
-\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.ShowActiveConferenceDTO()()}}
+\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.ShowActiveConferenceDTO()}}
 Costruttore
 \paragraph{Parametri}
 \begin{description}
 \item active-conference
 \end{description}
-\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.ShowActiveConferenceDTO()()}}
+\subsubsection{\texttt{DTO.ShowActiveConferenceDTO.ShowActiveConferenceDTO()}}
 Costruttore di copia per una conferenza
 \paragraph{Parametri}
 \begin{description}
@@ -153,6 +161,7 @@ Costruttore
 \item titolo
 \item abstr
 \item autori
+\item status
 \end{description}
 \subsubsection{\texttt{DTO.ShowArticleDTO.ShowArticleDTO()}}
 Costruttore di copia per un articolo
@@ -185,6 +194,11 @@ Costruttore di copia
 \paragraph{Valore di ritorno}
 \begin{description}
 \item Autori dell'articolo
+\end{description}
+\subsubsection{\texttt{DTO.ShowArticleDTO.getStatus()}}
+\paragraph{Valore di ritorno}
+\begin{description}
+\item Stato dell'articolo
 \end{description}
 
 

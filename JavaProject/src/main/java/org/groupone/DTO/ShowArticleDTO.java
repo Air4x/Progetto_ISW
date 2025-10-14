@@ -16,6 +16,7 @@ public class ShowArticleDTO {
     private String titolo;
     private String abstr;
     private ArrayList<RUserDTO> autori;
+    private String status;
     
     /**
      * Costrutore
@@ -24,11 +25,12 @@ public class ShowArticleDTO {
      * @param abstr
      * @param autori
      */
-    public ShowArticleDTO(ID id, String titolo, String abstr, ArrayList<RUserDTO> autori) {
+    public ShowArticleDTO(ID id, String titolo, String abstr, ArrayList<RUserDTO> autori, String status) {
         this.id = id;
         this.titolo = titolo;
         this.abstr = abstr;
         this.autori = autori;
+        this.status = status;
     }
 
     /**
@@ -45,6 +47,7 @@ public class ShowArticleDTO {
             user_f= new RUserDTO((Author)author);
             this.autori.add(user_f);
         }
+        this.status= article.getStato();
     }
 
     /**
@@ -61,6 +64,7 @@ public class ShowArticleDTO {
             user_f= new RUserDTO(fake_user);
             this.autori.add(user_f);
         }
+        this.status= aritcle_dto.getStatus();
     }
 
     /**
@@ -95,9 +99,16 @@ public class ShowArticleDTO {
         return autori;
     }
 
+    /**
+     * Stato di un articolo
+     */
+    public String getStatus() {
+        return status;
+    }
+
     @Override
     public String toString() {
-        return "\n" + this.titolo + "\n" + this.abstr + "\n" + this.autori.toString() + "\n\n";
+        return "\n" + this.titolo + "\n" + this.abstr + "\n" + this.autori.toString() + "\n" + this.status + "\n\n";
     }
 
 }

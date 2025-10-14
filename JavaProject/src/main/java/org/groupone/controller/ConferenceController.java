@@ -97,7 +97,7 @@ public class ConferenceController {
                 fake_user = new RUserDTO (auth.getName(),auth.getLastName(),auth.getEmail(),auth.getAffiliation(),auth.getRole(),id);
                 fake_list_author.add(fake_user);
             }
-            fake_article = new ShowArticleDTO(a.getId(), a.getTitle(), a.getAbstr(), fake_list_author);
+            fake_article = new ShowArticleDTO(a.getId(), a.getTitle(), a.getAbstr(), fake_list_author, a.getStato());
             fake_list_articles.add(fake_article);
         }
         return fake_list_articles;

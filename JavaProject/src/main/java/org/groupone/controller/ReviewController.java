@@ -33,7 +33,7 @@ public class ReviewController {
      * Metodo per creare una revisione per ogni revisore passato come parametro
      * @param reviewers
      * @param article
-     * @return
+     * @returnn Valore Booleano che indica se la revisione è stata creata con successo
      * @throws SQLException
      */
     public boolean createReview(ArrayList<RUserDTO> reviewers, ShowArticleDTO article) throws SQLException {
@@ -57,7 +57,7 @@ public class ReviewController {
     /**
      * Metodo che restituisce la lista di revisori che non hanno conflitti di interesse con l'articolo
      * @param articleId
-     * @return
+     * @return Un arraylist di RUser che possono essere scelti come revisori per l'articolo senza conplitti di interesse
      * @throws SQLException
      */
     public ArrayList<RUserDTO> getPossibleReviewers(ID articleId) throws SQLException {
@@ -76,7 +76,7 @@ public class ReviewController {
      * @param final_review
      * @param new_score
      * @param new_result
-     * @return
+     * @return Un oggetto reviewDTO che rappresenta la revisione aggiornata
      * @throws SQLException
      */    
     public ReviewDTO updateReview (ReviewDTO final_review, int new_score, String new_result) throws SQLException {
@@ -94,8 +94,9 @@ public class ReviewController {
     /**
      * Metodo che permette di ottenere la lista di tutte le revisioni di un dato
      * revisore
-     *
      * @param reviewer, l'id del revisore
+     * @return UN arraylist di reviewDTO che rappresenta la lista di tutte le revisioni di un dato revisore
+     * @throws SQLException
      */
     public ArrayList<ReviewDTO> getAllReviewsByReviewer(ID reviewer) throws SQLException {
         ArrayList<Review> reviews = (ArrayList<Review>) this.reviewer_dao.getAllReviewByReviewer(reviewer);
@@ -109,8 +110,9 @@ public class ReviewController {
     /**
      * Metodo che permette di ottenere la lista di tutte le revisioni di un dato
      * articolo
-     *
      * @param article, l'id dell'articolo
+     * @return Un arraylist di reviewDTO che rappresenta la lista di tutte le revisioni di un dato articolo
+     * @throws SQLException
      */
     public ArrayList<ReviewDTO> getAllReviewsByArticle(ID articleId) throws SQLException {
         ArrayList<Review> reviews = (ArrayList<Review>) this.reviewer_dao.getAllReviewByArticle(articleId);
@@ -138,10 +140,10 @@ public class ReviewController {
             } else if (r.getResult().equals("accettato")) {
                 counter_pos++;
             }
-            if(counter_neg >= 2){
+            if(counter_neg >= 2 && counter_pos >=0){
                 new_status = "Rifiutato";
                 break;
-            } else if(counter_pos >=2){
+            } else if(counter_pos >=2 && counter_neg >=0){
                 new_status = "accettato";
                 break;
             }        

@@ -150,8 +150,8 @@ Metodo utilizzo per la configurazione di un host per l'invio delle email
 \paragraph{Parametri}
 \begin{description}
 \item email-d
-\item conf-title
 \item msg
+\item subject
 \end{description}
 \paragraph{Eccezioni}
 \begin{description}
@@ -210,7 +210,7 @@ Metodo che restituisce la lista di revisori che non hanno conflitti di interesse
 Un arraylist di RUser che possono essere scelti come revisori per l'articolo senza conplitti di interesse
 
 
-\subsubsection{\texttt{controller.ArticleController.updateReview()}}
+\subsubsection{\texttt{controller.ReviewController.updateReview()}}
 Metodo che permette di aggiornare una revisione
 \paragraph{Parametri}
 \begin{description}
@@ -223,10 +223,10 @@ Metodo che permette di aggiornare una revisione
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-un oggetto reviewDTO che rappresenta la revisione aggiornata
+Un oggetto reviewDTO che rappresenta la revisione aggiornata
 
 
-\subsubsection{\texttt{controller.ArticleController.getAllReviewsByReviewer()}}
+\subsubsection{\texttt{controller.ReviewController.getAllReviewsByReviewer()}}
 Metodo che permette di ottenere la lista di tutte le revisioni di un datorevisore
 \paragraph{Parametri}
 \begin{description}
@@ -237,10 +237,10 @@ Metodo che permette di ottenere la lista di tutte le revisioni di un datorevisor
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-un arraylist di reviewDTO che rappresenta la lista di tutte le revisioni di un dato revisore
+Un arraylist di reviewDTO che rappresenta la lista di tutte le revisioni di un dato revisore
 
 
-\subsubsection{\texttt{controller.ArticleController.getAllReviewsByArticle()}}
+\subsubsection{\texttt{controller.ReviewController.getAllReviewsByArticle()}}
 Metodo che permette di ottenere la lista di tutte le revisioni di un dato articolo
 \paragraph{Parametri}
 \begin{description}
@@ -251,8 +251,18 @@ Metodo che permette di ottenere la lista di tutte le revisioni di un dato artico
 \item[SQLException] In caso di errore di interazione con il DataBase
 \end{description}
 \paragraph{Valore di ritorno}
-un arraylist di reviewDTO che rappresenta la lista di tutte le revisioni di un dato articolo
+Un arraylist di reviewDTO che rappresenta la lista di tutte le revisioni di un dato articolo
 
+\subsubsection{\texttt{controller.ReviewController.checkReviewsCompletion()}}
+Metodo che permette di ottenere la lista di tutte le revisioni di un dato articoloMetodo che controlla se un articolo ha ricevuto almeno 2 revisioni con esitopositivo o negativo e aggiorna lo stato dell'articolo di conseguenza
+\paragraph{Parametri}
+\begin{description}
+\item articleId
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
 
 \subsection{UserController}
 \paragraph{Attributi}
@@ -285,8 +295,8 @@ Metodo per la registarzione di un untente
 \paragraph{Valore di ritorno}
 Un oggetto RUser che rappresenta l'unbtente appena registrato
 
-\subsubsection{\texttt{controller.UserController.}}
-
+\subsubsection{\texttt{controller.UserController.login}}
+Metodo per l'accesso di un utente
 \paragraph{Parametri}
 \begin{description}
 \item email
@@ -298,6 +308,34 @@ Un oggetto RUser che rappresenta l'unbtente appena registrato
 \end{description}
 \paragraph{Valore di ritorno}
 Un oggetto RUserDTO che rappresenta l'uttente che ha appena fatto il login
+
+
+\subsubsection{\texttt{controller.UserController.getRAuthorBYEmail()}}
+Metodo per ottenere un autore mediante email
+\paragraph{Parametri}
+\begin{description}
+\item email
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+Un oggetto RUserDTO
+
+\subsubsection{\texttt{controller.UserController.getCooAuthors()}}
+Metodo per ottenere una lista di coo-autori mediante email
+\paragraph{Parametri}
+\begin{description}
+\item email
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException] In caso di errore di interazione con il DataBase
+\end{description}
+\paragraph{Valore di ritorno}
+Un oggetto ArrayList di RUserDTO
+
 
 %%% Local Variables:
 %%% mode: LaTeX

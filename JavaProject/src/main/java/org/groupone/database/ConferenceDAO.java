@@ -105,10 +105,10 @@ public class ConferenceDAO {
 	// =======Esecuzione queries=========================
 	while(idArt.next()){
 	    ArrayList<Author> autori = new ArrayList<>();
-	    stIdAuth.setString(1, idArt.getString("id_art"));
+	    stIdAuth.setString(1, idArt.getString("ID_ARTICOLO"));
 	    ResultSet idAuth = stIdAuth.executeQuery();
 	    while(idAuth.next()){
-		stAuth.setString(1, idAuth.getString("id_aut"));
+		stAuth.setString(1, idAuth.getString("ID_UTENTE"));
 		ResultSet authors = stAuth.executeQuery();
 		authors.next();
 		Author a = new Author(authors.getString("AFFILIAZIONE"), authors.getString("EMAIL"),
@@ -116,10 +116,10 @@ public class ConferenceDAO {
 				      authors.getString("PASSWORD"), new ID(authors.getString("ID")));
 		autori.add(a);
 	    }
-	    stArt.setString(1, idArt.getString("id_art"));
+	    stArt.setString(1, idArt.getString("ID_ARTICOLO"));
 	    ResultSet article = stArt.executeQuery();
 	    article.next();
-	    Article articolo = new Article(new ID(idArt.getString("id_art")),article.getString("ABSTRACT"), autori, article.getString("TITOLO"), article.getString("STATO"));
+	    Article articolo = new Article(new ID(idArt.getString("ID_ARTICOLO")),article.getString("ABSTRACT"), autori, article.getString("TITOLO"), article.getString("STATO"));
 	    articoli.add(articolo);
 	}
 	return articoli;

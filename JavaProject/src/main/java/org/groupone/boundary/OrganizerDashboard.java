@@ -64,7 +64,7 @@ public class OrganizerDashboard extends JFrame{
                     super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                     if(value instanceof ShowActiveConferenceDTO){
                         ShowActiveConferenceDTO activeConf = (ShowActiveConferenceDTO)value;
-                        setText("Conference Name : "+activeConf.getTitle()+"\tDescription: "+activeConf.getDescription() +"\tDue Date : " + activeConf.getDeadline() );
+                        setText("Conference Name : "+activeConf.getTitle()+"\t Description: "+activeConf.getDescription() +"\t Due Date : " + activeConf.getDeadline() );
                     }
                     return this;
                 }

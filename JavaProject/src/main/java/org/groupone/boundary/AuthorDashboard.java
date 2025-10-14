@@ -121,8 +121,9 @@ public class AuthorDashboard extends JFrame {
         scrollSubmittedArticles.setBounds(5,285,400,200);
         contentPane.add(scrollSubmittedArticles);
 
+        reviewDashboardButton.setText("Reviewer Dashboard");
         reviewDashboardButton.setBackground(new Color(100, 149, 237));
-        reviewDashboardButton.setBounds(5, 285, 400, 200);
+        reviewDashboardButton.setBounds(5, 500, 200, 30);
         reviewDashboardButton.setForeground(Color.white);
         reviewDashboardButton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e){
@@ -131,6 +132,7 @@ public class AuthorDashboard extends JFrame {
 
             }
         });
+        contentPane.add(reviewDashboardButton);
 
 
 

@@ -32,7 +32,7 @@ public class ReviewForm extends JFrame {
         contentPane.add(lblresult);
 
 
-        String[] results = {"Passato", "Non Passato"};
+        String[] results = {"Accettato", "Rifiutato"};
         comboBoxresult.setModel(new DefaultComboBoxModel(results));
         comboBoxresult.setSelectedIndex(0);
         comboBoxresult.setBounds(10, 110, 80, 20);

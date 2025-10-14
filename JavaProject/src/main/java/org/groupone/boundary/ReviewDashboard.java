@@ -22,6 +22,7 @@ public class ReviewDashboard extends JFrame {
             setTitle("Review Dashboard");
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setBounds(100, 100, 450, 300);
+            setContentPane(contentPane);
             contentPane.setLayout(null);
             ReviewController rc = new ReviewController();
             ReviewDTO[] articletoreview = rc.getAllReviewsByReviewer(reviewer.getId()).toArray(new ReviewDTO[0]);
@@ -29,6 +30,7 @@ public class ReviewDashboard extends JFrame {
             for(int i=0;i<articletoreview.length;i++){
                 reviewmodel.addElement(articletoreview[i]);
             }
+
             listarticletoreview.setModel(reviewmodel);
             listarticletoreview.setCellRenderer(new DefaultListCellRenderer() {
                 @Override
@@ -36,7 +38,7 @@ public class ReviewDashboard extends JFrame {
                     super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                     if(value instanceof ReviewDTO){
                         ReviewDTO review = (ReviewDTO) value;
-                        setText("Article: " + review.getArticle());
+                        setText("Article: " + review.getArticle() + "Status:" );
                     }
                     return this;
                 }

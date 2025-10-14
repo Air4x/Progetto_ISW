@@ -1,0 +1,45 @@
+
+\subsubsection{Package Utility}
+\label{sec:prg_utility}
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=\linewidth]{VisualParadigm/diagramma_prg_utility.png}
+  \caption{Diagramma delle classi del package utility}
+  \label{fig:prg_utility}
+\end{figure}
+
+Il \texttt{package utility} contiene delle classi di supporto che
+implementano funzionalità secondarie utilizzate in posti diversi del
+programma, ma che non hanno una reale relazione tra di loro.
+Le classi contenute in questo \texttt{package} sono:
+\begin{description}
+\item[ID], un leggero wrapper per la classe \texttt{java.util.UUID}
+  per la generazione di UUID per l'identificazione degli elementi
+  gestiti dal sistema
+\item[PasswordManager], una classe thread-safe per la gestione dei
+  segreti necessari per la gestione delle funzionalità del sistema:
+  database e servizio di notifica email
+\item[CheckListItem], implementa un item di una lista di checkbox
+\end{description}
+
+\paragraph{ID}
+La classe ID presenta due metodi principali:
+\begin{description}
+\item[ID] Costruttore pubblico, serve a convertire un ID dalla sua rappresentazione come stringa alla rappresentazione interna di Java
+\item[generate] Metodo statico che implementa la capacità di generare
+  un nuovo ID
+\end{description}
+
+\paragraph{PasswordManager}
+La classe PasswordManager presenta due metodi principali:
+\begin{description}
+\item[getInstance] Metodo che funziona come costruttore, ma invece di
+  creare una nuova istanza della classe, permette di accedere sempre
+  alla stessa così da rispettare il Singleton Pattern
+\item[get] Metodo che permette di ottenere un segreto dato il suo nome
+\end{description}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../main"
+%%% End:

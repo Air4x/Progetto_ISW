@@ -79,7 +79,7 @@ public class ReviewController {
      * @return
      * @throws SQLException
      */    
-    public ReviewDTO updateReview (ReviewDTO final_review, int new_score, String new_result) throws SQLException {
+    public ReviewDTO updateReview (ReviewDTO final_review, int new_score, String new_result, String new_status) throws SQLException {
         Review r = this.reviewer_dao.getAllReviewByID(final_review.getId());
         if (final_review == null) {
             System.out.println("Invalid review");
@@ -87,6 +87,7 @@ public class ReviewController {
         }
         r.setScore(new_score);
         r.setResult(new_result);
+        r.getArticle().setStato(new_status);
         this.reviewer_dao.updateReview(r);
         return new ReviewDTO(r);
     }

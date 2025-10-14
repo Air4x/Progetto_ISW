@@ -62,7 +62,7 @@ CREATE TABLE Revisioni (
        ESITO varchar(9),
        constraint FK_REVISIONI_UTENTI foreign key(ID_REVISORE) references Utenti(ID),
        constraint FK_REVISIONI_ARTICOLI foreign key(ID_ARTICOLO) references Articoli(ID),
-       constraint CHEK_ESITO check (ESITO = 'accettato' or ESITO = 'rifiutato')
+       constraint CHEK_ESITO check (ESITO = 'accettato' or ESITO = 'rifiutato' or ESITO = 'inattesa')
 );
 
 -- Inserimento dati di test

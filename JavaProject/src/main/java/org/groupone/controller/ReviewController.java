@@ -79,7 +79,7 @@ public class ReviewController {
      * @return
      * @throws SQLException
      */    
-    public ReviewDTO updateReview (ReviewDTO final_review, int new_score, String new_result, String new_status) throws SQLException {
+    public ReviewDTO updateReview (ReviewDTO final_review, int new_score, String new_result) throws SQLException {
         Review r = this.reviewer_dao.getAllReviewByID(final_review.getId());
         if (final_review == null) {
             System.out.println("Invalid review");
@@ -87,7 +87,6 @@ public class ReviewController {
         }
         r.setScore(new_score);
         r.setResult(new_result);
-        r.getArticle().setStato(new_status);
         this.reviewer_dao.updateReview(r);
         return new ReviewDTO(r);
     }
@@ -122,9 +121,32 @@ public class ReviewController {
         return reviews_dto;
     }
 
-    @Deprecated
-    public boolean assignReviewers(ShowArticleDTO article, ArrayList<RUserDTO> reviewers) throws SQLException {
-        return this.createReview(reviewers, article);
+    /**
+     * Metodo che controlla se un articolo ha ricevuto almeno 2 revisioni con esito
+     * positivo o negativo e aggiorna lo stato dell'articolo di conseguenza
+     * @param articleId
+     * @throws SQLException
+     */
+    public void checkReviewsCompletion(ID articleId) throws SQLException {
+        ArrayList<Review> reviews = (ArrayList<Review>) this.reviewer_dao.getAllReviewByArticle(articleId);
+        String new_status = "inattesa";
+        int counter_neg= 0;
+        int counter_pos= 0;
+        for (Review r : reviews) {
+            if (r.getResult().equals("rifiutato")) {
+                counter_neg++;
+            } else if (r.getResult().equals("accettato")) {
+                counter_pos++;
+            }
+            if(counter_neg >= 2){
+                new_status = "Rifiutato";
+                break;
+            } else if(counter_pos >=2){
+                new_status = "accettato";
+                break;
+            }        
+        }
+        article_dao.getArticleByID(articleId).setStato(new_status);
     }
 
 }

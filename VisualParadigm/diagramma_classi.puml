@@ -1,13 +1,13 @@
 @startuml 
 
 class ConferenceManager {
-  + submitArticle(author: Author, article: Article, conf: Conference)
-  + assignReviewer(reviewer: Author, article: Article)
   + getSubmissions(conf: Conference): List<Article>
   + setArticleStatus(article: Article, status: String)
+  + registerUser(nome: String, cognome: String, email: String, password: String, affiliazione: String, ruolo: String): void
+  + login(email: String, password: String): void
 }
 
-  abstract class User {
+abstract class User {
     - id: int
     - name: String
     - lastName: String
@@ -29,6 +29,7 @@ class ConferenceManager {
     + Author(aff: String, email: String, lastName: String, name: String, password: String, id: String)
     + Author(a: Author)		
     + getRole(): String
+    + submitArticle(article: Article, conf: Conference)
   }
 
   class Organizer {
@@ -36,6 +37,7 @@ class ConferenceManager {
     + Organizer(aff: String, email: String, lastName: String, name: String, password: String, id: String)
     + Organizer(o: Organizer)
     + getRole(): String
+    + assignReviewer(reviewer: Author, article: Article)
   }
 
   class Article {
@@ -44,7 +46,8 @@ class ConferenceManager {
     - status: String
     - coAuthors: List<Author>
     + Article(id: String, abstract: String, coAuthors: List<Author>, title: String)
-    + Article(a: Article)
+	+ Article(a: Article)
+	+ updateReview(rev: Review)
   }
   
   class Conference {
@@ -60,21 +63,32 @@ class ConferenceManager {
     + getArticles(): List<Article>
   }
 
+class Review {
+	- Id: ID
+	- Article: Article
+	- Reviewer: Author
+	- Punteggio: int
+	- Esito: String
+	+ Review(article: Article, reviewer: Author)
+}
+
   User <|-- Author
-  User <|-- Organizer
+Organizer --|> User
 
 
 Organizer "1" -- "1" ConferenceManager : Manages
-ConferenceManager "1" -- "0..*" Conference : Knows about
-ConferenceManager "1" -- "0..*" Article : Knows about
-ConferenceManager "1" -- "0..*" Author : Knows about
+ConferenceManager "1" -- "0..*" Conference : Conosce
+ConferenceManager "1" -- "0..*" Article : Conosce
+ConferenceManager "1" -- "0..*" Author : Conosce
+ConferenceManager "1" -- "1..*" Review : Assegna
 
 ' Relazioni
-Organizer "1" -- "0..*" Conference : Gestisce
-Conference "1" -- "0..*" Article : Sottomesso a
-Article "1" -- "0..*" Author : Scritto da
+Organizer "1" -left- "0..*" Conference: Gestisce
+Article "0..*" -- "1..*" Conference : Sottomesso a
+Article "1" -- "1..4" Author : Scritto da
+Author "1" -- "0..*" Review: Aggiorna
 
 ' Revisori: relazione molti-a-molti tra Autore e Articolo
-Author "0..*" -- "3" Article : <<revisore>>
+Author "0..*" -- "3" Article : revisore di
 
 @enduml

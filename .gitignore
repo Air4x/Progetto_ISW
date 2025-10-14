@@ -35,6 +35,8 @@ Documentation/*.toc
 *.pdf
 *.toc
 *.out
+main.lof
+main.lot
 # Auctex files
 Documentation/*/auto/*
 Documentation/auto/*
@@ -42,9 +44,9 @@ Documentation/auto/*
 # Immagini
 VisualParadigm/*.png
 
-./JavaProject/target/*
-JavaProject/src/main/resources/*
-JavaProject/src/test/resources/*
+./JavaProject/target/
+./JavaProject/src/main/resources/*
+./JavaProject/src/test/resources/*
 
 ./JavaProject/.idea/workspace.xml
 _minted/

@@ -2,12 +2,20 @@
 package Utility {
 	class ID {
 		- id: UUDI
-		+ ID(String s)
 		- ID()
+		+ ID(String s)
 		+ generate(): ID
 		+ toString(): String
 		+ equals(o: Object): boolean
 		+ hashCode(): int
+	}
+
+	class PasswordManager {
+		- instance: PasswordManager
+		- props: Properties
+		- PasswordManager()
+		+ getInstance(): PasswordManager
+		+ get(key: String): String 
 	}
 }
 @enduml

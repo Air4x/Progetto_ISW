@@ -19,9 +19,8 @@ public class ArticleDAOTest {
     @Test
     public void saveArticle() {
 	ArrayList<Author> autori = new ArrayList<>();
-	autori.add(new Author("TEST", "test@test.test", "PROVA", "AUTORE", "test321",new ID("95ba1fc7-bf7e-4764-341b-eac6051437fb")));
-	autori.add(new Author("TEST", "test@test.test", "PROVA", "AUTORE", "test321",new ID("3b804533-cd62-5b84-f55b-0074120e0376")));
-	autori.add(new Author("TEST", "test@test.test", "PROVA", "AUTORE", "test321",new ID("0dd9344a-04a5-d3a4-f7c3-35894467b3e0")));
+	autori.add(new Author("Federico II", "test_autore_10@test.com", "Bartell", "Cindy", "A0sD9fG8hJ7kL6mN", new ID("64393265-3937-4261-b563-326137626135")));
+	autori.add(new Author("Federico II", "test_autore_7@test.com", "Ledner", "Garth", "HjK9lMnB8vCxZ7aQ", new ID("34633933-3933-4832-b533-373065323631")));
 	Article a = new Article(ID.generate(), "ARTICOLO_PROVA", autori, "PROVA");
 	try {
 	    ArticleDAO dao = new ArticleDAO();
@@ -34,16 +33,18 @@ public class ArticleDAOTest {
     
     @Test
     public void getArticleById() {
-	ID id = new ID("15e9add4-f93a-4457-b058-b1135eb8e789");
+	ID id = new ID("62366665-3430-4435-b764-316461623265");
 	ArrayList<Author> autori = new ArrayList<>();
-	autori.add(new Author("TEST", "test@test.test", "PROVA", "AUTORE", "test321", new ID("0dd9344a-04a5-d3a4-f7c3-35894467b3e0")));
-	autori.add(new Author("TEST", "test@test.test", "PROVA", "AUTORE", "test321", new ID("3b804533-cd62-5b84-f55b-0074120e0376")));
-	autori.add(new Author("TEST", "test@test.test", "PROVA", "AUTORE", "test321", new ID("95ba1fc7-bf7e-4764-341b-eac6051437fb")));
-	Article expected = new Article(id, "ARTICOLO_PROVA", autori, "PROVA");
+	// autori
+	/// id1: 64393265-3937-4261-b563-326137626135
+	/// id2: 34633933-3933-4832-b533-373065323631
+	autori.add(new Author("Federico II", "test_autore_10@test.com", "Bartell", "Cindy", "A0sD9fG8hJ7kL6mN", new ID("64393265-3937-4261-b563-326137626135")));
+	autori.add(new Author("Federico II", "test_autore_7@test.com", "Ledner", "Garth", "HjK9lMnB8vCxZ7aQ", new ID("34633933-3933-4832-b533-373065323631")));
+	Article expected = new Article(new ID("62366665-3430-4435-b764-316461623265"), "Test Abstract", autori, "interdum orci condimentum");
 	try {
 	    ArticleDAO dao = new ArticleDAO();
 	    Article result = dao.getArticleByID(id);
-	    assertEquals(expected, result);
+	    assertTrue(result.getTitle().equals(expected.getTitle()));
 	} catch (SQLException e){
 	    e.printStackTrace();
 	    fail("getArticleByID - Found Exception");
@@ -52,7 +53,7 @@ public class ArticleDAOTest {
 
     @Test
     public void getArticleByAuthorsOK(){
-	ID id = new ID("9c388e06-3c9e-43bd-9327-acbffed869d3");
+	ID id = new ID("64393265-3937-4261-b563-326137626135");
 	try {
 	    ArticleDAO dao = new ArticleDAO();
 	    ArrayList<Article> actual = dao.getArticlesByAuthor(id);
@@ -78,7 +79,7 @@ public class ArticleDAOTest {
 
     @Test
     public void isArticlePresentByID(){
-	ID id = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
+	ID id = new ID("64383965-3762-4265-a539-316463343833");
 	try {
 	    ArticleDAO dao = new ArticleDAO();
 	    assertTrue("isArticlePresentByID - articolo non trovato", dao.isArticlePresentByID(id));

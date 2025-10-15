@@ -74,6 +74,7 @@ Classe Utilizzata per visualizzare tutte le conferenze attive e di poter inoltra
 \item[lblwelcome] Istanza di JLabel
 \item[lblarticlesubmitted] Istanza di JLabel
 \item[lblactiveconference] Istanza di JLabel
+\item[reviewDashboardButton] Istanza di JButton
 \end{description}
 
 \subsubsection{boundary.AuthorDashboard.AuthorDashboard()}
@@ -100,6 +101,8 @@ Classe utilizzata per visualizzare le conferenze attive e gestire gli articoli d
 \item[lblwelcome] Istanza di JLabel
 \item[lblactiveconference] Istanza di JLabel
 \item[lblarticlesubmitted] Istanza di JLabel
+\item[checkReviewCompletion] Istanza di JButton
+\item[selected] Istanza di ShowArticleDTO
 \end{description}
 
 \subsubsection{boundary.OrganizerDashboard.OrganizerDashboard()}
@@ -187,8 +190,49 @@ Costruttore
 \item[SQLException]  In caso di errore di interazione con il Database
 \end{description}
 
+\subsection{ReviewDashboard}
+Dashboard per visualizzare le review da effettuare agli articoli 
+\paragraph{Attributi}
+\begin{description}
+\item[contentPane] Istanza di JPanel
+\item[scrollarticletoreview] Istanza di JScrollPane
+\item[listarticletoreview] Istanza di JList
+\end{description}
+\subsubsection{boundary.ReviewDashboard.ReviewDashboard()}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item[reviewer] RUserDTO
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException]  In caso di errore di interazione con il Database
+\end{description}
 
 
+
+\subsection{ReviewForm}
+Form per inserire il punteggio ottenuto e se è passata la revisione
+\paragraph{Attributi}
+\begin{description}
+\item[contentPane] Istanza di JPanel
+\item[comboBoxresult] Istanza di JComboBox
+\item[lblscore] Istanza di JLabel
+\item[lblresult] Istanza di JLabel
+\item[txtscore] Istanza di JTextField
+\item[updatereviewbutton] Istanza di JButton
+\end{description}
+\subsubsection{boundary.ReviewForm.ReviewForm()}
+Costruttore
+\paragraph{Parametri}
+\begin{description}
+\item[review] ReviewDTO
+\item[rc] ReviewController
+\end{description}
+\paragraph{Eccezioni}
+\begin{description}
+\item[SQLException]  In caso di errore di interazione con il Database
+\end{description}
 
 
 

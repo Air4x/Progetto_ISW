@@ -112,7 +112,7 @@ public class AuthorDashboard extends JFrame {
 
                 if(value instanceof ShowArticleDTO){
                     ShowArticleDTO showArticle = (ShowArticleDTO) value;
-                    setText("Title: "+showArticle.getTitle());
+                    setText("Title: "+showArticle.getTitle() + "\t Status:"+ getState());
                 }
                 return this;
             }

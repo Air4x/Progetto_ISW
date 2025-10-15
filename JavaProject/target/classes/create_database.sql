@@ -62,34 +62,34 @@ CREATE TABLE Revisioni (
        ESITO varchar(9),
        constraint FK_REVISIONI_UTENTI foreign key(ID_REVISORE) references Utenti(ID),
        constraint FK_REVISIONI_ARTICOLI foreign key(ID_ARTICOLO) references Articoli(ID),
-       constraint CHEK_ESITO check (ESITO = 'accettato' or ESITO = 'rifiutato')
+       constraint CHEK_ESITO check (ESITO = 'accettato' or ESITO = 'rifiutato' or ESITO = 'inattesa')
 );
 
 -- Inserimento dati di test
 --- Questa parte è stata autogenerata ---
 ---- Utenti
 ------ RUOLO = 'autore'
-INSERT INTO Utenti VALUES ('31353664-3930-4465-a334-323164633932','Cindy', 'Barrows', 'Federico II', 'test_autore_1@test.com', "4hJd8kLpT2xYw0Rz" ,'autore');
-INSERT INTO Utenti VALUES ('38343465-3166-4636-b166-386433333335','Missouri', 'Grady', 'Federico II', 'test_autore_2@test.com', "Qz7wXcVbN9mKlErT" ,'autore');
-INSERT INTO Utenti VALUES ('64636266-6162-4162-a536-346632626632','Frederic', 'Weissnat', 'Federico II', 'test_autore_3@test.com', "P0oI9uY8tREwQ1aZ" ,'autore');
-INSERT INTO Utenti VALUES ('65393966-3531-4738-b662-653232663438','Missouri', 'Ledner', 'Federico II', 'test_autore_4@test.com', "5sGf6dHj7kLmBn4V" ,'autore');
-INSERT INTO Utenti VALUES ('66643462-6636-4665-b364-383037373830','Rosendo', 'Smith', 'Federico II', 'test_autore_5@test.com', "C3xZ2aB1nMkLpQ0W" ,'autore');
-INSERT INTO Utenti VALUES ('65303532-6633-4464-b134-373061616332','Emanuel', 'Monahan', 'Federico II', 'test_autore_6@test.com', "R8tY7uI6oP5aD4fG" ,'autore');
-INSERT INTO Utenti VALUES ('34633933-3933-4832-b533-373065323631','Garth', 'Ledner', 'Federico II', 'test_autore_7@test.com', "HjK9lMnB8vCxZ7aQ" ,'autore');
-INSERT INTO Utenti VALUES ('35323634-3435-4463-b330-646636643738','Cindy', 'Barrows', 'Federico II', 'test_autore_8@test.com', "E2rT4yU6iO8pAsD3" ,'autore');
-INSERT INTO Utenti VALUES ('32643432-3962-4764-a465-313536313537','Cedrick', 'Steuber', 'Federico II', 'test_autore_9@test.com', "F5gH7jK9lZ1xWc4V" ,'autore');
-INSERT INTO Utenti VALUES ('64393265-3937-4261-b563-326137626135','Cindy', 'Bartell', 'Federico II', 'test_autore_10@test.com', "A0sD9fG8hJ7kL6mN" ,'autore');
+INSERT INTO Utenti VALUES ('31353664-3930-4465-a334-323164633932','Cindy', 'Barrows', 'Federico II', 'test_autore_1@test.com', '4hJd8kLpT2xYw0Rz' ,'autore');
+INSERT INTO Utenti VALUES ('38343465-3166-4636-b166-386433333335','Missouri', 'Grady', 'Federico II', 'test_autore_2@test.com', 'Qz7wXcVbN9mKlErT' ,'autore');
+INSERT INTO Utenti VALUES ('64636266-6162-4162-a536-346632626632','Frederic', 'Weissnat', 'Federico II', 'test_autore_3@test.com', 'P0oI9uY8tREwQ1aZ' ,'autore');
+INSERT INTO Utenti VALUES ('65393966-3531-4738-b662-653232663438','Missouri', 'Ledner', 'Federico II', 'test_autore_4@test.com', '5sGf6dHj7kLmBn4V' ,'autore');
+INSERT INTO Utenti VALUES ('66643462-6636-4665-b364-383037373830','Rosendo', 'Smith', 'Federico II', 'test_autore_5@test.com', 'C3xZ2aB1nMkLpQ0W' ,'autore');
+INSERT INTO Utenti VALUES ('65303532-6633-4464-b134-373061616332','Emanuel', 'Monahan', 'Federico II', 'test_autore_6@test.com', 'R8tY7uI6oP5aD4fG' ,'autore');
+INSERT INTO Utenti VALUES ('34633933-3933-4832-b533-373065323631','Garth', 'Ledner', 'Federico II', 'test_autore_7@test.com', 'HjK9lMnB8vCxZ7aQ' ,'autore');
+INSERT INTO Utenti VALUES ('35323634-3435-4463-b330-646636643738','Cindy', 'Barrows', 'Federico II', 'test_autore_8@test.com', 'E2rT4yU6iO8pAsD3' ,'autore');
+INSERT INTO Utenti VALUES ('32643432-3962-4764-a465-313536313537','Cedrick', 'Steuber', 'Federico II', 'test_autore_9@test.com', 'F5gH7jK9lZ1xWc4V' ,'autore');
+INSERT INTO Utenti VALUES ('64393265-3937-4261-b563-326137626135','Cindy', 'Bartell', 'Federico II', 'test_autore_10@test.com', 'A0sD9fG8hJ7kL6mN' ,'autore');
 ------ RUOLO = 'organizzatore'
-INSERT INTO Utenti VALUES ('32373832-3632-4463-a262-666532653338','Wade', 'Nitzsche', 'Federico II', 'test_organizzatore_1@test.com', "B6vC5xZ4aQ3wE2rT" ,'organizzatore');
-INSERT INTO Utenti VALUES ('65666239-6464-4537-b137-353835643834','Johathan', 'Bauch', 'Federico II', 'test_organizzatore_2@test.com', "Y1uI0oP9dF8gH7jK" ,'organizzatore');
-INSERT INTO Utenti VALUES ('39653463-3133-4164-b234-333262356365','Garth', 'Bartell', 'Federico II', 'test_organizzatore_3@test.com', "L3mN4bV5cZ6xQ7wE" ,'organizzatore');
-INSERT INTO Utenti VALUES ('33396633-3862-4632-b431-643432383362','Cindy', 'Nitzsche', 'Federico II', 'test_organizzatore_4@test.com', "T8rY9uI0pAsD1fG2" ,'organizzatore');
-INSERT INTO Utenti VALUES ('34626163-6130-4834-a334-376239323830','Nicola', 'Monahan', 'Federico II', 'test_organizzatore_5@test.com', "P4oI5uY6tREwQ7aZ" ,'organizzatore');
-INSERT INTO Utenti VALUES ('63326637-6263-4131-a431-386563313861','Johathan', 'Smith', 'Federico II', 'test_organizzatore_6@test.com', "M9kL8pQ7wE6rT5yU" ,'organizzatore');
-INSERT INTO Utenti VALUES ('32613962-3730-4662-a639-336563363339','Garth', 'Schowalt', 'Federico II', 'test_organizzatore_7@test.com', "D2fG3hJ4kL5mN6bV" ,'organizzatore');
-INSERT INTO Utenti VALUES ('34616635-3562-4137-b761-373661353931','Cedrick', 'Monahan', 'Federico II', 'test_organizzatore_8@test.com', "Z7aQ8wE9rT0yU1iO" ,'organizzatore');
-INSERT INTO Utenti VALUES ('61356363-3734-4835-a137-323533376165','Garth', 'Pfeffer', 'Federico II', 'test_organizzatore_9@test.com', "C3xZ4vB5nK6mL7pH" ,'organizzatore');
-INSERT INTO Utenti VALUES ('64326466-3534-4961-b966-373932313433','Cedrick', 'Smith', 'Federico II', 'test_organizzatore_10@test.com', "W0rT9yU8iO7pA6sD" ,'organizzatore');
+INSERT INTO Utenti VALUES ('32373832-3632-4463-a262-666532653338','Wade', 'Nitzsche', 'Federico II', 'test_organizzatore_1@test.com', 'B6vC5xZ4aQ3wE2rT' ,'organizzatore');
+INSERT INTO Utenti VALUES ('65666239-6464-4537-b137-353835643834','Johathan', 'Bauch', 'Federico II', 'test_organizzatore_2@test.com', 'Y1uI0oP9dF8gH7jK' ,'organizzatore');
+INSERT INTO Utenti VALUES ('39653463-3133-4164-b234-333262356365','Garth', 'Bartell', 'Federico II', 'test_organizzatore_3@test.com', 'L3mN4bV5cZ6xQ7wE' ,'organizzatore');
+INSERT INTO Utenti VALUES ('33396633-3862-4632-b431-643432383362','Cindy', 'Nitzsche', 'Federico II', 'test_organizzatore_4@test.com', 'T8rY9uI0pAsD1fG2' ,'organizzatore');
+INSERT INTO Utenti VALUES ('34626163-6130-4834-a334-376239323830','Nicola', 'Monahan', 'Federico II', 'test_organizzatore_5@test.com', 'P4oI5uY6tREwQ7aZ' ,'organizzatore');
+INSERT INTO Utenti VALUES ('63326637-6263-4131-a431-386563313861','Johathan', 'Smith', 'Federico II', 'test_organizzatore_6@test.com', 'M9kL8pQ7wE6rT5yU' ,'organizzatore');
+INSERT INTO Utenti VALUES ('32613962-3730-4662-a639-336563363339','Garth', 'Schowalt', 'Federico II', 'test_organizzatore_7@test.com', 'D2fG3hJ4kL5mN6bV' ,'organizzatore');
+INSERT INTO Utenti VALUES ('34616635-3562-4137-b761-373661353931','Cedrick', 'Monahan', 'Federico II', 'test_organizzatore_8@test.com', 'Z7aQ8wE9rT0yU1iO' ,'organizzatore');
+INSERT INTO Utenti VALUES ('61356363-3734-4835-a137-323533376165','Garth', 'Pfeffer', 'Federico II', 'test_organizzatore_9@test.com', 'C3xZ4vB5nK6mL7pH' ,'organizzatore');
+INSERT INTO Utenti VALUES ('64326466-3534-4961-b966-373932313433','Cedrick', 'Smith', 'Federico II', 'test_organizzatore_10@test.com', 'W0rT9yU8iO7pA6sD' ,'organizzatore');
 ---- Articoli
 INSERT INTO Articoli VALUES ('62366665-3430-4435-b764-316461623265','interdum orci condimentum', 'Test Abstract', 'sottomesso');
 INSERT INTO Articoli VALUES ('35393530-6534-4234-b263-346463643536','Mauris congue orci porttitor', 'Test Abstract', 'sottomesso');
@@ -101,7 +101,6 @@ INSERT INTO Autori VALUES ('66643462-6636-4665-b364-383037373830', '35393530-653
 INSERT INTO Autori VALUES ('34633933-3933-4832-b533-373065323631', '35393530-6534-4234-b263-346463643536');
 INSERT INTO Autori VALUES ('66643462-6636-4665-b364-383037373830', '64383965-3762-4265-a539-316463343833');
 INSERT INTO Autori VALUES ('65303532-6633-4464-b134-373061616332', '64383965-3762-4265-a539-316463343833');
----- Conferenze
 ---- Conferenze
 INSERT INTO Conferenze VALUES ('62646636-3962-4238-b630-343665376536', 'TITOLO1', 'DESCRIZIONE1', '2026-01-31', '32373832-3632-4463-a262-666532653338');
 INSERT INTO Conferenze VALUES ('61356266-3165-4638-b965-326166616666', 'TITOLO2', 'DESCRIZIONE2', '2026-01-31', '65666239-6464-4537-b137-353835643834');

@@ -73,10 +73,6 @@
           <version>3.3.0</version>
         </plugin>
         <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.4.2</version>
-        </plugin>
-        <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>3.1.2</version>
         </plugin>
@@ -93,6 +89,19 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.6.1</version>
         </plugin>
+	<plugin>
+	  <groupId>org.apache.maven.plugins</groupId>
+	  <artifactId>maven-jar-plugin</artifactId>
+	  <version>3.4.2</version>
+	  <configuration>
+	    <archive>
+	      <manifest>
+		<addClasspath>true</addClasspath>
+		<mainClass>org.groupone.Main</mainClass>
+	      </manifest>
+	    </archive>
+	  </configuration>
+	</plugin>
       </plugins>
     </pluginManagement>
   </build>

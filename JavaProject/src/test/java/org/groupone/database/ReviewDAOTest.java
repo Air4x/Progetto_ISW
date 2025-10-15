@@ -12,8 +12,8 @@ public class ReviewDAOTest {
 
     @Test
     public void hasConflictOfInterest(){
-	ID idArt = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
-	ID idUser = new ID("9c388e06-3c9e-43bd-9327-acbffed869d3");
+	ID idArt = new ID("62366665-3430-4435-b764-316461623265");
+	ID idUser = new ID("34633933-3933-4832-b533-373065323631");
 	try {
 	    ReviewDAO dao = new ReviewDAO();
 	    boolean actual = dao.hasConflitOfInterest(idArt, idUser);

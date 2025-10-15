@@ -13,7 +13,6 @@ public class ReviewDTO {
     private String article;
     private int score;
     private String result;
-    private String status;
     
     /**
      * Costruttore
@@ -21,12 +20,11 @@ public class ReviewDTO {
      * @param score
      * @param result
      */
-    public ReviewDTO(ID id, String article, int score, String result, String status) {
+    public ReviewDTO(ID id, String article, int score, String result) {
         this.id = id;
         this.article = article;
         this.score = score;
         this.result = result;
-        this.status = status;
     }
 
     /**
@@ -38,7 +36,6 @@ public class ReviewDTO {
         this.article = review.getArticle().getTitle();
         this.score = review.getScore();
         this.result = review.getResult();
-        this.status = review.getArticle().getStato();
     }
     
     /**
@@ -71,14 +68,6 @@ public class ReviewDTO {
      */
     public int getScore() {
         return score;
-    }
-
-    /**
-     * Stato dell'articolo
-     * @return
-     */
-    public String getStatus() {
-        return status;
     }
     
     @Override

@@ -36,7 +36,7 @@ public class ReviewController {
      * @returnn Valore Booleano che indica se la revisione è stata creata con successo
      * @throws SQLException
      */
-    public boolean createReview(ArrayList<RUserDTO> reviewers, ShowArticleDTO article) throws SQLException {
+    public boolean createReview(ArrayList<RUserDTO> reviewers, ShowArticleDTO article) throws SQLException{
         if (reviewers == null || reviewers.isEmpty()) {
             System.out.println("Invalid reviewers list");
             return false;
@@ -51,6 +51,12 @@ public class ReviewController {
             }
             
         }
+        try{
+            article_dao.getArticleByID(article.getId()).setStato("in revisione");
+        }catch( IllegalArgumentException e){ 
+        }
+
+        System.out.println("Reviews created successfully ");
         return true;
     }
 
@@ -80,14 +86,15 @@ public class ReviewController {
      * @throws SQLException
      */    
     public ReviewDTO updateReview (ReviewDTO final_review, int new_score, String new_result) throws SQLException {
-        Review r = this.reviewer_dao.getAllReviewByID(final_review.getId());
         if (final_review == null) {
             System.out.println("Invalid review");
             return null;
         }
+        Review r = this.reviewer_dao.getAllReviewByID(final_review.getId());
         r.setScore(new_score);
         r.setResult(new_result);
         this.reviewer_dao.updateReview(r);
+        System.out.println("Review updated successfully");
         return new ReviewDTO(r);
     }
 
@@ -124,16 +131,17 @@ public class ReviewController {
     }
 
     /**
-     * Metodo che controlla se un articolo ha ricevuto almeno 2 revisioni con esito
-     * positivo o negativo e aggiorna lo stato dell'articolo di conseguenza
-     * @param articleId
+     * Metodo che controlla se un articolo ha completato le revisioni
+     * @param articleId 
+     * @return Valore booleano che indica se l'articolo ha completato le revisioni
      * @throws SQLException
      */
-    public void checkReviewsCompletion(ID articleId) throws SQLException {
+    public boolean checkReviewsCompletion(ID articleId) throws SQLException {
         ArrayList<Review> reviews = (ArrayList<Review>) this.reviewer_dao.getAllReviewByArticle(articleId);
-        String new_status = "inattesa";
         int counter_neg= 0;
         int counter_pos= 0;
+        String new_status = "in revisione";
+        boolean risultato = false;
         for (Review r : reviews) {
             if (r.getResult().equals("rifiutato")) {
                 counter_neg++;
@@ -141,14 +149,17 @@ public class ReviewController {
                 counter_pos++;
             }
             if(counter_neg >= 2 && counter_pos >=0){
-                new_status = "Rifiutato";
+                new_status = "sottomesso";
+                risultato = false;
                 break;
             } else if(counter_pos >=2 && counter_neg >=0){
-                new_status = "accettato";
+                new_status = "sottomesso";
+                risultato = true;
                 break;
             }        
         }
         article_dao.getArticleByID(articleId).setStato(new_status);
+        return risultato;
     }
 
 }

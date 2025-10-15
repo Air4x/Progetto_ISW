@@ -24,7 +24,7 @@ public class UserDAOTest {
 	@Test
 	public void isUserPresentByIDPositive() throws SQLException {
 		UserDAO dao = new UserDAO();
-		ID id = new ID("3a9e468f-ff6b-4a84-bbc0-fb3f9e9c5024");
+		ID id = new ID("31353664-3930-4465-a334-323164633932");
 		try {
 			boolean result = dao.isUserPresentByID(id);
 			assertTrue("failure - utente non trovato", result);
@@ -47,7 +47,7 @@ public class UserDAOTest {
 	@Test
 	public void isUserPresentByEmailPositive() {
 		UserDAO dao = new UserDAO();
-		String email = "domenico.cotroneo@unina.it";
+		String email = "test_autore_1@test.com";
 		try {
 			boolean result = dao.isUserPresentByEmail(email);
 			assertTrue("failure - utente non trovato", result);
@@ -71,7 +71,7 @@ public class UserDAOTest {
 	@Test
 	public void getUserByEmail() {
 		UserDAO dao = new UserDAO();
-		String email = "domenico.cotroneo@unina.it";
+		String email = "test_autore_1@test.com";
 		try {
 			User u = dao.getUserByEmail(email);
 			assertNotNull("failure - utente non trovato", u);
@@ -83,7 +83,7 @@ public class UserDAOTest {
 	@Test
 	public void  getUserRoleByID() {
 		UserDAO dao = new UserDAO();
-		ID id = new ID("9c388e06-3c9e-43bd-9327-acbffed869d3");
+		ID id = new ID("31353664-3930-4465-a334-323164633932");
 		String expectedRole = "autore";
 		try {
 			String role = dao.getUserRoleByID(id);
@@ -96,8 +96,8 @@ public class UserDAOTest {
 	@Test
 	public void getUserByID() {
 		UserDAO dao = new UserDAO();
-		ID id = new ID("9c388e06-3c9e-43bd-9327-acbffed869d3");
-		Author expectedAuthor = new Author("Seconda Università di Napoli", "gian.rombanini@outlook.it", "Rombanini", "Gianmarco", "batuffolino", id);
+		ID id = new ID("31353664-3930-4465-a334-323164633932");
+		Author expectedAuthor = new Author("Federico II", "test_autore_1@test.com", "Barrows", "Cindy", "4hJd8kLpT2xYw0Rz", id);
 		try {
 			Author author = (Author) dao.getUserByID(id);
 			assertEquals(expectedAuthor, author);

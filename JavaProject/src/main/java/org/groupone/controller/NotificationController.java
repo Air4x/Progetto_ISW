@@ -40,7 +40,7 @@ public class NotificationController extends TimerTask {
         try {
             this.conf_dao= new ConferenceDAO();
             this.user_dao= new UserDAO();
-        } catch (SQLException e) {
+        } catch (SQLException|ExceptionInInitializerError e) {
             e.printStackTrace();
             System.out.println("Errore nell'inizializzazione del NotificationController");
         }

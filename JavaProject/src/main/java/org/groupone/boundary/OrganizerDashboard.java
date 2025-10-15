@@ -4,6 +4,7 @@ import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ShowActiveConferenceDTO;
 import org.groupone.DTO.ShowArticleDTO;
 import org.groupone.controller.ConferenceController;
+import org.groupone.controller.ReviewController;
 import org.groupone.utility.ID;
 
 import javax.swing.*;
@@ -23,11 +24,13 @@ public class OrganizerDashboard extends JFrame{
     private JLabel lblwelcome =   new JLabel();
     private JLabel lblactiveconference =    new JLabel();
     private JLabel lblarticlesubmitted =    new JLabel();
+    private JButton checkReviewCompletion =    new JButton("Check Review");
+    private ShowArticleDTO selected ;
 
     //Composizione frame
     public OrganizerDashboard(RUserDTO organizer) throws SQLException {
         try {
-
+            ReviewController rc = new ReviewController();
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setTitle("Organizer Dashboard");
             setBounds(100, 100, 650, 800);
@@ -86,10 +89,15 @@ public class OrganizerDashboard extends JFrame{
                         scrollarticleSubmitted.getViewport().setView(listarticleSubmitted);
                         listarticleSubmitted.addMouseListener(new MouseAdapter() {
                             public void mouseClicked(MouseEvent e) {
+
                                 int indexa = listarticleSubmitted.locationToIndex(e.getPoint());
                                 ShowArticleDTO selectedarticle = articlemodel.getElementAt(indexa);
-                                AssignReviewersView frame  = new AssignReviewersView(selectedarticle);
-                                frame.setVisible(true);
+                                if(selectedarticle.getStatus().equals("sottomesso")){
+                                    AssignReviewersView frame  = new AssignReviewersView(selectedarticle);
+                                    frame.setVisible(true);
+                                }
+
+                                selected = selectedarticle;
 
                             }
                         });
@@ -134,6 +142,33 @@ public class OrganizerDashboard extends JFrame{
 
                 }
             });
+
+            checkReviewCompletion.setBackground(new Color(100, 149, 237));
+            checkReviewCompletion.setForeground(Color.white);
+            checkReviewCompletion.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
+            checkReviewCompletion.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    if(selected==null){
+                        JOptionPane.showMessageDialog(null,"Please Select the Article");
+                    }
+                    else{
+                        try {
+                            if(rc.checkReviewsCompletion(selected.getId())){
+                                JOptionPane.showMessageDialog(null, "Article Status Updated");
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null, "Article Status Not Update, still in revision");
+                            }
+
+                        }catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                }
+            });
+            checkReviewCompletion.setBounds(280, 550, 200, 50);
+            contentPane.add(checkReviewCompletion);
 
 
             contentPane.add(buttonCreateConference);

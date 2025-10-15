@@ -1,9 +1,10 @@
 package org.groupone.controller;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.time.LocalDate;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ShowArticleDTO;
 import org.groupone.database.ArticleDAO;
@@ -61,7 +62,7 @@ public class ArticleController {
             }
         }
         if(authors_list.isEmpty()){
-            System.out.println("List of authors is empty");
+            System.out.println("List of authors dto is empty");
             return false;
         }
         Article art = new Article(article_id, article_abstract, authors_list, article_titolo);
@@ -84,6 +85,10 @@ public class ArticleController {
             for (Article article : real_article) {
                 ShowArticleDTO articleDTO = new ShowArticleDTO(article);
                 fake_article.add(articleDTO);
+            }
+            if(fake_article.isEmpty() || fake_article == null){
+                System.out.println("Nessun articolo trovato per questo autore");
+                return null;
             }
             return fake_article;
         }else  if (this.user_dao.isUserPresentByID(authorID) == false){

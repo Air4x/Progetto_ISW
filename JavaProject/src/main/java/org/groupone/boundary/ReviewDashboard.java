@@ -20,9 +20,11 @@ public class ReviewDashboard extends JFrame {
     ReviewDashboard(RUserDTO reviewer) {
         try {
             setTitle("Review Dashboard");
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             setBounds(100, 100, 450, 300);
             setContentPane(contentPane);
+            setLocationRelativeTo(null);
+            setResizable(false);
             contentPane.setLayout(null);
             ReviewController rc = new ReviewController();
             ReviewDTO[] articletoreview = rc.getAllReviewsByReviewer(reviewer.getId()).toArray(new ReviewDTO[0]);

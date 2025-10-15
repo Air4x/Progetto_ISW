@@ -115,8 +115,6 @@ public class AssignReviewersView extends JFrame {
                     }
                     if (!selected1.getId().equals(selected2.getId()) && !selected3.getId().equals(selected1.getId()) && !selected2.getId().equals(selected3.getId())) {
                         try {
-
-
                             ArrayList<RUserDTO> reviewrs = new ArrayList<RUserDTO>();
                             reviewrs.add(selected1);
                             reviewrs.add(selected2);

@@ -108,7 +108,7 @@ public class ShowArticleDTO {
 
     @Override
     public String toString() {
-        return "\n" + this.titolo + "\n" + this.abstr + "\n" + this.autori.toString() + "\n" + this.status + "\n\n";
+        return "\n" + this.titolo + "\n" + this.abstr + "\n"  + this.status + "\n" + this.autori.toString()+"\n\n";
     }
 
 }

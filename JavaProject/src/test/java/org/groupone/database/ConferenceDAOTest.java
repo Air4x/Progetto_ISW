@@ -18,7 +18,7 @@ public class ConferenceDAOTest {
 
     @Test
     public void getConferenceByID() {
-	ID id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d");
+	ID id = new ID("62646636-3962-4238-b630-343665376536");
 	try {
 	    ConferenceDAO dao = new ConferenceDAO();
 	    Conference c = dao.getConferenceByID(id);
@@ -31,7 +31,7 @@ public class ConferenceDAOTest {
 
     @Test
     public void getArticlesByConference() {
-	ID id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc16d");
+	ID id = new ID("62646636-3962-4238-b630-343665376536");
 	try {
 	    ConferenceDAO dao = new ConferenceDAO();
 	    ArrayList<Article> arts = dao.getArticlesByConference(id);
@@ -59,7 +59,9 @@ public class ConferenceDAOTest {
 	Date scadenza = Date.valueOf(LocalDate.now());
 	Conference c = new Conference(scadenza,
 				      "TITOLO_PROVA",
-				      "DESCRIZIONE_PROVA_RIMUOVERE_PRIMA_DI_TEST", ID.generate(), new ID("ee719226-43d5-4bfc-bf46-3e409bbbf425"));
+				      "DESCRIZIONE_PROVA_RIMUOVERE_PRIMA_DI_TEST",
+				      ID.generate(),
+				      new ID("32373832-3632-4463-a262-666532653338"));
 	try {
 	    ConferenceDAO dao = new ConferenceDAO();
 	    dao.saveConference(c);
@@ -71,7 +73,7 @@ public class ConferenceDAOTest {
 
     @Test
     public void isConferencePresentByID(){
-	ID id = new ID("6279c9e1-b121-4c7a-a196-7a43b57fc03d");
+	ID id = new ID("62646636-3962-4238-b630-343665376536");
 	try {
 	    ConferenceDAO dao = new ConferenceDAO();
 	    boolean result = dao.isConferencePresentByID(id);

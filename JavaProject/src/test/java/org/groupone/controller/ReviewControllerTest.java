@@ -3,11 +3,15 @@ package org.groupone.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import org.groupone.DTO.PossibleReviewDTO;
+import org.groupone.DTO.RUserDTO;
+import org.groupone.DTO.ReviewDTO;
+import org.groupone.DTO.ShowArticleDTO;
+import org.groupone.database.ArticleDAO;
 import org.groupone.database.UserDAO;
-import org.groupone.entity.Author;
 import org.groupone.utility.ID;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,77 +19,56 @@ import org.junit.Test;
 public class ReviewControllerTest {
 
     private ReviewController review_Controller;
-    private UserDAO u_DAO;
+    private UserDAO user_dao;
+    private ArticleDAO article_dao;
 
     @Before
     public void setUp() throws SQLException {
         review_Controller = new ReviewController();
-        u_DAO = new UserDAO();
+        user_dao = new UserDAO();
+        article_dao = new ArticleDAO();
     }
 
     @Test
-    public void testAssignReviewerSuccess() throws SQLException {
-        ID id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
-        ArrayList<PossibleReviewDTO> list_reviewer = review_Controller.getListReviewer(id_article);
-        boolean esito = review_Controller.assignReviewer(id_article, list_reviewer);
+    public void testCreateReview_ValidInput() throws SQLException {
+        ArrayList<RUserDTO> reviewers = new ArrayList<>();
+        reviewers.add(new RUserDTO(user_dao.getUserByEmail("test_autore_2@test.com")));
+        reviewers.add(new RUserDTO(user_dao.getUserByEmail("test_autore_3@test.com")));
+        reviewers.add(new RUserDTO(user_dao.getUserByEmail("test_autore_4@test.com")));
+        Boolean esito= review_Controller.createReview(reviewers, new ShowArticleDTO(article_dao.getArticleByID(new ID("64383965-3762-4265-a539-316463343833"))));
         assertTrue(esito);
     }
 
     @Test
-    public void testAssignReviewerFailureArticleNotFound() throws SQLException {
-        ArrayList<PossibleReviewDTO> list_reviewer = new ArrayList<>();
-        list_reviewer = review_Controller.getListReviewer(ID.generate());
-        boolean esito = review_Controller.assignReviewer(ID.generate(), list_reviewer);
+    public void testCreateReview_NullOrEmptyReviewers() throws SQLException {
+        Boolean esito= review_Controller.createReview(null, new ShowArticleDTO(article_dao.getArticleByID(new ID("64383965-3762-4265-a539-316463343833"))));
         assertFalse(esito);
     }
 
     @Test
-    public void testAssignReviewerFailureErrorListAuthor() throws SQLException {
-        ArrayList<PossibleReviewDTO> list_reviewer = new ArrayList<>();
-        boolean esito = review_Controller.assignReviewer(new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea"), list_reviewer);
+    public void testCreateReview_InvalidArticle() throws SQLException {
+        ArrayList<RUserDTO> reviewers = new ArrayList<>();
+        reviewers.add(new RUserDTO(user_dao.getUserByEmail("test_autore_2@test.com")));
+        reviewers.add(new RUserDTO(user_dao.getUserByEmail("test_autore_3@test.com")));
+        reviewers.add(new RUserDTO(user_dao.getUserByEmail("test_autore_4@test.com")));
+        Boolean esito= review_Controller.createReview(reviewers, null);
         assertFalse(esito);
     }
 
     @Test
-    public void testGetListReviewerSuccess() throws SQLException {
-        ArrayList<Author> list_a = u_DAO.getAllAuthors();
-        ID id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
-        ArrayList<PossibleReviewDTO> list_reviewer = review_Controller.getListReviewer(id_article);
-        for(PossibleReviewDTO r : list_reviewer){
-            System.out.println(r.toString());
-        }
-        if(list_reviewer.size() == 0){
-            assert(false);
-        } else {
-            assert(true);
-        }
+    public void testUpdateReview_ValidInput() throws SQLException{
+        ArrayList<ReviewDTO> r = review_Controller.getAllReviewsByArticle(new ID("62366665-3430-4435-b764-316461623265"));
+        ReviewDTO final_review = r.get(0);
+        ReviewDTO updated_review = review_Controller.updateReview(final_review, 12, "rifiutato");
+        assertNotNull(updated_review);
     }
 
     @Test
-    public void testGetListReviewerthereAreNoReviewers() throws SQLException {
-        ID id_article = new ID("7cf18f80-b41a-42f0-af41-fbb9b60303ab");
-        ArrayList<PossibleReviewDTO> list_reviewer = review_Controller.getListReviewer(id_article);
-        if(list_reviewer.size() == 0){
-            assert(true);
-        } else {
-            assert(false);
-        }
-
+    public void testUpdateReview_InvalidInput() throws SQLException{
+        ReviewDTO updated_review = review_Controller.updateReview(null, 12, "rifiutato");
+        assertNull(updated_review);
+    }
     }
 
-    @Test
-    public void testUpdateArticleStatusSuccess() throws SQLException {
-        ID id_article = new ID("2e24cd58-a3d7-4057-a1b8-ce9a24669cea");
-        boolean esito = review_Controller.updateArticleStatus(id_article, "in_revisione");
-        assert(esito);
-    }
-    
-    @Test
-    public void testUpdateArticleStatusFailure() throws SQLException {
-        ID id_article = ID.generate();
-        boolean esito = review_Controller.updateArticleStatus(id_article, "NEW_STATUS");
-        assertFalse(esito);
-    }
 
-}
 

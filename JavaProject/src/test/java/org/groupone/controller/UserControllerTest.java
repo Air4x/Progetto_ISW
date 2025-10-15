@@ -21,7 +21,7 @@ public class UserControllerTest {
 
     @Test
     public void testRegisterUserIsPresent() throws SQLException {
-        RUserDTO fake_user = user_controller.registerUser("Seconda Università di Napoli","fakenetflix2003b@gmail.com","Rombanini","Gianmarco","batuffolino", "autore");
+        RUserDTO fake_user = user_controller.registerUser("Seconda Università di Napoli","gpt1youtu@gmail.com","Rombanini","Gianmarco","batuffolino", "autore");
         assertNull(fake_user);
     }
 
@@ -36,8 +36,8 @@ public class UserControllerTest {
 
     @Test
     public void testLoginUserOK() throws SQLException {
-        RUserDTO fake_user = user_controller.login("fakenetflix2003b@gmail.com","batuffolino");
-        assertEquals(fake_user.getEmail(),"fakenetflix2003b@gmail.com");
+        RUserDTO fake_user = user_controller.login("gpt1youtu@gmail.com","4hJd8kLpT2xYw0Rz");
+        assertEquals(fake_user.getEmail(),"gpt1youtu@gmail.com");
     }
 
     @Test
@@ -48,13 +48,13 @@ public class UserControllerTest {
 
     @Test
     public void testGetAuthorByEmailOK() throws SQLException {
-        RUserDTO fake_user = user_controller.getRAuthorBYEmail("fakenetflix2003b@gmail.com");
+        RUserDTO fake_user = user_controller.getRAuthorBYEmail("gpt1youtu@gmail.com");
         assertEquals("autore",fake_user.getRole());
     }
 
     @Test
     public void testGetAuthorByEmailNotOK() throws SQLException {
-        RUserDTO fake_user = user_controller.getRAuthorBYEmail("gpt1youtu@gmail.com");
+        RUserDTO fake_user = user_controller.getRAuthorBYEmail("test_organizzatore_1@test.com");
         assertNull(fake_user);
     }
 

@@ -27,8 +27,7 @@ public class UserControllerTest {
 
     @Test
     public void testRegisterUserIsNotPresent() throws SQLException {
-        /*Bisogna cambiare solo new_email per vedere che il test e andato a buon fine*/
-        String new_email = "komassdfslggòkdsadssp.ghyssdaasssdsfszb@gmail.com";
+        String new_email = "user." + System.currentTimeMillis() + "@gmail.com";
         RUserDTO fake_user =user_controller.registerUser("Seconda Università di Napoli",new_email,"Rombanini","Gianmarco","batuffolino", "autore");
         System.out.println(fake_user.toString());
         assertEquals(new_email,fake_user.getEmail());

@@ -1,0 +1,42 @@
+@startuml
+actor User
+participant "LoginView"
+participant "LoginForm"
+participant "UserController"
+participant "UserDAO"
+participant "user: User" as user
+database "testDB"
+
+activate User
+User -> LoginView : "L'utente clicca sul tasto Login"
+
+create LoginForm
+LoginView -> LoginForm : <<create>> new LoginForm()
+activate LoginView
+activate LoginForm
+User -> LoginForm : "L'untente inserisce le credenziali di access"
+LoginForm -> LoginForm : Controllo credenziali
+alt Credenziali valide
+create UserController
+LoginForm -> UserController :<<create>> new UserController()
+LoginForm -> UserController: login(email, password)
+UserController -> UserController: Controllo credenziali
+alt Login andato a buon fine
+create UserDAO
+UserController -> UserDAO: <<create>> new UserDAO()
+UserController -> UserDAO: getUserByEmail(email)
+UserDAO -> testDB: SELECT * FROM Utenti ...
+testDB --> UserDAO: Success
+create user
+UserDAO -> user : <<create>> new User()
+UserDAO --> UserController : user
+UserController --> LoginForm: RUserDTO
+else Utente non presente nel database
+UserController --> LoginForm : null
+LoginForm ---> User : Mostra messaggio di errore
+end
+else Formato credenziali non valido
+LoginForm --> User: Mostra messaggio di errore
+end
+
+@enduml

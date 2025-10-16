@@ -1,5 +1,4 @@
 @startuml
-
 actor User 
 participant "LoginView"
 participant "RegistrationForm"

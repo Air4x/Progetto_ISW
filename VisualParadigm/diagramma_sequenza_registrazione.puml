@@ -1,0 +1,28 @@
+@startuml
+
+actor User as us
+participant "Sistema" as ui
+participant "Database" as db
+
+activate us
+activate ui
+us -> ui : Inserimento dati per la registrazione [name,lastname,email,password,affiliation] e selezione del ruolo
+us -> ui : click sul tasto registrazione
+ui->ui: Verifica dei dati
+alt Tutti dati validi
+activate db
+ui->db: Salvataggio informazioni dell'utente
+deactivate db
+else Email non presente
+ui->us: Il sistema mostra un messaggio di errore
+else Email non valida
+ui->us: Il sistema mostra un messaggio di errore
+else Password non valida
+ui->us:  Il sistema mostra un messaggio di errore 
+end
+
+deactivate us
+deactivate ui
+
+
+@enduml

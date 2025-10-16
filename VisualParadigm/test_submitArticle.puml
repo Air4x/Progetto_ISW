@@ -33,7 +33,8 @@ else (no)
   :[18] create Article;
   :[19] add Article to conference;
   :[20] save Article;
-  :[21] return true;
+  :[21] submit Article to conference;
+  :[22] return true;
   stop
 endif
 

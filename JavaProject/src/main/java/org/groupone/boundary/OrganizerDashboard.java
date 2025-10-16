@@ -150,6 +150,9 @@ public class OrganizerDashboard extends JFrame{
                         try {
                             if(rc.checkReviewsCompletion(selected.getId())){
                                 JOptionPane.showMessageDialog(null, "Article Status Updated");
+                                OrganizerDashboard organizerDashboard = new OrganizerDashboard(organizer);
+                                organizerDashboard.setVisible(true);
+                                dispose();
                             }
                             else{
                                 JOptionPane.showMessageDialog(null, "Article Status Not Update, still in revision");

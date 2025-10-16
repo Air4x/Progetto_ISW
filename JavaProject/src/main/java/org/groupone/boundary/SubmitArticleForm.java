@@ -99,21 +99,6 @@ public class SubmitArticleForm extends JFrame {
         scrollcoautori.setBounds(170, 40, 250, 220);
         contentPane.add(scrollcoautori);
 
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
         buttonSubmit.setText("Submit");
         buttonSubmit.setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonSubmit.setBackground(new Color(100, 149, 237));
@@ -123,15 +108,18 @@ public class SubmitArticleForm extends JFrame {
             public void mouseClicked(MouseEvent e) {
 
                 try {
+
+
                     ArrayList<RUserDTO> coautoriselezionati = new ArrayList<>();
+                    coautoriselezionati.add(userDTO);
+
                     for(int i=0;i<model.size();i++){
                         if(model.get(i).isSelected()){
                             coautoriselezionati.add(model.getElementAt(i).getUser());
                         }
                     }
 
-
-                    if(coautoriselezionati.size()>3){
+                    if(coautoriselezionati.size()>4){
                         JOptionPane.showMessageDialog(null,"The Coauthors selected are more than 3");
                     }
                     if (txttitle.getText().length() > 150) {
@@ -139,7 +127,6 @@ public class SubmitArticleForm extends JFrame {
                     }
                     if (txtareaabstract.getText().length() > 250) {
                         JOptionPane.showMessageDialog(null, "The abstract is too long.");
-
                     }
                     if (txtareaabstract.getText().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Please Enter the Abstract.");
@@ -148,10 +135,8 @@ public class SubmitArticleForm extends JFrame {
                         JOptionPane.showMessageDialog(null, "Please Enter the Title.");
                     }
 
-                    if (txtcoauthors.getText().length() <= 150 && txtareaabstract.getText().length() <= 250 && coautoriselezionati.size() <= 3) {
-
+                    if (txtcoauthors.getText().length() <= 150 && txtareaabstract.getText().length() <= 250 && coautoriselezionati.size() <= 4) {
                         if (ac.submitArticle(txttitle.getText(), txtareaabstract.getText(), coautoriselezionati, conferenceID)) {
-                            coautoriselezionati.add(userDTO);
                             JOptionPane.showMessageDialog(null, "Article Submitted Successfully");
                             AuthorDashboard frame = new AuthorDashboard(userDTO);
                             frame.setVisible(true);
@@ -175,7 +160,7 @@ public class SubmitArticleForm extends JFrame {
         buttonBack.setCursor(new Cursor(Cursor.HAND_CURSOR));
         buttonBack.setForeground(Color.white);
         buttonBack.setBackground(new Color(100, 149, 237));
-        buttonBack.setBounds(170, 210, 100, 30);
+        buttonBack.setBounds(170, 300, 100, 30);
         buttonBack.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -190,6 +175,10 @@ public class SubmitArticleForm extends JFrame {
                 }
             }
         });
+        contentPane.add(buttonBack);
+
+
+
 
 
     }

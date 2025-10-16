@@ -63,8 +63,27 @@ package Entity {
     + nearDeadline: boolean
   }
 
+  class Review {
+		- id: ID
+		- reviewer: Author
+		- article: Article
+		- score: int
+		- result: String
+                + Review(reviewer: Author, article: Article)
+		+ Review(id: ID, reviewer: Author, article: Article, score: int, esito: String)
+		+ getID(): ID
+		+ getReviewer(): Author
+		+ getArticle(): Article
+		+ getScore(): int
+		+ getResult(): String
+		+ setScore(): void
+		+ setResult(): void
+  }
+	
   User <|-- Author
   User <|-- Organizer
   Conference o-- Article
+  Article "1" -- "0..*" Review : has
+  Author "1" -- "0..*" Review : writes
 }
 @enduml

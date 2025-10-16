@@ -22,6 +22,7 @@ public class ReviewController {
     private ReviewDAO reviewer_dao;
     private UserDAO user_dao;
     private ArticleDAO article_dao;
+    private ShowArticleDTO article_dto;
 
     public ReviewController () throws SQLException {
         this.reviewer_dao = new ReviewDAO();
@@ -53,6 +54,7 @@ public class ReviewController {
         }
         try{
             article_dao.getArticleByID(article.getId()).setStato("in revisione");
+            article_dao.updateStato(article.getId(), "in revisione");
         }catch( IllegalArgumentException e){ 
         }
 
@@ -138,27 +140,28 @@ public class ReviewController {
      */
     public boolean checkReviewsCompletion(ID articleId) throws SQLException {
         ArrayList<Review> reviews = (ArrayList<Review>) this.reviewer_dao.getAllReviewByArticle(articleId);
+        System.out.println(reviews.size() + " " + reviews.get(0).getResult()+ " " + reviews.get(1).getResult()+ " " + reviews.get(2).getResult());
         int counter_neg= 0;
         int counter_pos= 0;
         String new_status = "in revisione";
         boolean risultato = false;
         for (Review r : reviews) {
-            if (r.getResult().equals("rifiutato")) {
+            if (r.getResult().equals("Rifiutato")) {
                 counter_neg++;
-            } else if (r.getResult().equals("accettato")) {
+            } else if (r.getResult().equals("Accettato")) {
                 counter_pos++;
-            }
+            }        
+        }
             if(counter_neg >= 2 && counter_pos >=0){
                 new_status = "sottomesso";
                 risultato = false;
-                break;
             } else if(counter_pos >=2 && counter_neg >=0){
                 new_status = "sottomesso";
                 risultato = true;
-                break;
-            }        
-        }
+            }
+            System.out.println(counter_neg+" "+counter_pos);
         article_dao.getArticleByID(articleId).setStato(new_status);
+        article_dao.updateStato(articleId, new_status);
         return risultato;
     }
 

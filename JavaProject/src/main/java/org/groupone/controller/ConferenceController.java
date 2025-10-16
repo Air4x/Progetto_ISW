@@ -103,6 +103,9 @@ public class ConferenceController {
             fake_article = new ShowArticleDTO(a.getId(), a.getTitle(), a.getAbstr(), fake_list_author, a.getStato());
             fake_list_articles.add(fake_article);
         }
+        for(ShowArticleDTO sa : fake_list_articles){
+            System.out.println(sa.getTitle()+ " "+ sa.getStatus()+" "+ sa.getId().toString()  );
+        }
         return fake_list_articles;
     }
 

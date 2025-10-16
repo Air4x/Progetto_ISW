@@ -19,24 +19,29 @@ LoginForm -> LoginForm : Controllo credenziali
 alt Credenziali valide
 create UserController
 LoginForm -> UserController :<<create>> new UserController()
+activate UserController
 LoginForm -> UserController: login(email, password)
 UserController -> UserController: Controllo credenziali
 alt Login andato a buon fine
 create UserDAO
 UserController -> UserDAO: <<create>> new UserDAO()
+activate UserDAO
 UserController -> UserDAO: getUserByEmail(email)
 UserDAO -> testDB: SELECT * FROM Utenti ...
 testDB --> UserDAO: Success
 create user
 UserDAO -> user : <<create>> new User()
 UserDAO --> UserController : user
+deactivate UserDAO
 UserController --> LoginForm: RUserDTO
 else Utente non presente nel database
 UserController --> LoginForm : null
+deactivate UserController
 LoginForm ---> User : Mostra messaggio di errore
 end
 else Formato credenziali non valido
 LoginForm --> User: Mostra messaggio di errore
 end
-
+deactivate LoginForm
+deactivate User
 @enduml

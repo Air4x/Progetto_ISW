@@ -80,7 +80,7 @@ public class OrganizerDashboard extends JFrame{
                     try {
                         int indexc = listActiveConference.locationToIndex(e.getPoint());
                         ShowActiveConferenceDTO selectedconference = activeConferencemodel.getElementAt(indexc);
-                        ShowArticleDTO[] articlesubmitted = cc.getArticlesByConference(selectedconference.getId()).toArray(new ShowArticleDTO[0]);
+                        ShowArticleDTO[] articlesubmitted = cc.getArticlesByConference(selectedconference.getId()).toArray(new ShowArticleDTO[1]);
                         DefaultListModel<ShowArticleDTO> articlemodel = new DefaultListModel<>();
                         for(ShowArticleDTO article : articlesubmitted){
                             articlemodel.addElement(article);
@@ -91,12 +91,17 @@ public class OrganizerDashboard extends JFrame{
                             public void mouseClicked(MouseEvent e) {
 
                                 ShowArticleDTO selectedarticle = articlemodel.getElementAt(listarticleSubmitted.locationToIndex(e.getPoint()));
-                                if(selectedarticle.getStatus().equals("sottomesso")){
-                                    AssignReviewersView frame  = new AssignReviewersView(selectedarticle);
-                                    frame.setVisible(true);
+                                if(selectedarticle != null) {
+                                    if (selectedarticle.getStatus().equals("sottomesso")) {
+                                        AssignReviewersView frame = new AssignReviewersView(selectedarticle, organizer);
+                                        frame.setVisible(true);
+                                        dispose();
+                                    } else {
+                                        selected = selectedarticle;
+                                    }
                                 }
 
-                                selected = selectedarticle;
+
 
                             }
                         });
@@ -112,7 +117,7 @@ public class OrganizerDashboard extends JFrame{
                     super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                     if(value instanceof ShowArticleDTO){
                         ShowArticleDTO article = (ShowArticleDTO)value;
-                        setText("Title : "+article.getTitle()+ "\tCoauthors : "+article.getAuthors().toString());
+                        setText("Title : "+article.getTitle()+ "\tStatus : "+article.getStatus());
                     }
                     return this;
                 }

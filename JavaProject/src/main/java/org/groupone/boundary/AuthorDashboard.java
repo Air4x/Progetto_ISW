@@ -51,7 +51,7 @@ public class AuthorDashboard extends JFrame {
         lblactiveconference.setBounds(10, 35, 414, 40);
         contentPane.add(lblactiveconference);
 
-        ShowActiveConferenceDTO[] activeconference = cc.getActiveConferences().toArray(new ShowActiveConferenceDTO[0]);
+        ShowActiveConferenceDTO[] activeconference = cc.getActiveConferences().toArray(new ShowActiveConferenceDTO[1]);
         DefaultListModel<ShowActiveConferenceDTO> model = new DefaultListModel<>();
         for(ShowActiveConferenceDTO showActiveConference : activeconference){
             model.addElement(showActiveConference);

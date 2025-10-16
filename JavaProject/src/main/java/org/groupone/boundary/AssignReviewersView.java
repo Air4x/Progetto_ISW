@@ -26,13 +26,14 @@ public class AssignReviewersView extends JFrame {
     private JComboBox reviewer3 = new JComboBox();
     private RUserDTO selected1,selected2,selected3;
 
-    public AssignReviewersView(ShowArticleDTO article) {
+    public AssignReviewersView(ShowArticleDTO article,RUserDTO organizer) {
         try {
             ReviewController rc = new ReviewController();
-            setTitle("Assign Reviewers");
             setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             setBounds(100, 100, 450, 300);
             setTitle("Assign Reviewers");
+            setResizable(false);
+            setLocationRelativeTo(null);
 
 
 
@@ -121,6 +122,8 @@ public class AssignReviewersView extends JFrame {
                             reviewrs.add(selected3);
                             rc.createReview(reviewrs, article);
                             JOptionPane.showMessageDialog(null, "Reviewers assigned successfully");
+                            OrganizerDashboard organizerDashboard = new OrganizerDashboard(organizer);
+                            organizerDashboard.setVisible(true);
                             dispose();
                         }catch (SQLException ex) {
                             ex.printStackTrace();

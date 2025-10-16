@@ -257,11 +257,17 @@ package Boundary {
      '/
   }
   
-  class AssignReviewrsView {
+  class AssignReviewersView {
     /'
      ' + showPendingArticles()
      ' + assignReviewers()
      '/
+  }
+  class ReviewForm {
+  }
+  class ReviewDashboard {
+  }
+  class RegistrationForm {
   }
   
 }
@@ -337,37 +343,57 @@ package DTO{
 
 }
 
-' Database -> Entity
-User --> ID
-Article --> ID
-Conference --> ID
-Review --> ID
-DBManager --> PasswordManager    
-UserDAO -u-> User
-UserDAO -u-> Author
-UserDAO -u-> Organizer	
+Article -> ID
+Review -> ID
+Conference -> ID
+User -> ID
+Organizer -> ID
+Author -> ID
+DBManager -> PasswordManager
 ArticleDAO -u-> Article
 ArticleDAO -u-> Author
+UserDAO -u-> Author
+UserDAO -u-> Organizer
+UserDAO -u-> User
+UserDAO --> ID
+ReviewDAO --> ID
+ReviewDAO -u-> Review
+ReviewDAO -u-> Article
+ReviewDAO -u-> Author
+ConferenceDAO -u-> Article
+ConferenceDAO -u-> Author
 ConferenceDAO -u-> Conference
-ConferenceDAO -u-> Organizer
-ReviewDAO -u-> Review	
-LoginView --> UserController
-AuthorDashboard --> ArticleController
-SubmitArticleForm --> ArticleController
-OrganizerDashboard --> ConferenceController
-AssignReviewrsView --> ReviewController
-UserController --> UserDAO
-UserController --> User
-UserController --> Author
-UserController --> Organizer
-ArticleController --> ArticleDAO
-ConferenceController --> ConferenceDAO
-ReviewController --> ReviewDAO
-UserController --> RUserDTO
-ConferenceController --> RUserDTO
-ConferenceController --> ShowActiveConferenceDTO
-ConferenceController --> ShowArticleDTO
-ArticleController --> RUserDTO
-ArticleController --> ShowArticleDTO
-ReviewController --> PossibleReviewDTO
+ConferenceDAO --> ID
+ReviewController -d-> ArticleDAO
+ReviewController -d-> ReviewDAO
+ReviewController -d-> UserDAO
+ReviewController -u-> RUserDTO
+ReviewController -u-> PossibleReviewDTO
+ReviewController -u-> ShowArticleDTO
+ConferenceController -d-> ConferenceDAO
+ConferenceController -d-> UserDAO
+ConferenceController -u-> RUserDTO
+ConferenceController -u-> ShowArticleDTO
+ConferenceController -u-> ShowActiveConferenceDTO
+ArticleController -d-> ArticleDAO
+ArticleController -d-> ConferenceDAO
+ArticleController -d-> UserDAO
+ArticleController -u-> RUserDTO
+ArticleController -u-> ShowArticleDTO
+NotificationController -d-> ConferenceDAO
+NotificationController -d-> UserDAO
+UserController -d-> UserDAO
+UserController -u-> RUserDTO
+ReviewForm -d-> ReviewController
+OrganizerDashboard -d-> ConferenceController
+OrganizerDashboard -d-> ReviewController
+AuthorDashboard -d->ArticleController
+AuthorDashboard -d-> ConferenceController
+RegistrationForm -d-> UserController
+ReviewDashboard -d-> ReviewController
+SubmitArticleForm -d-> ArticleController
+SubmitArticleForm -d-> UserController
+AssignReviewersView -d-> ReviewController
+LoginForm -d-> UserController
+CreateConferenceForm -d-> ConferenceController
 @enduml

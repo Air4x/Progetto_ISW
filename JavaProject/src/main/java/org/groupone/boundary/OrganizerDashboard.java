@@ -74,7 +74,7 @@ public class OrganizerDashboard extends JFrame{
             });
 
             scrollConferenceList.getViewport().setView(listActiveConference);
-            scrollConferenceList.setBounds(10, 70, 414, 200);
+            scrollConferenceList.setBounds(10, 70, 640, 200);
             listActiveConference.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     try {
@@ -90,8 +90,7 @@ public class OrganizerDashboard extends JFrame{
                         listarticleSubmitted.addMouseListener(new MouseAdapter() {
                             public void mouseClicked(MouseEvent e) {
 
-                                int indexa = listarticleSubmitted.locationToIndex(e.getPoint());
-                                ShowArticleDTO selectedarticle = articlemodel.getElementAt(indexa);
+                                ShowArticleDTO selectedarticle = articlemodel.getElementAt(listarticleSubmitted.locationToIndex(e.getPoint()));
                                 if(selectedarticle.getStatus().equals("sottomesso")){
                                     AssignReviewersView frame  = new AssignReviewersView(selectedarticle);
                                     frame.setVisible(true);
@@ -113,12 +112,12 @@ public class OrganizerDashboard extends JFrame{
                     super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                     if(value instanceof ShowArticleDTO){
                         ShowArticleDTO article = (ShowArticleDTO)value;
-                        setText("Title : "+article.getTitle()+ "\tCoauthors : "+article.getAuthors());
+                        setText("Title : "+article.getTitle()+ "\tCoauthors : "+article.getAuthors().toString());
                     }
                     return this;
                 }
             });
-            scrollarticleSubmitted.setBounds(10, 290, 414, 200);
+            scrollarticleSubmitted.setBounds(10, 290, 640, 200);
             contentPane.add(scrollarticleSubmitted);
             lblarticlesubmitted.setText("Article Submitted");
             lblarticlesubmitted.setFont(new Font("Arial",Font.PLAIN,13));

@@ -28,7 +28,7 @@ public class AuthorDashboard extends JFrame {
 
 
     public AuthorDashboard(RUserDTO userDTO) throws SQLException {
-
+        System.out.println(userDTO.getId());
         ConferenceController cc = new ConferenceController();
         ArticleController ac = new ArticleController();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,9 +36,6 @@ public class AuthorDashboard extends JFrame {
         setTitle("Dashboard Autore");
         setLocationRelativeTo(null);
         setResizable(false);
-
-
-
 
 
         contentPane.setBounds(5,5,5,5);

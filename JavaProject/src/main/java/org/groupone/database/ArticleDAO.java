@@ -1,12 +1,13 @@
 package org.groupone.database;
 
-import org.groupone.entity.*;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import org.groupone.entity.Article;
+import org.groupone.entity.Author;
 import org.groupone.utility.ID;
 
 
@@ -161,4 +162,16 @@ public class ArticleDAO {
 	updateArticoli.setString(2, newAbs);
 	int ignore = updateArticoli.executeUpdate();
     }
+
+	public void updateStato(ID artId, String newStato) throws SQLException {
+    String updateQuery = "UPDATE Articoli SET STATO=? WHERE ID=?;"; // Nomi di tabella non necessari qui
+    PreparedStatement updateArticoli = conn.prepareStatement(updateQuery);
+
+    // Codice CORRETTO
+    updateArticoli.setString(1, newStato);         // 1° '?' -> STATO
+    updateArticoli.setString(2, artId.toString()); // 2° '?' -> ID
+
+    updateArticoli.executeUpdate();
+    updateArticoli.close(); // È buona norma chiudere lo statement
+}
 }

@@ -7,7 +7,7 @@ images: diagramma_uso.png diagramma_classi.png sequence prg er test
 
 sequence: diagramma_sequenza_sottomissione.png diagramma_sequenza_conferenza.png diagramma_sequenza_revisori.png diagramma_sequenza_accesso.png diagramma_sequenza_registrazione.png diagramma_sequenza_conferenza_V2.png
 
-prg: diagramma_prg_classi.png diagramma_prg_database.png diagramma_prg_entity.png diagramma_prg_controller.png diagramma_prg_dto.png diagramma_prg_boundary.png diagramma_prg_utility.png diagramma_prg_sequenza_registrazione.png
+prg: diagramma_prg_classi.png diagramma_prg_database.png diagramma_prg_entity.png diagramma_prg_controller.png diagramma_prg_dto.png diagramma_prg_boundary.png diagramma_prg_utility.png diagramma_prg_sequenza_registrazione.png diagramma_prg_sequenza_accesso.png
 
 er: er_finale.png
 

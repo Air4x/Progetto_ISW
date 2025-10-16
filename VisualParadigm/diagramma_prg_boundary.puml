@@ -39,6 +39,14 @@ package Boundary {
     + showPendingArticles()
     + assignReviewers()
   }
-  
+    
+  class ReviewDashboard {
+    + showPendingReviews()
+  }
+
+  class ReviewForm{
+    +displayForm()
+    +review()
+  }
 }
 @enduml

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import org.groupone.DTO.RUserDTO;
 import org.groupone.DTO.ShowArticleDTO;
 import org.groupone.utility.ID;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
@@ -81,7 +81,7 @@ public class ArticleControllerTest {
         ID author_id = new ID ("3a9e468f-ff6b-4a84-bbc0-acbffed869d3");
         ArrayList<ShowArticleDTO> list_article = new ArrayList<>();
         list_article=this.article_controller.getArticleByAuthor(author_id);
-        assertNull(list_article);
+        assertEquals(0, list_article.size());
     }
 
     @Test
@@ -89,6 +89,6 @@ public class ArticleControllerTest {
         ID author_id = new ID ("31353664-3930-4465-a334-323164633932");
         ArrayList<ShowArticleDTO> list_article = new ArrayList<>();
         list_article=this.article_controller.getArticleByAuthor(author_id);
-        assertNull(list_article);
+        assertEquals(0, list_article.size());
     }
 }

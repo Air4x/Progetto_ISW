@@ -12,7 +12,7 @@ CREATE TABLE Utenti (
        AFFILIAZIONE varchar(100) not null,
        EMAIL varchar(200) not null,
        PASSWORD varchar(130) not null,
-       RUOLO varchar(13) not null,
+       RUOLO varchar(15) not null,
        constraint CHECK_RUOLO check (RUOLO = 'autore' or RUOLO = 'organizzatore')
 );
 
@@ -21,7 +21,7 @@ CREATE TABLE Articoli (
        ID varchar(36) primary key,
        TITOLO varchar(140) not null,
        ABSTRACT varchar(250) not null,
-       STATO varchar(11) not null,
+       STATO varchar(15) not null,
        constraint CHECK_STATO check (STATO = 'sottomesso' or STATO = 'in revisione')
 );
 
@@ -69,7 +69,7 @@ CREATE TABLE Revisioni (
 --- Questa parte è stata autogenerata ---
 ---- Utenti
 ------ RUOLO = 'autore'
-INSERT INTO Utenti VALUES ('31353664-3930-4465-a334-323164633932','Cindy', 'Barrows', 'Federico II', 'gpt1youtu@gmail.com', '4hJd8kLpT2xYw0Rz' ,'autore');
+INSERT INTO Utenti VALUES ('31353664-3930-4465-a334-323164633932','Caparezza', 'Barrows', 'Federico II', 'gpt1youtu@gmail.com', '4hJd8kLpT2xYw0Rz' ,'autore');
 INSERT INTO Utenti VALUES ('38343465-3166-4636-b166-386433333335','Missouri', 'Grady', 'Federico II', 'test_autore_2@test.com', 'Qz7wXcVbN9mKlErT' ,'autore');
 INSERT INTO Utenti VALUES ('64636266-6162-4162-a536-346632626632','Frederic', 'Weissnat', 'Federico II', 'test_autore_3@test.com', 'P0oI9uY8tREwQ1aZ' ,'autore');
 INSERT INTO Utenti VALUES ('65393966-3531-4738-b662-653232663438','Missouri', 'Ledner', 'Federico II', 'test_autore_4@test.com', '5sGf6dHj7kLmBn4V' ,'autore');

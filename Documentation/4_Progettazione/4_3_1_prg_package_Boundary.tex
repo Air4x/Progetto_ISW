@@ -1,68 +1,27 @@
 \subsubsection{Package Boundary}
-\label{sec:prg_package_boundary}
+
+\label{fig:package_boundary_prg_image}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=\linewidth]{VisualParadigm/diagramma_prg_boundary.png}
+  \caption{Package Boundary}
+  \label{fig:Package Boundary}
+\end{figure}
 
 Nel Package Boundary vi sono tutti gli oggetti responsabili della costruzione della GUI e della logica di presentazione. A questo livello tutte le classi corrispondono a delle interfacce. 
 
-\paragraph{AssignReviewsView}
-Permette la visualizzazione di tutti gli articoli sottomessi all'organizzatore per poter essere poi essere messi in revisione.
-\begin{itemize}
-\item showPendingReviewers(): Effettua la visualizzazione degli atricoli inoltrati dagli Autori per essere revisionati.\\
-\item assingReviewers(): L'organizzatore tramite questa funzione assegna per ogni articolo tre revisori. Nel caso in cui si verificasse un errore viene visualizzato il messaggio di errore da mostrare, altrimenti vengono correttamente assegnati i revisori all'articolo.\\
-\end{itemize}
-
-
-\paragraph{CreateConferenceForm}
-L'organizzatore tramite questa classe permette la creazione delle conferenze.\\
-\begin{itemize}
-\item displayForm(): si occupa della formattazione del form.\\
-\item createConference(): L'organizzatore inserisce i dati per la creazione della conferenza, inserendo il titolo, la descrizione, la data di scadenza. Nel caso in cui si verificasse un errore viene visualizzato attraverso un messaggio di errore.
-\end{itemize}
-
-\paragraph{LoginView}
-Permette la visualizzazione all'utente i form per la registrazione ed l'accesso\\
-\begin{itemize}
-\item showLoginForm(): Mostra il form per l'accesso dell'utente all'applicazione\\
-\item showRegistrationForm(): Mostra il form per la registrazione dell'utente all'applicazione\\
-\item handleLogin(): Gestisce l'accesso dell'utente all'applicazione, visualizzando il messaggio di errore quando esso viene riscontrato\\
-\item handleRegistration(): Gestisce la registrazione dell'utente all'applicazione, visualizzando quando il messaggio di errore quando viene riscontrato\\
-\end{itemize}
-
-\paragraph{RegistrationForm}
-Permette la compilazione e l'inoltro del form per la registrazione, permettendo la creazione di un nuovo utente\\
-\begin{itemize}
-\item displayForm(): Permette la visualizzazione del form per effettuare la registrazione\\
-\item submitRegistration(): Inoltra i dati per la registrazione al database, effettuando la verifica dell'inserimento corretto dei dati e nel caso in cui sia già registrato un utente\\
-\end{itemize}
-
-\paragraph{LoginForm}
-Permette la compilazione e l'intoltro del form per l'accesso, permettendo tramite l'inserimento dell'email e della password dell'account, di accede alla propria dashboard
-\begin{itemize}
-\item displayForm(): Permette la visualizzazione del form per la compilazione del login
-\item submitLogin(): Inoltra i dati inseriti per l'accesso, verificcando attraverso il database l'esistenza dell'utente
-\end{itemize}
-
-
-\paragraph{OrganizerDashboard}
-Tramite questa dashboard, vengono visualizzati tutte le conferenze con la possibilità di analizzare anche gli articoli che sono stati sottomessi\\
-\begin{itemize}
-\item showConferenceList(): Permette la visualizzazione tramite una lista delle conferenze\\
-\item viewStats(): Visualizza le statistiche riguardanti le conferenze, tra cui quelle che sono attive. Introduce anche la possibilità di visualizzare gli articoli che sono stati sottomessi per la conferenza determinata\\
-\end{itemize}
-
-\paragraph{SubmitArticleForm}
-Permette la visualizzazione del form per la sottomissione degli articoli\\
-\begin{itemize}
-\item displayForm(): Si occupa della visualizzazione del form pe la sottomissione degli articoli\\
-\item submitArticle(): Inserendo l'articolo e la conferenza, inoltra l'articolo per la determinata conferenza\\
-\end{itemize}
-
-\paragraph{AuthorDashboard}
-Tramite questa dashboard, l'autore ha la possibità di visualizzare le conferenze attive e gli articoli sottomessi da lui stesso\\
-\begin{itemize}
-\item showActiveConference(): Mostra le confereneze attive a cui è possibile sottomettere degli articoli\\
-\item showSubmittedArticles(): Mostra gli articoli sottomessi e a quali conferenze sono stati sottomessi\\
-\end{itemize}
-
+\begin{description}
+\item[AssignReviewsView] :Classe che implementa l'interfaccia grafica per permettere all'organizzatore di assegnare i revisori
+\item[CreateConferenceForm] :Classe che implementa l'interfaccia grafica per permettere la creazione di una nuova Conferenza
+\item[LoginView] :Classe che implementa l'interfaccia grafica che implementa la funzione per l'accesso
+\item[RegistrationForm] :Classe che implementa l'interfaccia grafica per la registrazione
+\item[AuthorDashboard] :Classe che implementa l'interfaccia grafica per la gestione di tutte le funzioni dell'Autore
+\item[OrganizerDashboard] :Classe che implementa l'interfaccia grafica per la gestione di tutte le funzioni dell'Organizzatore
+\item[SubmitArticleForm] :Classe che implementa l'interfaccia grafica per la sottomissione di articoli
+\item[ReviewDashboard] : Classe che implementa l'interfaccia grafica per la gestione delle funzionalità da revisore
+\item[ReviewForm]: Classe che implementa l'interfaccia grafica per effettuare la revisione di un articolo
+\end{description}
 
 
 %%% Local Variables:

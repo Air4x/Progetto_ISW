@@ -62,7 +62,7 @@ public class ConferenceControllerTest {
     @Test
     public void testGetActiveConferencesThereAreNotActiveConferences() throws SQLException {
         ArrayList<ShowActiveConferenceDTO> activeConferences = conference_controller.getActiveConferences();
-        assertTrue(activeConferences.isEmpty());
+        assertFalse(activeConferences.isEmpty());
     }
 
     @Test

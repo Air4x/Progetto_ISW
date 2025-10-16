@@ -13,8 +13,8 @@ package Controller {
   class ConferenceController {
     - user_dao: UserDAO
     - conf_dao: ConferenceDAO
-    + ConferenceController(),
-    + createConference(loscadenza: LocalDate, title: String, descr: String, id: ID, org: RUserDTO): boolean
+    + ConferenceController()
+    + createConference(scadenza: LocalDate, title: String, descr: String, id: ID, org: RUserDTO): boolean
     + getActiveConferences(): ArrayList<ShowActiveConferenceDTO>
     + getArticlesByConference(ID: ID_conference): ArrayList<ShowArticleDTO>
   }
@@ -23,7 +23,7 @@ package Controller {
     - art_dao: ArticleDAO
     - user_dao: UserDAO
     - conf_dao: ConferenceDAO
-    + ArticleController (),
+    + ArticleController()
     + submitArticle(article_titolo: String, article_abstrct: String, article_autori: ArrayList<RUserDTO>, id_conf: ID): boolean
     + getArticleByAuthor(authorID: ID): ArrayList<ShowArticleDTO>
   }
@@ -32,23 +32,24 @@ package Controller {
     - reviewer_dao: ReviewDAO
     - user_dao: UserDAO
     - article_dao: ArticleDAO
-    + ReviewController();
+    + ReviewController()
     + createReview(reviewers: ArrayList<RUserDTO>, article: ShowArticleDTO): boolean
-    + getListReviewer(articleID: ID): ArrayList<PossibleReviewDTO>
-    + updateArticleStatus (id_article: ID, status: String): boolean
+    + getPossibleReviewers(articleID: ID): ArrayList<RUserDTO>
+    + updateReview( final_review: ReviewDTO, new_score: String, new_result: String): ReviewDTO
+    + getAllReviewsByReviewer(reviewer: ID): ArrayList<ReviewDTO>
+    + getAllReviewsByArticle(articleId: ID): ArrayList<ReviewDTO>
+    + checkReviewsCompletion(articleId: ID): boolean
   }
 
   class NotificationController {
     - conf_dao: ConferenceDAO
     - user_dao: UserDAO
-    + NotificationController(),
+    + NotificationController()
+    + run(): void
     + sendNotificationDeadline(): void
     + creatMessage(aut_name: String, aut_lastname: String, conf_title: ArrayList<String>): String
     + sendEmail (email_d: String, msg: String, subject: String): void
-    + run(): void
   }
-
-TimerTask <|-- NotificationController
-
 }
+TimerTask <|-- NotificationController
 @enduml

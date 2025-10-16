@@ -68,6 +68,7 @@ public class ArticleController {
         Article art = new Article(article_id, article_abstract, authors_list, article_titolo);
         this.conf_dao.getConferenceByID(id_conf).getArticles().add(art);
         art_dao.saveArticle(art);
+        conf_dao.submitArticle(id_conf, article_id);
         System.out.println("Articolo consegnato");
         return true;
     }

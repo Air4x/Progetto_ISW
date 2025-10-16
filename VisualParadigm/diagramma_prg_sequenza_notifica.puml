@@ -1,0 +1,34 @@
+@startuml
+actor Timer
+participant "NotificationController"
+participant ConferenceDAO
+participant UserDAO
+database "testDB" as DB
+
+activate Timer
+Timer -> NotificationController: sendNotificationDeadline()
+activate NotificationController
+NotificationController -> ConferenceDAO: getActiveConference()
+activate ConferenceDAO
+ConferenceDAO -> ConferenceDAO: getAllConference()
+ConferenceDAO -> DB: SELECT * FROM Conferenze
+DB --> ConferenceDAO: Success
+ConferenceDAO --> NotificationController: List<Conference>
+deactivate ConferenceDAO
+NotificationController -> UserDAO: getAllAuthors()
+activate UserDAO
+UserDAO -> DB: SELECT * FROM Utenti ...
+DB ---> UserDAO: Success
+UserDAO --> NotificationController: List<Author>
+deactivate UserDAO
+loop for autore in List<Author>
+NotificationController -> NotificationController: sendEmail(email, subject)
+alt Invio andato a buon fine
+else Invio non andato a buon fine
+NotificationController --> NotificationController: Errore invio
+end
+end
+NotificationController --> Timer: void
+deactivate NotificationController
+deactivate Timer
+@enduml

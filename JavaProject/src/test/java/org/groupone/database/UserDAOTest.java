@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import org.groupone.entity.Author;
 import org.groupone.entity.Organizer;
 import org.groupone.entity.User;
+import org.groupone.utility.ID;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
-import org.groupone.utility.ID;
 
 
 public class UserDAOTest {
@@ -99,7 +99,7 @@ public class UserDAOTest {
 	public void getUserByID() {
 		UserDAO dao = new UserDAO();
 		ID id = new ID("31353664-3930-4465-a334-323164633932");
-		Author expectedAuthor = new Author("Federico II", "test_autore_1@test.com", "Barrows", "Cindy", "4hJd8kLpT2xYw0Rz", id);
+		Author expectedAuthor = new Author("Federico II", "gpt1youtu@gmail.com", "Caparezza", "Cindy", "4hJd8kLpT2xYw0Rz", id);
 		try {
 			Author author = (Author) dao.getUserByID(id);
 			assertNotNull(author);

@@ -70,8 +70,6 @@ public class RegistrationForm extends JFrame {
         txtemail.setFont(new Font("Arial",Font.PLAIN,12));
         panel.add(txtemail);
 
-        
-
         lblpassword.setText("Password :");
         lblpassword.setBounds(150,100,100,20);
         lblpassword.setFont(new Font("Arial",Font.PLAIN,20));
@@ -103,11 +101,6 @@ public class RegistrationForm extends JFrame {
         comboboxruoli.setSelectedIndex(0);
         comboboxruoli.setBounds(150,210,100,20);
         panel.add(comboboxruoli);
-
-
-
-
-
         registerbutton.setText("Register");
         registerbutton.setBounds(10,250,150,30);
         registerbutton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));

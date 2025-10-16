@@ -27,6 +27,7 @@ public class AuthorDashboard extends JFrame {
     private JButton reviewDashboardButton = new  JButton();
 
 
+
     public AuthorDashboard(RUserDTO userDTO) throws SQLException {
         System.out.println(userDTO.getId());
         ConferenceController cc = new ConferenceController();

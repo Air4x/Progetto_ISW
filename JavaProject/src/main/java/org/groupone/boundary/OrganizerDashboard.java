@@ -25,6 +25,7 @@ public class OrganizerDashboard extends JFrame{
     private JLabel lblactiveconference =    new JLabel();
     private JLabel lblarticlesubmitted =    new JLabel();
     private JButton checkReviewCompletion =    new JButton("Check Review");
+    private JButton assignReviewButton = new JButton("Assign Review");
     private ShowArticleDTO selected ;
 
     //Composizione frame
@@ -90,17 +91,7 @@ public class OrganizerDashboard extends JFrame{
                         listarticleSubmitted.addMouseListener(new MouseAdapter() {
                             public void mouseClicked(MouseEvent e) {
 
-                                ShowArticleDTO selectedarticle = articlemodel.getElementAt(listarticleSubmitted.locationToIndex(e.getPoint()));
-                                if(selectedarticle != null) {
-                                    if (selectedarticle.getStatus().equals("sottomesso")) {
-                                        AssignReviewersView frame = new AssignReviewersView(selectedarticle, organizer);
-                                        frame.setVisible(true);
-                                        dispose();
-                                    } else {
-                                        selected = selectedarticle;
-                                    }
-                                }
-
+                                selected  = articlemodel.getElementAt(listarticleSubmitted.locationToIndex(e.getPoint()));
 
 
                             }
@@ -133,7 +124,7 @@ public class OrganizerDashboard extends JFrame{
 
 
             buttonCreateConference.setText("Create Conference");
-            buttonCreateConference.setBounds(50, 550, 200, 50);
+            buttonCreateConference.setBounds(10, 550, 200, 50);
             buttonCreateConference.setBackground(new Color(100, 149, 237));
             buttonCreateConference.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
             buttonCreateConference.setForeground(Color.white);
@@ -173,19 +164,34 @@ public class OrganizerDashboard extends JFrame{
             });
             checkReviewCompletion.setBounds(280, 550, 200, 50);
             contentPane.add(checkReviewCompletion);
+            assignReviewButton.setBackground(new Color(100, 149, 237));
+            assignReviewButton.setForeground(Color.white);
+            assignReviewButton.setCursor(Cursor.getPredefinedCursor(HAND_CURSOR));
+            assignReviewButton.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    if(selected==null){
+                        JOptionPane.showMessageDialog(null,"Please Select the Article");
+                    }
+                    else{
+                        if(selected.getStatus().equals("sottomesso")){
+                            AssignReviewersView frame = new AssignReviewersView(selected, organizer);
+                            frame.setVisible(true);
+                            dispose();
 
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null, "The article is in revision");
+                        }
+                    }
+                }
+            });
+            assignReviewButton.setBounds(10, 610, 200, 50);
+            contentPane.add(assignReviewButton);
 
             contentPane.add(buttonCreateConference);
         }catch (SQLException e){
             e.printStackTrace();
         }
-
-
-
-
-
-
-
 
     }
 

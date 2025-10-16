@@ -79,8 +79,8 @@ public class ArticleController {
      * @throws SQLException
      */
     public ArrayList<ShowArticleDTO> getArticleByAuthor(ID authorID) throws SQLException {
+        ArrayList<ShowArticleDTO> fake_article = new ArrayList<>();
         if (this.user_dao.isUserPresentByID(authorID) == true) {
-            ArrayList<ShowArticleDTO> fake_article = new ArrayList<>();
             ArrayList<Article> real_article = art_dao.getArticlesByAuthor(authorID);
             for (Article article : real_article) {
                 ShowArticleDTO articleDTO = new ShowArticleDTO(article);
@@ -88,12 +88,12 @@ public class ArticleController {
             }
             if(fake_article.isEmpty() || fake_article == null){
                 System.out.println("Nessun articolo trovato per questo autore");
-                return null;
+                return fake_article;
             }
             return fake_article;
         }else  if (this.user_dao.isUserPresentByID(authorID) == false){
             System.out.println("Utente non trovato");
         }
-        return null;
+        return fake_article;
     }
 }

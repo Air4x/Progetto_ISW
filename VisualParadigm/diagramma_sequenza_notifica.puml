@@ -1,0 +1,21 @@
+@startuml
+actor Scheduler
+participant "Sistema" as System
+
+activate Scheduler
+Scheduler -> System : Avvia controllo scadenze
+activate System
+
+note over System
+  Il sistema recupera le conferenze 
+  con scadenze imminenti e identifica
+  gli autori da notificare.
+end note
+
+System -> System : Invia notifiche via email agli autori
+
+System --> Scheduler : Controllo completato
+deactivate System
+
+deactivate Scheduler
+@enduml

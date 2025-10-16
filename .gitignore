@@ -44,10 +44,12 @@ Documentation/auto/*
 # Immagini
 VisualParadigm/*.png
 
-./JavaProject/target/
+./JavaProject/target/*g
 ./JavaProject/src/main/resources/*
 ./JavaProject/src/test/resources/*
-
+JavaProject/target/classes/*
+JavaProject/target/maven-status/
 ./JavaProject/.idea/workspace.xml
 _minted/
 JavaProject/target/classes/org/
+JavaProject/target/surefire-reports/

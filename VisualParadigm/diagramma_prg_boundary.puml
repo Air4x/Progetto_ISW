@@ -1,52 +1,125 @@
 @startuml
 package Boundary {
   class LoginView {
-    + showLoginForm()
-    + showRegistretionForm()
-    + handleLogin()
-    + handleRegistration()
+    -loginButton:JButton
+    -panel:JPanel
+    -registerButton:JButton
+    +LoginView()
   }
   class LoginForm{
-    +displayForm()
-    +submitLogin()
+    -txtemail:JTextField
+    -lblemail:JLabel
+    -passwordfield:JPasswordField
+    -lblpassword:JLabel
+    -panel:JPanel
+    -loginbutton:JButton
+    -userDTO:RUserDTO
+    +LoginForm()
   }
-  class RegisterForm{
-    +displayForm()
-    submitRegistration()
+  class RegistrationForm{
+    -txtname:JTextField
+    -lblname:JLabel
+    -panel:JPanel
+    -lbllastname:JLabel
+    -txtlastname:JTextField
+    -txtemail:JTextField
+    -lblemail:JLabel
+    -passwordField:JPasswordField
+    -lblpassword:JLabel
+    -txtaffiliazione:JTextField
+    -lblaffiliazione:JLabel
+    -lblruolo:JLabel
+    -registerbutton:JButton
+    -comboboxruoli:JComboBox
+    -userDTO:RUserDTO
+    +RegistrationForm()
   }
   
   class AuthorDashboard {
-    + showActiveConferences()
-    + showSubmittedArticles()
+    -contentPane:JPanel
+    -scrollActiveConference:JScrollPane
+    -scrollSubmittedArticles:JScrollPane
+    -listarticleSubmitted:JList
+    -listactiveConference:JList
+    -lblwelcome:JLabel
+    -lblarticlesubmitted:JLabel
+    -lblactiveconference:JLabel
+    -reviewDashboardButton:JButton
+    + AuthorDashboard()
   }
   
   class SubmitArticleForm {
-    + displayForm()
-    + submitArticle()
+    -lbltitle:JLabel
+    -txttitle:JTextField
+    -lblabstract:JLabel
+    -txtareaabstract:JTextArea
+    -lblcoauthors:JLabel
+    -txtcoauthors:JTextField
+    -contentPane:JPanel
+    -buttonSubmit:JButton
+    -buttonBack:JButton
+    -listacoautori:JList
+    -scrollcoautori:JScrollPane
+    + SubmitArticleForm()
   }
   
   class OrganizerDashboard {
-    + showConferenceList()
-    + viewStats()
+    -contentPane:JPanel
+    -scrollConferenceList:JScrollPane
+    -buttonCreateConference:JButton
+    -listActiveConference:JList
+    -listarticleSubmitted:JList
+    -scrollarticleSubmitted:JScrollPane
+    -lblwelcome:JLabel
+    -lblactiveconference:JLabel
+    -lblarticlesubmitted:JLabel
+    -checkReviewCompletion:JButton
+    -assignReviewButton:JButton
+    -selected:ShowArticleDTO
+    + OrganizerDashboard()
   }
   
   class CreateConferenceForm {
-    + displayForm()
-    + createConference()
+    -contentPane:JPanel
+    -lbltitle:JLabel
+    -txttitle:JTextField
+    -lbldescription:JLabel
+    -lblduedate:JLabel
+    -txtduedate:JTextField
+    -txtareadescription:JTextArea
+    -buttonCreateConference:JButton
+    -buttonBack:JButton
+    + CreateConferenceForm()
   }
   
-  class AssignReviewrsView {
-    + showPendingArticles()
-    + assignReviewers()
+  class AssignReviewersView {
+    -contentPane:JPanel
+    -lblrevisore:JLabel
+    -buttonAssignReviewers:JButton
+    -reviewer1:JComboBox
+    -reviewer2:JComboBox
+    -reviewer3:JComboBox
+    -selected1:RUserDTO
+    -selected2:RUserDTO
+    -selected3:RUserDTO
+    + assignReviewersView()
   }
     
   class ReviewDashboard {
-    + showPendingReviews()
+    -contentPane:JPanel
+    -scrollarticletoreview:JScrollPane
+    -listarticletoreview:JList
+    + ReviewDashboard()
   }
 
   class ReviewForm{
-    +displayForm()
-    +review()
+    -contentPane:JPanel
+    -comboBoxresult: JComboBox
+    -lblScore:JLabel
+    -lblresult:JLabel
+    -txtscore:JTextField
+    -updatereviewButton:JButton
+    +ReviewForm()
   }
 }
 @enduml

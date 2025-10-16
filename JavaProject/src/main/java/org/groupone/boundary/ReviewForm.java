@@ -59,7 +59,7 @@ public class ReviewForm extends JFrame {
                         }
                         else{
                             rc.updateReview(review,score,comboBoxresult.getSelectedItem().toString());
-
+                            JOptionPane.showMessageDialog(null, "Review Updated Successfully");
                             dispose();
                         }
                     }

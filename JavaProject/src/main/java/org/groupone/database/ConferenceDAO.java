@@ -80,6 +80,20 @@ public class ConferenceDAO {
     }
 
     /**
+     * Permette di collegare un articolo ad una conferenza
+     *
+     * @param conf, l'id della conferenza
+     * @param art, l'id dell'articolo
+     */
+    public void submitArticle(ID conf, ID art) throws SQLException {
+	String sql = "INSERT INTO Sottomissioni VALUES(?, ?);";
+	PreparedStatement stmt = conn.prepareStatement(sql);
+	stmt.setString(1, art.toString());
+	stmt.setString(2, conf.toString());
+	stmt.executeUpdate();
+    }
+
+    /**
      * Permette di ottenere la lista di tutti gli articoli sottomessi
      * ad una conferenza
      *

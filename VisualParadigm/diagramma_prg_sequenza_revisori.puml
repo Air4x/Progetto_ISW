@@ -1,0 +1,43 @@
+@startuml
+actor Organizzatore
+participant OrganizerDashboard
+participant AssignReviewersView
+participant ReviewController
+participant ReviewDAO
+database testDB
+
+activate Organizzatore
+Organizzatore -> OrganizerDashboard: "L'Organizzatore clicca sull'articolo a cui vuole assegnare un revisore"
+activate OrganizerDashboard
+OrganizerDashboard -> AssignReviewersView: <<create>> new AssignReviewersView()
+activate AssignReviewersView
+AssignReviewersView -> ReviewController: <<create>> new ReviewController()
+activate ReviewController
+ReviewController -> ReviewDAO: <<create>> new ReviewDAO
+AssignReviewersView -> ReviewController: getPossibleReviewers(article.getId())
+ReviewController -> ReviewDAO: getAllAuthors()
+activate ReviewDAO
+ReviewDAO -> testDB: SELECT * FROM Utenti ...
+testDB --> ReviewDAO: Success
+ReviewDAO --> ReviewController: List<Author>
+ReviewController --> AssignReviewersView: ArrayList<RUserDTO>
+Organizzatore -> AssignReviewersView: "L'Organizzatore sceglie i revisori"
+AssignReviewersView -> AssignReviewersView: Controllo validità revisori scelti
+alt Revisori validi
+AssignReviewersView -> ReviewController: createReview(reviewrs, article)
+ReviewController -> ReviewDAO: saveReview(reviewer, article)
+ReviewDAO -> testDB: INSERT INTO Revisioni (...)
+testDB --> ReviewDAO: Success
+ReviewDAO --> ReviewController : void
+deactivate ReviewDAO
+ReviewController --> AssignReviewersView : true
+deactivate ReviewController
+AssignReviewersView --> Organizzatore: Mostra messaggio di avvenuta assegnazione
+else Revisori non validi
+AssignReviewersView -> Organizzatore: Mostra messaggio di errore
+end
+deactivate AssignReviewersView
+deactivate OrganizerDashboard
+deactivate Organizzatore
+@enduml
+

@@ -1,0 +1,37 @@
+@startuml
+actor Organizzatore
+participant OrganizerDashboard
+participant CreateConferenceForm
+participant ConferenceController
+participant ConferenceDAO
+participant "conf: Conference" as conference
+database testDB
+
+activate Organizzatore
+Organizzatore -> OrganizerDashboard : "L'Organizzatore clicca sul bottone Create Conference"
+activate OrganizerDashboard
+OrganizerDashboard -> CreateConferenceForm: <<create>> new CreateConferenceForm
+activate CreateConferenceForm
+Organizzatore -> CreateConferenceForm: "L'Organizzatore inserisce i dati della nuova conferenza"
+CreateConferenceForm -> CreateConferenceForm: Controllo dati
+alt Dati validi
+CreateConferenceForm -> ConferenceController: <<create>> new ConferenceController()
+activate ConferenceController
+CreateConferenceForm -> ConferenceController: createConference(scadenza, titolo, description, id, organizzatore)
+ConferenceController -> conference: <<create>> new Conference(scadenza, titolo, description, id, organizzaotore)
+ConferenceController -> ConferenceDAO : saveConference(conf)
+activate ConferenceDAO
+ConferenceDAO -> testDB: INSERT INTO Conferenze (...)
+testDB --> ConferenceDAO: Success
+ConferenceDAO --> ConferenceController: void
+deactivate ConferenceDAO
+ConferenceController --> CreateConferenceForm: true
+deactivate ConferenceController
+CreateConferenceForm --> Organizzatore: Mostra messaggio di avvenuta creazione
+else Dati non validi
+CreateConferenceForm -> Organizzatore: Mostra messaggio di errore
+end
+deactivate CreateConferenceForm
+deactivate OrganizerDashboard
+deactivate Organizzatore
+@enduml

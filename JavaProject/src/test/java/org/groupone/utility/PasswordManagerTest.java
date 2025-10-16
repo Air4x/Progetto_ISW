@@ -8,6 +8,6 @@ public class PasswordManagerTest {
 
     @Test
     public void get() {
-        assertTrue(PasswordManager.getInstance().get("db_user").equalsIgnoreCase("mario"));
+        assertTrue(PasswordManager.getInstance().get("email_host").equalsIgnoreCase("mail.smtp.gmail.com"));
     }
 }

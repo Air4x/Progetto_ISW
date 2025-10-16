@@ -51,10 +51,10 @@ public class UserDAOTest {
 		UserDAO dao = new UserDAO();
 		String email = "test_autore_10@test.com";
 		try {
-			boolean result = dao.isUserPresentByEmail(email);
-			assertTrue("failure - utente non trovato", result);
-			} catch (SQLException e) {
-			e.printStackTrace();
+		    boolean result = dao.isUserPresentByEmail(email);
+		    assertTrue("failure - utente non trovato", result);
+		} catch (SQLException e) {
+		    e.printStackTrace();
 		}
 	}
 
@@ -73,7 +73,7 @@ public class UserDAOTest {
 	@Test
 	public void getUserByEmail() {
 		UserDAO dao = new UserDAO();
-		String email = "test_autore_1@test.com";
+		String email = "test_autore_10@test.com";
 		try {
 			User u = dao.getUserByEmail(email);
 			assertNotNull("failure - utente non trovato", u);

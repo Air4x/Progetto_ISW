@@ -12,7 +12,7 @@ CREATE TABLE Utenti (
        AFFILIAZIONE varchar(100) not null,
        EMAIL varchar(200) not null,
        PASSWORD varchar(130) not null,
-       RUOLO varchar(13) not null,
+       RUOLO varchar(15) not null,
        constraint CHECK_RUOLO check (RUOLO = 'autore' or RUOLO = 'organizzatore')
 );
 
@@ -21,7 +21,7 @@ CREATE TABLE Articoli (
        ID varchar(36) primary key,
        TITOLO varchar(140) not null,
        ABSTRACT varchar(250) not null,
-       STATO varchar(11) not null,
+       STATO varchar(15) not null,
        constraint CHECK_STATO check (STATO = 'sottomesso' or STATO = 'in revisione')
 );
 
@@ -69,7 +69,7 @@ CREATE TABLE Revisioni (
 --- Questa parte è stata autogenerata ---
 ---- Utenti
 ------ RUOLO = 'autore'
-INSERT INTO Utenti VALUES ('31353664-3930-4465-a334-323164633932','Cindy', 'Barrows', 'Federico II', 'gpt1youtu@gmail.com', '4hJd8kLpT2xYw0Rz' ,'autore');
+INSERT INTO Utenti VALUES ('31353664-3930-4465-a334-323164633932','Caparezza', 'Barrows', 'Federico II', 'gpt1youtu@gmail.com', '4hJd8kLpT2xYw0Rz' ,'autore');
 INSERT INTO Utenti VALUES ('38343465-3166-4636-b166-386433333335','Missouri', 'Grady', 'Federico II', 'test_autore_2@test.com', 'Qz7wXcVbN9mKlErT' ,'autore');
 INSERT INTO Utenti VALUES ('64636266-6162-4162-a536-346632626632','Frederic', 'Weissnat', 'Federico II', 'test_autore_3@test.com', 'P0oI9uY8tREwQ1aZ' ,'autore');
 INSERT INTO Utenti VALUES ('65393966-3531-4738-b662-653232663438','Missouri', 'Ledner', 'Federico II', 'test_autore_4@test.com', '5sGf6dHj7kLmBn4V' ,'autore');
@@ -117,3 +117,9 @@ INSERT INTO Revisioni VALUES ('63363139-6632-4363-a532-663438343262', '34633933-
 INSERT INTO Revisioni VALUES ('30336b61-3431-4861-b034-396361393935', '64393265-3937-4261-b563-326137626135', '62366665-3430-4435-b764-316461623265', 0, 'accettato');
 INSERT INTO Revisioni VALUES ('66326162-6561-4439-a335-386465353363', '64636266-6162-4162-a536-346632626632', '35393530-6534-4234-b263-346463643536', 0, 'rifiutato');
 INSERT INTO Revisioni VALUES ('37646663-6133-4138-b265-653334366133', '66643462-6636-4665-b364-383037373830', '35393530-6534-4234-b263-346463643536', 0, 'accettato');
+
+
+test_organizzatore_1@test.com  B6vC5xZ4aQ3wE2rT
+gpt1youtu@gmail.com 4hJd8kLpT2xYw0Rz
+test_autore_2@test.com Qz7wXcVbN9mKlErT
+test_autore_3@test.comP0oI9uY8tREwQ1aZ

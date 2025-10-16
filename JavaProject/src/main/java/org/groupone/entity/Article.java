@@ -154,8 +154,7 @@ public class Article {
      *
      */
     public void setStato(String stato) {
-	if(!stato.equals("sottomesso")
-	   || !stato.equals("in revisione")) {
+	if(!stato.equals("sottomesso") && !stato.equals("in revisione")) {
 	    throw new IllegalArgumentException("Stato is not valid\n Expected [sottomesso|in revisione], received " + stato);
 	}
 	this.stato = stato;
